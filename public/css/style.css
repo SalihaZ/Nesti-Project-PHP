@@ -1,0 +1,145 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");
+html,
+body {
+    font-family: "Nunito", sans-serif !important;
+    height: 100%;
+}
+
+
+/* FOR THE LOGIN PAGE */
+
+#wrapper_connection {
+    height: 100vh;
+    background-image: url(../images/background.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#container_connection {
+    width: 400px;
+    margin: 0 auto;
+    margin-top: 10%;
+}
+
+#Connection-Username,
+#Connection-Password {
+    width: 100%;
+    padding: 12px 15px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+#Connection {
+    background-color: #1d596b;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    border: 1px solid #1d596b;
+    font-size: 18px;
+}
+
+#Connection:hover {
+    background-color: white;
+    color: #3079cc;
+    border: 1px solid #3789e7;
+}
+
+
+/* Bordered form */
+
+form {
+    width: 100%;
+    padding: 30px;
+    border: 1px solid #f1f1f1;
+    background: #fff;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+#container_connection h1 {
+    margin: 0 25%;
+    padding-bottom: 20px;
+}
+
+*/ .mainNavbar>* {
+    background-color: #005662;
+}
+
+.btnNavbar {
+    background-color: #00838f;
+    font-family: "Nunito", sans-serif;
+}
+
+.active {
+    background-color: #c49000;
+}
+
+.fa-utensils,
+.fa-users,
+.fa-chart-bar,
+.fa-clipboard-list {
+    color: white;
+    font-size: 20px;
+}
+
+.fa-user,
+.fa-sign-out-alt {
+    color: black;
+    font-size: 20px;
+}
+
+.fa-user-alt {
+    font-size: 33px;
+}
+
+.fa-lock {
+    font-size: 37px;
+}
+
+#button-add:hover,
+#button-add:hover>* {
+    color: white;
+    background-color: #00838f;
+    transition-duration: unset;
+}
+
+.fa-plus-circle,
+.fa-search {
+    color: #00838f;
+}
+
+thead {
+    background-color: #00838f;
+    color: white;
+}
+
+#button-recipe-validation {
+    background-color: #b0d41c;
+    color: #005662;
+}
+
+#button-recipe-reset {
+    background-color: #4fb3bf;
+    color: white;
+}
+
+.nav-location {
+    color: #4fb3bf;
+}
+
+.no-padding {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.no-margin {
+    margin-bottom: 0 !important;
+}
+
+.bg-gray {
+    background-color: rgb(121, 119, 119);
+}
