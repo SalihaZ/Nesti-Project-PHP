@@ -27,28 +27,24 @@
                     <div class="row mb-2">
                         <label for="inputRecipeName">Nom</label>
                         <input type="text" class="form-control" id="inputRecipeName" placeholder="Veuillez saisir un nom" name="recipe[name_recipes]">
-                        <!-- <small id="chief" class="form-text text-muted">Auteur de la recette : <?php echo $_SESSION["firstName"] . " " . $_SESSION["lastName"] ?></small> -->
                     </div>
 
                     <!-- Input Name Recipe -->
                     <div class="row mb-2">
                         <label for="inputRecipeName">Prénom</label>
                         <input type="text" class="form-control" id="inputRecipeName" placeholder="Veuillez saisir un prénom" name="recipe[name_recipes]">
-                        <!-- <small id="chief" class="form-text text-muted">Auteur de la recette : <?php echo $_SESSION["firstName"] . " " . $_SESSION["lastName"] ?></small> -->
                     </div>
 
                     <!-- Input Name Recipe -->
                     <div class="row mb-2">
                         <label for="inputRecipeName">Rôle</label>
                         <input type="text" class="form-control" id="inputRecipeName" placeholder="Veuillez saisir un rôle" name="recipe[name_recipes]">
-                        <!-- <small id="chief" class="form-text text-muted">Auteur de la recette : <?php echo $_SESSION["firstName"] . " " . $_SESSION["lastName"] ?></small> -->
                     </div>
 
                     <!-- Input Name Recipe -->
                     <div class="row mb-2">
                         <label for="inputRecipeName">État</label>
                         <input type="text" class="form-control" id="inputRecipeName" placeholder="Veuillez saisir un état" name="recipe[name_recipes]">
-                        <!-- <small id="chief" class="form-text text-muted">Auteur de la recette : <?php echo $_SESSION["firstName"] . " " . $_SESSION["lastName"] ?></small> -->
                     </div>
 
                     <br>
@@ -73,14 +69,12 @@
                     <div class="row mb-2">
                         <label for="inputRecipeName">Email</label>
                         <input type="text" class="form-control" id="inputRecipeName" placeholder="Veuillez saisir un email" name="recipe[name_recipes]">
-                        <!-- <small id="chief" class="form-text text-muted">Auteur de la recette : <?php echo $_SESSION["firstName"] . " " . $_SESSION["lastName"] ?></small> -->
                     </div>
 
                     <!-- Input Name Recipe -->
                     <div class="row mb-2">
                         <label for="inputRecipeName">Mot de passe</label>
                         <input type="text" class="form-control" id="inputRecipeName" placeholder="Veuillez saisir un mot de passe" name="recipe[name_recipes]">
-                        <!-- <small id="chief" class="form-text text-muted">Auteur de la recette : <?php echo $_SESSION["firstName"] . " " . $_SESSION["lastName"] ?></small> -->
                     </div>
 
                 </div>
@@ -112,59 +106,59 @@
                 <br>
 
                 <!-- Table Container -->
-    <div class="row wrapper-articles-table shadow">
-        <div class="col no-padding">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Utilisateur</th>
-                        <th scope="col">Montant</th>
-                        <th scope="col">Nb d'articles</th>
-                        <th scope="col">Date</th>
-                        <th scope="col">État</th>
-                    </tr>
-                </thead>
-                <tbody>
+                <div class="row wrapper-articles-table shadow">
+                    <div class="col no-padding">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Utilisateur</th>
+                                    <th scope="col">Montant</th>
+                                    <th scope="col">Nb d'articles</th>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">État</th>
+                                </tr>
+                            </thead>
+                            <tbody>
 
-                    <?php
-                    foreach ($arrayArticles as $element) {
-                    ?>
-                        <tr>
-                            <th scope="row">
-                                <?= $element->getId_article() ?>
-                            </th>
-                            <td>
-                                <?= $element->getFk_id_product() ?>
-                            </td>
-                            <td>
-                                <!-- <?= $element->getDifficulty_recipes() ?> -->
-                            </td>
-                            <td>
-                                <!-- <?= $element->getNumber_person_recipes() ?> -->
-                            </td>
-                            <td>
-                                <!-- <?= $element->getTime_recipes() ?> -->
-                            </td>
-                            <td>
-                                <!-- <?= $element->getFk_id_chief() ?> -->
-                            </td>
-                            <td> <a href="articles/edit">Modifier <br> <a href="">Supprimer</a></td>
-                        </tr>
+                                <?php
+                                foreach ($arrayUsers as $element) {
+                                ?>
+                                    <tr>
+                                        <th scope="row">
+                                            <?= $element->getUsername_user() ?>
+                                        </th>
+                                        <td>
+                                            <!-- <?= $element->getFk_id_product() ?> -->
+                                        </td>
+                                        <td>
+                                            <!-- <?= $element->getDifficulty_recipes() ?> -->
+                                        </td>
+                                        <td>
+                                            <!-- <?= $element->getNumber_person_recipes() ?> -->
+                                        </td>
+                                        <td>
+                                            <!-- <?= $element->getTime_recipes() ?> -->
+                                        </td>
+                                        <td>
+                                            <!-- <?= $element->getFk_id_chief() ?> -->
+                                        </td>
+                                        <td> <a href="articles/edit">Modifier <br> <a href="">Supprimer</a></td>
+                                    </tr>
 
-                    <?php
-                    }
-                    ?>
+                                <?php
+                                }
+                                ?>
 
-                </tbody>
-            </table>
-        </div>
-    </div>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
 
-            <div class="col-4">
-                <h2>Liste des ingrédients</h2>
-                <br>
-            </div>
+                <div class="col-4">
+                    <h2>Liste des ingrédients</h2>
+                    <br>
+                </div>
 
         </form>
 

@@ -6,6 +6,22 @@ body {
 }
 
 
+/* NavBar*/
+
+#mainNavbar>* {
+    background-color: #005662;
+}
+
+.btnNavbar {
+    background-color: #00838f;
+    font-family: "Nunito", sans-serif;
+}
+
+.active {
+    background-color: #c49000;
+}
+
+
 /* FOR THE LOGIN PAGE */
 
 #wrapper_connection {
@@ -63,19 +79,6 @@ form {
 #container_connection h1 {
     margin: 0 25%;
     padding-bottom: 20px;
-}
-
-*/ .mainNavbar>* {
-    background-color: #005662;
-}
-
-.btnNavbar {
-    background-color: #00838f;
-    font-family: "Nunito", sans-serif;
-}
-
-.active {
-    background-color: #c49000;
 }
 
 .fa-utensils,

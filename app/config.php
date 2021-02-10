@@ -3,7 +3,7 @@
 define('DEBUG', true);
 
 // PATH
-define('BASE_URL', 'http://localhost/www/projet_nesti/');
+define('BASE_URL', 'http://localhost/www/Nesti-Project-PHP/');
 define('PATH_CTRL', 'app/controller/');
 
 // PATH-VIEW

@@ -1,4 +1,4 @@
-<nav class="navbar mainNavbar">
+<nav class="navbar" id ="mainNavbar">
   <form class="form-inline">
 
     <!-- Buttons nav -->
