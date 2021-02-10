@@ -1,7 +1,6 @@
 <?php
 
-include(PATH_ENTITIES . "User.php");
-include(PATH_MODEL . "UserDAO.php");
+
 
 // Constructor Obj Recipe
 $model = new UserDAO();

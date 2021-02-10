@@ -1,7 +1,6 @@
 <?php
 
-include(PATH_ENTITIES . "Recipe.php");
-include(PATH_MODEL . "RecipeDAO.php");
+
 
 // Constructor Obj Recipe
 $model = new RecipeDAO();
@@ -19,4 +18,3 @@ $arrayRecipes = $model->readAll();
 //         }
 //     }
 // }
-

@@ -74,7 +74,7 @@
                             <td>
                                 <?= $element->getState_user() ?>
                             </td>
-                            <td> <a href="users/edit">Modifier <br> <a href="">Supprimer</a></td>
+                            <td> <a href="users/edition">Modifier <br> <a href="">Supprimer</a></td>
                         </tr>
 
                     <?php

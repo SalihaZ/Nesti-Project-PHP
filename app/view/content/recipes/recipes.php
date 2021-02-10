@@ -79,7 +79,7 @@
                             <td>
                                 <?= $element->getFk_id_chief() ?>
                             </td>
-                            <td> <a href="articles/edit">Modifier <br> <a href="">Supprimer</a></td>
+                            <td> <a href="recipes/edition">Modifier <br> <a href="">Supprimer</a></td>
                         </tr>
 
                     <?php

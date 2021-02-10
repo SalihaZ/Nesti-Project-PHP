@@ -14,7 +14,7 @@ switch ($loc) {
                 include(PATH_RECIPES . "recipes-create.php");
                 break;
             case "edit":
-                include(PATH_RECIPES . "recipes-edit.php");
+                include(PATH_RECIPES . "recipes-edition.php");
                 break;
             default:
                 include(PATH_RECIPES  . "recipes.php");
