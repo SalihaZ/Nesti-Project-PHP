@@ -2,45 +2,54 @@
 session_start();
 include ('app/loader.php');
 
+// include 'app/config.php';
+// // include(__DIR__.'/app/Autoloader.php');
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-
 
 $loc =  filter_input(INPUT_GET, "loc", FILTER_SANITIZE_STRING);
 $action =  filter_input(INPUT_GET, "action", FILTER_SANITIZE_STRING);
 
 $UserSession = new Session();
 
-// if($UserSession->isConnectUser()){
-//     $loc = "recipes";
-// } else {
-//     $loc = "recipes";
-// }
+if ($UserSession->isConnectUser()) {
+    echo ("STATUS : Connected ;");
+
+} else {
+    echo ("STATUS : Not Connected ;");
+    $loc = "connection";
+
+}
 
 switch ($loc) {
-    
-    // Login part
-    case "login":
-        include(PATH_CTRL . "controller_login.php");
+
+        // Connection part
+    case "connection":
+        include(PATH_CTRL . "controller_connection.php");
         break;
 
-    // Recipes part
+    case "disconnection":
+        include(PATH_CTRL . "controller_disconnection.php");
+        break;
+
+        // Recipes part
     case "recipes":
         include(PATH_CTRL . "controller_recipes.php");
         break;
 
-    // Articles part
+        // Articles part
     case "articles":
         include(PATH_CTRL . "controller_articles.php");
         break;
 
-    // Users part
+        // Users part
     case "users":
         include(PATH_CTRL . "controller_users.php");
         break;
 
-    // Statistics part
+        // Statistics part
     case "statistics":
         include(PATH_STATISTICS . "statistics.php");
         break;

@@ -15,25 +15,19 @@
 
         <!-- Research Bar -->
         <div class="col-8 d-flex no-padding">
-            <input type="search" class="form-control-lg" placeholder="Rechercher une recette" />
+            <input type="search" class="form-control-lg shadow" placeholder="Rechercher une recette" />
             <button type="button" class="btn" id="button-search-bar">
                 <i class="fas fa-search"></i>
             </button>
         </div>
 
         <!-- Buttons Container -->
-        <div class="col-4 d-flex justify-content-between no-padding">
+        <div class="col-4 d-flex justify-content-end no-padding">
 
-            <!-- Button Commands -->
-            <a href="articles/commands" class="btn btn-lg btn-outline-secondary">
+            <!-- Button ADD -->
+            <a href="recipes/create" class="btn btn-lg btn-outline-secondary shadow">
                 <i class="fas fa-plus-circle"></i>
-                Commandes
-            </a>
-
-            <!-- Button Import -->
-            <a href="article/imports" class="btn btn-lg btn-outline-secondary">
-                <i class="fas fa-plus-circle"></i>
-                Importer
+                Ajouter
             </a>
         </div>
     </div>

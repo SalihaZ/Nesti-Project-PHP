@@ -40,11 +40,11 @@
       <a class="nav-link btnNavbarUser mr-5">
         <button class="btn text-black" type="button">
           <i class="fas fa-user pr-3"></i>
-          <!-- <?php echo $_COOKIE["lastName"] . " " . $_COOKIE["firstName"] ?> </button> -->
+          <!-- <?php echo $_SESSION["lastName"] . " " . $_SESSION["firstName"] ?> </button> -->
       </a>
 
       <!-- Button Disconnection -->
-      <a class="nav-link btnNavbarUser mr-5" href="index.php?loc=statistics">
+      <a class="nav-link btnNavbarUser mr-5" href="<?php echo BASE_URL ?>disconnection">
         <button class="btn text-black" type="button">
           <i class="fas fa-sign-out-alt pr-3"></i>
           Déconnexion</button>

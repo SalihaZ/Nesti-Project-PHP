@@ -15,7 +15,7 @@
 
         <!-- Research Bar -->
         <div class="col-8 d-flex no-padding">
-            <input type="search" class="form-control-lg" placeholder="Rechercher un utilisateur">
+            <input type="search" class="form-control-lg shadow" placeholder="Rechercher un utilisateur">
             <button type="button" class="btn" id="button-search-bar">
                 <i class="fas fa-search"></i>
             </button>
@@ -25,7 +25,7 @@
         <div class="col-4 d-flex justify-content-end no-padding">
 
             <!-- Button Add -->
-            <a href="users/create" class="btn btn-lg btn-outline-secondary">
+            <a href="users/create" class="btn btn-lg btn-outline-secondary shadow">
                 <i class="fas fa-plus-circle"></i>
                 Ajouter
             </a>

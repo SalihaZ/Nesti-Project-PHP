@@ -2,10 +2,14 @@
 
 switch ($loc) {
 
-        // Login part
-    case "login":
-        include(PATH_VIEW . "login.php");
+        // Connection part
+    case "connection":
+        include(PATH_VIEW . "connection.php");
         break;
+
+    case "disconnection":
+            include(PATH_VIEW . "connection.php");
+            break;
 
         // Recipes part
     case "recipes":

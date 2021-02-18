@@ -2,6 +2,7 @@
 
 class User { 
 
+    //Attributes
     private $id_user;
     private $username_user;
     private $passwordHash_user;
@@ -13,8 +14,8 @@ class User {
     private $adress1_user;
     private $adress2_user;
     private $postcode_user;
-    private $city_user;
-    private $valid_user;
+    private $fk_id_city;
+    private $valid_user = true;
 
     /**
      * Get the value of id_user
@@ -225,21 +226,22 @@ class User {
         return $this;
     }
 
-    /**
-     * Get the value of city_user
+  /**
+     * Get the value of fk_id_city
      */ 
-    public function getCity_user()
+    public function getFk_id_city()
     {
-        return $this->city_user;
+        return $this->fk_id_city;
     }
 
     /**
-     * Set the value of city_user
+     * Set the value of fk_id_city
+     *
      * @return  self
      */ 
-    public function setCity_user($city_user)
+    public function setFk_id_city($fk_id_city)
     {
-        $this->city_user = $city_user;
+        $this->fk_id_city = $fk_id_city;
 
         return $this;
     }

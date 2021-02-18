@@ -29,3 +29,6 @@ define('PWD', '');
 
 // PATH_IMAGE
 define('PATH_IMG', BASE_URL.'public/images/');
+
+//PATH_JS
+define('PATH_JS', BASE_URL.'public/js/');

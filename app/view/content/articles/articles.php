@@ -15,7 +15,7 @@
 
         <!-- Research Bar -->
         <div class="col-8 d-flex no-padding">
-            <input type="search" class="form-control-lg" placeholder="Rechercher un article" />
+            <input type="search" class="form-control-lg shadow" placeholder="Rechercher un article" />
             <button type="button" class="btn" id="button-search-bar">
                 <i class="fas fa-search"></i>
             </button>
@@ -23,18 +23,18 @@
 
         <!-- Buttons Container -->
         <div class="col-4 d-flex justify-content-between no-padding">
-           
+
             <!-- Button Commands -->
-                <a href="articles/commands" class="btn btn-lg btn-outline-secondary">
-                    <i class="fas fa-plus-circle"></i>
-                    Commandes
-                </a>
+            <a href="articles/commands" class="btn btn-lg btn-outline-secondary shadow" id="button-commands">
+                <i class="far fa-eye"></i>
+                Commandes
+            </a>
 
             <!-- Button Import -->
-                <a href="article/imports" class="btn btn-lg btn-outline-secondary">
-                    <i class="fas fa-plus-circle"></i>
-                    Importer
-                </a>
+            <a href="article/imports" class="btn btn-lg btn-outline-secondary shadow">
+                <i class="fas fa-plus-circle"></i>
+                Importer
+            </a>
         </div>
     </div>
 

@@ -12,11 +12,9 @@ class Session
         return $isConnect;
     }
 
-
     // Connection User Sesion
     public function connectUser($ID)
     {
-
         $_SESSION['IDUser'] = $ID;
     }
 

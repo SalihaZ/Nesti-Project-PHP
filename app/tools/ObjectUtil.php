@@ -14,4 +14,6 @@ class ObjectUtil{
             static::set($object,$propertyName,$propertyValue);
         }
     }
+
+    
 }

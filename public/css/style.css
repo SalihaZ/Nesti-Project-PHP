@@ -6,23 +6,7 @@ body {
 }
 
 
-/* NavBar*/
-
-#mainNavbar>* {
-    background-color: #005662;
-}
-
-.btnNavbar {
-    background-color: #00838f;
-    font-family: "Nunito", sans-serif;
-}
-
-.active {
-    background-color: #c49000;
-}
-
-
-/* FOR THE LOGIN PAGE */
+/* FOR THE CONNECTION PAGE */
 
 #wrapper_connection {
     height: 100vh;
@@ -47,6 +31,12 @@ body {
     box-sizing: border-box;
 }
 
+.fa-user,
+.fa-sign-out-alt {
+    color: black;
+    font-size: 20px;
+}
+
 #Connection {
     background-color: #1d596b;
     color: white;
@@ -66,6 +56,30 @@ body {
 }
 
 
+/* FOR THE NAVBAR */
+
+#mainNavbar>* {
+    background-color: #005662;
+}
+
+.btnNavbar {
+    background-color: #00838f;
+    font-family: "Nunito", sans-serif;
+}
+
+.active {
+    background-color: #c49000;
+}
+
+.fa-utensils,
+.fa-users,
+.fa-chart-bar,
+.fa-clipboard-list {
+    color: white;
+    font-size: 20px;
+}
+
+
 /* Bordered form */
 
 form {
@@ -79,20 +93,6 @@ form {
 #container_connection h1 {
     margin: 0 25%;
     padding-bottom: 20px;
-}
-
-.fa-utensils,
-.fa-users,
-.fa-chart-bar,
-.fa-clipboard-list {
-    color: white;
-    font-size: 20px;
-}
-
-.fa-user,
-.fa-sign-out-alt {
-    color: black;
-    font-size: 20px;
 }
 
 .fa-user-alt {
@@ -111,8 +111,14 @@ form {
 }
 
 .fa-plus-circle,
-.fa-search {
+.fa-search,
+.fa-eye {
     color: #00838f;
+}
+
+#button-commands {
+    background-color: #c49000;
+    color: white;
 }
 
 thead {
@@ -145,4 +151,36 @@ thead {
 
 .bg-gray {
     background-color: rgb(121, 119, 119);
+}
+
+.fa-caret-square-up,
+.fa-caret-square-down {
+    color: #1d596b;
+    font-size: 40px;
+}
+
+.fa-trash {
+    font-size: 40px;
+    color: red;
+}
+
+#plusPreparation {
+    background-color: #b0d41c;
+    width: 93%;
+}
+
+.form-group {
+    width: 100%;
+    padding: 30px;
+    border: 1px solid #f1f1f1;
+    background: #fff;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.fa-times {
+    color: red;
+}
+
+.buttonDelete {
+    background-color: white;
 }
