@@ -1,8 +1,14 @@
+<!-- Create new user object -->
+<?php if (!isset($user) || empty($user)) {
+    $user = new User();
+}
+?>
+
 <!-- Main -->
 <main class="container wrapper-user-create">
-  
-<!-- Nav Location -->
-   <nav>
+
+    <!-- Nav Location -->
+    <nav>
     </nav>
 
     <br>
@@ -28,90 +34,151 @@
                     <!-- Input UserName User -->
                     <div class="row mb-2">
                         <label for="inputUserName">Nom d'utilisateur</label>
-                        <input type="text" class="form-control" id="inputUserName" placeholder="Veuillez saisir un nom d'utilisateur" name="username_user">
+                        <input type="text" class="form-control" id="inputUserName" name="username_user" value="<?= $user->getUsername_user() ?>">
+                    </div>
+
+                    <!-- Error UserName User -->
+                    <div>
+                        <?php if (!empty($user->getUsernameError())) : ?>
+                            <span class="badge badge-danger"><?= $user->getUsernameError() ?></span>
+                        <?php endif; ?>
                     </div>
 
                     <!-- Input Password User -->
                     <div class="row mb-2">
                         <label for="inputUserPassword">Mot de passe</label>
-                        <input type="text" class="form-control" id="inputUserPassword" placeholder="Veuillez saisir un mot de passe" name="password_user">
+                        <input type="text" class="form-control" id="inputUserPassword" name="password_user">
                     </div>
 
-                    <!-- Input Name Recipe -->
-                    <div class="row mb-2">
-                        <label for="inputUserRole">Rôle</label>
-                        <input type="text" class="form-control" id="inputUserRole" placeholder="Veuillez saisir un rôle" name="">
+                    <!-- Error Password User -->
+                    <div>
+                        <?php if (!empty($user->getPasswordError())) : ?>
+                            <span class="badge badge-danger"><?= $user->getPasswordError() ?></span>
+                        <?php endif; ?>
                     </div>
-
-                    <!-- Input Name Recipe -->
-                    <div class="row mb-2">
-                        <label for="inputUserState">État</label>
-                        <input type="text" class="form-control" id="inputUserState" placeholder="Veuillez saisir un état" name="state_user">
-                    </div>
-
-                      <!-- Input City User -->
-                      <div class="row mb-2">
-                        <label for="inputUserCity">Ville</label>
-                        <input type="text" class="form-control" id="inputUserCity" placeholder="Veuillez saisir une ville" name="name_city">
-                    </div>
-
-                    <br>
-
-                    <!-- Buttons Validation / Reset -->
-                    <div class="row d-flex justify-content-around">
-
-                        <!-- Button Validation -->
-                        <input class="btn btn-lg" type="submit" id="button-recipe-validation" value="Valider">
-
-                        <!-- Button Reset -->
-                        <a href="#">
-                            <button class="btn btn-lg" type="button" id="button-recipe-reset" onclick=resetUser()>
-                                Annuler</button>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="col-5">
-
 
                     <!-- Input LastName User -->
                     <div class="row mb-2">
                         <label for="inputUserLastName">Nom</label>
-                        <input type="text" class="form-control" id="inputUserLastName" placeholder="Veuillez saisir un nom" name="lastname_user">
+                        <input type="text" class="form-control" id="inputUserLastName" name="lastname_user" value="<?= $user->getLastname_user() ?>">
+                    </div>
+
+                    <!-- Error LastName User -->
+                    <div>
+                        <?php if (!empty($user->getLastnameError())) : ?>
+                            <span class="badge badge-danger"><?= $user->getLastnameError() ?></span>
+                        <?php endif; ?>
                     </div>
 
                     <!-- Input FirstName User -->
                     <div class=" row mb-2">
                         <label for="inputUserFirstName">Prénom</label>
-                        <input type="text" class="form-control" id="inputUserFirstName" placeholder="Veuillez saisir un prénom" name="firstname_user">
+                        <input type="text" class="form-control" id="inputUserFirstName" name="firstname_user">
+                    </div>
+
+                    <!-- Error FirstName User -->
+                    <div>
+                        <?php if (!empty($user->getFirstnameError())) : ?>
+                            <span class="badge badge-danger"><?= $user->getFirstnameError() ?></span>
+                        <?php endif; ?>
                     </div>
 
                     <!-- Input Email User -->
                     <div class="row mb-2">
                         <label for="inputUserEmail">Email</label>
-                        <input type="text" class="form-control" id="inputUserEmail" placeholder="Veuillez saisir un email" name="email_user">
+                        <input type="text" class="form-control" id="inputUserEmail" name="email_user">
                     </div>
 
-                      <!-- Input Adress1 User -->
-                      <div class=" row mb-2">
+                    <!-- Error Email User -->
+                    <div>
+                        <?php if (!empty($user->getEmailError())) : ?>
+                            <span class="badge badge-danger"><?= $user->getEmailError()?></span>
+                        <?php endif; ?>
+                    </div>
+
+                </div>
+                
+                <div class="col-5">
+
+                    <!-- Input Adress1 User -->
+                    <div class=" row mb-2">
                         <label for="inputUserAdress1">Adresse</label>
-                        <input type="text" class="form-control" id="inputUserAdress1" placeholder="Veuillez saisir une adresse" name="adress1_user">
+                        <input type="text" class="form-control" id="inputUserAdress1" name="adress1_user">
+                    </div>
+
+                    <!-- Error Adress1 User -->
+                    <div>
+                        <?php if (!empty($user->getAdressError())) : ?>
+                            <span class="badge badge-danger"><?= $user->getAdressError()?></span>
+                        <?php endif; ?>
                     </div>
 
                     <!-- Input Adress2 User -->
                     <div class="row mb-2">
                         <label for="inputUserAdress2">Complément d'adresse</label>
-                        <input type="text" class="form-control" id="inputUserAdress2" placeholder="Veuillez saisir un complément d'adresse" name="adress2_user">
+                        <input type="text" class="form-control" id="inputUserAdress2" name="adress2_user">
                     </div>
 
+                    <!-- Input City User -->
+                    <div class="row mb-2">
+                        <label for="inputUserCity">Ville</label>
+                        <input type="text" class="form-control" id="inputUserCity" name="name_city">
+                    </div>
 
+                    <!-- Input Postcode User -->
+                    <div class="row mb-2">
+                        <label for="inputUserPostCode">Code postal</label>
+                        <input type="text" class="form-control" id="inputUserPostCode" name="postcode_user">
+                    </div>
+
+                    <!-- Error Postcode User -->
+                    <div>
+                        <?php if (!empty($user->getPostcodeError())) : ?>
+                            <span class="badge badge-danger"><?= $user->getPostcodeError() ?></span>
+                        <?php endif; ?>
+                    </div>
+
+                    <div class="row mb-2">
+
+                        <!-- Input Role User -->
+                        <div class="col-6">
+                            <label for="inputUserRole">Rôle </label> <br>
+                            <input type="checkbox" id="admin" name="admin" value="Administrateur">
+                            <label for="vehicle1"> Administrateur </label><br>
+                            <input type="checkbox" id="mod" name="mod" value="Modérateur">
+                            <label for="vehicle2"> Modérateur </label><br>
+                            <input type="checkbox" id="user" name="user" value="Utilisateur" checked>
+                            <label for="user"> Utilisateur </label><br><br>
+                        </div>
+
+                        <!-- Input State User -->
+                        <div class="col-6">
+                            <label for="inputUserState">État </label> <br>
+                            <select name="state_user" id="state-select">
+                                <option value="a">Actif</option>
+                                <option value="b">Bloqué</option>
+                                <option value="w">En attente</option>
+                            </select>
+                        </div>
+
+                    </div>
                 </div>
+            </div>
 
+            <!-- Buttons Validation / Reset -->
+            <div class="row d-flex justify-content-around">
+
+                <!-- Button Validation -->
+                <input class="btn btn-lg" type="submit" id="button-recipe-validation" value="Valider">
+
+                <!-- Button Reset -->
+                <a href="#">
+                    <button class="btn btn-lg" type="button" id="button-recipe-reset" onclick=resetUser()>
+                        Annuler</button>
+                </a>
             </div>
 
         </form>
-
-    </div>
 
     </div>
 

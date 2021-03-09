@@ -2,9 +2,6 @@
 session_start();
 include ('app/loader.php');
 
-// include 'app/config.php';
-// // include(__DIR__.'/app/Autoloader.php');
-
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -30,6 +27,7 @@ switch ($loc) {
         include(PATH_CTRL . "controller_connection.php");
         break;
 
+        // Disconnection part
     case "disconnection":
         include(PATH_CTRL . "controller_disconnection.php");
         break;

@@ -15,6 +15,7 @@ class UserDAO extends BaseDAO
   
           if ($result) {
               $arrayUsers = $result->fetchAll(PDO::FETCH_CLASS, 'User');
+              // connection log
           } else {
               $arrayUsers = [];
           }
@@ -24,7 +25,7 @@ class UserDAO extends BaseDAO
     public static function createUser($user) {
         $pdo = Database::getPdo();
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $sql = "INSERT INTO users (username_user, password_user, lastname_user, firstname_user, email_user, state_user, adress1_user, adress2_user, fk_id_city) values(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO users (username_user, password_user, lastname_user, firstname_user, email_user, state_user, adress1_user, adress2_user, fk_id_city, postcode_user) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $q = $pdo->prepare($sql);
         $q->execute(
             [
@@ -36,7 +37,8 @@ class UserDAO extends BaseDAO
                 $user->getState_user(),
                 $user->getAdress1_user(),
                 $user->getAdress2_user(),
-                $user->getFk_id_city(),            
+                $user->getFk_id_city(), 
+                $user->getPostcode_user()             
             ]
         );
         Database::disconnect();

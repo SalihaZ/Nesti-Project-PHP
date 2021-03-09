@@ -115,11 +115,10 @@
             <br>
 
             <!-- Bloc Preparation -->
-            <form action="">
-
-                <!-- Row One Step Preparation -->
-                <div class="row mb-4">
-                    <div class="d-flex">
+            <div class="form-group">
+                <div id="stepsPreparation">
+                    <!-- Row One Step Preparation -->
+                    <div class="row mb-4 d-flex">
                         <div class="d-flex flex-column pr-3">
 
                             <!-- Arrow DOWN -->
@@ -136,11 +135,9 @@
                         <!-- Text AREA -->
                         <textarea cols="65" rows="5" class="bg-white border border-info rounded"></textarea>
                     </div>
-                </div>
 
-                <!-- Row One Step Preparation -->
-                <div class="row mb-4">
-                    <div class="d-flex">
+                    <!-- Row One Step Preparation -->
+                    <div class="row mb-4 d-flex">
                         <div class="d-flex flex-column pr-3">
 
                             <!-- Arrow UP -->
@@ -162,11 +159,9 @@
                         <!-- Text AREA -->
                         <textarea cols="65" rows="5" class="bg-white border border-info rounded"></textarea>
                     </div>
-                </div>
 
-                <!-- Row One Step Preparation -->
-                <div class="row mb-4">
-                    <div class="d-flex">
+                    <!-- Row One Step Preparation -->
+                    <div class="row mb-4 d-flex">
                         <div class="d-flex flex-column pr-3">
 
                             <!-- Arrow UP -->
@@ -184,13 +179,11 @@
                         <textarea cols="65" rows="5" class="bg-white border border-info rounded"></textarea>
                     </div>
                 </div>
-
                 <!-- Button Plus -->
                 <div class="row justify-content-end">
-                    <button class="btn" id="plusPreparation"><i class="fas fa-plus"></i></button>
+                    <button class="btn" id="plusPreparation" onclick="addStepPreparation()" type="submit"><i class="fas fa-plus"></i></button>
                 </div>
-
-            </form>
+            </div>
         </div>
 
 
@@ -236,12 +229,9 @@
                                     <input class="btn" onclick="addIngredient()" type="submit" id="button-recipe-validation" value="OK">
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
-
             </div>
-
         </div>
 </main>
