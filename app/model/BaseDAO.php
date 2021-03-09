@@ -13,7 +13,7 @@ class BaseDAO
         $q->execute([$value]);
 
         $entity = $q->fetchObject(static::getEntityClass());
-
+        
         return $entity;
     }
 

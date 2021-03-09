@@ -2,6 +2,9 @@
 <?php if (!isset($user) || empty($user)) {
     $user = new User();
 }
+if (!isset($city) || empty($city)) {
+    $city = new City();
+}
 ?>
 
 <!-- Main -->
@@ -33,66 +36,67 @@
 
                     <!-- Input UserName User -->
                     <div class="row mb-2">
-                        <label for="inputUserName">Nom d'utilisateur</label>
+                        <label for="inputUserName">Nom d'utilisateur *</label>
                         <input type="text" class="form-control" id="inputUserName" name="username_user" value="<?= $user->getUsername_user() ?>">
                     </div>
 
                     <!-- Error UserName User -->
                     <div>
                         <?php if (!empty($user->getUsernameError())) : ?>
-                            <span class="badge badge-danger"><?= $user->getUsernameError() ?></span>
+                            <span class="badge badge-danger mb-2"><?= $user->getUsernameError() ?></span>
                         <?php endif; ?>
                     </div>
 
                     <!-- Input Password User -->
                     <div class="row mb-2">
-                        <label for="inputUserPassword">Mot de passe</label>
-                        <input type="text" class="form-control" id="inputUserPassword" name="password_user">
+                        <label for="inputUserPassword">Mot de passe *</label>
+                        <input type="text" class="form-control" id="inputUserPassword" name="password_user" value="<?= $user->getPassword_user() ?>">
                     </div>
 
                     <!-- Error Password User -->
                     <div>
                         <?php if (!empty($user->getPasswordError())) : ?>
-                            <span class="badge badge-danger"><?= $user->getPasswordError() ?></span>
+                            <span class="badge badge-danger mb-2"><?= $user->getPasswordError() ?></span>
                         <?php endif; ?>
                     </div>
 
                     <!-- Input LastName User -->
                     <div class="row mb-2">
-                        <label for="inputUserLastName">Nom</label>
+                        <label for="inputUserLastName">Nom *</label>
                         <input type="text" class="form-control" id="inputUserLastName" name="lastname_user" value="<?= $user->getLastname_user() ?>">
                     </div>
 
                     <!-- Error LastName User -->
                     <div>
                         <?php if (!empty($user->getLastnameError())) : ?>
-                            <span class="badge badge-danger"><?= $user->getLastnameError() ?></span>
+                            <span class="badge badge-danger mb-2"><?= $user->getLastnameError() ?></span>
                         <?php endif; ?>
                     </div>
 
                     <!-- Input FirstName User -->
                     <div class=" row mb-2">
-                        <label for="inputUserFirstName">Prénom</label>
-                        <input type="text" class="form-control" id="inputUserFirstName" name="firstname_user">
+                        <label for="inputUserFirstName">Prénom *</label>
+                        <input type="text" class="form-control" id="inputUserFirstName" name="firstname_user" value="<?= $user->getFirstname_user() ?>">
                     </div>
 
                     <!-- Error FirstName User -->
                     <div>
                         <?php if (!empty($user->getFirstnameError())) : ?>
-                            <span class="badge badge-danger"><?= $user->getFirstnameError() ?></span>
+                            <span class="badge badge-danger mb-2"><?= $user->getFirstnameError() ?></span>
                         <?php endif; ?>
                     </div>
 
                     <!-- Input Email User -->
                     <div class="row mb-2">
-                        <label for="inputUserEmail">Email</label>
-                        <input type="text" class="form-control" id="inputUserEmail" name="email_user">
+                        <label for="inputUserEmail">Email *</label>
+                        <input type="text" class="form-control" id="inputUserEmail" name="email_user" value="<?= $user->getEmail_user() ?>">
                     </div>
 
                     <!-- Error Email User -->
                     <div>
                         <?php if (!empty($user->getEmailError())) : ?>
-                            <span class="badge badge-danger"><?= $user->getEmailError()?></span>
+                            <span class="badge badge-danger mb-2"><?= $user->getEmailError()?></span>
+                            <?php echo"</br>"?>
                         <?php endif; ?>
                     </div>
 
@@ -100,41 +104,55 @@
                 
                 <div class="col-5">
 
-                    <!-- Input Adress1 User -->
+                    <!-- Input Address1 User -->
                     <div class=" row mb-2">
-                        <label for="inputUserAdress1">Adresse</label>
-                        <input type="text" class="form-control" id="inputUserAdress1" name="adress1_user">
+                        <label for="inputUserAddress1">Adresse *</label>
+                        <input type="text" class="form-control" id="inputUserAddress1" name="address1_user" value="<?= $user->getAddress1_user() ?>">
                     </div>
 
-                    <!-- Error Adress1 User -->
+                    <!-- Error Address1 User -->
                     <div>
-                        <?php if (!empty($user->getAdressError())) : ?>
-                            <span class="badge badge-danger"><?= $user->getAdressError()?></span>
+                        <?php if (!empty($user->getAddress1Error())) : ?>
+                            <span class="badge badge-danger mb-2"><?= $user->getAddress1Error()?></span>
                         <?php endif; ?>
                     </div>
 
-                    <!-- Input Adress2 User -->
+                    <!-- Input Address2 User -->
                     <div class="row mb-2">
-                        <label for="inputUserAdress2">Complément d'adresse</label>
-                        <input type="text" class="form-control" id="inputUserAdress2" name="adress2_user">
+                        <label for="inputUserAddress2">Complément d'adresse</label>
+                        <input type="text" class="form-control" id="inputUserAddress2" name="address2_user" value="<?= $user->getAddress2_user() ?>">
+                    </div>
+
+                     <!-- Error Address2 User -->
+                     <div>
+                        <?php if (!empty($user->getAddress2Error())) : ?>
+                            <span class="badge badge-danger mb-2"><?= $user->getAddress2Error()?></span>
+                        <?php endif; ?>
                     </div>
 
                     <!-- Input City User -->
                     <div class="row mb-2">
-                        <label for="inputUserCity">Ville</label>
-                        <input type="text" class="form-control" id="inputUserCity" name="name_city">
+                        <label for="inputUserCity">Ville *</label>
+                        <input type="text" class="form-control" id="inputUserCity" name="name_city" >
+                    </div>
+
+                    <!-- Error City User -->
+                    <div>
+                        <?php if (!empty($city->getNameCityError())) : ?>
+                            <span class="badge badge-danger mb-2"><?= $city->getNameCityError()?></span>
+                        <?php endif; ?>
                     </div>
 
                     <!-- Input Postcode User -->
                     <div class="row mb-2">
-                        <label for="inputUserPostCode">Code postal</label>
-                        <input type="text" class="form-control" id="inputUserPostCode" name="postcode_user">
+                        <label for="inputUserPostCode">Code postal *</label>
+                        <input type="text" class="form-control" id="inputUserPostCode" name="postcode_user" value="<?= $user->getPostcode_user() ?>">
                     </div>
 
                     <!-- Error Postcode User -->
                     <div>
                         <?php if (!empty($user->getPostcodeError())) : ?>
-                            <span class="badge badge-danger"><?= $user->getPostcodeError() ?></span>
+                            <span class="badge badge-danger mb-2"><?= $user->getPostcodeError() ?></span>
                         <?php endif; ?>
                     </div>
 
@@ -142,9 +160,11 @@
 
                         <!-- Input Role User -->
                         <div class="col-6">
-                            <label for="inputUserRole">Rôle </label> <br>
+                            <label for="inputUserRole">Rôle *</label> <br>
                             <input type="checkbox" id="admin" name="admin" value="Administrateur">
-                            <label for="vehicle1"> Administrateur </label><br>
+                            <label for="admin"> Administrateur </label><br>
+                            <input type="checkbox" id="mod" name="mod" value="Modérateur">
+                            <label for="mod"> Chef </label><br>
                             <input type="checkbox" id="mod" name="mod" value="Modérateur">
                             <label for="vehicle2"> Modérateur </label><br>
                             <input type="checkbox" id="user" name="user" value="Utilisateur" checked>
@@ -153,7 +173,7 @@
 
                         <!-- Input State User -->
                         <div class="col-6">
-                            <label for="inputUserState">État </label> <br>
+                            <label for="inputUserState">État *</label> <br>
                             <select name="state_user" id="state-select">
                                 <option value="a">Actif</option>
                                 <option value="b">Bloqué</option>

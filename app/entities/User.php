@@ -6,14 +6,14 @@ class User
     //Attributes
     private $id_user;
     private $username_user;
-    private $passwordHash_user;
+    private $password_user;
     private $lastname_user;
     private $firstname_user;
     private $email_user;
     private $state_user;
     private $date_creation_user;
-    private $adress1_user;
-    private $adress2_user;
+    private $address1_user;
+    private $address2_user;
     private $fk_id_city;
     private $postcode_user;
     private $valid_user = true;
@@ -25,7 +25,9 @@ class User
     private $firstnameError = '';
     private $emailError = '';
     private $stateError = '';
-    private $adressError = '';
+    private $address1Error = '';
+    private $address2Error = '';
+    private $cityError = '';
     private $postcodeError = '';
 
     /**
@@ -62,10 +64,10 @@ class User
     public function setUsername_user($username_user)
     {
         if (empty($username_user)) {
-            $this->usernameError = 'Veuillez saisir votre prénom';
+            $this->usernameError = "Veuillez saisir un nom d'utilisateur";
             $this->valid_user  = false;
-        } else if (!preg_match("/^[a-zA-Z ]*$/", $username_user)) {
-            $this->usernameError = "Seuls les lettres et les espaces sont autorisés";
+        } else if (!preg_match("/^[a-zA-Z0-9._-]{3,16}$/", $username_user)) {
+            $this->usernameError = "Le nom d'utilisateur ne respecte pas les conditions";
             $this->valid_user = false;
         }
 
@@ -75,20 +77,28 @@ class User
     }
 
     /**
-     * Get the value of passwordHash_user
+     * Get the value of password_user
      */
-    public function getPasswordHash_user()
+    public function getPassword_user()
     {
-        return $this->passwordHash_user;
+        return $this->password_user;
     }
 
     /**
-     * Set the value of passwordHash_user
+     * Set the value of password_user
      * @return  self
      */
-    public function setPasswordHash_user($passwordHash_user)
+    public function setPassword_user($password_user)
     {
-        $this->passwordHash_user = $passwordHash_user;
+        if (empty($password_user)) {
+            $this->passwordError = 'Veuillez saisir un mot de passe';
+            $this->valid_user = false;
+        } else if (!preg_match("/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%!?^&+=])(?=\\S+$).{8,16}$/", $password_user)) {
+            $this->passwordError = "Le mot de passe n'est pas assez fort ou ne respecte pas les conditions";
+            $this->valid_user = false;
+        }
+
+        $this->password_user = $password_user;
 
         return $this;
     }
@@ -109,10 +119,10 @@ class User
     {
         if (empty($lastname_user)) {
             $this->lastnameError = 'Veuillez saisir votre nom';
-            $this->valid = false;
-        } else if (!preg_match("/^[a-zA-Z ]*$/", $lastname_user)) {
-            $this->lastnameError = "Seuls les lettres et les espaces sont autorisés";
-            $this->valid = false;
+            $this->valid_user = false;
+        } else if (!preg_match("/^[a-z ,.'-]+$/i", $lastname_user)) {
+            $this->lastnameError = "Votre saisie nom n'est pas correcte";
+            $this->valid_user = false;
         }
 
         $this->lastname_user = $lastname_user;
@@ -136,10 +146,10 @@ class User
     {
         if (empty($firstname_user)) {
             $this->firstnameError = 'Veuillez saisir votre prénom';
-            $this->valid = false;
-        } else if (!preg_match("/^[a-zA-Z ]*$/", $firstname_user)) {
-            $this->firstnameError = "Seuls les lettres et les espaces sont autorisés";
-            $this->valid = false;
+            $this->valid_user = false;
+        } else if (!preg_match("/^[a-z ,.'-]+$/i", $firstname_user)) {
+            $this->firstnameError = "Votre saisie prénom n'est pas correcte";
+            $this->valid_user = false;
         }
 
         $this->firstname_user = $firstname_user;
@@ -163,10 +173,10 @@ class User
     {
         if (empty($email_user)) {
             $this->emailError = 'Veuillez saisir votre adresse e-mail';
-            $this->valid = false;
+            $this->valid_user = false;
         } else if (!filter_var($email_user, FILTER_VALIDATE_EMAIL)) {
-            $this->emailError = 'Veuillez saisir une adresse e-mail valide';
-            $this->valid = false;
+            $this->emailError = "L'adresse email n'est pas correcte";
+            $this->valid_user = false;
         }
         $this->email_user = $email_user;
 
@@ -186,11 +196,7 @@ class User
      * @return  self
      */
     public function setState_user($state_user)
-    {    if (!isset($state_user)) {
-        $this->state_user = 'Veuillez saisir un état';
-        $this->valid = false;
-    }
-
+    {   
         $this->state_user = $state_user;
 
         return $this;
@@ -216,43 +222,44 @@ class User
     }
 
     /**
-     * Get the value of adress1_user
+     * Get the value of address1_user
      */
-    public function getAdress1_user()
+    public function getAddress1_user()
     {
-        return $this->adress1_user;
+        return $this->address1_user;
     }
 
     /**
-     * Set the value of adress1_user
+     * Set the value of address1_user
      * @return  self
      */
-    public function setAdress1_user($adress1_user)
+    public function setAddress1_user($address1_user)
     {
-        if (!isset($adress1_user)) {
-            $this->adress1_user = 'Veuillez saisir une adresse postale';
-            $this->valid = false;
+        if (empty($address1_user)) {
+            $this->address1Error = 'Veuillez saisir une adresse postale';
+            $this->valid_user = false;
         }
-        $this->adress1_user = $adress1_user;
+
+        $this->address1_user = $address1_user;
 
         return $this;
     }
 
     /**
-     * Get the value of adress2_user
+     * Get the value of address2_user
      */
-    public function getAdress2_user()
+    public function getAddress2_user()
     {
-        return $this->adress2_user;
+        return $this->address2_user;
     }
 
     /**
-     * Set the value of adress2_user
+     * Set the value of address2_user
      * @return  self
      */
-    public function setAdress2_user($adress2_user)
+    public function setAddress2_user($address2_user)
     {
-        $this->adress2_user = $adress2_user;
+        $this->address2_user = $address2_user;
 
         return $this;
     }
@@ -270,11 +277,14 @@ class User
      * @return  self
      */
     public function setPostcode_user($postcode_user)
-    {  if (!isset($postcode_user)) {
-        $this->postcode_user = 'Veuillez saisir un code postal';
-        $this->valid = false;
+    {  if (empty($postcode_user)) {
+        $this->postcodeError = 'Veuillez saisir un code postal';
+        $this->valid_user = false;
+    } else if (!preg_match("/^[0-9]{5}$/", $postcode_user)) {
+        $this->postcodeError = "Veuillez saisir un code postal valide";
+        $this->valid_user = false;
     }
-        $this->postcode_user = $postcode_user;
+    $this->postcode_user = $postcode_user;
 
         return $this;
     }
@@ -318,15 +328,6 @@ class User
         return $this;
     }
 
-    public function setPasswordHashFromPlaintext($plaintextPassword)
-    {
-        $this->setPasswordHash_user(password_hash($plaintextPassword, PASSWORD_DEFAULT));
-    }
-    public function isPassword($plaintextPassword)
-    {
-        return password_verify($plaintextPassword, $this->getPasswordHash_user());
-    }
-
     /**
      * Get the value of usernameError
      */
@@ -368,11 +369,28 @@ class User
     }
 
     /**
-     * Get the value of adressError
+     * Get the value of addressError
      */
-    public function getAdressError()
+    public function getAddress1Error()
     {
-        return $this->adressError;
+        return $this->address1Error;
+    }
+
+      /**
+     * Get the value of addressError
+     */
+    public function getAddress2Error()
+    {
+        return $this->address2Error;
+    }
+
+
+     /**
+     * Get the value of cityError
+     */ 
+    public function getCityError()
+    {
+        return $this->cityError;
     }
 
     /**

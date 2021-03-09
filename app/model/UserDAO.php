@@ -25,18 +25,18 @@ class UserDAO extends BaseDAO
     public static function createUser($user) {
         $pdo = Database::getPdo();
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $sql = "INSERT INTO users (username_user, password_user, lastname_user, firstname_user, email_user, state_user, adress1_user, adress2_user, fk_id_city, postcode_user) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO users (username_user, password_user, lastname_user, firstname_user, email_user, state_user, address1_user, address2_user, fk_id_city, postcode_user) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $q = $pdo->prepare($sql);
         $q->execute(
             [
                 $user->getUsername_user(),
-                $user->getPasswordHash_user(),
+                $user->getPassword_user(),
                 $user->getLastname_user(),
                 $user->getFirstname_user(),
                 $user->getEmail_user(),
                 $user->getState_user(),
-                $user->getAdress1_user(),
-                $user->getAdress2_user(),
+                $user->getAddress1_user(),
+                $user->getAddress2_user(),
                 $user->getFk_id_city(), 
                 $user->getPostcode_user()             
             ]
