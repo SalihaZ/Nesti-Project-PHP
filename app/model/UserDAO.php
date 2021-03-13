@@ -7,7 +7,7 @@ class UserDAO extends BaseDAO
     protected static $tableName = "users";
 
      // Fetchs all data of the users in DB
-      public function readAll()
+      public static function readAll()
       {
           $pdo = Database::getPdo();
           $sql = "SELECT * FROM users";

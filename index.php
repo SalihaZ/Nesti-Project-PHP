@@ -21,8 +21,10 @@ if ($UserSession->isConnectUser()) {
 
 }
 
-switch ($loc) {
+$controller = null;
 
+switch ($loc) {
+   
         // Connection part
     case "connection":
         include(PATH_CTRL . "ControllerConnection.php");
@@ -45,17 +47,19 @@ switch ($loc) {
 
         // Users part
     case "users":
-        include(PATH_CTRL . "ControllerUsers.php");
-        break;
+       $controller = new ControllerUsers();
+    break;
 
         // Statistics part
     case "statistics":
-        include(PATH_STATISTICS . "statistics.php");
+        include(PATH_CTRL . "ControllerStatistics.php");
         break;
 
     default:
         include(PATH_ERRORS . "error404.php");
         break;
 }
+
+extract($controller->getData());
 
 include(PATH_COMMON . "template.php");

@@ -3,21 +3,20 @@
 class ControllerUsers extends BaseController
 {
 
-    public function initialize()
-    {
-        if (($_GET['loc'] == 'user')&&($_GET['action']  == 'create')){ 
-        $this->createUser();
+    public function initialize(){
+        
+        if(($_GET['loc'] == 'users') && (!isset($_GET['action']))){
+            $arrayUsers = UserDAO::readAll();
+            $this->_data['arrayUsers'] = $arrayUsers;
+        }
+
+        if(($_GET['loc'] == 'users') && ($_GET['action'] == 'create')){
+           $this->createUser();
         }
     }
 
     private function createUser()
     {
-        $modelUser = new UserDAO();
-        // $modelCity = new CityDAO();
-        $modelBase = new BaseDAO();
-
-        // Constructor Obj User
-        $arrayUsers = $modelUser->readAll();
 
         if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
 
@@ -64,8 +63,12 @@ class ControllerUsers extends BaseController
                 RoleDAO::createRoles($user);
             }
         }
-        return 0;
     }
+
+    // private function getOneUser($id)
+    // {
+    // UserDAO::findOneBy();
+    // }
 }
 
 
