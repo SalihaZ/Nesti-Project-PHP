@@ -16,6 +16,7 @@ class User
     private $address2_user;
     private $fk_id_city;
     private $postcode_user;
+    private $roles_user = [];
     private $valid_user = true;
 
     // Errors
@@ -29,6 +30,7 @@ class User
     private $address2Error = '';
     private $cityError = '';
     private $postcodeError = '';
+    private $rolesError = '';
 
     /**
      * Get the value of id_user
@@ -196,7 +198,7 @@ class User
      * @return  self
      */
     public function setState_user($state_user)
-    {   
+    {
         $this->state_user = $state_user;
 
         return $this;
@@ -277,14 +279,15 @@ class User
      * @return  self
      */
     public function setPostcode_user($postcode_user)
-    {  if (empty($postcode_user)) {
-        $this->postcodeError = 'Veuillez saisir un code postal';
-        $this->valid_user = false;
-    } else if (!preg_match("/^[0-9]{5}$/", $postcode_user)) {
-        $this->postcodeError = "Veuillez saisir un code postal valide";
-        $this->valid_user = false;
-    }
-    $this->postcode_user = $postcode_user;
+    {
+        if (empty($postcode_user)) {
+            $this->postcodeError = 'Veuillez saisir un code postal';
+            $this->valid_user = false;
+        } else if (!preg_match("/^[0-9]{5}$/", $postcode_user)) {
+            $this->postcodeError = "Veuillez saisir un code postal valide";
+            $this->valid_user = false;
+        }
+        $this->postcode_user = $postcode_user;
 
         return $this;
     }
@@ -307,6 +310,47 @@ class User
         $this->fk_id_city = $fk_id_city;
 
         return $this;
+    }
+
+    /**
+     * Get the value of roles
+     */
+    public function getRoles_user()
+    {
+        return $this->roles_user;
+    }
+
+    /**
+     * Set the value of roles
+     *
+     * @return  self
+     */
+    public function setRoles_user($roles_user)
+    {
+        $this->roles_user = array_map(function($r) {
+            return $this->translateRole($r);
+        }, $roles_user);
+
+        return $this;
+    }
+
+    private function translateRole($role)
+    {
+        switch ($role) {
+            case 'admins':
+                $translateRole = 'Administrateur';
+                break;
+            case 'moderators':
+                $translateRole = 'Modérateur';
+                break;
+            case 'chiefs':
+                $translateRole = 'Chef';
+                break;
+            default:
+            $translateRole = 'Utilisateur';
+                break;
+        }
+        return $translateRole;
     }
 
     /**
@@ -376,7 +420,7 @@ class User
         return $this->address1Error;
     }
 
-      /**
+    /**
      * Get the value of addressError
      */
     public function getAddress2Error()
@@ -385,9 +429,9 @@ class User
     }
 
 
-     /**
+    /**
      * Get the value of cityError
-     */ 
+     */
     public function getCityError()
     {
         return $this->cityError;
@@ -403,9 +447,17 @@ class User
 
     /**
      * Get the value of stateError
-     */ 
+     */
     public function getStateError()
     {
         return $this->stateError;
+    }
+
+    /**
+     * Get the value of rolesError
+     */
+    public function getRolesError()
+    {
+        return $this->rolesError;
     }
 }

@@ -43,7 +43,7 @@
                         <th scope="col">#</th>
                         <th scope="col">Nom d'utilisateur</th>
                         <th scope="col">Nom</th>
-                        <th scope="col">Rôle</th>
+                        <th scope="col">Rôle(s)</th>
                         <th scope="col">Dernière connexion</th>
                         <th scope="col">Etat</th>
                         <th scope="col">Actions</th>
@@ -66,10 +66,12 @@
                                 <?= $element->getFirstname_user() ?>
                             </td>
                             <td>
-                                <!-- <//?= $element->getDifficulty_recipes() ?> -->
+                                <?php
+                               echo implode(",", $element->getRoles_user());
+                                ?>
                             </td>
                             <td>
-                                <!-- <//?= $element->getNumber_person_recipes() ?> -->
+
                             </td>
                             <td>
                                 <?= $element->getState_user() ?>

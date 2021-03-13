@@ -2,7 +2,6 @@
 
 class CityDAO extends BaseDAO
 {
-
     protected static $tableName = "cities";
 
     public static function createCity($city)

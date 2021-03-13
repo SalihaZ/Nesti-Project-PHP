@@ -15,7 +15,12 @@ class UserDAO extends BaseDAO
   
           if ($result) {
               $arrayUsers = $result->fetchAll(PDO::FETCH_CLASS, 'User');
-              // connection log
+            
+              foreach ($arrayUsers as $user) {
+                 $roles_user = RoleDAO::readUserRoles($user);
+                 $user->setRoles_user($roles_user);
+              }
+
           } else {
               $arrayUsers = [];
           }
@@ -38,10 +43,12 @@ class UserDAO extends BaseDAO
                 $user->getAddress1_user(),
                 $user->getAddress2_user(),
                 $user->getFk_id_city(), 
-                $user->getPostcode_user()             
+                $user->getPostcode_user()
             ]
         );
+        $last_id = $pdo->lastInsertId();
         Database::disconnect();
+        return $last_id;
     }
 
 

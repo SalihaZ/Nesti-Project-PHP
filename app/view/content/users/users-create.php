@@ -160,15 +160,17 @@ if (!isset($city) || empty($city)) {
 
                         <!-- Input Role User -->
                         <div class="col-6">
-                            <label for="inputUserRole">Rôle *</label> <br>
-                            <input type="checkbox" id="admin" name="admin" value="Administrateur">
+                            <label for="inputUserRole">Rôle(s) *</label> <br>
+                           
+                            <input type="checkbox" id="admin" name="roles_user[]" value="admins">
                             <label for="admin"> Administrateur </label><br>
-                            <input type="checkbox" id="mod" name="mod" value="Modérateur">
-                            <label for="mod"> Chef </label><br>
-                            <input type="checkbox" id="mod" name="mod" value="Modérateur">
-                            <label for="vehicle2"> Modérateur </label><br>
-                            <input type="checkbox" id="user" name="user" value="Utilisateur" checked>
-                            <label for="user"> Utilisateur </label><br><br>
+                            
+                            <input type="checkbox" id="mod" name="roles_user[]" value="moderators">
+                            <label for="mod"> Modérateur </label><br>
+
+                            <input type="checkbox" id="chief" name="roles_user[]" value="chiefs">
+                            <label for="chief"> Chef </label><br>
+                            
                         </div>
 
                         <!-- Input State User -->
