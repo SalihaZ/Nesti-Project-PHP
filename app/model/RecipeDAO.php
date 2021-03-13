@@ -1,12 +1,10 @@
 <?php
 
-include_once(PATH_MODEL . 'Database.php');
-
 class RecipeDAO
 {
 
     // Fetch all data DB Recipe
-    public function readAll()
+    public static function readAllRecipes()
     {
 
         $pdo = Database::getPdo();
