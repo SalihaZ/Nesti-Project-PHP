@@ -1,46 +1,53 @@
 <?php
 
-include_once(PATH_MODEL . 'Database.php');
-
 class UserDAO extends BaseDAO
 {
     protected static $tableName = "users";
 
-     // Fetchs all data of the users in DB
-      public static function readAll()
-      {
-          $pdo = Database::getPdo();
-          $sql = "SELECT * FROM users";
-          $result = $pdo->query($sql);
-  
-          if ($result) {
-              $arrayUsers = $result->fetchAll(PDO::FETCH_CLASS, 'User');
-            
-              foreach ($arrayUsers as $user) {
-                 $roles_user = RoleDAO::readUserRoles($user);
-                 $user->setRoles_user($roles_user);
-              }
+    // Fetchs all data of the users in DB
+    public static function readAllUsers()
+    {
+        $pdo = Database::getPdo();
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $sql = "SELECT * FROM users";
+        $result = $pdo->query($sql);
 
-          } else {
-              $arrayUsers = [];
-          }
-          return $arrayUsers;
-      }
+        if ($result) {
+            $arrayUsers = $result->fetchAll(PDO::FETCH_CLASS, 'User');
 
-        // Fetch all data of the users in DB
-        public static function readOne($user)
-        {
-            $id = $user->getId_user();
-            $pdo = Database::getPdo();
-            $sql = "SELECT * FROM users WHERE id_user = $id";
-            $result = $pdo->query($sql);
-    
-            Database::disconnect();
-    
-            return $result;
-        }    
+            foreach ($arrayUsers as $user) {
+                $roles_user = RoleDAO::readUserRoles($user);
+                $user->setRoles_user($roles_user);
+            }
+        } else {
+            $arrayUsers = [];
+        }
+        return $arrayUsers;
+    }
 
-    public static function createUser($user) {
+    // Fetch data of one user in DB
+    public static function readOneUser($id)
+    {
+        $pdo = Database::getPdo();
+
+        $sql = "SELECT * FROM users WHERE id_user = $id";
+        $result = $pdo->query($sql);
+        $result->setFetchMode(PDO::FETCH_CLASS, 'User');
+
+        if ($result) {
+            $user = $result->fetch();
+        } else {
+            $user = '';
+        }
+
+        Database::disconnect();
+
+        return $user;
+    }
+
+    // Create one user in the DB
+    public static function createUser($user)
+    {
         $pdo = Database::getPdo();
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $sql = "INSERT INTO users (username_user, password_user, lastname_user, firstname_user, email_user, state_user, address1_user, address2_user, fk_id_city, postcode_user) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -55,7 +62,7 @@ class UserDAO extends BaseDAO
                 $user->getState_user(),
                 $user->getAddress1_user(),
                 $user->getAddress2_user(),
-                $user->getFk_id_city(), 
+                $user->getFk_id_city(),
                 $user->getPostcode_user()
             ]
         );

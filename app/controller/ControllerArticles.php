@@ -5,8 +5,10 @@ class ControllerArticles extends BaseController
 
     public function initialize()
     {
-        // Constructor Obj Article
-        $model = new ArticleDAO();
-        $arrayArticles = $model->readAll();
+        if (!isset($_GET['action'])) {
+            $arrayArticles = ArticleDAO::readAllArticles();
+            $this->_data['arrayArticles'] = $arrayArticles;
+        }
     }
 }
+

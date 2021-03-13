@@ -1,12 +1,10 @@
 <?php
 
-include_once(PATH_MODEL . 'Database.php');
-
 class ArticleDAO
 {
 
     // Fetch all data of the articles in DB
-    public function readAll()
+    public static function readAllArticles()
     {
 
         $pdo = Database::getPdo();

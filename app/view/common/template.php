@@ -1,9 +1,5 @@
 <?php
 
-// Head
-include(PATH_COMMON . 'head.php');
-
-
 echo "LOC : ".$loc. " ; ";
 echo "ACTION : ".$action. " ; ";
 echo "ID : ".$id. " ; ";

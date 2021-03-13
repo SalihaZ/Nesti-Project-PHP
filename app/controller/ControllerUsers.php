@@ -3,15 +3,22 @@
 class ControllerUsers extends BaseController
 {
 
-    public function initialize(){
-        
-        if(($_GET['loc'] == 'users') && (!isset($_GET['action']))){
-            $arrayUsers = UserDAO::readAll();
-            $this->_data['arrayUsers'] = $arrayUsers;
-        }
+    public function initialize()
+    {
 
-        if(($_GET['loc'] == 'users') && ($_GET['action'] == 'create')){
-           $this->createUser();
+        if (!isset($_GET['action'])) {
+            $arrayUsers = UserDAO::readAllUsers();
+            $this->_data['arrayUsers'] = $arrayUsers;
+        } else {
+            if ($_GET['action'] == 'create') {
+                $this->createUser();
+            }
+
+            if ($_GET['action'] == 'edition') {
+                $id = $_GET['id'];
+                $user = $this->editUser($id);
+                $this->_data['user'] = $user;
+            }
         }
     }
 
@@ -63,6 +70,14 @@ class ControllerUsers extends BaseController
                 RoleDAO::createRoles($user);
             }
         }
+    }
+
+    private function editUser($id)
+    {
+        $user = UserDAO::readOneUser($id);
+       
+        return $user;
+
     }
 
     // private function getOneUser($id)

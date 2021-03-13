@@ -2,6 +2,9 @@
 session_start();
 include ('app/loader.php');
 
+// Head
+include(PATH_COMMON . 'head.php');
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -37,12 +40,12 @@ switch ($loc) {
 
         // Recipes part
     case "recipes":
-        include(PATH_CTRL . "ControllerRecipes.php");
+        $controller = new ControllerRecipes();
         break;
 
         // Articles part
     case "articles":
-        include(PATH_CTRL . "ControllerArticles.php");
+        $controller = new ControllerArticles();
         break;
 
         // Users part
@@ -52,7 +55,7 @@ switch ($loc) {
 
         // Statistics part
     case "statistics":
-        include(PATH_CTRL . "ControllerStatistics.php");
+        $controller = new ControllerStatistics();
         break;
 
     default:

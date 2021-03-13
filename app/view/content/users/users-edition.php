@@ -53,6 +53,51 @@
                     <?php endif; ?>
                 </div>
 
+            <!-- Input Address1 User -->
+            <div class=" row mb-2">
+                        <label for="inputUserAddress1">Adresse *</label>
+                        <input type="text" class="form-control" id="inputUserAddress1" name="address1_user" value="<?= $user->getAddress1_user() ?>">
+                    </div>
+
+                    <!-- Error Address1 User -->
+                    <div>
+                        <?php if (!empty($user->getAddress1Error())) : ?>
+                            <span class="badge badge-danger mb-2"><?= $user->getAddress1Error()?></span>
+                        <?php endif; ?>
+                    </div>
+
+                    <!-- Input Address2 User -->
+                    <div class="row mb-2">
+                        <label for="inputUserAddress2">Complément d'adresse</label>
+                        <input type="text" class="form-control" id="inputUserAddress2" name="address2_user" value="<?= $user->getAddress2_user() ?>">
+                    </div>
+
+                     <!-- Error Address2 User -->
+                     <div>
+                        <?php if (!empty($user->getAddress2Error())) : ?>
+                            <span class="badge badge-danger mb-2"><?= $user->getAddress2Error()?></span>
+                        <?php endif; ?>
+                    </div>
+
+                    <!-- Input City User -->
+                    <div class="row mb-2">
+                        <label for="inputUserCity">Ville *</label>
+                        <input type="text" class="form-control" id="inputUserCity" name="name_city">
+                    </div>
+
+                    <!-- Input Postcode User -->
+                    <div class="row mb-2">
+                        <label for="inputUserPostCode">Code postal *</label>
+                        <input type="text" class="form-control" id="inputUserPostCode" name="postcode_user" value="<?= $user->getPostcode_user() ?>">
+                    </div>
+
+                    <!-- Error Postcode User -->
+                    <div>
+                        <?php if (!empty($user->getPostcodeError())) : ?>
+                            <span class="badge badge-danger mb-2"><?= $user->getPostcodeError() ?></span>
+                        <?php endif; ?>
+                    </div>
+
                 <div class="row mb-2">
 
                     <!-- Input Role User -->
@@ -106,7 +151,24 @@
 
             <div class="row">
                 <h2>Informations</h2>
-                <textarea rows="12" cols="50" class="form-control shadow" id="inputUser" placeholder="" name="recipe[name_recipes]"> </textarea>
+                <div class="" id="infosUser" placeholder="" name="recipe[name_recipes]">
+                <p> Date de création : <br> 
+                Dernière connexion : <br>
+                <h5> Chef </h5>
+                Nombre de recette : <br>
+                Dernière recette : <br><br>
+                <h5> Utilisateur </h5>
+                Nombre de commandes : <br>
+                Montant total des commandes :  <br>
+                Dernière commande : <br><br>
+                <h5> Administrateur </h5>
+                Nombre d'importation faites : <br>
+                Date de la dernière importation : <br><br>
+                <h5> Modérateur </h5>
+                Nombre de commentaire bloqué : <br>
+                Nobmre de commentaire approuvé : <br>
+                </p> 
+                </div>
             </div>
 
             <br>
