@@ -1,3 +1,9 @@
+<!-- Create new user object -->
+<?php if (!isset($user) || empty($user)) {
+    $user = new User();
+} 
+?>
+
 <!-- Main -->
 <main class="container wrapper-user-create">
 
@@ -21,32 +27,59 @@
         <div class="col-6">
             <form method="POST" action="create" class="form-group rounded">
 
-                <!-- Input Name Recipe -->
+                <!-- Input LastName User -->
                 <div class="row mb-2">
-                    <label for="inputRecipeName">Nom</label>
-                    <input type="text" class="form-control" id="inputRecipeName" placeholder="Veuillez saisir un nom" name="recipe[name_recipes]">
-                    <!-- <small id="chief" class="form-text text-muted">Auteur de la recette : <?php echo $_SESSION["firstName"] . " " . $_SESSION["lastName"] ?></small> -->
+                    <label for="inputUserLastName">Nom *</label>
+                    <input type="text" class="form-control" id="inputUserLastName" name="lastname_user" value="<?= $user->getLastname_user() ?>">
                 </div>
 
-                <!-- Input Name Recipe -->
-                <div class="row mb-2">
-                    <label for="inputRecipeName">Prénom</label>
-                    <input type="text" class="form-control" id="inputRecipeName" placeholder="Veuillez saisir un prénom" name="recipe[name_recipes]">
-                    <!-- <small id="chief" class="form-text text-muted">Auteur de la recette : <?php echo $_SESSION["firstName"] . " " . $_SESSION["lastName"] ?></small> -->
+                <!-- Error LastName User -->
+                <div>
+                    <?php if (!empty($user->getLastnameError())) : ?>
+                        <span class="badge badge-danger mb-2"><?= $user->getLastnameError() ?></span>
+                    <?php endif; ?>
                 </div>
 
-                <!-- Input Name Recipe -->
-                <div class="row mb-2">
-                    <label for="inputRecipeName">Rôle</label>
-                    <input type="text" class="form-control" id="inputRecipeName" placeholder="Veuillez saisir un rôle" name="recipe[name_recipes]">
-                    <!-- <small id="chief" class="form-text text-muted">Auteur de la recette : <?php echo $_SESSION["firstName"] . " " . $_SESSION["lastName"] ?></small> -->
+                <!-- Input FirstName User -->
+                <div class=" row mb-2">
+                    <label for="inputUserFirstName">Prénom *</label>
+                    <input type="text" class="form-control" id="inputUserFirstName" name="firstname_user" value="<?= $user->getFirstname_user() ?>">
                 </div>
 
-                <!-- Input Name Recipe -->
+                <!-- Error FirstName User -->
+                <div>
+                    <?php if (!empty($user->getFirstnameError())) : ?>
+                        <span class="badge badge-danger mb-2"><?= $user->getFirstnameError() ?></span>
+                    <?php endif; ?>
+                </div>
+
                 <div class="row mb-2">
-                    <label for="inputRecipeName">État</label>
-                    <input type="text" class="form-control" id="inputRecipeName" placeholder="Veuillez saisir un état" name="recipe[name_recipes]">
-                    <!-- <small id="chief" class="form-text text-muted">Auteur de la recette : <?php echo $_SESSION["firstName"] . " " . $_SESSION["lastName"] ?></small> -->
+
+                    <!-- Input Role User -->
+                    <div class="col-6">
+                        <label for="inputUserRole">Rôle(s) *</label> <br>
+
+                        <input type="checkbox" id="admin" name="roles_user[]" value="admins">
+                        <label for="admin"> Administrateur </label><br>
+
+                        <input type="checkbox" id="mod" name="roles_user[]" value="moderators">
+                        <label for="mod"> Modérateur </label><br>
+
+                        <input type="checkbox" id="chief" name="roles_user[]" value="chiefs">
+                        <label for="chief"> Chef </label><br>
+
+                    </div>
+
+                    <!-- Input State User -->
+                    <div class="col-6">
+                        <label for="inputUserState">État *</label> <br>
+                        <select name="state_user" id="state-select">
+                            <option value="a">Actif</option>
+                            <option value="b">Bloqué</option>
+                            <option value="w">En attente</option>
+                        </select>
+                    </div>
+
                 </div>
 
                 <br>
@@ -78,7 +111,7 @@
 
             <br>
 
-             <!-- Button Reset Password -->
+            <!-- Button Reset Password -->
             <div class="row d-flex justify-content-center">
                 <input class="btn btn-lg" type="submit" id="button-recipe-reset" value="Réinitialisation du mot de passe">
             </div>
@@ -166,8 +199,8 @@
                 <!-- Details -->
                 <div class="col-4 mb-3">
                     <div class="row d-flex justify-content-between px-3 align-items-end">
-                    <h2>Détails</h2>
-                    <label class="px-2 bg-warning">ID n° 3</label>
+                        <h2>Détails</h2>
+                        <label class="px-2 bg-warning">ID n° 3</label>
                     </div>
                     <textarea rows="10" cols="50" class="form-control shadow" id="inputRecipeName" placeholder="" name="recipe[name_recipes]"> </textarea>
                 </div>

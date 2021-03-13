@@ -6,7 +6,7 @@ include(PATH_COMMON . 'head.php');
 
 echo "LOC : ".$loc. " ; ";
 echo "ACTION : ".$action. " ; ";
-// echo "ID : ".$action. " ; ";
+echo "ID : ".$id. " ; ";
 // var_dump("POST : ".$_POST. " ; ");
 var_dump($_POST);
 

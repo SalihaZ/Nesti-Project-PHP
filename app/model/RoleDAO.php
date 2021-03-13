@@ -2,6 +2,7 @@
 
 class RoleDAO extends BaseDAO
 {
+    // Creates role(s) for a new user (association foreing key(s))
     public static function createRoles($user)
     {
         $roles = $user->getRoles_user();
@@ -21,6 +22,7 @@ class RoleDAO extends BaseDAO
         }
     }
 
+    // Fetchs role(s) for users
     public static function readUserRoles($user) {
 
         $roles = ['admins', 'moderators', 'chiefs'];

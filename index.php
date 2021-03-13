@@ -8,6 +8,7 @@ error_reporting(E_ALL);
 
 $loc =  filter_input(INPUT_GET, "loc", FILTER_SANITIZE_STRING);
 $action =  filter_input(INPUT_GET, "action", FILTER_SANITIZE_STRING);
+$id =  filter_input(INPUT_GET, "id", FILTER_SANITIZE_STRING);
 
 $UserSession = new Session();
 
@@ -24,27 +25,27 @@ switch ($loc) {
 
         // Connection part
     case "connection":
-        include(PATH_CTRL . "controller_connection.php");
+        include(PATH_CTRL . "ControllerConnection.php");
         break;
 
         // Disconnection part
     case "disconnection":
-        include(PATH_CTRL . "controller_disconnection.php");
+        include(PATH_CTRL . "ControllerDisconnection.php");
         break;
 
         // Recipes part
     case "recipes":
-        include(PATH_CTRL . "controller_recipes.php");
+        include(PATH_CTRL . "ControllerRecipes.php");
         break;
 
         // Articles part
     case "articles":
-        include(PATH_CTRL . "controller_articles.php");
+        include(PATH_CTRL . "ControllerArticles.php");
         break;
 
         // Users part
     case "users":
-        include(PATH_CTRL . "controller_users.php");
+        include(PATH_CTRL . "ControllerUsers.php");
         break;
 
         // Statistics part

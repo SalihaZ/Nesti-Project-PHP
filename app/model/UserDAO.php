@@ -6,7 +6,7 @@ class UserDAO extends BaseDAO
 {
     protected static $tableName = "users";
 
-     // Fetch all data of the users in DB
+     // Fetchs all data of the users in DB
       public function readAll()
       {
           $pdo = Database::getPdo();
@@ -26,6 +26,19 @@ class UserDAO extends BaseDAO
           }
           return $arrayUsers;
       }
+
+        // Fetch all data of the users in DB
+        public static function readOne($user)
+        {
+            $id = $user->getId_user();
+            $pdo = Database::getPdo();
+            $sql = "SELECT * FROM users WHERE id_user = $id";
+            $result = $pdo->query($sql);
+    
+            Database::disconnect();
+    
+            return $result;
+        }    
 
     public static function createUser($user) {
         $pdo = Database::getPdo();

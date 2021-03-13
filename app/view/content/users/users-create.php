@@ -34,32 +34,6 @@ if (!isset($city) || empty($city)) {
             <div class="row d-flex justify-content-between">
                 <div class="col-5">
 
-                    <!-- Input UserName User -->
-                    <div class="row mb-2">
-                        <label for="inputUserName">Nom d'utilisateur *</label>
-                        <input type="text" class="form-control" id="inputUserName" name="username_user" value="<?= $user->getUsername_user() ?>">
-                    </div>
-
-                    <!-- Error UserName User -->
-                    <div>
-                        <?php if (!empty($user->getUsernameError())) : ?>
-                            <span class="badge badge-danger mb-2"><?= $user->getUsernameError() ?></span>
-                        <?php endif; ?>
-                    </div>
-
-                    <!-- Input Password User -->
-                    <div class="row mb-2">
-                        <label for="inputUserPassword">Mot de passe *</label>
-                        <input type="text" class="form-control" id="inputUserPassword" name="password_user" value="<?= $user->getPassword_user() ?>">
-                    </div>
-
-                    <!-- Error Password User -->
-                    <div>
-                        <?php if (!empty($user->getPasswordError())) : ?>
-                            <span class="badge badge-danger mb-2"><?= $user->getPasswordError() ?></span>
-                        <?php endif; ?>
-                    </div>
-
                     <!-- Input LastName User -->
                     <div class="row mb-2">
                         <label for="inputUserLastName">Nom *</label>
@@ -100,6 +74,32 @@ if (!isset($city) || empty($city)) {
                         <?php endif; ?>
                     </div>
 
+                    <!-- Input UserName User -->
+                    <div class="row mb-2">
+                        <label for="inputUserName">Nom d'utilisateur *</label>
+                        <input type="text" class="form-control" id="inputUserName" name="username_user" value="<?= $user->getUsername_user() ?>">
+                    </div>
+
+                    <!-- Error UserName User -->
+                    <div>
+                        <?php if (!empty($user->getUsernameError())) : ?>
+                            <span class="badge badge-danger mb-2"><?= $user->getUsernameError() ?></span>
+                        <?php endif; ?>
+                    </div>
+
+                    <!-- Input Password User -->
+                    <div class="row mb-2">
+                        <label for="inputUserPassword">Mot de passe *</label>
+                        <input type="text" class="form-control" id="inputUserPassword" name="password_user" value="<?= $user->getPassword_user() ?>">
+                    </div>
+
+                    <!-- Error Password User -->
+                    <div>
+                        <?php if (!empty($user->getPasswordError())) : ?>
+                            <span class="badge badge-danger mb-2"><?= $user->getPasswordError() ?></span>
+                        <?php endif; ?>
+                    </div>
+
                 </div>
                 
                 <div class="col-5">
@@ -133,7 +133,7 @@ if (!isset($city) || empty($city)) {
                     <!-- Input City User -->
                     <div class="row mb-2">
                         <label for="inputUserCity">Ville *</label>
-                        <input type="text" class="form-control" id="inputUserCity" name="name_city" >
+                        <input type="text" class="form-control" id="inputUserCity" name="name_city">
                     </div>
 
                     <!-- Error City User -->
