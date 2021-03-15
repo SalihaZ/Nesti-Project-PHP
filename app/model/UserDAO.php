@@ -26,7 +26,7 @@ class UserDAO extends BaseDAO
     }
 
     // Fetch data of one user in DB
-    public static function readOneUser($id)
+    public static function findOneUser($id)
     {
         $pdo = Database::getPdo();
 
@@ -72,25 +72,31 @@ class UserDAO extends BaseDAO
     }
 
 
-    // public static function update($user)  {
-    //     $pdo = Database::connect();
-    //     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    //     $sql = "UPDATE crudPhp_user SET name = ?,firstname = ?,birthDate = ?,tel = ?, email = ?, pays = ?, comment = ?, metier = ?, url = ? WHERE id = ?";
-    //     $q = $pdo->prepare($sql);
-    //     $q->execute(
-    //         [
-    //             $user->getName(),
-    //             $user->getFirstname(),
-    //             $user->getBirthDate(),
-    //             $user->getTel(),
-    //             $user->getEmail(),
-    //             $user->getPays(),
-    //             $user->getComment(),
-    //             $user->getMetier(),
-    //             $user->getUrl(),
-    //             $user->getId()
-    //         ]
-    //     );
+    // Update one user in the DB
+    public static function updateUser($user)
+    {
+
+        $pdo = Database::getPdo();
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $sql = "UPDATE users SET lastname_user = ?, firstname_user = ?, state_user =?, address1_user = ?, address2_user = ?, fk_id_city = ?, postcode_user = ? WHERE id_user = ?";
+        $q = $pdo->prepare($sql);
+        $q->execute(
+            [
+                $user->getLastname_user(),
+                $user->getFirstname_user(),
+                $user->getState_user(),
+                $user->getAddress1_user(),
+                $user->getAddress2_user(),
+                $user->getFk_id_city(),
+                $user->getPostcode_user(),
+                $user->getId_user()
+            ]
+        );
+        $last_id = $pdo->lastInsertId();
+        Database::disconnect();
+        return $last_id;
+    }
+
 
     //     Database::disconnect();
     // }

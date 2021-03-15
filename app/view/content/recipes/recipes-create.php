@@ -69,11 +69,11 @@
                 <div class="row d-flex justify-content-around">
 
                     <!-- Button Validation -->
-                    <input class="btn btn-lg" type="submit" id="button-recipe-validation" value="Valider">
+                    <input class="btn btn-lg" id ='button-validation' type="submit" value="Valider">
 
                     <!-- Button Reset -->
                     <a href="#">
-                        <button onclick="resetInputs()" class="btn btn-lg" type="button" id="button-recipe-reset">
+                        <button onclick="resetInputs()" class="btn btn-lg" id ='button-reset' type="button">
                             Annuler</button>
                     </a>
                 </div>
@@ -226,7 +226,7 @@
                                     <input type="text" class="form-control" id="inputIngredientUnit" placeholder="Unité">
                                 </div>
                                 <div class="col-2 no-padding">
-                                    <input class="btn" onclick="addIngredient()" type="submit" id="button-recipe-validation" value="OK">
+                                    <input class="btn" onclick="addIngredient()" type="submit" id="button-validation" value="OK">
                                 </div>
                             </div>
                         </div>

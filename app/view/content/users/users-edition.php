@@ -1,7 +1,7 @@
 <!-- Create new user object -->
 <?php if (!isset($user) || empty($user)) {
     $user = new User();
-} 
+}
 ?>
 
 <!-- Main -->
@@ -25,7 +25,7 @@
 
         <!-- Article Input Informations Recipe-->
         <div class="col-6">
-            <form method="POST" action="create" class="form-group rounded">
+            <form method="POST" action="" class="form-group rounded">
 
                 <!-- Input LastName User -->
                 <div class="row mb-2">
@@ -53,64 +53,77 @@
                     <?php endif; ?>
                 </div>
 
-            <!-- Input Address1 User -->
-            <div class=" row mb-2">
-                        <label for="inputUserAddress1">Adresse *</label>
-                        <input type="text" class="form-control" id="inputUserAddress1" name="address1_user" value="<?= $user->getAddress1_user() ?>">
-                    </div>
+                <!-- Input Address1 User -->
+                <div class=" row mb-2">
+                    <label for="inputUserAddress1">Adresse *</label>
+                    <input type="text" class="form-control" id="inputUserAddress1" name="address1_user" value="<?= $user->getAddress1_user() ?>">
+                </div>
 
-                    <!-- Error Address1 User -->
-                    <div>
-                        <?php if (!empty($user->getAddress1Error())) : ?>
-                            <span class="badge badge-danger mb-2"><?= $user->getAddress1Error()?></span>
-                        <?php endif; ?>
-                    </div>
+                <!-- Error Address1 User -->
+                <div>
+                    <?php if (!empty($user->getAddress1Error())) : ?>
+                        <span class="badge badge-danger mb-2"><?= $user->getAddress1Error() ?></span>
+                    <?php endif; ?>
+                </div>
 
-                    <!-- Input Address2 User -->
-                    <div class="row mb-2">
-                        <label for="inputUserAddress2">Complément d'adresse</label>
-                        <input type="text" class="form-control" id="inputUserAddress2" name="address2_user" value="<?= $user->getAddress2_user() ?>">
-                    </div>
+                <!-- Input Address2 User -->
+                <div class="row mb-2">
+                    <label for="inputUserAddress2">Complément d'adresse</label>
+                    <input type="text" class="form-control" id="inputUserAddress2" name="address2_user" value="<?= $user->getAddress2_user() ?>">
+                </div>
 
-                     <!-- Error Address2 User -->
-                     <div>
-                        <?php if (!empty($user->getAddress2Error())) : ?>
-                            <span class="badge badge-danger mb-2"><?= $user->getAddress2Error()?></span>
-                        <?php endif; ?>
-                    </div>
+                <!-- Error Address2 User -->
+                <div>
+                    <?php if (!empty($user->getAddress2Error())) : ?>
+                        <span class="badge badge-danger mb-2"><?= $user->getAddress2Error() ?></span>
+                    <?php endif; ?>
+                </div>
 
-                    <!-- Input City User -->
-                    <div class="row mb-2">
-                        <label for="inputUserCity">Ville *</label>
-                        <input type="text" class="form-control" id="inputUserCity" name="name_city">
-                    </div>
+                <!-- Input City User -->
+                <div class="row mb-2">
+                    <label for="inputUserCity">Ville *</label>
+                    <input type="text" class="form-control" id="inputUserCity" name="name_city" value ='<?= $user->getFk_id_city() ?>'>
+                </div>
 
-                    <!-- Input Postcode User -->
-                    <div class="row mb-2">
-                        <label for="inputUserPostCode">Code postal *</label>
-                        <input type="text" class="form-control" id="inputUserPostCode" name="postcode_user" value="<?= $user->getPostcode_user() ?>">
-                    </div>
+                <!-- Input Postcode User -->
+                <div class="row mb-2">
+                    <label for="inputUserPostCode">Code postal *</label>
+                    <input type="text" class="form-control" id="inputUserPostCode" name="postcode_user" value="<?= $user->getPostcode_user() ?>">
+                </div>
 
-                    <!-- Error Postcode User -->
-                    <div>
-                        <?php if (!empty($user->getPostcodeError())) : ?>
-                            <span class="badge badge-danger mb-2"><?= $user->getPostcodeError() ?></span>
-                        <?php endif; ?>
-                    </div>
+                <!-- Error Postcode User -->
+                <div>
+                    <?php if (!empty($user->getPostcodeError())) : ?>
+                        <span class="badge badge-danger mb-2"><?= $user->getPostcodeError() ?></span>
+                    <?php endif; ?>
+                </div>
 
                 <div class="row mb-2">
 
                     <!-- Input Role User -->
                     <div class="col-6">
+
                         <label for="inputUserRole">Rôle(s) *</label> <br>
 
-                        <input type="checkbox" id="admin" name="roles_user[]" value="admins">
+                        <input type="checkbox" id="admin" name="roles_user[]" value="admins" <?php foreach ($user->getRoles_user() as $role) {
+                                                                                                    if ($role == 'Administrateur') {
+                                                                                                        echo 'checked';
+                                                                                                    };
+                                                                                                }; ?>>
                         <label for="admin"> Administrateur </label><br>
 
-                        <input type="checkbox" id="mod" name="roles_user[]" value="moderators">
+                        <input type="checkbox" id="mod" name="roles_user[]" value="moderators" <?php foreach ($user->getRoles_user() as $role) {
+                                                                                                    if ($role == 'Modérateur') {
+                                                                                                        echo 'checked';
+                                                                                                    };
+                                                                                                }; ?>>
                         <label for="mod"> Modérateur </label><br>
 
-                        <input type="checkbox" id="chief" name="roles_user[]" value="chiefs">
+                        <input type="checkbox" id="chief" name="roles_user[]" value="chiefs" <?php foreach ($user->getRoles_user() as $role) {
+                                                                                                    if ($role == 'Chef') {
+                                                                                                        echo 'checked';
+                                                                                                    };
+                                                                                                }; ?>>
                         <label for="chief"> Chef </label><br>
 
                     </div>
@@ -119,9 +132,15 @@
                     <div class="col-6">
                         <label for="inputUserState">État *</label> <br>
                         <select name="state_user" id="state-select">
-                            <option value="a">Actif</option>
-                            <option value="b">Bloqué</option>
-                            <option value="w">En attente</option>
+                            <option value="a" <?php if ($user->getState_user() == 'a') {
+                                                    echo 'selected';
+                                                }; ?>>Actif</option>
+                            <option value="b" <?php if ($user->getState_user() == 'b') {
+                                                    echo 'selected';
+                                                }; ?>>Bloqué</option>
+                            <option value="w" <?php if ($user->getState_user() == 'w') {
+                                                    echo 'selected';
+                                                }; ?>>En attente</option>
                         </select>
                     </div>
 
@@ -133,11 +152,11 @@
                 <div class="row d-flex justify-content-around">
 
                     <!-- Button Validation -->
-                    <input class="btn btn-lg" type="submit" id="button-recipe-validation" value="Valider">
+                    <input class="btn btn-lg" type="submit" id="button-validation" value="Valider">
 
                     <!-- Button Reset -->
                     <a href="#">
-                        <button class="btn btn-lg" type="button" id="button-recipe-reset">
+                        <button class="btn btn-lg" type="button" id="button-reset" onclick=resetUser()>
                             Annuler</button>
                     </a>
                 </div>
@@ -152,22 +171,22 @@
             <div class="row">
                 <h2>Informations</h2>
                 <div class="" id="infosUser" placeholder="" name="recipe[name_recipes]">
-                <p> Date de création : <br> 
-                Dernière connexion : <br>
-                <h5> Chef </h5>
-                Nombre de recette : <br>
-                Dernière recette : <br><br>
-                <h5> Utilisateur </h5>
-                Nombre de commandes : <br>
-                Montant total des commandes :  <br>
-                Dernière commande : <br><br>
-                <h5> Administrateur </h5>
-                Nombre d'importation faites : <br>
-                Date de la dernière importation : <br><br>
-                <h5> Modérateur </h5>
-                Nombre de commentaire bloqué : <br>
-                Nobmre de commentaire approuvé : <br>
-                </p> 
+                    <p> Date de création : <br>
+                        Dernière connexion : <br>
+                    <h5> Chef </h5>
+                    Nombre de recette : <br>
+                    Dernière recette : <br><br>
+                    <h5> Utilisateur </h5>
+                    Nombre de commandes : <br>
+                    Montant total des commandes : <br>
+                    Dernière commande : <br><br>
+                    <h5> Administrateur </h5>
+                    Nombre d'importation faites : <br>
+                    Date de la dernière importation : <br><br>
+                    <h5> Modérateur </h5>
+                    Nombre de commentaire bloqué : <br>
+                    Nobmre de commentaire approuvé : <br>
+                    </p>
                 </div>
             </div>
 
@@ -175,7 +194,7 @@
 
             <!-- Button Reset Password -->
             <div class="row d-flex justify-content-center">
-                <input class="btn btn-lg" type="submit" id="button-recipe-reset" value="Réinitialisation du mot de passe">
+                <input class="btn btn-lg" type="submit" id="button-reset" value="Réinitialisation du mot de passe">
             </div>
         </div>
     </div>

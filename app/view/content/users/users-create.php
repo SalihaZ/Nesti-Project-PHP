@@ -191,11 +191,11 @@ if (!isset($city) || empty($city)) {
             <div class="row d-flex justify-content-around">
 
                 <!-- Button Validation -->
-                <input class="btn btn-lg" type="submit" id="button-recipe-validation" value="Valider">
+                <input class="btn btn-lg" type="submit" id="button-validation" value="Valider">
 
                 <!-- Button Reset -->
                 <a href="#">
-                    <button class="btn btn-lg" type="button" id="button-recipe-reset" onclick=resetUser()>
+                    <button class="btn btn-lg" type="button" id="button-reset" onclick=resetUser()>
                         Annuler</button>
                 </a>
             </div>

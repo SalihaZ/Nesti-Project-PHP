@@ -1,9 +1,9 @@
 <?php
 
-echo "LOC : ".$loc. " ; ";
-echo "ACTION : ".$action. " ; ";
-echo "ID : ".$id. " ; ";
-var_dump("POST : ".$_POST. " ; ");
+echo " LOC : ".$loc. " ; ";
+echo " ACTION : ".$action. " ; ";
+echo " ID : ".$id. " ; ";
+var_dump($_POST);
 
 //Navigation
 if (($loc != "connection") && ($loc != "disconnection")) {

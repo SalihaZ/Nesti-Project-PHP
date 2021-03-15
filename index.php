@@ -1,6 +1,6 @@
 <?php
 session_start();
-include ('app/loader.php');
+include ('app/Autoloader.php');
 
 // Head
 include(PATH_COMMON . 'head.php');
