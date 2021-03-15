@@ -2,7 +2,7 @@
 
 class City { 
 
-     //Attributes
+    //Attributes
     private $id_city;
     private $name_city;
     private $valid_city = true;

@@ -2,6 +2,7 @@
 
 class Article { 
 
+    //Attributes
     private $id_article;
     private $quantity_unite_article;
     private $state_article;

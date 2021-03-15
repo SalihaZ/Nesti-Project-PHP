@@ -2,7 +2,6 @@
 
 class User
 {
-
     //Attributes
     private $id_user;
     private $username_user;
