@@ -1,55 +1,46 @@
-<nav class="navbar" id ="mainNavbar">
-  <form class="form-inline">
+<nav class="navbar" id="mainNavbar">
 
-    <!-- Buttons nav -->
-    <div class="wrapper-buttons-nav d-flex mr-auto">
+  <!-- Buttons nav -->
+  <div class="wrapper-buttons-nav w-100 d-flex justify-content-around py-4 text-decoration-none">
 
-      <!-- Button Recipe -->
-      <a class="nav-link btnNavbar mr-5 rounded-sm <?= ($loc == "recipes") ? "active" : ""; ?>" href= "<?php echo BASE_URL ?>recipes">
-        <button class="btn text-white" type="button">
-          <i class="fas fa-clipboard-list pr-3"></i>
-          Recettes</button>
-      </a>
+    <!-- Button Recipe -->
+    <a class="nav-link btnNavbar rounded-sm <?= ($loc == "recipes") ? "active" : ""; ?>" href="<?php echo BASE_URL ?>recipes">
+      <i class="fas fa-clipboard-list pr-3"></i>
+      Recettes
+    </a>
 
-      <!-- Button Articles -->
-      <a class="nav-link btnNavbar mr-5 rounded-sm <?= ($loc == "articles") ? "active" : ""; ?>" href= "<?php echo BASE_URL ?>articles">
-        <button class="btn text-white" type="button">
-          <i class="fas fa-utensils pr-3"></i>
-          Articles</button>
-      </a>
+    <!-- Button Articles -->
+    <a class="nav-link btnNavbar rounded-sm <?= ($loc == "articles") ? "active" : ""; ?>" href="<?php echo BASE_URL ?>articles">
+      <i class="fas fa-utensils pr-3"></i>
+      Articles
+    </a>
 
-      <!-- Button Users -->
-      <a class="nav-link btnNavbar mr-5 rounded-sm <?= ($loc == "users") ? "active" : ""; ?>" href="<?php echo BASE_URL ?>users">
-        <button class="btn text-white" type="button">
-          <i class="fas fa-users pr-3"></i>
-          Utilisateurs</button>
-      </a>
+    <!-- Button Users -->
+    <a class="nav-link btnNavbar rounded-sm <?= ($loc == "users") ? "active" : ""; ?>" href="<?php echo BASE_URL ?>users">
+      <i class="fas fa-users pr-3"></i>
+      Utilisateurs
+    </a>
 
-      <!-- Button Recipe -->
-      <a class="nav-link btnNavbar mr-5 rounded-sm <?= ($loc == "statistics") ? "active" : ""; ?>" href="statistics">
-        <button class="btn text-white" type="button">
-          <i class="far fa-chart-bar pr-3"></i>
-          Statistiques</button>
-      </a>
-    </div>
+    <!-- Button Recipe -->
+    <a class="nav-link btnNavbar rounded-sm <?= ($loc == "statistics") ? "active" : ""; ?>" href="statistics">
+      <i class="far fa-chart-bar pr-3"></i>
+      Statistiques
+    </a>
 
     <!-- Button Session -->
     <div class="wrapper-buttons-session d-flex justify-content-end rounded-sm bg-white">
 
       <!-- Button User -->
-      <a class="nav-link btnNavbarUser mr-5">
-        <button class="btn text-black" type="button">
-          <i class="fas fa-user pr-3"></i>
-          <!-- <?php echo $_SESSION["lastName"] . " " . $_SESSION["firstName"] ?> </button> -->
+      <a class="nav-link btnNavbarUser">
+        <i class="fas fa-user"></i>
+        <!-- <?php echo $_SESSION["lastName"] . " " . $_SESSION["firstName"] ?> -->
       </a>
 
       <!-- Button Disconnection -->
-      <a class="nav-link btnNavbarUser mr-5" href="<?php echo BASE_URL ?>disconnection">
-        <button class="btn text-black" type="button">
-          <i class="fas fa-sign-out-alt pr-3"></i>
-          Déconnexion</button>
+      <a class="nav-link btnNavbarUser" href="<?php echo BASE_URL ?>disconnection">
+        <i class="fas fa-sign-out-alt"></i>
+        Déconnexion
       </a>
     </div>
-
-  </form>
+  </div>
 </nav>

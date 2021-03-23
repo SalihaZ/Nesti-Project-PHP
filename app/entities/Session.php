@@ -3,16 +3,16 @@
 class Session
 {
     // Does the user is connected ?
-    public function isConnectUser()
+    public function isUserConnected()
     {
-        $isConnect = false;
+        $isConnected = false;
         if (isset($_SESSION['IDUser']) && !empty($_SESSION['IDUser'])) {
-            $isConnect = true;
+            $isConnected = true;
         }
-        return $isConnect;
+        return $isConnected;
     }
 
-    // Connection User Sesion
+    // Connection User Session
     public function connectUser($ID)
     {
         $_SESSION['IDUser'] = $ID;

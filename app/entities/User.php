@@ -67,7 +67,7 @@ class User
         if (empty($username_user)) {
             $this->usernameError = "Veuillez saisir un nom d'utilisateur";
             $this->valid_user  = false;
-        } else if (!preg_match("/^[a-zA-Z0-9._-]{3,16}$/", $username_user)) {
+        } else if (!preg_match("/^[a-zA-Z0-9._-]{3,20}$/", $username_user)) {
             $this->usernameError = "Le nom d'utilisateur ne respecte pas les conditions";
             $this->valid_user = false;
         }
@@ -94,7 +94,7 @@ class User
         if (empty($password_user)) {
             $this->passwordError = 'Veuillez saisir un mot de passe';
             $this->valid_user = false;
-        } else if (!preg_match("/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%!?^&+=])(?=\\S+$).{8,16}$/", $password_user)) {
+        } else if (!preg_match("/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%!?^&+=])(?=\\S+$).{12,}$/", $password_user)) {
             $this->passwordError = "Le mot de passe n'est pas assez fort ou ne respecte pas les conditions";
             $this->valid_user = false;
         }
@@ -121,7 +121,7 @@ class User
         if (empty($lastname_user)) {
             $this->lastnameError = 'Veuillez saisir votre nom';
             $this->valid_user = false;
-        } else if (!preg_match("/^[a-z ,.'-]+$/i", $lastname_user)) {
+        } else if (!preg_match("/^[a-z ,.'-]{3,20}+$/i", $lastname_user)) { // A MODIFIER
             $this->lastnameError = "Votre saisie nom n'est pas correcte";
             $this->valid_user = false;
         }
@@ -148,7 +148,7 @@ class User
         if (empty($firstname_user)) {
             $this->firstnameError = 'Veuillez saisir votre prénom';
             $this->valid_user = false;
-        } else if (!preg_match("/^[a-z ,.'-]+$/i", $firstname_user)) {
+        } else if (!preg_match("/^[a-z ,.'-]{3,20}+$/i", $firstname_user)) { // A MODIFIER
             $this->firstnameError = "Votre saisie prénom n'est pas correcte";
             $this->valid_user = false;
         }
@@ -190,6 +190,22 @@ class User
     public function getState_user()
     {
         return $this->state_user;
+    }
+
+    // Display state for tables
+    public function getDisplayState_user()
+    {
+
+        if ($this->state_user == 'a') {
+            $state = 'Actif';
+        }
+        if ($this->state_user == 'b') {
+            $state = 'Bloqué';
+        }
+        if ($this->state_user == 'w') {
+            $state = 'En attente';
+        }
+        return $state;
     }
 
     /**
@@ -286,6 +302,7 @@ class User
             $this->postcodeError = "Veuillez saisir un code postal valide";
             $this->valid_user = false;
         }
+
         $this->postcode_user = $postcode_user;
 
         return $this;
@@ -316,7 +333,32 @@ class User
      */
     public function getRoles_user()
     {
+
         return $this->roles_user;
+    }
+
+    // Display roles for tables
+    public function getDisplayRoles()
+    {
+        $displayRoles = [];
+        
+        foreach ($this->roles_user as $role) {
+            if ($role == 'admins') {
+                $displayRoles[] = 'Administrateur';
+            }
+            if ($role == 'moderators') {
+                $displayRoles[] = 'Modérateur';
+            }
+            if ($role == 'chiefs') {
+                $displayRoles[] = 'Chef';
+            }
+        }
+        
+        if ($displayRoles == null ){
+            $displayRoles[] = 'Utilisateur';
+        }
+
+        return $displayRoles;
     }
 
     /**
@@ -326,30 +368,9 @@ class User
      */
     public function setRoles_user($roles_user)
     {
-        $this->roles_user = array_map(function($r) {
-            return $this->translateRole($r);
-        }, $roles_user);
+        $this->roles_user = $roles_user;
 
         return $this;
-    }
-
-    private function translateRole($role)
-    {
-        switch ($role) {
-            case 'admins':
-                $translateRole = 'Administrateur';
-                break;
-            case 'moderators':
-                $translateRole = 'Modérateur';
-                break;
-            case 'chiefs':
-                $translateRole = 'Chef';
-                break;
-            default:
-            $translateRole = 'Utilisateur';
-                break;
-        }
-        return $translateRole;
     }
 
     /**

@@ -63,8 +63,12 @@ body {
 }
 
 .btnNavbar {
+    color: white;
     background-color: #00838f;
-    font-family: "Nunito", sans-serif;
+}
+
+.btnNavbarUser {
+    color: #00838f;
 }
 
 .active {
@@ -126,14 +130,14 @@ thead {
     color: white;
 }
 
-#button-validation {
-    background-color: #b0d41c;
-    color: #005662;
+.btn-validation {
+    background-color: #b0d41c !important;
+    color: #005662 !important;
 }
 
-#button-reset {
-    background-color: #4fb3bf;
-    color: white;
+.btn-reset {
+    background-color: #4fb3bf !important;
+    color: white !important;
 }
 
 .nav-location {
@@ -185,7 +189,37 @@ thead {
     background-color: white;
 }
 
+
 /* PAGE USER */
+
+
+/* REGISTER */
+
+#pwd-strength {
+    margin-top: 2px;
+    width: 100%;
+    height: 8px;
+    border-radius: .10rem;
+    background-color: red;
+}
+
+
+/* 1st For Firefox, 2nd For Chrome or Safari*/
+
+#pwd-strength::-moz-progress-bar,
+#pwd-strength::-webkit-progress-value {
+    background: green;
+}
+
+#password_verification {
+    font-size: small;
+    line-height: 1rem;
+}
+
+#password_conditions {
+    color: red;
+}
+
 
 /* EDITION */
 

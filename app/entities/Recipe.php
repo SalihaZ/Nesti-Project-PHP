@@ -63,6 +63,7 @@ class Recipe {
         return $this->name_recipes;
     }
 
+
     /**
      * Set the value of name_recipes
      * @return  self

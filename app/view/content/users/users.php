@@ -14,11 +14,9 @@
     <div class="row d-flex justify-content-between">
 
         <!-- Research Bar -->
-        <div class="col-8 d-flex no-padding">
-            <input type="search" class="form-control-lg shadow" placeholder="Rechercher un utilisateur">
-            <button type="button" class="btn" id="button-search-bar">
-                <i class="fas fa-search"></i>
-            </button>
+        <div class="col-8 d-flex align-items-center no-padding">
+            <input type="search" class="form-control-lg shadow mr-2" id="searchUser" placeholder="Rechercher un utilisateur">
+            <i class="fas fa-search"></i>
         </div>
 
         <!-- Buttons Container -->
@@ -35,56 +33,51 @@
     <br>
 
     <!-- Table Container -->
-    <div class="row shadow">
-        <div class="col no-padding">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Nom d'utilisateur</th>
-                        <th scope="col">Nom</th>
-                        <th scope="col">Rôle(s)</th>
-                        <th scope="col">Dernière connexion</th>
-                        <th scope="col">Etat</th>
-                        <th scope="col">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
+    <table class="table" data-toggle="table" data-sortable="true" data-pagination="true" data-pagination-next-text="Next" data-search="true" data-search-selector="#searchUser" data-locale="fr-FR" data-toolbar="#toolbar" data-toolbar-align="left">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nom d'utilisateur</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Rôle(s)</th>
+                <th scope="col">Dernière connexion</th>
+                <th scope="col">État</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
 
-                    <?php
-                    foreach ($arrayUsers as $element) {
-                    ?>
-                        <tr>
-                            <th scope="row">
-                                <?= $element->getId_user() ?>
-                            </th>
-                            <td>
-                                <?= $element->getUsername_user() ?>
-                            </td>
-                            <td>
-                                <?= $element->getLastname_user() ?>
-                                <?= $element->getFirstname_user() ?>
-                            </td>
-                            <td>
-                                <?php
-                               echo implode(",", $element->getRoles_user());
-                                ?>
-                            </td>
-                            <td>
+            <?php
+            foreach ($arrayUsers as $element) {
+            ?>
+                <tr>
+                    <th scope="row">
+                        <?= $element->getId_user() ?>
+                    </th>
+                    <td>
+                        <?= $element->getUsername_user() ?>
+                    </td>
+                    <td>
+                        <?= $element->getLastname_user() ?>
+                        <?= $element->getFirstname_user() ?>
+                    </td>
+                    <td>
+                        <?= implode(", ", $element->getDisplayRoles()) ?>
+                    </td>
+                    <td>
 
-                            </td>
-                            <td>
-                                <?= $element->getState_user() ?>
-                            </td>
-                            <td> <a href="users/edition/<?= $element->getId_user() ?>">Modifier <br> <a href="">Supprimer</a></td>
-                        </tr>
+                    </td>
+                    <td>
+                        <?= $element->getDisplayState_user(); ?>
+                    </td>
+                    <td> <a href="users/edition/<?= $element->getId_user() ?>" class="text-warning">Modifier</a> <br> <a href="" class="text-danger">Supprimer</a></td>
+                </tr>
 
-                    <?php
-                    }
-                    ?>
+            <?php
+            }
+            ?>
 
-                </tbody>
-            </table>
-        </div>
-    </div>
+        </tbody>
+    </table>
+    <br>
 </main>

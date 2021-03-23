@@ -35,53 +35,50 @@
     <br>
 
     <!-- Table Container -->
-    <div class="row wrapper-articles-table shadow">
-        <div class="col no-padding">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Nom</th>
-                        <th scope="col">Difficulté</th>
-                        <th scope="col">Pour</th>
-                        <th scope="col">Temps</th>
-                        <th scope="col">Chef</th>
-                        <th scope="col">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
+    <table class="table" data-toggle="table" data-sortable="true" data-pagination="true" data-pagination-pre-text="Previous" data-pagination-next-text="Next" data-search="true" data-search-align="left" data-search-selector="#customSearchArticle" data-locale="eu-EU" data-toolbar="#toolbar" data-toolbar-align="left">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Difficulté (sur 5)</th>
+                <th scope="col">Pour</th>
+                <th scope="col">Temps</th>
+                <th scope="col">Chef</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
 
-                    <?php
-                    foreach ($arrayRecipes as $element) {
-                    ?>
-                        <tr>
-                            <th scope="row">
-                                <?= $element->getId_recipes() ?>
-                            </th>
-                            <td>
-                                <?= $element->getName_recipes() ?>
-                            </td>
-                            <td>
-                                <?= $element->getDifficulty_recipes() ?>
-                            </td>
-                            <td>
-                                <?= $element->getNumber_person_recipes() ?>
-                            </td>
-                            <td>
-                                <?= $element->getTime_recipes() ?>
-                            </td>
-                            <td>
-                                <?= $element->getFk_id_chief() ?>
-                            </td>
-                            <td> <a href="recipes/edition">Modifier <br> <a href="">Supprimer</a></td>
-                        </tr>
+            <?php
+            foreach ($arrayRecipes as $element) {
+            ?>
+                <tr>
+                    <th scope="row">
+                        <?= $element->getId_recipes() ?>
+                    </th>
+                    <td>
+                        <?= $element->getName_recipes() ?>
+                    </td>
+                    <td>
+                        <?= $element->getDifficulty_recipes() ?>
+                    </td>
+                    <td>
+                        <?= $element->getNumber_person_recipes() ?>
+                    </td>
+                    <td>
+                        <?= $element->getTime_recipes() ?>
+                    </td>
+                    <td>
+                        <?= $element->getFk_id_chief() ?>
+                    </td>
+                    <td> <a href="recipes/edition">Modifier <br> <a href="">Supprimer</a></td>
+                </tr>
 
-                    <?php
-                    }
-                    ?>
+            <?php
+            }
+            ?>
 
-                </tbody>
-            </table>
-        </div>
-    </div>
+        </tbody>
+    </table>
+    <br>
 </main>

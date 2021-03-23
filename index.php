@@ -15,14 +15,15 @@ $id =  filter_input(INPUT_GET, "id", FILTER_SANITIZE_STRING);
 
 $UserSession = new Session();
 
-if ($UserSession->isConnectUser()) {
+if ($UserSession->isUserConnected()) {
     echo ("STATUS : Connected ;");
 
 } else {
     echo ("STATUS : Not Connected ;");
     $loc = "connection";
-
 }
+
+var_dump($_SESSION['IDUser']);
 
 $controller = null;
 
@@ -30,7 +31,7 @@ switch ($loc) {
    
         // Connection part
     case "connection":
-        include(PATH_CTRL . "ControllerConnection.php");
+        $controller = new ControllerConnection();
         break;
 
         // Disconnection part

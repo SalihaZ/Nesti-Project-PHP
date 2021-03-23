@@ -23,7 +23,7 @@
     <!-- Section Top -->
     <div class="row d-flex">
 
-        <!-- Article Input Informations Recipe-->
+        <!-- Inputs User Informations -->
         <div class="col-6">
             <form method="POST" action="" class="form-group rounded">
 
@@ -82,8 +82,15 @@
                 <!-- Input City User -->
                 <div class="row mb-2">
                     <label for="inputUserCity">Ville *</label>
-                    <input type="text" class="form-control" id="inputUserCity" name="name_city" value ='<?= $user->getFk_id_city() ?>'>
+                    <input type="text" class="form-control" id="inputUserCity" name="name_city" value='<?= $city->getName_city() ?>'>
                 </div>
+
+                 <!-- Error City User -->
+                 <div>
+                        <?php if (!empty($city->getNameCityError())) : ?>
+                            <span class="badge badge-danger mb-2"><?= $city->getNameCityError() ?></span>
+                        <?php endif; ?>
+                    </div>
 
                 <!-- Input Postcode User -->
                 <div class="row mb-2">
@@ -106,21 +113,21 @@
                         <label for="inputUserRole">Rôle(s) *</label> <br>
 
                         <input type="checkbox" id="admin" name="roles_user[]" value="admins" <?php foreach ($user->getRoles_user() as $role) {
-                                                                                                    if ($role == 'Administrateur') {
+                                                                                                    if ($role == 'admins') {
                                                                                                         echo 'checked';
                                                                                                     };
                                                                                                 }; ?>>
                         <label for="admin"> Administrateur </label><br>
 
                         <input type="checkbox" id="mod" name="roles_user[]" value="moderators" <?php foreach ($user->getRoles_user() as $role) {
-                                                                                                    if ($role == 'Modérateur') {
+                                                                                                    if ($role == 'moderators') {
                                                                                                         echo 'checked';
                                                                                                     };
                                                                                                 }; ?>>
                         <label for="mod"> Modérateur </label><br>
 
                         <input type="checkbox" id="chief" name="roles_user[]" value="chiefs" <?php foreach ($user->getRoles_user() as $role) {
-                                                                                                    if ($role == 'Chef') {
+                                                                                                    if ($role == 'chiefs') {
                                                                                                         echo 'checked';
                                                                                                     };
                                                                                                 }; ?>>
@@ -152,11 +159,11 @@
                 <div class="row d-flex justify-content-around">
 
                     <!-- Button Validation -->
-                    <input class="btn btn-lg" type="submit" id="button-validation" value="Valider">
+                    <input class="btn btn-lg btn-validation" type="submit" value="Valider">
 
                     <!-- Button Reset -->
                     <a href="#">
-                        <button class="btn btn-lg" type="button" id="button-reset" onclick=resetUser()>
+                        <button class="btn btn-lg btn-reset" type="button" onclick=resetUser()>
                             Annuler</button>
                     </a>
                 </div>
@@ -170,23 +177,41 @@
 
             <div class="row">
                 <h2>Informations</h2>
-                <div class="" id="infosUser" placeholder="" name="recipe[name_recipes]">
-                    <p> Date de création : <br>
-                        Dernière connexion : <br>
-                    <h5> Chef </h5>
-                    Nombre de recette : <br>
-                    Dernière recette : <br><br>
+                <div class="" id="infosUser" placeholder="" name="">
+                    <p> Date de création : <?= $user->getDate_creation_user() ?> <br>
+                        Dernière connexion : </p>
+
+                    <?php $roles_user = $user->getRoles_user() ?>
+                    <p>
                     <h5> Utilisateur </h5>
                     Nombre de commandes : <br>
                     Montant total des commandes : <br>
-                    Dernière commande : <br><br>
-                    <h5> Administrateur </h5>
-                    Nombre d'importation faites : <br>
-                    Date de la dernière importation : <br><br>
-                    <h5> Modérateur </h5>
-                    Nombre de commentaire bloqué : <br>
-                    Nobmre de commentaire approuvé : <br>
-                    </p>
+                    Dernière commande : </p>
+
+                    <?php foreach ($roles_user as $role) {
+                        if ($role == 'admins') { ?>
+                            <p>
+                            <h5> Administrateur </h5>
+                            Nombre d'importation faites : <br>
+                            Date de la dernière importation : </p>
+                        <?php
+                        }
+                        if ($role == 'moderators') { ?>
+                            <p>
+                            <h5> Modérateur </h5>
+                            Nombre de commentaire bloqué : <br>
+                            Nombre de commentaire approuvé : </p>
+                        <?php
+                        }
+                        if ($role == 'chiefs') { ?>
+                            <p>
+                            <h5> Chef </h5>
+                            Nombre de recette : <br>
+                            Dernière recette : </p>
+                    <?php
+                        }
+                    }
+                    ?>
                 </div>
             </div>
 
@@ -194,7 +219,7 @@
 
             <!-- Button Reset Password -->
             <div class="row d-flex justify-content-center">
-                <input class="btn btn-lg" type="submit" id="button-reset" value="Réinitialisation du mot de passe">
+                <input class="btn btn-lg btn-reset" type="submit" value="Réinitialisation du mot de passe">
             </div>
         </div>
     </div>
@@ -300,63 +325,59 @@
             <br>
 
             <!-- Research Bar -->
-            <div class="col-12 d-flex no-padding">
-                <input type="search" class="form-control-lg" placeholder="Rechercher un commentaire" />
-                <button type="button" class="btn" id="button-search-bar">
-                    <i class="fas fa-search"></i>
-                </button>
+            <div class="col-8 d-flex align-items-center no-padding">
+                <input type="search" class="form-control-lg shadow mr-2" id="searchComments" placeholder="Rechercher un commentaire">
+                <i class="fas fa-search"></i>
             </div>
 
             <br>
 
-            <!-- Table Container -->
-            <div class="row wrapper-articles-table shadow">
-                <div class="col no-padding">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Titre</th>
-                                <th scope="col">Recette</th>
-                                <th scope="col">Contenu</th>
-                                <th scope="col">Date</th>
-                                <th scope="col">État</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+            <!-- Table Comments Container -->
+            <table class="table" data-toggle="table" data-sortable="true" data-pagination="true" data-pagination-next-text="Next" data-search="true" data-search-selector="#searchComments" data-locale="fr-FR" data-toolbar="#toolbar" data-toolbar-align="left">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Titre</th>
+                        <th scope="col">Recette</th>
+                        <th scope="col">Contenu</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">État</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    foreach ($arrayComments as $element) {
+                    ?>
+                        <tr>
+                            <th scope="row">
+                                <?= $element->getId_comment() ?>
+                            </th>
+                            <td>
+                                <?= $element->getTitle_comment() ?>
+                            </td>
+                            <td>
+                                <?= $element->getFk_id_recipe() ?>
+                            </td>
+                            <td>
+                                <?= $element->getContent_comment() ?>
+                            </td>
+                            <td>
+                                <?= $element->getDate_creation_comment() ?>
+                            </td>
+                            <td>
+                                <?= $element->getDisplayState_comment(); ?>
+                            </td>
+                            <td> <a href=""  class="text-success">Approuver<br> <a href="" class="text-danger">Bloquer</a></td>
+                        </tr>
 
-                            <?php
-                            foreach ($arrayUsers as $element) {
-                            ?>
-                                <tr>
-                                    <th scope="row">
-                                        1
-                                    </th>
-                                    <td>
+                    <?php
+                    }
+                    ?>
 
-                                    </td>
-                                    <td>
-
-                                    </td>
-                                    <td>
-
-                                    </td>
-
-                                    <td>
-
-                                    </td>
-                                    <td> <a href="">Approuver <br> <a href="">Bloquer</a></td>
-                                </tr>
-
-                            <?php
-                            }
-                            ?>
-
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+                </tbody>
+            </table>
+            <br>
         </div>
     </div>
-
 </main>

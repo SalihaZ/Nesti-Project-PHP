@@ -55,7 +55,7 @@ class UserDAO extends BaseDAO
         $q->execute(
             [
                 $user->getUsername_user(),
-                $user->getPassword_user(),
+                password_hash($user->getPassword_user(), PASSWORD_BCRYPT),
                 $user->getLastname_user(),
                 $user->getFirstname_user(),
                 $user->getEmail_user(),
@@ -92,9 +92,7 @@ class UserDAO extends BaseDAO
                 $user->getId_user()
             ]
         );
-        $last_id = $pdo->lastInsertId();
         Database::disconnect();
-        return $last_id;
     }
 
 

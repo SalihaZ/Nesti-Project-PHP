@@ -69,8 +69,8 @@ if (!isset($city) || empty($city)) {
                     <!-- Error Email User -->
                     <div>
                         <?php if (!empty($user->getEmailError())) : ?>
-                            <span class="badge badge-danger mb-2"><?= $user->getEmailError()?></span>
-                            <?php echo"</br>"?>
+                            <span class="badge badge-danger mb-2"><?= $user->getEmailError() ?></span>
+                            <?php echo "</br>" ?>
                         <?php endif; ?>
                     </div>
 
@@ -90,7 +90,8 @@ if (!isset($city) || empty($city)) {
                     <!-- Input Password User -->
                     <div class="row mb-2">
                         <label for="inputUserPassword">Mot de passe *</label>
-                        <input type="text" class="form-control" id="inputUserPassword" name="password_user" value="<?= $user->getPassword_user() ?>">
+                        <input type="password" class="form-control" id="inputUserPassword" name="password_user" value="<?= $user->getPassword_user() ?>">
+                        <progress id="pwd-strength" value="0" max="5"></progress>
                     </div>
 
                     <!-- Error Password User -->
@@ -100,8 +101,22 @@ if (!isset($city) || empty($city)) {
                         <?php endif; ?>
                     </div>
 
+                    <!-- Verification Strength Password User -->
+                    <div id="password_verification">
+                        <div class="font-weight-bold">Votre mot de passe doit contenir : </div>
+                        <div id='password_conditions'>
+                            <div id='pwdLength'> • Au moins 12 caractères</div>
+                            <div id='pwdLowCase'> • Une minuscule</div>
+                            <div id='pwdUpperCase'> • Une majuscule</div>
+                            <div id='pwdDigit'> • Un chiffre</div>
+                            <div id='pwdSpecial'> • Un caractère spécial</div>
+                        </div>
+                    </div>
+
+                    <br>
+
                 </div>
-                
+
                 <div class="col-5">
 
                     <!-- Input Address1 User -->
@@ -113,7 +128,7 @@ if (!isset($city) || empty($city)) {
                     <!-- Error Address1 User -->
                     <div>
                         <?php if (!empty($user->getAddress1Error())) : ?>
-                            <span class="badge badge-danger mb-2"><?= $user->getAddress1Error()?></span>
+                            <span class="badge badge-danger mb-2"><?= $user->getAddress1Error() ?></span>
                         <?php endif; ?>
                     </div>
 
@@ -123,23 +138,23 @@ if (!isset($city) || empty($city)) {
                         <input type="text" class="form-control" id="inputUserAddress2" name="address2_user" value="<?= $user->getAddress2_user() ?>">
                     </div>
 
-                     <!-- Error Address2 User -->
-                     <div>
+                    <!-- Error Address2 User -->
+                    <div>
                         <?php if (!empty($user->getAddress2Error())) : ?>
-                            <span class="badge badge-danger mb-2"><?= $user->getAddress2Error()?></span>
+                            <span class="badge badge-danger mb-2"><?= $user->getAddress2Error() ?></span>
                         <?php endif; ?>
                     </div>
 
                     <!-- Input City User -->
                     <div class="row mb-2">
                         <label for="inputUserCity">Ville *</label>
-                        <input type="text" class="form-control" id="inputUserCity" name="name_city">
+                        <input type="text" class="form-control" id="inputUserCity" name="name_city" value="<?= $city->getName_city() ?>">
                     </div>
 
                     <!-- Error City User -->
                     <div>
                         <?php if (!empty($city->getNameCityError())) : ?>
-                            <span class="badge badge-danger mb-2"><?= $city->getNameCityError()?></span>
+                            <span class="badge badge-danger mb-2"><?= $city->getNameCityError() ?></span>
                         <?php endif; ?>
                     </div>
 
@@ -160,22 +175,34 @@ if (!isset($city) || empty($city)) {
 
                         <!-- Input Role User -->
                         <div class="col-6">
-                            <label for="inputUserRole">Rôle(s) *</label> <br>
-                           
-                            <input type="checkbox" id="admin" name="roles_user[]" value="admins">
+                            <label for="inputUserRole">Rôle(s)</label> <br>
+
+                            <input type="checkbox" id="admin" name="roles_user[]" value="admins" <?php foreach ($user->getRoles_user() as $role) {
+                                                                                                        if ($role == 'admins') {
+                                                                                                            echo 'checked';
+                                                                                                        };
+                                                                                                    }; ?>>
                             <label for="admin"> Administrateur </label><br>
-                            
-                            <input type="checkbox" id="mod" name="roles_user[]" value="moderators">
+
+                            <input type="checkbox" id="mod" name="roles_user[]" value="moderators" <?php foreach ($user->getRoles_user() as $role) {
+                                                                                                        if ($role == 'moderators') {
+                                                                                                            echo 'checked';
+                                                                                                        };
+                                                                                                    }; ?>>
                             <label for="mod"> Modérateur </label><br>
 
-                            <input type="checkbox" id="chief" name="roles_user[]" value="chiefs">
+                            <input type="checkbox" id="chief" name="roles_user[]" value="chiefs" <?php foreach ($user->getRoles_user() as $role) {
+                                                                                                        if ($role == 'chiefs') {
+                                                                                                            echo 'checked';
+                                                                                                        };
+                                                                                                    }; ?>>
                             <label for="chief"> Chef </label><br>
-                            
+
                         </div>
 
                         <!-- Input State User -->
                         <div class="col-6">
-                            <label for="inputUserState">État *</label> <br>
+                            <label for="inputUserState">État</label> <br>
                             <select name="state_user" id="state-select">
                                 <option value="a">Actif</option>
                                 <option value="b">Bloqué</option>
@@ -191,11 +218,11 @@ if (!isset($city) || empty($city)) {
             <div class="row d-flex justify-content-around">
 
                 <!-- Button Validation -->
-                <input class="btn btn-lg" type="submit" id="button-validation" value="Valider">
+                <input class="btn btn-lg btn-validation" type="submit" value="Valider">
 
                 <!-- Button Reset -->
                 <a href="#">
-                    <button class="btn btn-lg" type="button" id="button-reset" onclick=resetUser()>
+                    <button class="btn btn-lg btn-reset" type="button" onclick=resetUser()>
                         Annuler</button>
                 </a>
             </div>

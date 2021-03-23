@@ -41,53 +41,49 @@
     <br>
 
     <!-- Table Container -->
-    <div class="row wrapper-articles-table shadow">
-        <div class="col no-padding">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Nom</th>
-                        <th scope="col">Prix de vente</th>
-                        <th scope="col">Type</th>
-                        <th scope="col">Dernière importation</th>
-                        <th scope="col">Stock</th>
-                        <th scope="col">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
+    <table class="table" id="allArticlesTable" data-toggle="table" data-sortable="true" data-pagination="true" data-pagination-pre-text="Previous" data-pagination-next-text="Next" data-search="true" data-search-align="left" data-search-selector="#customSearchArticle" data-locale="eu-EU" data-toolbar="#toolbar" data-toolbar-align="left">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nom d'utilisateur</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Rôle(s)</th>
+                <th scope="col">Dernière connexion</th>
+                <th scope="col">État</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
 
-                    <?php
-                    foreach ($arrayArticles as $element) {
-                    ?>
-                        <tr>
-                            <th scope="row">
-                                <?= $element->getId_article() ?>
-                            </th>
-                            <td>
-                                <?= $element->getFk_id_product() ?>
-                            </td>
-                            <td>
-                                <!-- <?= $element->getDifficulty_recipes() ?> -->
-                            </td>
-                            <td>
-                                <!-- <?= $element->getNumber_person_recipes() ?> -->
-                            </td>
-                            <td>
-                                <!-- <?= $element->getTime_recipes() ?> -->
-                            </td>
-                            <td>
-                                <!-- <?= $element->getFk_id_chief() ?> -->
-                            </td>
-                            <td> <a href="articles/edition">Modifier <br> <a href="">Supprimer</a></td>
-                        </tr>
+            <?php
+            foreach ($arrayArticles as $element) {
+            ?>
+                <tr>
+                    <th scope="row">
+                        <?= $element->getId_article() ?>
+                    </th>
+                    <td>
+                        <?= $element->getFk_id_product() ?>
+                    </td>
+                    <td>
+                        <!-- <?= $element->getDifficulty_recipes() ?> -->
+                    </td>
+                    <td>
+                        <!-- <?= $element->getNumber_person_recipes() ?> -->
+                    </td>
+                    <td>
+                        <!-- <?= $element->getTime_recipes() ?> -->
+                    </td>
+                    <td>
+                        <!-- <?= $element->getFk_id_chief() ?> -->
+                    </td>
+                    <td> <a href="articles/edition">Modifier <br> <a href="">Supprimer</a></td>
+                </tr>
 
-                    <?php
-                    }
-                    ?>
-
-                </tbody>
-            </table>
-        </div>
-    </div>
+            <?php
+            }
+            ?>
+        </tbody>
+    </table>
+    <br>
 </main>

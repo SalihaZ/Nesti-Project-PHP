@@ -6,7 +6,6 @@ class RecipeDAO
     // Fetch all data DB Recipe
     public static function readAllRecipes()
     {
-
         $pdo = Database::getPdo();
         $sql = "SELECT * FROM recipes";
         $result = $pdo->query($sql);
