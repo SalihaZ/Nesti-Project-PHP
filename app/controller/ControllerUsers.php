@@ -10,6 +10,7 @@ class ControllerUsers extends BaseController
             $arrayUsers = UserDAO::readAllUsers();
             $this->_data['arrayUsers'] = $arrayUsers;
         } else {
+
             if ($_GET['action'] == 'create') {
 
                 if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
@@ -22,27 +23,52 @@ class ControllerUsers extends BaseController
             }
 
             if ($_GET['action'] == 'edition') {
+                if (!isset($_GET['option'])) {
 
-                $id_user = $_GET['id'];
+                    $id_user = $_GET['id'];
 
-                // Read data (user/city/roles)
-                $user = UserDAO::findOneUser($id_user);
-                $id_city = $user->getFk_id_city();
-                $city = CityDAO::findOneBy("id_city", $id_city);
-                $roles_user = RoleDAO::readUserRoles($user);
-                $user->setRoles_user($roles_user);
+                    // Read data (user/city/roles)
+                    $user = UserDAO::findOneUser($id_user);
+                    $id_city = $user->getFk_id_city();
+                    $city = CityDAO::findOneBy("id_city", $id_city);
+                    $roles_user = RoleDAO::readUserRoles($user);
+                    $user->setRoles_user($roles_user);
 
-                // Table Comments
-                $arrayComments = CommentsDAO::readCommentsFromOneUser($id_user);
-                $this->_data['arrayComments'] = $arrayComments;
+                    // Table Comments
+                    $arrayComments = CommentsDAO::readCommentsFromOneUser($id_user);
+                    $this->_data['arrayComments'] = $arrayComments;
 
-                if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
+                    if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
 
-                    var_dump($user);
-                    var_dump($city);
+                        $city = $this->createCity();
+                        $this->editUser($user, $city);
+                    }
+                }
+                
+                if (isset($_GET['option'])) {
+                    if ($_GET['option'] == 'commentapproved') {
 
-                    $city = $this->createCity();
-                    $this->editUser($user, $city);
+                        if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
+
+                            $id_user = $_POST['id_user'];
+                            $id_comment = $_POST['id_comment'];
+                            CommentsDAO::approveComment($id_comment);
+                            header('Location:' . BASE_URL . "users/edition/" . $id_user);
+                        }
+                    }
+                }
+
+                if (isset($_GET['option'])) {
+                    if ($_GET['option'] == 'commentdisapproved') {
+
+                        if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
+
+                            $id_user = $_POST['id_user'];
+                            $id_comment = $_POST['id_comment'];
+                            CommentsDAO::disapproveComment($id_comment);
+                            header('Location:' . BASE_URL . "users/edition/" . $id_user);
+                        }
+                    }
                 }
 
                 $this->_data['user'] = $user;

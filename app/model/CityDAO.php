@@ -6,7 +6,6 @@ class CityDAO extends BaseDAO
 
     public static function createCity($city)
     {
-
         $pdo = Database::getPdo();
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $sql = "INSERT INTO cities (name_city) values(?)";

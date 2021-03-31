@@ -2,9 +2,9 @@
     <div id="wrapper_connection">
         <div class="row" id="container_connection">
             
-        <form action="" method="POST" class="pb-4">
+         <form action="" method="POST" class="pb-4">
                
-            <!-- Title -->
+                <!-- Title -->
                 <div class="row">
                     <h1>Connexion</h1>
                 </div>

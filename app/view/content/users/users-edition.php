@@ -7,7 +7,13 @@
 <!-- Main -->
 <main class="container wrapper-user-create">
 
-    <br>
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Library</li>
+  </ol>
+</nav>
+
     <!-- Title Page -->
     <div class="row">
         <div class="col-12">
@@ -21,11 +27,11 @@
     </nav>
 
     <!-- Section Top -->
-    <div class="row d-flex">
+    <div class="row d-flex justify-content-around mr-2">
 
         <!-- Inputs User Informations -->
-        <div class="col-6">
-            <form method="POST" action="" class="form-group rounded">
+        <div class="col-5">
+            <form method="POST" action="" class="application rounded">
 
                 <!-- Input LastName User -->
                 <div class="row mb-2">
@@ -36,7 +42,7 @@
                 <!-- Error LastName User -->
                 <div>
                     <?php if (!empty($user->getLastnameError())) : ?>
-                        <span class="badge badge-danger mb-2"><?= $user->getLastnameError() ?></span>
+                        <span class="badge bg-danger mb-2"><?= $user->getLastnameError() ?></span>
                     <?php endif; ?>
                 </div>
 
@@ -49,7 +55,7 @@
                 <!-- Error FirstName User -->
                 <div>
                     <?php if (!empty($user->getFirstnameError())) : ?>
-                        <span class="badge badge-danger mb-2"><?= $user->getFirstnameError() ?></span>
+                        <span class="badge bg-danger mb-2"><?= $user->getFirstnameError() ?></span>
                     <?php endif; ?>
                 </div>
 
@@ -62,7 +68,7 @@
                 <!-- Error Address1 User -->
                 <div>
                     <?php if (!empty($user->getAddress1Error())) : ?>
-                        <span class="badge badge-danger mb-2"><?= $user->getAddress1Error() ?></span>
+                        <span class="badge bg-danger mb-2"><?= $user->getAddress1Error() ?></span>
                     <?php endif; ?>
                 </div>
 
@@ -75,7 +81,7 @@
                 <!-- Error Address2 User -->
                 <div>
                     <?php if (!empty($user->getAddress2Error())) : ?>
-                        <span class="badge badge-danger mb-2"><?= $user->getAddress2Error() ?></span>
+                        <span class="badge bg-danger mb-2"><?= $user->getAddress2Error() ?></span>
                     <?php endif; ?>
                 </div>
 
@@ -85,12 +91,12 @@
                     <input type="text" class="form-control" id="inputUserCity" name="name_city" value='<?= $city->getName_city() ?>'>
                 </div>
 
-                 <!-- Error City User -->
-                 <div>
-                        <?php if (!empty($city->getNameCityError())) : ?>
-                            <span class="badge badge-danger mb-2"><?= $city->getNameCityError() ?></span>
-                        <?php endif; ?>
-                    </div>
+                <!-- Error City User -->
+                <div>
+                    <?php if (!empty($city->getNameCityError())) : ?>
+                        <span class="badge bg-danger mb-2"><?= $city->getNameCityError() ?></span>
+                    <?php endif; ?>
+                </div>
 
                 <!-- Input Postcode User -->
                 <div class="row mb-2">
@@ -101,11 +107,11 @@
                 <!-- Error Postcode User -->
                 <div>
                     <?php if (!empty($user->getPostcodeError())) : ?>
-                        <span class="badge badge-danger mb-2"><?= $user->getPostcodeError() ?></span>
+                        <span class="badge bg-danger mb-2"><?= $user->getPostcodeError() ?></span>
                     <?php endif; ?>
                 </div>
 
-                <div class="row mb-2">
+                <div class="row">
 
                     <!-- Input Role User -->
                     <div class="col-6">
@@ -159,72 +165,76 @@
                 <div class="row d-flex justify-content-around">
 
                     <!-- Button Validation -->
+                    <!-- <button class="btn btn-lg btn-validation" type="submit">Valider</button> -->
                     <input class="btn btn-lg btn-validation" type="submit" value="Valider">
 
                     <!-- Button Reset -->
-                    <a href="#">
-                        <button class="btn btn-lg btn-reset" type="button" onclick=resetUser()>
-                            Annuler</button>
-                    </a>
+                    <button class="btn btn-lg btn-reset" type="button" onclick=resetUser()>Annuler</button>
                 </div>
-
             </form>
 
         </div>
 
         <!-- Article Input Informations Users-->
-        <div class="col-6 mb-3">
+        <div class="col-5">
 
             <div class="row">
                 <h2>Informations</h2>
-                <div class="" id="infosUser" placeholder="" name="">
+            </div>
+            <div class="list">
+                <div class="row">
                     <p> Date de création : <?= $user->getDate_creation_user() ?> <br>
-                        Dernière connexion : </p>
-
-                    <?php $roles_user = $user->getRoles_user() ?>
-                    <p>
+                        Dernière connexion : <?= $user->getLastConnectionUser() ?></p>
+                </div>
+                <div class="row">
                     <h5> Utilisateur </h5>
-                    Nombre de commandes : <br>
-                    Montant total des commandes : <br>
-                    Dernière commande : </p>
+                    Nombre de commandes : <?= $user->getNumberCommandsUser() ?><br>
+                    Montant total des commandes : <?= $user->getAllCommandsPricesUser() ?> €<br>
+                    Dernière commande : <?= $user->getLastCommandPriceUser() ?> €</p>
+                </div>
 
-                    <?php foreach ($roles_user as $role) {
-                        if ($role == 'admins') { ?>
+                <?php $roles_user = $user->getRoles_user() ?>
+                <?php foreach ($roles_user as $role) {
+                    if ($role == 'admins') { ?>
+                        <div class="row">
                             <p>
                             <h5> Administrateur </h5>
-                            Nombre d'importation faites : <br>
-                            Date de la dernière importation : </p>
-                        <?php
-                        }
-                        if ($role == 'moderators') { ?>
+                            Nombre d'importation faites : <?= $user->getNumberImportsAdmin() ?> <br>
+                            Date de la dernière importation : <?= $user->getDateLastImportAdmin() ?> </p>
+                        </div>
+                    <?php
+                    }
+                    if ($role == 'moderators') { ?>
+                        <div class="row">
                             <p>
                             <h5> Modérateur </h5>
-                            Nombre de commentaire bloqué : <br>
-                            Nombre de commentaire approuvé : </p>
-                        <?php
-                        }
-                        if ($role == 'chiefs') { ?>
+                            Nombre de commentaire approuvé : <?= $user->getNumberApprovedCommentsModerator() ?> <br>
+                            Nombre de commentaire bloqué : <?= $user->getNumberDisapprovedCommentsModerator() ?> </p>
+                        </div>
+                    <?php
+                    }
+                    if ($role == 'chiefs') { ?>
+                        <div class="row">
                             <p>
                             <h5> Chef </h5>
-                            Nombre de recette : <br>
-                            Dernière recette : </p>
-                    <?php
-                        }
+                            Nombre de recette : <?= $user->getNumberRecipesChief() ?> <br>
+                            Dernière recette : <?= $user->getNameLastRecipeChief() ?> </p>
+                        </div>
+                <?php
                     }
-                    ?>
-                </div>
+                }
+                ?>
             </div>
 
             <br>
 
             <!-- Button Reset Password -->
             <div class="row d-flex justify-content-center">
-                <input class="btn btn-lg btn-reset" type="submit" value="Réinitialisation du mot de passe">
+                <button class="btn btn-lg btn-reset">Réinitialisation du mot de passe</button>
             </div>
         </div>
     </div>
 
-    <br>
     <br>
 
     <!-- Section Middle -->
@@ -357,7 +367,7 @@
                                 <?= $element->getTitle_comment() ?>
                             </td>
                             <td>
-                                <?= $element->getFk_id_recipe() ?>
+                                <?= $element->getRecipe()->getName_recipe() ?>
                             </td>
                             <td>
                                 <?= $element->getContent_comment() ?>
@@ -368,7 +378,72 @@
                             <td>
                                 <?= $element->getDisplayState_comment(); ?>
                             </td>
-                            <td> <a href=""  class="text-success">Approuver<br> <a href="" class="text-danger">Bloquer</a></td>
+
+                            <td>
+                                <!-- Form POST Approve -->
+                                <form method="POST" action="<?= BASE_URL . "users/edition/" . $id . "/commentapproved" ?>" class="form-table mb-2 rounded bg-success">
+
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn bt-tbl" data-bs-toggle="modal" data-bs-target="#approveComment">
+                                        Approuver
+                                    </button>
+
+                                    <!-- Input Hidden POST -->
+                                    <input type="hidden" name="id_user" value="<?= $id ?>">
+                                    <input type="hidden" name="id_comment" value="<?= $element->getId_comment() ?>">
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="approveComment" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="staticBackdropLabel">État commentaire</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Vous êtes sur le point d'approuver ce commentaire. Êtes-vous sûr de vouloir réaliser cette action ?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Non</button>
+                                                    <button type="submit" class="btn btn-success">Oui !</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+
+                                <!-- Form POST Disapprove -->
+                                <form method="POST" action="<?= BASE_URL . "users/edition/" . $id . "/commentdisapproved" ?>" class="form-table rounded bg-danger">
+
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn bt-tbl" data-bs-toggle="modal" data-bs-target="#disapproveComment">
+                                        Bloquer
+                                    </button>
+
+                                    <!-- Input Hidden POST -->
+                                    <input type="hidden" name="id_user" value="<?= $id ?>">
+                                    <input type="hidden" name="id_comment" value="<?= $element->getId_comment() ?>">
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="disapproveComment" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="staticBackdropLabel">État commentaire</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Vous êtes sur le point de bloquer ce commentaire. Êtes-vous sûr de vouloir réaliser cette action ?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Non</button>
+                                                    <button type="submit" class="btn btn-success">Oui !</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </td>
                         </tr>
 
                     <?php
@@ -380,4 +455,5 @@
             <br>
         </div>
     </div>
+
 </main>

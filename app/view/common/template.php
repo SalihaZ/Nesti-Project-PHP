@@ -3,6 +3,7 @@
 echo " LOC : ".$loc. " ; ";
 echo " ACTION : ".$action. " ; ";
 echo " ID : ".$id. " ; ";
+echo " OPTION : ".$option. " ; ";
 var_dump($_POST);
 
 //Navigation

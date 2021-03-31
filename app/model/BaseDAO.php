@@ -12,7 +12,9 @@ class BaseDAO
         $q = $pdo->prepare($sql);
         $q->execute([$value]);
 
-        $entity = $q->fetchObject(static::getEntityClass());
+        $result = $q->fetchObject(static::getEntityClass());
+     
+        $entity = $result??[]; // C'est du génie !
         
         return $entity;
     }

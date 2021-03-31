@@ -86,12 +86,8 @@ body {
 
 /* Bordered form */
 
-form {
-    width: 100%;
-    padding: 30px;
-    border: 1px solid #f1f1f1;
-    background: #fff;
-    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+.row {
+    --bs-gutter-x: 0rem !important;
 }
 
 #container_connection h1 {
@@ -133,11 +129,13 @@ thead {
 .btn-validation {
     background-color: #b0d41c !important;
     color: #005662 !important;
+    width: auto !important;
 }
 
 .btn-reset {
     background-color: #4fb3bf !important;
     color: white !important;
+    width: auto !important;
 }
 
 .nav-location {
@@ -173,11 +171,26 @@ thead {
     width: 93%;
 }
 
-.form-group {
+.application {
     width: 100%;
-    padding: 30px;
+    padding: 30px !important;
     border: 1px solid #f1f1f1;
     background: #fff;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.list {
+    padding: 10px 10px 0px 10px !important;
+    border: 1px solid #f1f1f1;
+    background: #fff;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.bt-tbl {
+    width: 100%;
+    padding: 5px !important;
+    text-decoration: none !important;
+    color: white !important;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 

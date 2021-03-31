@@ -59,7 +59,7 @@ function changeColorConditions(pw) {
 }
 
 // Reset all inputs new user
-function resetUser() {
+function resetUserCreate() {
     document.getElementById("inputUserName").value = '';
     document.getElementById("inputUserPassword").value = '';
     document.getElementById("inputUserRole").value = '';

@@ -2,13 +2,13 @@
 
 class Recipe { 
 
-    private $id_recipes;
-    private $date_creation_recipes;
-    private $name_recipes;
-    private $difficulty_recipes;
-    private $number_person_recipes;
-    private $state_recipes;
-    private $time_recipes;
+    private $id_recipe;
+    private $date_creation_recipe;
+    private $name_recipe;
+    private $difficulty_recipe;
+    private $number_person_recipe;
+    private $state_recipe;
+    private $time_recipe;
     private $fk_id_image;
     private $fk_id_chief;
     private $valid = true;
@@ -18,59 +18,59 @@ class Recipe {
     // }
 
     /**
-     * Get the value of id_recipes
+     * Get the value of id_recipe
      */ 
-    public function getId_recipes()
+    public function getId_recipe()
     {
-        return $this->id_recipes;
+        return $this->id_recipe;
     }
 
     /**
-     * Set the value of id_recipes
+     * Set the value of id_recipe
      * @return  self
      */ 
-    public function setId_recipes($id_recipes)
+    public function setId_recipe($id_recipe)
     {
-        $this->id_recipes = $id_recipes;
+        $this->id_recipe = $id_recipe;
 
         return $this;
     }
 
     /**
-     * Get the value of date_creation_recipes
+     * Get the value of date_creation_recipe
      */ 
-    public function getDate_creation_recipes()
+    public function getDate_creation_recipe()
     {
-        return $this->date_creation_recipes;
+        return $this->date_creation_recipe;
     }
 
     /**
-     * Set the value of date_creation_recipes
+     * Set the value of date_creation_recipe
      * @return  self
      */ 
-    public function setDate_creation_recipes($date_creation_recipes)
+    public function setDate_creation_recipe($date_creation_recipe)
     {
-        $this->date_creation_recipes = $date_creation_recipes;
+        $this->date_creation_recipe = $date_creation_recipe;
 
         return $this;
     }
 
     /**
-     * Get the value of name_recipes
+     * Get the value of name_recipe
      */ 
-    public function getName_recipes()
+    public function getName_recipe()
     {
-        return $this->name_recipes;
+        return $this->name_recipe;
     }
 
 
     /**
-     * Set the value of name_recipes
+     * Set the value of name_recipe
      * @return  self
      */ 
-    public function setName_recipes($name_recipes)
+    public function setName_recipe($name_recipe)
     {
-        $this->name_recipes = $name_recipes;
+        $this->name_recipe = $name_recipe;
 
         return $this;
     }
@@ -78,75 +78,75 @@ class Recipe {
     /**
      * Get the value of difficulty_recipes
      */ 
-    public function getDifficulty_recipes()
+    public function getDifficulty_recipe()
     {
-        return $this->difficulty_recipes;
+        return $this->difficulty_recipe;
     }
 
     /**
-     * Set the value of difficulty_recipes
+     * Set the value of difficulty_recipe
      * @return  self
      */ 
-    public function setDifficulty_recipes($difficulty_recipes)
+    public function setDifficulty_recipe($difficulty_recipe)
     {
-        $this->difficulty_recipes = $difficulty_recipes;
+        $this->difficulty_recipe = $difficulty_recipe;
 
         return $this;
     }
 
     /**
-     * Get the value of number_person_recipes
+     * Get the value of number_person_recipe
      */ 
-    public function getNumber_person_recipes()
+    public function getNumber_person_recipe()
     {
-        return $this->number_person_recipes;
+        return $this->number_person_recipe;
     }
 
     /**
-     * Set the value of number_person_recipes
+     * Set the value of number_person_recipe
      * @return  self
      */ 
-    public function setNumber_person_recipes($number_person_recipes)
+    public function setNumber_person_recipe($number_person_recipe)
     {
-        $this->number_person_recipes = $number_person_recipes;
+        $this->number_person_recipe = $number_person_recipe;
 
         return $this;
     }
 
     /**
-     * Get the value of state_recipes
+     * Get the value of state_recipe
      */ 
-    public function getState_recipes()
+    public function getState_recipe()
     {
-        return $this->state_recipes;
+        return $this->state_recipe;
     }
 
     /**
-     * Set the value of state_recipes
+     * Set the value of state_recipe
      * @return  self
      */ 
-    public function setState_recipes($state_recipes)
+    public function setState_recipe($state_recipe)
     {
-        $this->state_recipes = $state_recipes;
+        $this->state_recipe = $state_recipe;
 
         return $this;
     }
 
     /**
-     * Get the value of time_recipes
+     * Get the value of time_recipe
      */ 
-    public function getTime_recipes()
+    public function getTime_recipe()
     {
-        return $this->time_recipes;
+        return $this->time_recipe;
     }
 
     /**
-     * Set the value of time_recipes
+     * Set the value of time_recipe
      * @return  self
      */ 
-    public function setTime_recipes($time_recipes)
+    public function setTime_recipe($time_recipe)
     {
-        $this->time_recipes = $time_recipes;
+        $this->time_recipe = $time_recipe;
 
         return $this;
     }
@@ -197,13 +197,13 @@ class Recipe {
         return $this;
     }
 
-    public function setParametersFromArray($data) {
-        $this->valid = true;
+    // public function setParametersFromArray($data) {
+    //     $this->valid = true;
 
-        $this->setName_recipes($data["name_recipes"]);
-        $this->setDifficulty_recipes($data["difficulty_recipes"]);
-        $this->setNumber_person_recipes($data["number_person_recipes"]);
-        $this->setState_recipes($data["state_recipes"]);
-        $this->setTime_recipes($data["time_recipes"]);
-    }
+    //     $this->setName_recipe($data["name_recipes"]);
+    //     $this->setDifficulty_recipe($data["difficulty_recipes"]);
+    //     $this->setNumber_person_recipe($data["number_person_recipes"]);
+    //     $this->setState_recipe($data["state_recipes"]);
+    //     $this->setTime_recipe($data["time_recipes"]);
+    // }
 }

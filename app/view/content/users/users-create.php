@@ -26,11 +26,11 @@ if (!isset($city) || empty($city)) {
     <br>
 
     <!-- Section Top -->
-    <div class="row d-flex">
+    <div class="row d-flex gx-0">
 
         <!-- Article Input Informations Recipe-->
 
-        <form method="POST" action="" class="form-group">
+        <form method="POST" action="" class="application">
             <div class="row d-flex justify-content-between">
                 <div class="col-5">
 
@@ -43,7 +43,7 @@ if (!isset($city) || empty($city)) {
                     <!-- Error LastName User -->
                     <div>
                         <?php if (!empty($user->getLastnameError())) : ?>
-                            <span class="badge badge-danger mb-2"><?= $user->getLastnameError() ?></span>
+                            <span class="badge bg-danger mb-2"><?= $user->getLastnameError() ?></span>
                         <?php endif; ?>
                     </div>
 
@@ -56,7 +56,7 @@ if (!isset($city) || empty($city)) {
                     <!-- Error FirstName User -->
                     <div>
                         <?php if (!empty($user->getFirstnameError())) : ?>
-                            <span class="badge badge-danger mb-2"><?= $user->getFirstnameError() ?></span>
+                            <span class="badge bg-danger mb-2"><?= $user->getFirstnameError() ?></span>
                         <?php endif; ?>
                     </div>
 
@@ -69,7 +69,7 @@ if (!isset($city) || empty($city)) {
                     <!-- Error Email User -->
                     <div>
                         <?php if (!empty($user->getEmailError())) : ?>
-                            <span class="badge badge-danger mb-2"><?= $user->getEmailError() ?></span>
+                            <span class="badge bg-danger mb-2"><?= $user->getEmailError() ?></span>
                             <?php echo "</br>" ?>
                         <?php endif; ?>
                     </div>
@@ -83,7 +83,7 @@ if (!isset($city) || empty($city)) {
                     <!-- Error UserName User -->
                     <div>
                         <?php if (!empty($user->getUsernameError())) : ?>
-                            <span class="badge badge-danger mb-2"><?= $user->getUsernameError() ?></span>
+                            <span class="badge bg-danger mb-2"><?= $user->getUsernameError() ?></span>
                         <?php endif; ?>
                     </div>
 
@@ -97,7 +97,7 @@ if (!isset($city) || empty($city)) {
                     <!-- Error Password User -->
                     <div>
                         <?php if (!empty($user->getPasswordError())) : ?>
-                            <span class="badge badge-danger mb-2"><?= $user->getPasswordError() ?></span>
+                            <span class="badge bg-danger mb-2"><?= $user->getPasswordError() ?></span>
                         <?php endif; ?>
                     </div>
 
@@ -128,7 +128,7 @@ if (!isset($city) || empty($city)) {
                     <!-- Error Address1 User -->
                     <div>
                         <?php if (!empty($user->getAddress1Error())) : ?>
-                            <span class="badge badge-danger mb-2"><?= $user->getAddress1Error() ?></span>
+                            <span class="badge bg-danger mb-2"><?= $user->getAddress1Error() ?></span>
                         <?php endif; ?>
                     </div>
 
@@ -141,7 +141,7 @@ if (!isset($city) || empty($city)) {
                     <!-- Error Address2 User -->
                     <div>
                         <?php if (!empty($user->getAddress2Error())) : ?>
-                            <span class="badge badge-danger mb-2"><?= $user->getAddress2Error() ?></span>
+                            <span class="badge bg-danger mb-2"><?= $user->getAddress2Error() ?></span>
                         <?php endif; ?>
                     </div>
 
@@ -154,7 +154,7 @@ if (!isset($city) || empty($city)) {
                     <!-- Error City User -->
                     <div>
                         <?php if (!empty($city->getNameCityError())) : ?>
-                            <span class="badge badge-danger mb-2"><?= $city->getNameCityError() ?></span>
+                            <span class="badge bg-danger mb-2"><?= $city->getNameCityError() ?></span>
                         <?php endif; ?>
                     </div>
 
@@ -167,7 +167,7 @@ if (!isset($city) || empty($city)) {
                     <!-- Error Postcode User -->
                     <div>
                         <?php if (!empty($user->getPostcodeError())) : ?>
-                            <span class="badge badge-danger mb-2"><?= $user->getPostcodeError() ?></span>
+                            <span class="badge bg-danger mb-2"><?= $user->getPostcodeError() ?></span>
                         <?php endif; ?>
                     </div>
 
@@ -218,17 +218,17 @@ if (!isset($city) || empty($city)) {
             <div class="row d-flex justify-content-around">
 
                 <!-- Button Validation -->
-                <input class="btn btn-lg btn-validation" type="submit" value="Valider">
+                <button class="btn btn-lg btn-validation" type="submit">Valider</button>
 
                 <!-- Button Reset -->
-                <a href="#">
-                    <button class="btn btn-lg btn-reset" type="button" onclick=resetUser()>
-                        Annuler</button>
-                </a>
+                    <button class="btn btn-lg btn-reset" type="button" onclick=resetUserCreate()>Annuler</button>
+                
             </div>
 
         </form>
 
     </div>
+
+    <br>
 
 </main>

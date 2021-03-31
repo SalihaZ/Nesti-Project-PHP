@@ -19,7 +19,7 @@
 
         <!-- Article Input Informations Recipe-->
         <div class="col-6">
-            <form method="POST" action="create" class="form-group">
+            <form method="POST" action="create" class="application">
 
                 <!-- Input Name Recipe -->
                 <div class="row d-flex mb-3">
@@ -115,7 +115,7 @@
             <br>
 
             <!-- Bloc Preparation -->
-            <div class="form-group">
+            <div class="application">
                 <div id="stepsPreparation">
                     <!-- Row One Step Preparation -->
                     <div class="row mb-4 d-flex">
@@ -208,7 +208,7 @@
 
             <div>
                 <div class="row d-flex justify-content-center">
-                    <div class="form-group rounded">
+                    <div class="application rounded">
                         <div class="col-12">
 
                             <div class="row mb-1 justify-content-center">

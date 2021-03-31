@@ -65,12 +65,20 @@
                         <?= implode(", ", $element->getDisplayRoles()) ?>
                     </td>
                     <td>
-
+                        <?= $element->getLastConnectionUser() ?>
                     </td>
                     <td>
-                        <?= $element->getDisplayState_user(); ?>
+                        <?= $element->getDisplayState_user() ?>
                     </td>
-                    <td> <a href="users/edition/<?= $element->getId_user() ?>" class="text-warning">Modifier</a> <br> <a href="" class="text-danger">Supprimer</a></td>
+                    <td>
+
+                        <a href="<?= BASE_URL . "users/edition/" .  $element->getId_user() ?>" type="submit" class="btn bt-tbl btn-warning mb-2">Modifier</a>
+
+                       <br>
+                       
+                        <a href="" type="submit" class="btn bt-tbl btn-danger">Supprimer</a>
+
+                    </td>
                 </tr>
 
             <?php

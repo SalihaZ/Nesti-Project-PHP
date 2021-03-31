@@ -18,6 +18,7 @@ class RoleDAO extends BaseDAO
                     $user->getId_user(),
                 ]
             );
+
             Database::disconnect();
         }
     }

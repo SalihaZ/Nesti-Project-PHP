@@ -54,19 +54,19 @@
             ?>
                 <tr>
                     <th scope="row">
-                        <?= $element->getId_recipes() ?>
+                        <?= $element->getId_recipe() ?>
                     </th>
                     <td>
-                        <?= $element->getName_recipes() ?>
+                        <?= $element->getName_recipe() ?>
                     </td>
                     <td>
-                        <?= $element->getDifficulty_recipes() ?>
+                        <?= $element->getDifficulty_recipe() ?>
                     </td>
                     <td>
-                        <?= $element->getNumber_person_recipes() ?>
+                        <?= $element->getNumber_person_recipe() ?>
                     </td>
                     <td>
-                        <?= $element->getTime_recipes() ?>
+                        <?= $element->getTime_recipe() ?>
                     </td>
                     <td>
                         <?= $element->getFk_id_chief() ?>

@@ -12,6 +12,7 @@ error_reporting(E_ALL);
 $loc =  filter_input(INPUT_GET, "loc", FILTER_SANITIZE_STRING);
 $action =  filter_input(INPUT_GET, "action", FILTER_SANITIZE_STRING);
 $id =  filter_input(INPUT_GET, "id", FILTER_SANITIZE_STRING);
+$option =  filter_input(INPUT_GET, "option", FILTER_SANITIZE_STRING);
 
 $UserSession = new Session();
 
@@ -22,8 +23,6 @@ if ($UserSession->isUserConnected()) {
     echo ("STATUS : Not Connected ;");
     $loc = "connection";
 }
-
-var_dump($_SESSION['IDUser']);
 
 $controller = null;
 

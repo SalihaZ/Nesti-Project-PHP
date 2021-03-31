@@ -12,7 +12,6 @@ class Comment {
     private $fk_id_user;
     private $fk_id_moderator;
 
-
     /**
      * Get the value of id_comment
      */ 
@@ -191,6 +190,11 @@ class Comment {
         $this->fk_id_moderator = $fk_id_moderator;
 
         return $this;
+    }
+
+    public function getRecipe()
+    {
+        return RecipeDAO::findOneBy('id_recipe', $this->getFk_id_recipe());
     }
 
 }

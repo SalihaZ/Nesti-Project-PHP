@@ -33,7 +33,7 @@
       <!-- Button User -->
       <a class="nav-link btnNavbarUser">
         <i class="fas fa-user"></i>
-        <!-- <?php echo $_SESSION["lastName"] . " " . $_SESSION["firstName"] ?> -->
+        <?php echo $_SESSION["lastname_user"] . " " . $_SESSION["firstname_user"] ?>
       </a>
 
       <!-- Button Disconnection -->

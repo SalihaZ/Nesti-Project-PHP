@@ -75,7 +75,6 @@ class UserDAO extends BaseDAO
     // Update one user in the DB
     public static function updateUser($user)
     {
-
         $pdo = Database::getPdo();
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $sql = "UPDATE users SET lastname_user = ?, firstname_user = ?, state_user =?, address1_user = ?, address2_user = ?, fk_id_city = ?, postcode_user = ? WHERE id_user = ?";
@@ -94,7 +93,6 @@ class UserDAO extends BaseDAO
         );
         Database::disconnect();
     }
-
 
     //     Database::disconnect();
     // }

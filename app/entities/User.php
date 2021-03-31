@@ -341,7 +341,7 @@ class User
     public function getDisplayRoles()
     {
         $displayRoles = [];
-        
+
         foreach ($this->roles_user as $role) {
             if ($role == 'admins') {
                 $displayRoles[] = 'Administrateur';
@@ -353,8 +353,8 @@ class User
                 $displayRoles[] = 'Chef';
             }
         }
-        
-        if ($displayRoles == null ){
+
+        if ($displayRoles == null) {
             $displayRoles[] = 'Utilisateur';
         }
 
@@ -480,4 +480,53 @@ class User
     {
         return $this->rolesError;
     }
+
+    public function getNumberRecipesChief()
+    {
+        return RecipeDAO::getNumberRecipesChief($this->getId_user());
+    }
+
+    public function getNumberApprovedCommentsModerator()
+    {
+        return CommentsDAO::getNumberApprovedCommentsModerator($this->getId_user());
+    }
+
+    public function getNumberDisapprovedCommentsModerator()
+    {
+        return CommentsDAO::getNumberDisapprovedCommentsModerator($this->getId_user());
+    }
+
+    public function getLastConnectionUser()
+    {
+        return LogsUserDAO::getLastConnectionUser($this->getId_user());
+    }
+
+    public function getNumberCommandsUser()
+    {
+        return CommandsDAO::getNumberCommandsUser($this->getId_user());
+    }
+
+    public function getDateLastImportAdmin()
+    {
+        return ImportDAO::getDateLastImportAdmin($this->getId_user());
+    }
+
+    public function getNumberImportsAdmin()
+    {
+        return ImportDAO::getNumberImportAdmin($this->getId_user());
+    }
+
+    public function getNameLastRecipeChief()
+    {
+        return RecipeDAO::getNameLastRecipeChief($this->getId_user());
+    }
+
+    public function getLastCommandPriceUser(){
+        return CommandsDAO::getLastCommandPriceUser($this->getId_user());
+    }
+
+    public function getAllCommandsPricesUser() {
+        return CommandsDAO::getAllCommandsPricesUser($this->getId_user());
+    }
+
 }

@@ -21,34 +21,78 @@ class CommentsDAO extends BaseDAO
     }
 
     // Approve a comment
-    public static function approveComment($comment)
+    public static function approveComment($id_comment)
     {
         $pdo = Database::getPdo();
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $sql = "UPDATE comments SET state_comments = ? WHERE id_comment = ?";
+        $sql = "UPDATE comments SET state_comment = ? WHERE id_comment = ?";
         $q = $pdo->prepare($sql);
         $q->execute(
             [
-                $comment->getId_comment(),
-                $comment->getId_comment()
+                "a",
+                $id_comment
             ]
         );
         Database::disconnect();
     }
 
     // Blocks a comment
-    public static function dissaproveComment($comment)
+    public static function disapproveComment($id_comment)
     {
         $pdo = Database::getPdo();
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $sql = "UPDATE comments SET state_comments = ? WHERE id_comment = ?";
+        $sql = "UPDATE comments SET state_comment = ? WHERE id_comment = ?";
         $q = $pdo->prepare($sql);
         $q->execute(
             [
-                "w",
-                $comment->getId_comment()
+                "b",
+                $id_comment
             ]
         );
         Database::disconnect();
     }
+
+      // Finds the number of comments approved by the moderator
+      public static function getNumberApprovedCommentsModerator($id_moderator)
+      {
+  
+          $pdo = Database::getPdo();
+          $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+          $sql = "SELECT COUNT(fk_id_user) FROM comments WHERE fk_id_user = ? AND state_comment = 'a'";
+          $result = $pdo->prepare($sql);
+  
+          $result->execute(
+              [
+                $id_moderator
+              ]
+          );
+  
+          $number = $result->fetch();
+  
+          Database::disconnect();
+  
+          return $number[0];
+      }
+
+          // Finds the number of comments approved by the moderator 
+          public static function getNumberDisapprovedCommentsModerator($id_moderator)
+          {
+      
+              $pdo = Database::getPdo();
+              $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+              $sql = "SELECT COUNT(fk_id_user) FROM `comments` WHERE fk_id_user = ? AND state_comment = 'b'";
+              $result = $pdo->prepare($sql);
+      
+              $result->execute(
+                  [
+                    $id_moderator
+                  ]
+              );
+      
+              $number = $result->fetch();
+      
+              Database::disconnect();
+      
+              return $number[0];
+          }
 }
