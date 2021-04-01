@@ -7,12 +7,28 @@
 <!-- Main -->
 <main class="container wrapper-user-create">
 
-<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="#">Home</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Library</li>
-  </ol>
-</nav>
+    <!-- Nav Location -->
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Library</li>
+        </ol>
+    </nav>
+
+    <?php
+    if (isset($_SESSION['message'])) {
+    ?>
+        <div class="alert alert-success" role="alert">
+            Le mot de passe a bien été modifié.
+            <br>
+            Voici le nouveau mot de passe de l'utilisateur : <?= $_SESSION['message'] 
+            ?>
+        </div>
+        <?php unset($_SESSION['message']) ?>
+    <?php
+    }
+    ?>
+
 
     <!-- Title Page -->
     <div class="row">
@@ -21,10 +37,6 @@
             <br>
         </div>
     </div>
-
-    <!-- Nav Location -->
-    <nav>
-    </nav>
 
     <!-- Section Top -->
     <div class="row d-flex justify-content-around mr-2">
@@ -228,13 +240,47 @@
 
             <br>
 
-            <!-- Button Reset Password -->
-            <div class="row d-flex justify-content-center">
-                <button class="btn btn-lg btn-reset">Réinitialisation du mot de passe</button>
-            </div>
+            <!-- Form POST Disapprove -->
+            <form method="POST" action="<?= BASE_URL . "users/edition/" . $id . "/resetpassword" ?>" class="">
+
+                <!-- Button Reset Password -->
+                <div class="row d-flex justify-content-center">
+                    <button type="button" class="btn btn-lg btn-reset" data-bs-toggle="modal" data-bs-target="#resetPassword">
+                        Réinitialisation du mot de passe
+                    </button>
+                </div>
+
+                <!-- Input Hidden POST -->
+                <input type="hidden" name="id_user" value="<?= $id ?>">
+
+
+                <!-- Modal -->
+                <div class="modal fade" id="resetPassword" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel">Réinitialisation mot de passe</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Vous êtes sur le point de réinitialiser le mot de passe de l'utilisateur.
+                                Cette action est définitive et irréversible.
+                                <br><br>
+                                Êtes-vous sûr de vouloir réaliser cette action ?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Non</button>
+                                <button type="submit" class="btn btn-success">Oui !</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
         </div>
     </div>
 
+    <br>
     <br>
 
     <!-- Section Middle -->

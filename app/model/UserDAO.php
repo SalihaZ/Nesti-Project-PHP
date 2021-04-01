@@ -71,7 +71,6 @@ class UserDAO extends BaseDAO
         return $last_id;
     }
 
-
     // Update one user in the DB
     public static function updateUser($user)
     {
@@ -93,6 +92,22 @@ class UserDAO extends BaseDAO
         );
         Database::disconnect();
     }
+
+     // Reset password of one user in the DB
+     public static function resetPasswordUser($password, $id_user)
+     {
+         $pdo = Database::getPdo();
+         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+         $sql = "UPDATE users SET password_user = ? WHERE id_user = ?";
+         $q = $pdo->prepare($sql);
+         $q->execute(
+             [
+                 password_hash($password, PASSWORD_BCRYPT),
+                 $id_user
+             ]
+         );
+         Database::disconnect();
+     }
 
     //     Database::disconnect();
     // }

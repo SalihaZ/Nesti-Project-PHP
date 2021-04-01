@@ -448,7 +448,6 @@ class User
         return $this->address2Error;
     }
 
-
     /**
      * Get the value of cityError
      */
@@ -521,12 +520,13 @@ class User
         return RecipeDAO::getNameLastRecipeChief($this->getId_user());
     }
 
-    public function getLastCommandPriceUser(){
+    public function getLastCommandPriceUser()
+    {
         return CommandsDAO::getLastCommandPriceUser($this->getId_user());
     }
 
-    public function getAllCommandsPricesUser() {
+    public function getAllCommandsPricesUser()
+    {
         return CommandsDAO::getAllCommandsPricesUser($this->getId_user());
     }
-
 }

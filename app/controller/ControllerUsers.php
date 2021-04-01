@@ -54,6 +54,7 @@ class ControllerUsers extends BaseController
                             $id_comment = $_POST['id_comment'];
                             CommentsDAO::approveComment($id_comment);
                             header('Location:' . BASE_URL . "users/edition/" . $id_user);
+                            exit();
                         }
                     }
                 }
@@ -67,6 +68,27 @@ class ControllerUsers extends BaseController
                             $id_comment = $_POST['id_comment'];
                             CommentsDAO::disapproveComment($id_comment);
                             header('Location:' . BASE_URL . "users/edition/" . $id_user);
+                            exit();
+                        }
+                    }
+                }
+
+                if (isset($_GET['option'])) {
+                    if ($_GET['option'] == 'resetpassword') {
+
+                        if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
+
+                            $id_user = $_POST['id_user'];
+
+                            $data = '1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcefghijklmnopqrstuvwxyz@!$€%#';
+                            $password = substr(str_shuffle($data), 0, 16);
+
+                            UserDAO::resetPasswordUser($password, $id_user);
+
+                            $_SESSION['message'] = $password;
+                            
+                            header('Location:' . BASE_URL . "users/edition/" . $id_user);  
+                            exit();
                         }
                     }
                 }
