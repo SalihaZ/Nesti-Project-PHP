@@ -15,20 +15,37 @@
         </ol>
     </nav>
 
+    <!-- Alertes -->
+    <!-- For the reset password -->
     <?php
-    if (isset($_SESSION['message'])) {
+    if (isset($_SESSION['password'])) {
     ?>
         <div class="alert alert-success" role="alert">
             Le mot de passe a bien été modifié.
             <br>
-            Voici le nouveau mot de passe de l'utilisateur : <?= $_SESSION['message'] 
-            ?>
+            Voici le nouveau mot de passe de l'utilisateur :<b> <?= $_SESSION['password'] ?> </b>
+            <br>
+            Veuillez le noter attentivement car il ne vous sera plus jamais proposé de nouveau !
         </div>
-        <?php unset($_SESSION['message']) ?>
-    <?php
-    }
-    ?>
+    <?php }
+    unset($_SESSION['password']); ?>
 
+    <!-- For the comments -->
+    <?php if (isset($_SESSION['commentdisapproved'])) { ?>
+
+        <div class="alert alert-success" role="alert">
+            Le commentaire a bien été bloqué.
+        </div>
+        <?php } 
+        unset($_SESSION['commentdisapproved']);?>
+
+    <?php if (isset($_SESSION['commentapproved'])) { ?>
+
+        <div class="alert alert-success" role="alert">
+            Le commentaire a bien été validé.
+        </div>
+    <?php } 
+    unset($_SESSION['commentapproved']); ?>
 
     <!-- Title Page -->
     <div class="row">
@@ -220,7 +237,7 @@
                         <div class="row">
                             <p>
                             <h5> Modérateur </h5>
-                            Nombre de commentaire approuvé : <?= $user->getNumberApprovedCommentsModerator() ?> <br>
+                            Nombre de commentaire validé : <?= $user->getNumberApprovedCommentsModerator() ?> <br>
                             Nombre de commentaire bloqué : <?= $user->getNumberDisapprovedCommentsModerator() ?> </p>
                         </div>
                     <?php
@@ -383,7 +400,7 @@
             <!-- Research Bar -->
             <div class="col-8 d-flex align-items-center no-padding">
                 <input type="search" class="form-control-lg shadow mr-2" id="searchComments" placeholder="Rechercher un commentaire">
-                <i class="fas fa-search"></i>
+                <i class="fas fa-search ms-2"></i>
             </div>
 
             <br>
@@ -431,7 +448,7 @@
 
                                     <!-- Button trigger modal -->
                                     <button type="button" class="btn bt-tbl" data-bs-toggle="modal" data-bs-target="#approveComment">
-                                        Approuver
+                                        Valider
                                     </button>
 
                                     <!-- Input Hidden POST -->
@@ -447,7 +464,7 @@
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    Vous êtes sur le point d'approuver ce commentaire. Êtes-vous sûr de vouloir réaliser cette action ?
+                                                    Vous êtes sur le point de valider ce commentaire. Êtes-vous sûr de vouloir réaliser cette action ?
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Non</button>

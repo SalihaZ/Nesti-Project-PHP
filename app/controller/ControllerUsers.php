@@ -6,11 +6,30 @@ class ControllerUsers extends BaseController
     public function initialize()
     {
 
+        #USER
         if (!isset($_GET['action'])) {
             $arrayUsers = UserDAO::readAllUsers();
             $this->_data['arrayUsers'] = $arrayUsers;
         } else {
 
+            #USER/DELETE
+            if ($_GET['action'] == 'delete') {
+
+                if (isset($_GET['id'])) {
+
+                    echo "LOL";
+
+                    $id_user = $_GET['id'];
+
+                    UserDAO::deleteUser($id_user);
+
+                    $_SESSION['deleteUser'] = '';
+                    header('Location:' . BASE_URL . "users");
+                    exit();
+                }
+            }
+
+            #USER/CREATE
             if ($_GET['action'] == 'create') {
 
                 if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
@@ -22,6 +41,7 @@ class ControllerUsers extends BaseController
                 $this->_data['user'] = $user;
             }
 
+            #USER/EDITION
             if ($_GET['action'] == 'edition') {
                 if (!isset($_GET['option'])) {
 
@@ -44,7 +64,7 @@ class ControllerUsers extends BaseController
                         $this->editUser($user, $city);
                     }
                 }
-                
+
                 if (isset($_GET['option'])) {
                     if ($_GET['option'] == 'commentapproved') {
 
@@ -53,6 +73,8 @@ class ControllerUsers extends BaseController
                             $id_user = $_POST['id_user'];
                             $id_comment = $_POST['id_comment'];
                             CommentsDAO::approveComment($id_comment);
+
+                            $_SESSION['commentapproved'] = '';
                             header('Location:' . BASE_URL . "users/edition/" . $id_user);
                             exit();
                         }
@@ -67,6 +89,8 @@ class ControllerUsers extends BaseController
                             $id_user = $_POST['id_user'];
                             $id_comment = $_POST['id_comment'];
                             CommentsDAO::disapproveComment($id_comment);
+
+                            $_SESSION['commentdisapproved'] = '';
                             header('Location:' . BASE_URL . "users/edition/" . $id_user);
                             exit();
                         }
@@ -80,14 +104,14 @@ class ControllerUsers extends BaseController
 
                             $id_user = $_POST['id_user'];
 
-                            $data = '1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcefghijklmnopqrstuvwxyz@!$€%#';
+                            $data = '1234567890ABCDEFGHIJabcefghij!$#=+/&@_-';
                             $password = substr(str_shuffle($data), 0, 16);
 
                             UserDAO::resetPasswordUser($password, $id_user);
 
-                            $_SESSION['message'] = $password;
-                            
-                            header('Location:' . BASE_URL . "users/edition/" . $id_user);  
+                            $_SESSION['password'] = $password;
+
+                            header('Location:' . BASE_URL . "users/edition/" . $id_user);
                             exit();
                         }
                     }
@@ -98,6 +122,7 @@ class ControllerUsers extends BaseController
             }
         }
     }
+
 
     // Creates a new USER in the DB
     private function createUser($city)
@@ -113,9 +138,11 @@ class ControllerUsers extends BaseController
         $user->setAddress2_user($_POST["address2_user"]);
         $user->setFk_id_city($city->getId_city());
         $user->setPostcode_user($_POST["postcode_user"]);
+
         if (!empty($_POST['roles_user'])) {
             $roles = $_POST['roles_user'];
         }
+
         if (!empty($roles)) {
             $user->setRoles_user($roles);
         }

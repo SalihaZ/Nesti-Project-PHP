@@ -71,6 +71,22 @@ class UserDAO extends BaseDAO
         return $last_id;
     }
 
+      // Block one user in the DB
+      public static function deleteUser($id)
+      {
+          $pdo = Database::getPdo();
+          $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+          $sql = "UPDATE users SET state_user = ? WHERE id_user = ?";
+          $q = $pdo->prepare($sql);
+          $q->execute(
+              [
+                  "b",
+                  $id
+              ]
+          );
+          Database::disconnect();
+      }
+
     // Update one user in the DB
     public static function updateUser($user)
     {

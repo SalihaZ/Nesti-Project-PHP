@@ -1,6 +1,16 @@
 <!-- Main -->
 <main class="container wrapper-users">
-    <br>
+<br>
+       <!-- Alertes -->
+    <!-- For the delete user -->
+    <?php
+    if (isset($_SESSION['deleteUser'])) {
+    ?>
+        <div class="alert alert-success" role="alert">
+            L'utilisateur a bien été bloqué.
+        </div>
+    <?php }
+    unset($_SESSION['deleteUser']); ?>
 
     <!-- Title Page -->
     <div class="row">
@@ -16,7 +26,7 @@
         <!-- Research Bar -->
         <div class="col-8 d-flex align-items-center no-padding">
             <input type="search" class="form-control-lg shadow mr-2" id="searchUser" placeholder="Rechercher un utilisateur">
-            <i class="fas fa-search"></i>
+            <i class="fas fa-search ms-2"></i>
         </div>
 
         <!-- Buttons Container -->
@@ -71,13 +81,61 @@
                         <?= $element->getDisplayState_user() ?>
                     </td>
                     <td>
+                        <!-- Form POST Modify -->
+                        <form method="POST" action="<?= BASE_URL . "users/edition/" .  $element->getId_user() ?>" class="form-table mb-2 rounded bg-warning">
 
-                        <a href="<?= BASE_URL . "users/edition/" .  $element->getId_user() ?>" type="submit" class="btn bt-tbl btn-warning mb-2">Modifier</a>
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn bt-tbl" data-bs-toggle="modal" data-bs-target="<?= '#modifyUser' .  $element->getId_user() ?>">
+                                Modifier
+                            </button>
 
-                       <br>
-                       
-                        <a href="" type="submit" class="btn bt-tbl btn-danger">Supprimer</a>
+                            <!-- Modal -->
+                            <div class="modal fade" id="<?= 'modifyUser' .  $element->getId_user() ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="staticBackdropLabel">Modifier profil utilisateur</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Vous êtes sur le point d'accéder à la modification des informations du profil utilisateur de <b><?= $element->getLastname_user() ?> <?= $element->getFirstname_user() ?></b>. Êtes-vous sûr de vouloir réaliser cette action ?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Non</button>
+                                            <button type="submit" class="btn btn-success">Oui !</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
 
+                        <!-- Form POST Delete -->
+                        <form method="POST" action="<?= BASE_URL . "users/delete/" . $element->getId_user()?>" class="form-table rounded bg-danger">
+
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn bt-tbl" data-bs-toggle="modal" data-bs-target="<?= '#deleteUser' .  $element->getId_user() ?>">
+                                Supprimer
+                            </button>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="<?= 'deleteUser' .  $element->getId_user() ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="staticBackdropLabel">Supprimer profil utilisateur</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Vous êtes sur le point de supprimer le profil utilisateur de <b><?= $element->getLastname_user() ?> <?= $element->getFirstname_user() ?></b>. Êtes-vous sûr de vouloir réaliser cette action ?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Non</button>
+                                            <button type="submit" class="btn btn-success">Oui !</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                     </td>
                 </tr>
 
