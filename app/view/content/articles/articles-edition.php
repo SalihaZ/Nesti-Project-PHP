@@ -2,74 +2,112 @@
 if (!isset($article) || empty($article)) {
     $article = new Article();
 }
-if (!isset($errorMessages) || empty($errorMessages)) {
-    $errorMessages = [];
-}
 ?>
 
-<div class="container bg-white align-items-left" id="articleEditPage">
-    <div class="d-flex flex-row underLink">
-        <a href="<?= BASE_URL ?>article"><u>Articles</u>
-        </a>
-        <p> &nbsp > Edit</p>
+<br>
+
+<!-- Main -->
+<main class="container">
+
+    <!-- Title Page -->
+    <div class="row">
+        <div class="col">
+            <h1>Edition d'un article</h1>
+            <br>
+        </div>
     </div>
-    <h2 class="mb-2 mt-2">Article Edit</h2>
-    <div class="d-flex flex-row justify-content-around flex-wrap">
-        <div class="d-flex flex-column">
-            <form method="post" action="">
-                <div class="form-group">
-                    <label for="articleFactoryName">Article factory name</label>
-                    <input type="text" class="form-control p-0" name="articleFactoryName" id="articleFactoryName" value="<?= $article->getQuantityPerUnit() . " " . $article->getUnitMeasure()->getName() . " de " .  $article->getProduct()->getProductName() ?>" disabled>
+
+    <!-- Nav Location -->
+    <nav>
+    </nav>
+
+    <!-- Section Top -->
+    <div class="row d-flex justify-content-around mr-2">
+
+        <!-- Article Input Informations -->
+        <div class="col-5">
+            <form method="POST" action="" class="application">
+
+                <!-- Input Factory Name Article -->
+                <div class="row d-flex mb-3">
+                    <div class="col-12">
+                        <label for="inputArticleFactoryName">Nom d'usine de l'article</label>
+                        <input type="text" class="form-control" id="inputArticleFactoryName" name="articleFactoryName" value="<?= $article->getQuantity_unite_article() ?> <?= $article->getUnitArticle() ?> de <?= $article->getNameArticle() ?>">
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="articleUserName">Article user name</label>
-                    <input type="text" class="form-control p-0" name="articleUserName" id="articleUserName" value="<?= $article->getUserArticleName() != null ? $article->getUserArticleName() : $article->getQuantityPerUnit() . " " . $article->getUnitMeasure()->getName() . " de " .  $article->getProduct()->getProductName() ?>">
-                    <?php if (array_key_exists('articleUserNameError', $errorMessages)) : ?>
-                        <span class="text-danger"><?php $errorMessages['articleUserNameError']; ?></span>
-                    <?php endif; ?>
+
+                <!--  Input Customer Name Article -->
+                <div class="row d-flex mb-3">
+                    <div class="col-12">
+                        <label for="inputArticleCustomerName">Nom de l'article pour l'utilisateur</label>
+                        <input type="text" class="form-control" id="inputArticleCustomerName" name="articleCustomerName" value="<?= $article->getCustomer_name_article() != null ? $article->getCustomer_name_article() : $article->getQuantity_unite_article() . " " . $article->getUnitArticle() ." de " . $article->getNameArticle() ?>">
+                    </div>
                 </div>
-                <div class="mx-0 p-0 form-group row justify-content-between">
-                    <label for="idArticle">ID</label>
-                    <div class="col-3 p-0"><input type="text" class="form-control" name="idArticle" id="idArticle" value="<?= $article->getIdArticle() ?>" disabled></div>
+
+                <!-- Input ID Article -->
+                <div class="row mb-3">
+                    <div class="col-8">
+                        <label for="inputArticleID">Référence</label>
+                    </div>
+                    <div class="col-4">
+                        <input type="text" class="form-control" id="inputArticleID" name="articleID" value="<?= $article->getRefArticle() ?>">
+                    </div>
+
                 </div>
-                <div class="mx-0 p-0 form-group row justify-content-between">
-                    <label for="sellingPrice">Selling price</label>
-                    <div class="col-3 p-0"><input type="text" class="form-control" name="sellingPrice" id="sellingPrice" value="<?= round(($article->getPrice()->getPrice()), 2) ?>" disabled></div>
+
+                <!-- Input Price Article -->
+                <div class="row mb-3">
+                    <div class="col-8">
+                        <label for="inputArticlePrice">Prix de vente</label>
+                    </div>
+                    <div class="col-4">
+                        <input type="text" class="form-control" id="inputArticlePrice" name="articlePrice" value="<?= $article->getPriceArticle() ?>">
+                    </div>
+
                 </div>
-                <div class="mx-0 p-0 form-group row justify-content-between">
-                    <label for="stock">Stock</label>
-                    <div class="col-3 p-0"><input type="text" class="form-control" name="stock" id="stock" value="<?= $article->getStock() ?>" disabled></div>
+
+                <!-- Input Stock Article -->
+                <div class="row mb-3">
+                    <div class="col-8">
+                        <label for="inputArticleStock">Stock</label>
+                    </div>
+                    <div class="col-4">
+                        <input type="text" class="form-control" id="inputArticleStock" name="articleStock" value="<?= $article->getStockArticle()?>">
+                    </div>
+
                 </div>
-                <div class="d-flex flex-row">
-                    <button id="submitEditArticle" type="submit" class="btn mr-5">Submit</button>
-                    <!-- <button id="deleteEditArticle" type="reset" class="btn">Delete</button> -->
+
+                <br>
+
+                <!-- Buttons Validation / Reset -->
+                <div class="row d-flex justify-content-around">
+
+                    <!-- Button Validation -->
+                    <input class="btn btn-lg btn-validation" type="submit" value="Valider">
+
+                    <!-- Button Reset -->
+                    <button class="btn btn-lg btn-reset" type="reset">Annuler</button>
                 </div>
             </form>
         </div>
-        <div>
-            <div id="articlePictureEdit" class="bg-light border mb-2" style='background-image:url("<?= $article->getIdPicture() != null ? BASE_URL . PATH_PICTURES . $article->getPicture()->getName() . "." . $article->getPicture()->getExtension() : "" ?>")'></div>
+        <!-- Input Picture Article -->
+        <div class="col-5">
+            <div class="row mb-3">
+                <div class="col-12">
+                    <div class="custom-file">
+                        <form id="" class="application" action="" enctype="multipart/form-data" method="POST">
+                            <div class="d-flex flex-column">
+                                <input type="file" class="custom-file-input" id="InputFileEditArticle" name="image">
 
-            <div class=" d-flex flex-row justify-content-between">
-                <p class="articlePictureEditName"><?= $article->getIdPicture() != null ? ($article->getPicture()->getName() . "." . $article->getPicture()->getExtension()) : "" ?></p>
-                <a id="deletePictureButton" href="">
-                    <div class="articlePictureBin"><img src="<?php echo BASE_URL . PATH_ICONS ?>delete-svg.svg" alt="svg bin"></div>
-                </a>
-            </div>
-            <label class="form-label" for="customFile">Download a new picture</label>
+                                <!-- Button Validation Picture -->
+                                <div class="row d-flex justify-content-center">
+                                    <button type="button" class="btn btn-lg btn-validation">OK</button>
+                                </div>
 
-            <div class="custom-file">
-                <form id="formEditArticleImage" action="" enctype="multipart/form-data" method="post">
-                    <div class="d-flex flex-column"> 
-                        <input type="file" class="custom-file-input" id="InputFileEditArticle" name="image">
-                        <!-- le name dans le input se retrouve dans le $_FILES['image'] -->
-                        <button type="submit" class="align-self-end mt-1 btn" id="btn-edit-article-picture">OK</button>
+                            </div>
                     </div>
-                    <label class="custom-file-label" for="InputFileEditArticle" data-browse="Browse"></label>
-                    <input type="text" class="form-control" name="idArticlePicture" id="idArticlePicture" value="<?= $article->getIdArticle() ?>" hidden>
+                </div>
                 </form>
             </div>
-
-
         </div>
-    </div>
-</div>
+</main>

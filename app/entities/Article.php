@@ -1,9 +1,11 @@
-<?php 
+<?php
 
-class Article { 
+class Article
+{
 
     //Attributes
     private $id_article;
+    private $customer_name_article;
     private $quantity_unite_article;
     private $state_article;
     private $date_creation_article;
@@ -16,7 +18,7 @@ class Article {
 
     /**
      * Get the value of id_article
-     */ 
+     */
     public function getId_article()
     {
         return $this->id_article;
@@ -25,7 +27,7 @@ class Article {
     /**
      * Set the value of id_article
      * @return  self
-     */ 
+     */
     public function setId_article($id_article)
     {
         $this->id_article = $id_article;
@@ -34,8 +36,28 @@ class Article {
     }
 
     /**
+     * Get the value of customer_name_article
+     */
+    public function getCustomer_name_article()
+    {
+        return $this->customer_name_article;
+    }
+
+    /**
+     * Set the value of customer_name_article
+     *
+     * @return  self
+     */
+    public function setCustomer_name_article($customer_name_article)
+    {
+        $this->customer_name_article = $customer_name_article;
+
+        return $this;
+    }
+
+    /**
      * Get the value of quantity_unite_article
-     */ 
+     */
     public function getQuantity_unite_article()
     {
         return $this->quantity_unite_article;
@@ -44,7 +66,7 @@ class Article {
     /**
      * Set the value of quantity_unite_article
      * @return  self
-     */ 
+     */
     public function setQuantity_unite_article($quantity_unite_article)
     {
         $this->quantity_unite_article = $quantity_unite_article;
@@ -54,16 +76,32 @@ class Article {
 
     /**
      * Get the value of state_article
-     */ 
+     */
     public function getState_article()
     {
         return $this->state_article;
     }
 
+    // Display state for tables
+    public function getDisplayState_article()
+    {
+
+        if ($this->state_article == 'a') {
+            $state = 'Actif';
+        }
+        if ($this->state_article == 'b') {
+            $state = 'Bloqué';
+        }
+        if ($this->state_article == 'w') {
+            $state = 'En attente';
+        }
+        return $state;
+    }
+
     /**
      * Set the value of state_article
      * @return  self
-     */ 
+     */
     public function setState_article($state_article)
     {
         $this->state_article = $state_article;
@@ -73,7 +111,7 @@ class Article {
 
     /**
      * Get the value of date_creation_article
-     */ 
+     */
     public function getDate_creation_article()
     {
         return $this->date_creation_article;
@@ -82,7 +120,7 @@ class Article {
     /**
      * Set the value of date_creation_article
      * @return  self
-     */ 
+     */
     public function setDate_creation_article($date_creation_article)
     {
         $this->date_creation_article = $date_creation_article;
@@ -92,7 +130,7 @@ class Article {
 
     /**
      * Get the value of date_update_article
-     */ 
+     */
     public function getDate_update_article()
     {
         return $this->date_update_article;
@@ -101,7 +139,7 @@ class Article {
     /**
      * Set the value of date_update_article
      * @return  self
-     */ 
+     */
     public function setDate_update_article($date_update_article)
     {
         $this->date_update_article = $date_update_article;
@@ -111,7 +149,7 @@ class Article {
 
     /**
      * Get the value of fk_id_product
-     */ 
+     */
     public function getFk_id_product()
     {
         return $this->fk_id_product;
@@ -120,7 +158,7 @@ class Article {
     /**
      * Set the value of fk_id_product
      * @return  self
-     */ 
+     */
     public function setFk_id_product($fk_id_product)
     {
         $this->fk_id_product = $fk_id_product;
@@ -130,7 +168,7 @@ class Article {
 
     /**
      * Get the value of fk_id_image
-     */ 
+     */
     public function getFk_id_image()
     {
         return $this->fk_id_image;
@@ -139,7 +177,7 @@ class Article {
     /**
      * Set the value of fk_id_image
      * @return  self
-     */ 
+     */
     public function setFk_id_image($fk_id_image)
     {
         $this->fk_id_image = $fk_id_image;
@@ -149,7 +187,7 @@ class Article {
 
     /**
      * Get the value of fk_id_measure_unit
-     */ 
+     */
     public function getFk_id_measure_unit()
     {
         return $this->fk_id_measure_unit;
@@ -158,7 +196,7 @@ class Article {
     /**
      * Set the value of fk_id_measure_unit
      * @return  self
-     */ 
+     */
     public function setFk_id_measure_unit($fk_id_measure_unit)
     {
         $this->fk_id_measure_unit = $fk_id_measure_unit;
@@ -168,7 +206,7 @@ class Article {
 
     /**
      * Get the value of valid
-     */ 
+     */
     public function getValid()
     {
         return $this->valid;
@@ -177,7 +215,7 @@ class Article {
     /**
      * Set the value of valid
      * @return  self
-     */ 
+     */
     public function setValid($valid)
     {
         $this->valid = $valid;
@@ -200,15 +238,23 @@ class Article {
         return ArticleDAO::getTypeArticle($this->getId_article());
     }
 
+    public function getRefArticle()
+    {
+        return ArticleDAO::getRefArticle($this->getId_article());
+    }
+
     public function getUnitArticle()
     {
         return ArticleDAO::getUnitArticle($this->getId_article());
+    }
+
+    public function getStockArticle()
+    {
+        return ArticleDAO::getStockArticle($this->getId_article());
     }
 
     public function getDateImportArticle()
     {
         return ImportDAO::getDateImportArticle($this->getId_article());
     }
- 
 }
-

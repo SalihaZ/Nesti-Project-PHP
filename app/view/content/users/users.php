@@ -102,7 +102,7 @@
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Non</button>
-                                            <button type="submit" class="btn btn-success">Oui !</button>
+                                            <button type="submit" class="btn btn-success">Oui</button>
                                         </div>
                                     </div>
                                 </div>
@@ -130,7 +130,7 @@
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Non</button>
-                                            <button type="submit" class="btn btn-success">Oui !</button>
+                                            <button type="submit" class="btn btn-success">Oui</button>
                                         </div>
                                     </div>
                                 </div>

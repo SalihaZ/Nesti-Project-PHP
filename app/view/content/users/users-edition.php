@@ -5,7 +5,7 @@
 ?>
 
 <!-- Main -->
-<main class="container wrapper-user-create">
+<main class="container ">
 
     <!-- Nav Location -->
     <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
@@ -194,11 +194,10 @@
                 <div class="row d-flex justify-content-around">
 
                     <!-- Button Validation -->
-                    <!-- <button class="btn btn-lg btn-validation" type="submit">Valider</button> -->
                     <input class="btn btn-lg btn-validation" type="submit" value="Valider">
 
                     <!-- Button Reset -->
-                    <button class="btn btn-lg btn-reset" type="button" onclick=resetUser()>Annuler</button>
+                    <button class="btn btn-lg btn-reset" type="reset" onclick=resetUser()>Annuler</button>
                 </div>
             </form>
 
@@ -270,7 +269,6 @@
                 <!-- Input Hidden POST -->
                 <input type="hidden" name="id_user" value="<?= $id ?>">
 
-
                 <!-- Modal -->
                 <div class="modal fade" id="resetPassword" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog">
@@ -287,7 +285,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Non</button>
-                                <button type="submit" class="btn btn-success">Oui !</button>
+                                <button type="submit" class="btn btn-success">Oui</button>
                             </div>
                         </div>
                     </div>
@@ -468,7 +466,7 @@
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Non</button>
-                                                    <button type="submit" class="btn btn-success">Oui !</button>
+                                                    <button type="submit" class="btn btn-success">Oui</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -500,7 +498,7 @@
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Non</button>
-                                                    <button type="submit" class="btn btn-success">Oui !</button>
+                                                    <button type="submit" class="btn btn-success">Oui</button>
                                                 </div>
                                             </div>
                                         </div>

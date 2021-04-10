@@ -2,6 +2,17 @@
 <main class="container wrapper-articles">
     <br>
 
+    <!-- Alertes -->
+    <!-- For deleting article -->
+    <?php
+    if (isset($_SESSION['deleteArticle'])) {
+    ?>
+        <div class="alert alert-success" role="alert">
+            L'article a bien été bloqué.
+        </div>
+    <?php }
+    unset($_SESSION['deleteArticle']); ?>
+
     <!-- Title Page -->
     <div class="row">
         <div class="col-12">
@@ -13,8 +24,8 @@
     <!-- Article Top Page -->
     <div class="row d-flex justify-content-between">
 
-       <!-- Research Bar -->
-       <div class="col-8 d-flex align-items-center no-padding">
+        <!-- Research Bar -->
+        <div class="col-8 d-flex align-items-center no-padding">
             <input type="search" class="form-control-lg shadow mr-2" id="searchArticle" placeholder="Rechercher un article">
             <i class="fas fa-search ms-2"></i>
         </div>
@@ -42,26 +53,27 @@
     <table class="table" data-toggle="table" data-sortable="true" data-pagination="true" data-pagination-next-text="Next" data-search="true" data-search-selector="#searchArticle" data-locale="fr-FR" data-toolbar="#toolbar" data-toolbar-align="left">
         <thead>
             <tr>
-            <th scope="col">#</th>
+                <th scope="col">#</th>
                 <th scope="col">Nom de l'article</th>
                 <th scope="col">Prix de vente</th>
                 <th scope="col">Type</th>
                 <th scope="col">Dernière importation</th>
                 <th scope="col">Stock</th>
+                <th scope="col">État</th>
                 <th scope="col">Actions</th>
             </tr>
         </thead>
         <tbody>
 
             <?php
-           foreach ($arrayArticles as $element) {
+            foreach ($arrayArticles as $element) {
             ?>
                 <tr>
                     <th scope="row">
                         <?= $element->getId_article() ?>
                     </th>
                     <td>
-                    <?= $element->getQuantity_unite_article()?> <?= $element->getUnitArticle() ?> de <?= $element-> getNameArticle()?>
+                        <?= $element->getQuantity_unite_article() ?> <?= $element->getUnitArticle() ?> de <?= $element->getNameArticle() ?>
                     </td>
                     <td>
                         <?= $element->getPriceArticle() ?> €
@@ -73,12 +85,15 @@
                         <?= $element->getDateImportArticle() ?>
                     </td>
                     <td>
-                         ?>
+                        <?= $element->getStockArticle() ?>
                     </td>
                     <td>
-                
+                        <?= $element->getDisplayState_article() ?>
+                    </td>
+                    <td>
+
                         <!-- Form POST Modify -->
-                        <form method="POST" action="<?= BASE_URL . "article/edition/" .  $element->getId_article() ?>" class="form-table mb-2 rounded bg-warning">
+                        <form method="POST" action="<?= BASE_URL . "articles/edition/" .  $element->getId_article() ?>" class="form-table mb-2 rounded bg-warning">
 
                             <!-- Button trigger modal -->
                             <button type="button" class="btn bt-tbl" data-bs-toggle="modal" data-bs-target="<?= '#modifyArticle' .  $element->getId_article() ?>">
@@ -94,11 +109,11 @@
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            Vous êtes sur le point d'accéder à la modification des informations de l'article <b> <?= $element->getQuantity_unite_article()?> <?= $element->getUnitArticle() ?> de <?= $element-> getNameArticle()?></b>. Êtes-vous sûr de vouloir réaliser cette action ?
+                                            Vous êtes sur le point d'accéder à la modification des informations de l'article <b> <?= $element->getQuantity_unite_article() ?> <?= $element->getUnitArticle() ?> de <?= $element->getNameArticle() ?></b>. Êtes-vous sûr de vouloir réaliser cette action ?
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Non</button>
-                                            <button type="submit" class="btn btn-success">Oui !</button>
+                                            <button type="submit" class="btn btn-success">Oui</button>
                                         </div>
                                     </div>
                                 </div>
@@ -106,7 +121,7 @@
                         </form>
 
                         <!-- Form POST Delete -->
-                        <form method="POST" action="<?= BASE_URL . "article/delete/" . $element->getId_article()?>" class="form-table rounded bg-danger">
+                        <form method="POST" action="<?= BASE_URL . "articles/delete/" . $element->getId_article() ?>" class="form-table rounded bg-danger">
 
                             <!-- Button trigger modal -->
                             <button type="button" class="btn bt-tbl" data-bs-toggle="modal" data-bs-target="<?= '#deleteArticle' .  $element->getId_article() ?>">
@@ -122,11 +137,11 @@
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            Vous êtes sur le point de supprimer l'article <b><?= $element->getQuantity_unite_article()?> <?= $element->getUnitArticle() ?> de <?= $element-> getNameArticle()?></b>. Êtes-vous sûr de vouloir réaliser cette action ?
+                                            Vous êtes sur le point de supprimer l'article <b><?= $element->getQuantity_unite_article() ?> <?= $element->getUnitArticle() ?> de <?= $element->getNameArticle() ?></b>. Êtes-vous sûr de vouloir réaliser cette action ?
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Non</button>
-                                            <button type="submit" class="btn btn-success">Oui !</button>
+                                            <button type="submit" class="btn btn-success">Oui</button>
                                         </div>
                                     </div>
                                 </div>

@@ -8,7 +8,7 @@ if (!isset($city) || empty($city)) {
 ?>
 
 <!-- Main -->
-<main class="container wrapper-user-create">
+<main class="container ">
 
     <!-- Nav Location -->
     <nav>
@@ -219,7 +219,7 @@ if (!isset($city) || empty($city)) {
                         <button class="btn btn-lg btn-validation" type="submit">Valider</button>
 
                         <!-- Button Reset -->
-                        <button class="btn btn-lg btn-reset" type="button" onclick=resetUserCreate()>Annuler</button>
+                        <button class="btn btn-lg btn-reset" type="reset">Annuler</button>
 
                     </div>
 

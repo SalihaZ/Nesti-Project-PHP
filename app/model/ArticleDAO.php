@@ -1,7 +1,9 @@
 <?php
 
-class ArticleDAO
+class ArticleDAO extends BaseDAO
 {
+    
+    protected static $tableName = "articles";
 
     // Fetch all data of the articles in DB
     public static function readAllArticles()
@@ -103,6 +105,67 @@ class ArticleDAO
 
         return $unit['name_measure_unit'];
     }
+
+    public static function getRefArticle($id_article)
+    {
+        $pdo = Database::getPdo();
+
+        $sql = "SELECT ref_package FROM `packages` WHERE fk_id_article = $id_article";
+        $result = $pdo->query($sql);
+        $result->setFetchMode(PDO::FETCH_ASSOC);
+
+        if ($result) {
+            $ref = $result->fetch();
+        } else {
+            $ref['ref_package'] = "0";
+        }
+
+        Database::disconnect();
+
+        return $ref['ref_package'];
+    }
+
+     // Block one article in the DB
+     public static function deleteArticle($id_article)
+     {
+         $pdo = Database::getPdo();
+         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+         $sql = "UPDATE articles SET state_article = ? WHERE id_article = ?";
+         $q = $pdo->prepare($sql);
+         $q->execute(
+             [
+                 "b",
+                 $id_article
+             ]
+         );
+         Database::disconnect();
+     }
+
+     public static function getStockArticle($id_article)
+     {
+         $pdo = Database::getPdo();
+ 
+         $sql = "SELECT packages.quantity_bought_package - command_lines.command_quantity AS stock FROM packages
+         INNER JOIN articles ON articles.id_article = packages.fk_id_article
+         INNER JOIN command_lines ON command_lines.fk_id_article = articles.id_article
+         WHERE articles.id_article = $id_article";
+         $result = $pdo->query($sql);
+         $result->setFetchMode(PDO::FETCH_ASSOC);
+ 
+         if ($result->rowcount() == 1) {
+             $stock = $result->fetch();
+         } else {
+             $stock['stock'] = "0";
+         }
+ 
+         Database::disconnect();
+ 
+         return $stock['stock'];
+     }
+
+
+
+ 
 
 
     
