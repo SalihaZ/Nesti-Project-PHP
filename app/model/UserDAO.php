@@ -125,38 +125,4 @@ class UserDAO extends BaseDAO
          Database::disconnect();
      }
 
-    //     Database::disconnect();
-    // }
-
-    // public static function delete($user)
-    // {
-    //     $pdo = Database::connect();
-    //     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    //     $sql = "DELETE FROM crudPhp_user  WHERE id = ?";
-    //     $q = $pdo->prepare($sql);
-    //     $q->execute(array($user->getId()));
-    //     Database::disconnect();
-    // }
-
-    // public static function findById($id)
-    // {
-    //     return self::findOneBy("id", $id);
-    // }
-
-    // public static function exists($fieldName, $value)
-    // {
-    //     $pdo = Database::connect();
-    //     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    //     $sql = "SELECT * FROM nesti_php where $fieldName = ?";
-    //     $q = $pdo->prepare($sql);
-    //     $q->execute([$value]);
-    //     $result = false;
-
-    //     if ($q->rowCount() != 0) {
-    //         $result = true;
-    //     }
-
-    //     return $result;
-    // }
-
 }

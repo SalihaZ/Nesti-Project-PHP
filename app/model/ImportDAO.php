@@ -48,6 +48,29 @@ class ImportDAO extends BaseDAO
         
     }
 
+    public static function getDateImportArticle($id_article)
+    {
+        $pdo = Database::getPdo();
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $sql = "SELECT date_import FROM `imports` WHERE fk_id_article = $id_article";
+        $result = $pdo->query($sql); 
+        $result->setFetchMode(PDO::FETCH_ASSOC);
+
+        if ($result->rowcount() == 1) {
+
+            $date = $result->fetch();
+            
+        } else {
+            $date['date_import'] = "Pas de première importation";
+       
+        }
+
+        Database::disconnect();
+
+        
+        return $date['date_import'];
+    }
+
 
 }
 

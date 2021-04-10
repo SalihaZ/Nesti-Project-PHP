@@ -184,4 +184,31 @@ class Article {
 
         return $this;
     }
+
+    public function getPriceArticle()
+    {
+        return ArticleDAO::getPriceArticle($this->getId_article());
+    }
+
+    public function getNameArticle()
+    {
+        return ArticleDAO::getNameArticle($this->getId_article());
+    }
+
+    public function getTypeArticle()
+    {
+        return ArticleDAO::getTypeArticle($this->getId_article());
+    }
+
+    public function getUnitArticle()
+    {
+        return ArticleDAO::getUnitArticle($this->getId_article());
+    }
+
+    public function getDateImportArticle()
+    {
+        return ImportDAO::getDateImportArticle($this->getId_article());
+    }
+ 
 }
+

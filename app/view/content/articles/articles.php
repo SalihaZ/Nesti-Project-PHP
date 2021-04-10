@@ -13,12 +13,10 @@
     <!-- Article Top Page -->
     <div class="row d-flex justify-content-between">
 
-        <!-- Research Bar -->
-        <div class="col-8 d-flex no-padding">
-            <input type="search" class="form-control-lg shadow" placeholder="Rechercher un article" />
-            <button type="button" class="btn" id="button-search-bar">
-                <i class="fas fa-search"></i>
-            </button>
+       <!-- Research Bar -->
+       <div class="col-8 d-flex align-items-center no-padding">
+            <input type="search" class="form-control-lg shadow mr-2" id="searchArticle" placeholder="Rechercher un article">
+            <i class="fas fa-search ms-2"></i>
         </div>
 
         <!-- Buttons Container -->
@@ -41,48 +39,106 @@
     <br>
 
     <!-- Table Container -->
-    <table class="table" id="allArticlesTable" data-toggle="table" data-sortable="true" data-pagination="true" data-pagination-pre-text="Previous" data-pagination-next-text="Next" data-search="true" data-search-align="left" data-search-selector="#customSearchArticle" data-locale="eu-EU" data-toolbar="#toolbar" data-toolbar-align="left">
+    <table class="table" data-toggle="table" data-sortable="true" data-pagination="true" data-pagination-next-text="Next" data-search="true" data-search-selector="#searchArticle" data-locale="fr-FR" data-toolbar="#toolbar" data-toolbar-align="left">
         <thead>
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">Nom d'utilisateur</th>
-                <th scope="col">Nom</th>
-                <th scope="col">Rôle(s)</th>
-                <th scope="col">Dernière connexion</th>
-                <th scope="col">État</th>
+            <th scope="col">#</th>
+                <th scope="col">Nom de l'article</th>
+                <th scope="col">Prix de vente</th>
+                <th scope="col">Type</th>
+                <th scope="col">Dernière importation</th>
+                <th scope="col">Stock</th>
                 <th scope="col">Actions</th>
             </tr>
         </thead>
         <tbody>
 
             <?php
-            foreach ($arrayArticles as $element) {
+           foreach ($arrayArticles as $element) {
             ?>
                 <tr>
                     <th scope="row">
                         <?= $element->getId_article() ?>
                     </th>
                     <td>
-                        <?= $element->getFk_id_product() ?>
+                    <?= $element->getQuantity_unite_article()?> <?= $element->getUnitArticle() ?> de <?= $element-> getNameArticle()?>
                     </td>
                     <td>
-                        <!-- <?= $element->getDifficulty_recipes() ?> -->
+                        <?= $element->getPriceArticle() ?> €
                     </td>
                     <td>
-                        <!-- <?= $element->getNumber_person_recipes() ?> -->
+                        <?= $element->getTypeArticle() ?>
                     </td>
                     <td>
-                        <!-- <?= $element->getTime_recipes() ?> -->
+                        <?= $element->getDateImportArticle() ?>
                     </td>
                     <td>
-                        <!-- <?= $element->getFk_id_chief() ?> -->
+                         ?>
                     </td>
-                    <td> <a href="articles/edition">Modifier <br> <a href="">Supprimer</a></td>
+                    <td>
+                
+                        <!-- Form POST Modify -->
+                        <form method="POST" action="<?= BASE_URL . "article/edition/" .  $element->getId_article() ?>" class="form-table mb-2 rounded bg-warning">
+
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn bt-tbl" data-bs-toggle="modal" data-bs-target="<?= '#modifyArticle' .  $element->getId_article() ?>">
+                                Modifier
+                            </button>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="<?= 'modifyArticle' .  $element->getId_article() ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="staticBackdropLabel">Modifier article</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Vous êtes sur le point d'accéder à la modification des informations de l'article <b> <?= $element->getQuantity_unite_article()?> <?= $element->getUnitArticle() ?> de <?= $element-> getNameArticle()?></b>. Êtes-vous sûr de vouloir réaliser cette action ?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Non</button>
+                                            <button type="submit" class="btn btn-success">Oui !</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                        <!-- Form POST Delete -->
+                        <form method="POST" action="<?= BASE_URL . "article/delete/" . $element->getId_article()?>" class="form-table rounded bg-danger">
+
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn bt-tbl" data-bs-toggle="modal" data-bs-target="<?= '#deleteArticle' .  $element->getId_article() ?>">
+                                Supprimer
+                            </button>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="<?= 'deleteArticle' .  $element->getId_article() ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="staticBackdropLabel">Supprimer article</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Vous êtes sur le point de supprimer l'article <b><?= $element->getQuantity_unite_article()?> <?= $element->getUnitArticle() ?> de <?= $element-> getNameArticle()?></b>. Êtes-vous sûr de vouloir réaliser cette action ?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Non</button>
+                                            <button type="submit" class="btn btn-success">Oui !</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </td>
                 </tr>
 
             <?php
             }
             ?>
+
         </tbody>
     </table>
     <br>
