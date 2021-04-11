@@ -75,7 +75,7 @@ class ArticleDAO extends BaseDAO
 
         if ($result->rowcount() == 1) {
 
-            $type = "Ingredient";
+            $type = "Ingrédient";
         } else {
 
             $type = "Utensile";
@@ -125,7 +125,7 @@ class ArticleDAO extends BaseDAO
         return $ref['ref_package'];
     }
 
-     // Block one article in the DB
+     // Block one article 
      public static function deleteArticle($id_article)
      {
          $pdo = Database::getPdo();
@@ -145,7 +145,7 @@ class ArticleDAO extends BaseDAO
      {
          $pdo = Database::getPdo();
  
-         $sql = "SELECT packages.quantity_bought_package - command_lines.command_quantity AS stock FROM packages
+         $sql = "SELECT packages.quantity_bought_package -  SUM(command_lines.command_quantity) AS stock FROM packages
          INNER JOIN articles ON articles.id_article = packages.fk_id_article
          INNER JOIN command_lines ON command_lines.fk_id_article = articles.id_article
          WHERE articles.id_article = $id_article";
@@ -156,6 +156,7 @@ class ArticleDAO extends BaseDAO
              $stock = $result->fetch();
          } else {
              $stock['stock'] = "0";
+
          }
  
          Database::disconnect();

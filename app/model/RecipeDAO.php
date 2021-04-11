@@ -21,7 +21,7 @@ class RecipeDAO extends BaseDAO
         return $arrayRecipes;
     }
 
-    // Creates a new recipe in the DB
+    // Creates a new recipe 
     public static function create($recipe)
     {
         $pdo = Database::getPdo();

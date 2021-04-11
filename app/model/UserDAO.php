@@ -45,7 +45,7 @@ class UserDAO extends BaseDAO
         return $user;
     }
 
-    // Create one user in the DB
+    // Create one user 
     public static function createUser($user)
     {
         $pdo = Database::getPdo();
@@ -71,7 +71,7 @@ class UserDAO extends BaseDAO
         return $last_id;
     }
 
-      // Block one user in the DB
+      // Block one user 
       public static function deleteUser($id)
       {
           $pdo = Database::getPdo();
@@ -87,7 +87,7 @@ class UserDAO extends BaseDAO
           Database::disconnect();
       }
 
-    // Update one user in the DB
+    // Update one user 
     public static function updateUser($user)
     {
         $pdo = Database::getPdo();
@@ -109,7 +109,7 @@ class UserDAO extends BaseDAO
         Database::disconnect();
     }
 
-     // Reset password of one user in the DB
+     // Reset password of one user 
      public static function resetPasswordUser($password, $id_user)
      {
          $pdo = Database::getPdo();
@@ -124,5 +124,26 @@ class UserDAO extends BaseDAO
          );
          Database::disconnect();
      }
+
+     public static function getNameUserCommands($id_user){
+        $pdo = Database::getPdo();
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $sql = "SELECT CONCAT(users.lastname_user, ' ', users.firstname_user) AS name FROM `users` WHERE users.id_user = $id_user";
+        $result = $pdo->prepare($sql);
+        $result->setFetchMode(PDO::FETCH_ASSOC);
+        $result->execute();
+       
+        if ($result->rowcount() == 1) {
+
+            $name = $result->fetch();
+    
+        } else {
+            $name['name'] = "";
+        } 
+
+        Database::disconnect();
+
+        return $name['name'];
+    }
 
 }

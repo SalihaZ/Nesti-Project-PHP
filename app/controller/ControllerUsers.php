@@ -54,9 +54,13 @@ class ControllerUsers extends BaseController
                     $roles_user = RoleDAO::readUserRoles($user);
                     $user->setRoles_user($roles_user);
 
+                    // Table Commands
+                    $arrayCommandsUser = CommandsDAO::readCommandsFromOneUser($id_user);
+                    $this->_data['arrayCommandsUser'] = $arrayCommandsUser;
+
                     // Table Comments
-                    $arrayComments = CommentsDAO::readCommentsFromOneUser($id_user);
-                    $this->_data['arrayComments'] = $arrayComments;
+                    $arrayCommentsUser = CommentsDAO::readCommentsFromOneUser($id_user);
+                    $this->_data['arrayCommentsUser'] = $arrayCommentsUser;
 
                     if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
 
@@ -124,7 +128,7 @@ class ControllerUsers extends BaseController
     }
 
 
-    // Creates a new USER in the DB
+    // Creates a new USER 
     private function createUser($city)
     {
         $user = new User;
@@ -157,7 +161,7 @@ class ControllerUsers extends BaseController
         return $user;
     }
 
-    // Creates or gets an object CITY from/in the DB
+    // Creates or gets an object CITY from/
     private function createCity()
     {
         // Checks/Creates a new CITY

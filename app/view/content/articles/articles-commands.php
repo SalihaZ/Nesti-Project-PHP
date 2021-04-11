@@ -3,67 +3,75 @@
 
      <div class="row d-flex">
 
+         <!-- Nav Location -->
+         <div class="row mt-2">
+             <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                 <ol class="breadcrumb">
+                     <li class="breadcrumb-item"><a href="<?php echo BASE_URL ?>articles" class="bc">Articles</a></li>
+                     <li class="breadcrumb-item org" aria-current="page">Commandes</li>
+                 </ol>
+             </nav>
+         </div>
+         
+         <br>
+
          <!-- Titles Page -->
          <div class="col-12">
+
              <div class="row">
-                 <div class="col">
-                     <h1>Commandes</h1>
-                     <h5>Consultation descommandes</h5>
-                 </div>
+                 <h1>Commandes</h1>
+                 <h5>Consultation des commandes</h5>
              </div>
 
              <br>
 
-             <!-- Table Container -->
-             <div class="row wrapper-articles-table justify-content-between">
+             <!-- Research Bar Commands -->
+             <div class="row">
+                 <div class="col d-flex align-items-center no-padding">
+                     <input type="search" class="form-control-lg shadow mr-2" id="searchCommands" placeholder="Rechercher une commande">
+                     <i class="fas fa-search ms-2"></i>
+                 </div>
 
-                 <div class="col-8">
+             </div>
 
-                     <!-- Research Bar -->
-                     <div>
-                         <input type="search" class="form-control-lg" placeholder="Rechercher une commande" />
-                         <button type="button" class="btn" id="button-search-bar">
-                             <i class="fas fa-search"></i>
-                         </button>
-                     </div>
+             <br>
 
-                     <br>
-
-                     <table class="table shadow">
+             <!-- Table Container Commands -->
+             <div class="row justify-content-between">
+                 <div class="col-7">
+                     <table class="table" data-toggle="table" data-sortable="true" data-pagination="true" data-pagination-next-text="Next" data-search="true" data-search-selector="#searchCommands" data-locale="fr-FR">
                          <thead>
                              <tr>
-                                 <th scope="col">#</th>
+                                 <th scope="col">ID</th>
                                  <th scope="col">Utilisateur</th>
                                  <th scope="col">Montant</th>
-                                 <th scope="col">Nb d'articles</th>
-                                 <th scope="col">Date</th>
+                                 <th scope="col">Nombre d'articles</th>
+                                 <th scope="col">Date de création</th>
                                  <th scope="col">État</th>
                              </tr>
                          </thead>
                          <tbody>
-
                              <?php
-                                foreach ($arrayUsers as $element) {
+                                foreach ($arrayCommands as $element) {
                                 ?>
                                  <tr>
                                      <th scope="row">
-                                         1
+                                         <?= $element->getId_command() ?>
                                      </th>
                                      <td>
-                                         Jean Michel
+                                         <?= $element->getNameUserCommands() ?>
                                      </td>
+                                     <td>
 
-                                     <td>
-                                         13.87 €
                                      </td>
                                      <td>
-                                         13
+
                                      </td>
                                      <td>
-                                         12/12/2020
+                                         <?= $element->getDate_creation_command() ?>
                                      </td>
                                      <td>
-                                         a
+                                         <?= $element->getState_command() ?>
                                      </td>
                                  </tr>
 
@@ -76,13 +84,20 @@
                  </div>
 
                  <!-- Details -->
-                 <div class="col-4 mb-3">
-                     <div class="row d-flex justify-content-between px-3 align-items-end">
-                         <h2>Détails</h2>
-                         <label class="px-2 bg-warning">ID n° 3</label>
+                 <div class="col-4">
+                     <div class="row d-flex justify-content-between mb-1">
+                         <div class="col-8">
+                             <h2>Détails</h2>
+                         </div>
+                         <div class="col-2 d-flex align-items-center">
+                             <div class="px-2 bg-warning">ID n° 3</div>
+                         </div>
                      </div>
-                     <textarea rows="10" cols="50" class="form-control shadow" id="inputRecipeName" placeholder="" name="recipe[name_recipes]"> </textarea>
+                     <div class="row">
+                         <div class="form-control shadow" id="detailsCommands">Veuillez cliquer sur une commande afin d'accèder aux détails des articles la composant</div>
+                     </div>
                  </div>
+
              </div>
          </div>
      </div>

@@ -5,6 +5,16 @@ body {
     height: 100%;
 }
 
+h1 {
+    color: #005662;
+    font-weight: bold !important;
+}
+
+.org {
+    color: #c49000;
+    font-weight: bold !important;
+}
+
 
 /* FOR THE CONNECTION PAGE */
 
@@ -249,4 +259,9 @@ thead {
     border: 1px solid #ced4da;
     border-radius: .25rem;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.bc {
+    color: #005662;
+    text-decoration: none;
 }

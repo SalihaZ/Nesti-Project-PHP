@@ -4,6 +4,39 @@ class CommandsDAO extends BaseDAO
 {
     protected static $tableName = "commands";
 
+     // Fetch all data of the commands
+     public static function readAllCommands()
+     {
+ 
+         $pdo = Database::getPdo();
+         $sql = "SELECT * FROM commands";
+         $result = $pdo->query($sql);
+ 
+         if ($result) {
+             $arrayCommands = $result->fetchAll(PDO::FETCH_CLASS, 'Command');
+         } else {
+             $arrayCommands = [];
+         }
+ 
+         return $arrayCommands;
+     }
+
+    // Fetchs all comments of one user
+    public static function readCommandsFromOneUser($id_user)
+    {
+        $pdo = Database::getPdo();
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $sql = "SELECT * FROM commands WHERE fk_id_user = $id_user";
+        $result = $pdo->query($sql);
+
+        if ($result) {
+            $arrayCommands = $result->fetchAll(PDO::FETCH_CLASS, 'Command');
+        } else {
+            $arrayCommands = [];
+        }
+        return $arrayCommands;
+    }
+
     // Finds the number of comments approved by the moderator 
     public static function getNumberCommandsUser($id_user)
     {

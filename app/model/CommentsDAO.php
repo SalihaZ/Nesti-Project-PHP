@@ -4,12 +4,12 @@ class CommentsDAO extends BaseDAO
 {
     protected static $tableName = "comments";
 
-    // Fetchs all data of the users in DB
-    public static function readCommentsFromOneUser($id)
+    // Fetchs all comments of one user 
+    public static function readCommentsFromOneUser($id_user)
     {
         $pdo = Database::getPdo();
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $sql = "SELECT * FROM comments WHERE fk_id_user = $id";
+        $sql = "SELECT * FROM comments WHERE fk_id_user = $id_user";
         $result = $pdo->query($sql);
 
         if ($result) {

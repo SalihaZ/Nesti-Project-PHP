@@ -10,9 +10,15 @@ if (!isset($city) || empty($city)) {
 <!-- Main -->
 <main class="container ">
 
-    <!-- Nav Location -->
-    <nav>
-    </nav>
+     <!-- Nav Location -->
+     <div class="row mt-2">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="<?php echo BASE_URL ?>users" class="bc">Utilisateur</a></li>
+                <li class="breadcrumb-item org" aria-current="page">Création</li>
+            </ol>
+        </nav>
+    </div>
 
     <br>
 
@@ -22,7 +28,9 @@ if (!isset($city) || empty($city)) {
             <div class="row">
                 <h1>Création d'un utilisateur</h1>
             </div>
+
             <br>
+
             <!-- Section Top -->
             <div class="row">
 

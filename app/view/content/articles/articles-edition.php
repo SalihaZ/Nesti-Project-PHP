@@ -4,10 +4,18 @@ if (!isset($article) || empty($article)) {
 }
 ?>
 
-<br>
-
 <!-- Main -->
 <main class="container">
+
+    <!-- Nav Location -->
+    <div class="row mt-2">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="<?php echo BASE_URL ?>articles" class="bc">Articles</a></li>
+                <li class="breadcrumb-item org" aria-current="page">Edition</li>
+            </ol>
+        </nav>
+    </div>
 
     <!-- Title Page -->
     <div class="row">
@@ -17,15 +25,11 @@ if (!isset($article) || empty($article)) {
         </div>
     </div>
 
-    <!-- Nav Location -->
-    <nav>
-    </nav>
-
     <!-- Section Top -->
     <div class="row d-flex justify-content-around mr-2">
 
         <!-- Article Input Informations -->
-        <div class="col-5">
+        <div class="col-4">
             <form method="POST" action="" class="application">
 
                 <!-- Input Factory Name Article -->
@@ -40,39 +44,39 @@ if (!isset($article) || empty($article)) {
                 <div class="row d-flex mb-3">
                     <div class="col-12">
                         <label for="inputArticleCustomerName">Nom de l'article pour l'utilisateur</label>
-                        <input type="text" class="form-control" id="inputArticleCustomerName" name="articleCustomerName" value="<?= $article->getCustomer_name_article() != null ? $article->getCustomer_name_article() : $article->getQuantity_unite_article() . " " . $article->getUnitArticle() ." de " . $article->getNameArticle() ?>">
+                        <input type="text" class="form-control" id="inputArticleCustomerName" name="articleCustomerName" value="<?= $article->getCustomer_name_article() != null ? $article->getCustomer_name_article() : $article->getQuantity_unite_article() . " " . $article->getUnitArticle() . " de " . $article->getNameArticle() ?>">
                     </div>
                 </div>
 
                 <!-- Input ID Article -->
-                <div class="row mb-3">
-                    <div class="col-8">
+                <div class="row mb-3 d-flex justify-content-between">
+                    <div class="col-6">
                         <label for="inputArticleID">Référence</label>
                     </div>
-                    <div class="col-4">
-                        <input type="text" class="form-control" id="inputArticleID" name="articleID" value="<?= $article->getRefArticle() ?>">
+                    <div class="col-2">
+                        <input type="text" class="form-control" id="inputArticleID" name="articleID" value="<?= $article->getRefArticle() ?>" disabled>
                     </div>
 
                 </div>
 
                 <!-- Input Price Article -->
-                <div class="row mb-3">
-                    <div class="col-8">
+                <div class="row mb-3 d-flex justify-content-between">
+                    <div class="col-6">
                         <label for="inputArticlePrice">Prix de vente</label>
                     </div>
-                    <div class="col-4">
-                        <input type="text" class="form-control" id="inputArticlePrice" name="articlePrice" value="<?= $article->getPriceArticle() ?>">
+                    <div class="col-2">
+                        <input type="text" class="form-control" id="inputArticlePrice" name="articlePrice" value="<?= $article->getPriceArticle() ?>" disabled>
                     </div>
 
                 </div>
 
                 <!-- Input Stock Article -->
-                <div class="row mb-3">
-                    <div class="col-8">
+                <div class="row mb-3 d-flex justify-content-between">
+                    <div class="col-6">
                         <label for="inputArticleStock">Stock</label>
                     </div>
-                    <div class="col-4">
-                        <input type="text" class="form-control" id="inputArticleStock" name="articleStock" value="<?= $article->getStockArticle()?>">
+                    <div class="col-2">
+                        <input type="text" class="form-control" id="inputArticleStock" name="articleStock" value="<?= $article->getStockArticle() ?>" disabled>
                     </div>
 
                 </div>
@@ -110,4 +114,6 @@ if (!isset($article) || empty($article)) {
                 </form>
             </div>
         </div>
+    </div>
+    <br>
 </main>

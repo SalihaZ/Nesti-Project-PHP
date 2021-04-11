@@ -11,7 +11,7 @@ class ControllerArticles extends BaseController
             $this->_data['arrayArticles'] = $arrayArticles;
         } else {
 
-            #ARTICLE/DELETE
+            #ARTICLE / DELETE
             if ($_GET['action'] == 'delete') {
 
                 if (isset($_GET['id'])) {
@@ -27,6 +27,7 @@ class ControllerArticles extends BaseController
             }
 
         
+            #ARTICLE / EDITION
             if ($_GET['action'] == 'edition') {
                 if (!isset($_GET['option'])) {
 
@@ -35,6 +36,16 @@ class ControllerArticles extends BaseController
                     // Read data (user/city/roles)
                     $article = ArticleDAO::findOneBy("id_article", $id_article);
                     var_dump($article);
+                }
+            }
+
+             #ARTICLE / COMMANDS
+             if ($_GET['action'] == 'commands') {
+                if (!isset($_GET['option'])) {
+
+                    // Read data (user/city/roles)
+                    $arrayCommands = CommandsDAO::readAllCommands();
+                    $this->_data['arrayCommands'] = $arrayCommands;
                 }
             }
 

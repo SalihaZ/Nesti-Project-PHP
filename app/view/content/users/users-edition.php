@@ -5,15 +5,17 @@
 ?>
 
 <!-- Main -->
-<main class="container ">
+<main class="container">
 
     <!-- Nav Location -->
-    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Library</li>
-        </ol>
-    </nav>
+    <div class="row mt-2">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="<?php echo BASE_URL ?>users" class="bc">Utilisateur</a></li>
+                <li class="breadcrumb-item org" aria-current="page">Edition</li>
+            </ol>
+        </nav>
+    </div>
 
     <!-- Alertes -->
     <!-- For the reset password -->
@@ -36,15 +38,15 @@
         <div class="alert alert-success" role="alert">
             Le commentaire a bien été bloqué.
         </div>
-        <?php } 
-        unset($_SESSION['commentdisapproved']);?>
+    <?php }
+    unset($_SESSION['commentdisapproved']); ?>
 
     <?php if (isset($_SESSION['commentapproved'])) { ?>
 
         <div class="alert alert-success" role="alert">
             Le commentaire a bien été validé.
         </div>
-    <?php } 
+    <?php }
     unset($_SESSION['commentapproved']); ?>
 
     <!-- Title Page -->
@@ -149,21 +151,21 @@
 
                         <input type="checkbox" id="admin" name="roles_user[]" value="admins" <?php foreach ($user->getRoles_user() as $role) {
                                                                                                     if ($role == 'admins') {
-                                                                                                        echo 'checked';
+                                                                                                        echo 'checked disabled';
                                                                                                     };
                                                                                                 }; ?>>
                         <label for="admin"> Administrateur </label><br>
 
                         <input type="checkbox" id="mod" name="roles_user[]" value="moderators" <?php foreach ($user->getRoles_user() as $role) {
                                                                                                     if ($role == 'moderators') {
-                                                                                                        echo 'checked';
+                                                                                                        echo 'checked disabled';
                                                                                                     };
                                                                                                 }; ?>>
                         <label for="mod"> Modérateur </label><br>
 
                         <input type="checkbox" id="chief" name="roles_user[]" value="chiefs" <?php foreach ($user->getRoles_user() as $role) {
                                                                                                     if ($role == 'chiefs') {
-                                                                                                        echo 'checked';
+                                                                                                        echo 'checked disabled';
                                                                                                     };
                                                                                                 }; ?>>
                         <label for="chief"> Chef </label><br>
@@ -185,7 +187,6 @@
                                                 }; ?>>En attente</option>
                         </select>
                     </div>
-
                 </div>
 
                 <br>
@@ -256,7 +257,7 @@
 
             <br>
 
-            <!-- Form POST Disapprove -->
+            <!-- Form POST Reset Password -->
             <form method="POST" action="<?= BASE_URL . "users/edition/" . $id . "/resetpassword" ?>" class="">
 
                 <!-- Button Reset Password -->
@@ -269,7 +270,7 @@
                 <!-- Input Hidden POST -->
                 <input type="hidden" name="id_user" value="<?= $id ?>">
 
-                <!-- Modal -->
+                <!-- Modal Reset Password-->
                 <div class="modal fade" id="resetPassword" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -291,7 +292,6 @@
                     </div>
                 </div>
             </form>
-
         </div>
     </div>
 
@@ -304,64 +304,59 @@
         <!-- Titles -->
         <div class="col-12">
             <div class="row">
-                <div class="col">
-                    <h1>Ses Commandes</h1>
-                    <h5>Consultation de ses commandes</h5>
-                </div>
+                <h1>Ses Commandes</h1>
+                <h5>Consultation de ses commandes</h5>
             </div>
 
             <br>
 
-            <!-- Table Container -->
-            <div class="row wrapper-articles-table justify-content-between">
+            <!-- Research Bar Commands -->
+            <div class="row">
+                <div class="col d-flex align-items-center no-padding">
+                    <input type="search" class="form-control-lg shadow mr-2" id="searchCommands" placeholder="Rechercher une commande">
+                    <i class="fas fa-search ms-2"></i>
+                </div>
 
-                <div class="col-8">
+            </div>
 
-                    <!-- Research Bar -->
-                    <div>
-                        <input type="search" class="form-control-lg" placeholder="Rechercher un commentaire" />
-                        <button type="button" class="btn" id="button-search-bar">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
+            <br>
 
-                    <br>
-
-                    <table class="table shadow">
+            <!-- Table Container Commands -->
+            <div class="row justify-content-between">
+                <div class="col-7">
+                    <table class="table" data-toggle="table" data-sortable="true" data-pagination="true" data-pagination-next-text="Next" data-search="true" data-search-selector="#searchCommands" data-locale="fr-FR">
                         <thead>
                             <tr>
-                                <th scope="col">#</th>
+                                <th scope="col">ID</th>
                                 <th scope="col">Utilisateur</th>
                                 <th scope="col">Montant</th>
-                                <th scope="col">Nb d'articles</th>
-                                <th scope="col">Date</th>
+                                <th scope="col">Nombre d'articles</th>
+                                <th scope="col">Date de création</th>
                                 <th scope="col">État</th>
                             </tr>
                         </thead>
                         <tbody>
-
                             <?php
-                            foreach ($arrayUsers as $element) {
+                            foreach ($arrayCommandsUser as $element) {
                             ?>
                                 <tr>
                                     <th scope="row">
-                                        1
+                                        <?= $element->getId_command() ?>
                                     </th>
                                     <td>
-                                        <?= $element->getUsername_user() ?>
-                                    </td>
-
-                                    <td>
-                                        13.87 €
+                                    <?= $element->getNameUserCommands() ?>
                                     </td>
                                     <td>
-                                        13
+                                       
                                     </td>
                                     <td>
-                                        12/12/2020
+                                   
                                     </td>
                                     <td>
-                                        a
+                                        <?= $element->getDate_creation_command() ?>
+                                    </td>
+                                    <td>
+                                        <?= $element->getState_command() ?>
                                     </td>
                                 </tr>
 
@@ -374,147 +369,159 @@
                 </div>
 
                 <!-- Details -->
-                <div class="col-4 mb-3">
-                    <div class="row d-flex justify-content-between px-3 align-items-end">
-                        <h2>Détails</h2>
-                        <label class="px-2 bg-warning">ID n° 3</label>
+                <div class="col-4">
+                    <div class="row d-flex justify-content-between mb-1">
+                        <div class="col-8">
+                            <h2>Détails</h2>
+                        </div>
+                        <div class="col-2 d-flex align-items-center">
+                            <div class="px-2 bg-warning">ID n° 3</div>
+                        </div>
                     </div>
-                    <textarea rows="10" cols="50" class="form-control shadow" id="inputRecipeName" placeholder="" name="recipe[name_recipes]"> </textarea>
+                    <div class="row">
+                        <div class="form-control shadow" id="detailsCommands">Veuillez cliquer sur une commande afin d'accèder aux détails des articles la composant</div>
+                    </div>
                 </div>
+
             </div>
         </div>
     </div>
 
-    <br>
+    <br><br>
 
+    <!-- Section Comments -->
     <div class="row d-flex">
-
-        <!-- Section Comments -->
         <div class="col-12">
-            <h1>Ses Commentaires</h1>
-            <h5>Modération des ses commentaires</h5>
+            <div class="row">
+                <h1>Ses Commentaires</h1>
+                <h5>Modération des ses commentaires</h5>
+            </div>
+
             <br>
 
             <!-- Research Bar -->
-            <div class="col-8 d-flex align-items-center no-padding">
-                <input type="search" class="form-control-lg shadow mr-2" id="searchComments" placeholder="Rechercher un commentaire">
-                <i class="fas fa-search ms-2"></i>
+            <div class="row">
+                <div class="col d-flex align-items-center no-padding">
+                    <input type="search" class="form-control-lg shadow mr-2" id="searchComments" placeholder="Rechercher un commentaire">
+                    <i class="fas fa-search ms-2"></i>
+                </div>
             </div>
 
             <br>
 
             <!-- Table Comments Container -->
-            <table class="table" data-toggle="table" data-sortable="true" data-pagination="true" data-pagination-next-text="Next" data-search="true" data-search-selector="#searchComments" data-locale="fr-FR" data-toolbar="#toolbar" data-toolbar-align="left">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Titre</th>
-                        <th scope="col">Recette</th>
-                        <th scope="col">Contenu</th>
-                        <th scope="col">Date</th>
-                        <th scope="col">État</th>
-                        <th scope="col">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    foreach ($arrayComments as $element) {
-                    ?>
+            <div class="row">
+                <table class="table" data-toggle="table" data-sortable="true" data-pagination="true" data-pagination-next-text="Next" data-search="true" data-search-selector="#searchComments" data-locale="fr-FR"  >
+                    <thead>
                         <tr>
-                            <th scope="row">
-                                <?= $element->getId_comment() ?>
-                            </th>
-                            <td>
-                                <?= $element->getTitle_comment() ?>
-                            </td>
-                            <td>
-                                <?= $element->getRecipe()->getName_recipe() ?>
-                            </td>
-                            <td>
-                                <?= $element->getContent_comment() ?>
-                            </td>
-                            <td>
-                                <?= $element->getDate_creation_comment() ?>
-                            </td>
-                            <td>
-                                <?= $element->getDisplayState_comment(); ?>
-                            </td>
-
-                            <td>
-                                <!-- Form POST Approve -->
-                                <form method="POST" action="<?= BASE_URL . "users/edition/" . $id . "/commentapproved" ?>" class="form-table mb-2 rounded bg-success">
-
-                                    <!-- Button trigger modal -->
-                                    <button type="button" class="btn bt-tbl" data-bs-toggle="modal" data-bs-target="#approveComment">
-                                        Valider
-                                    </button>
-
-                                    <!-- Input Hidden POST -->
-                                    <input type="hidden" name="id_user" value="<?= $id ?>">
-                                    <input type="hidden" name="id_comment" value="<?= $element->getId_comment() ?>">
-
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="approveComment" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="staticBackdropLabel">État commentaire</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    Vous êtes sur le point de valider ce commentaire. Êtes-vous sûr de vouloir réaliser cette action ?
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Non</button>
-                                                    <button type="submit" class="btn btn-success">Oui</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-
-                                <!-- Form POST Disapprove -->
-                                <form method="POST" action="<?= BASE_URL . "users/edition/" . $id . "/commentdisapproved" ?>" class="form-table rounded bg-danger">
-
-                                    <!-- Button trigger modal -->
-                                    <button type="button" class="btn bt-tbl" data-bs-toggle="modal" data-bs-target="#disapproveComment">
-                                        Bloquer
-                                    </button>
-
-                                    <!-- Input Hidden POST -->
-                                    <input type="hidden" name="id_user" value="<?= $id ?>">
-                                    <input type="hidden" name="id_comment" value="<?= $element->getId_comment() ?>">
-
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="disapproveComment" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="staticBackdropLabel">État commentaire</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    Vous êtes sur le point de bloquer ce commentaire. Êtes-vous sûr de vouloir réaliser cette action ?
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Non</button>
-                                                    <button type="submit" class="btn btn-success">Oui</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                            </td>
+                            <th scope="col">ID</th>
+                            <th scope="col">Titre</th>
+                            <th scope="col">Recette</th>
+                            <th scope="col">Contenu</th>
+                            <th scope="col">Date de création</th>
+                            <th scope="col">État</th>
+                            <th scope="col">Actions</th>
                         </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        foreach ($arrayCommentsUser as $element) {
+                        ?>
+                            <tr>
+                                <th scope="row">
+                                    <?= $element->getId_comment() ?>
+                                </th>
+                                <td>
+                                    <?= $element->getTitle_comment() ?>
+                                </td>
+                                <td>
+                                    <?= $element->getRecipe()->getName_recipe() ?>
+                                </td>
+                                <td>
+                                    <?= $element->getContent_comment() ?>
+                                </td>
+                                <td>
+                                    <?= $element->getDate_creation_comment() ?>
+                                </td>
+                                <td>
+                                    <?= $element->getDisplayState_comment() ?>
+                                </td>
 
-                    <?php
-                    }
-                    ?>
+                                <td>
+                                    <!-- Form POST Approve -->
+                                    <form method="POST" action="<?= BASE_URL . "users/edition/" . $id . "/commentapproved" ?>" class="form-table mb-2 rounded bg-success">
 
-                </tbody>
-            </table>
+                                        <!-- Button trigger modal -->
+                                        <button type="button" class="btn bt-tbl" data-bs-toggle="modal" data-bs-target="#approveComment">
+                                            Valider
+                                        </button>
+
+                                        <!-- Input Hidden POST -->
+                                        <input type="hidden" name="id_user" value="<?= $id ?>">
+                                        <input type="hidden" name="id_comment" value="<?= $element->getId_comment() ?>">
+
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="approveComment" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="staticBackdropLabel">État commentaire</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        Vous êtes sur le point de valider ce commentaire. Êtes-vous sûr de vouloir réaliser cette action ?
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Non</button>
+                                                        <button type="submit" class="btn btn-success">Oui</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+
+                                    <!-- Form POST Disapprove -->
+                                    <form method="POST" action="<?= BASE_URL . "users/edition/" . $id . "/commentdisapproved" ?>" class="form-table rounded bg-danger">
+
+                                        <!-- Button trigger modal -->
+                                        <button type="button" class="btn bt-tbl" data-bs-toggle="modal" data-bs-target="#disapproveComment">
+                                            Bloquer
+                                        </button>
+
+                                        <!-- Input Hidden POST -->
+                                        <input type="hidden" name="id_user" value="<?= $id ?>">
+                                        <input type="hidden" name="id_comment" value="<?= $element->getId_comment() ?>">
+
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="disapproveComment" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="staticBackdropLabel">État commentaire</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        Vous êtes sur le point de bloquer ce commentaire. Êtes-vous sûr de vouloir réaliser cette action ?
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Non</button>
+                                                        <button type="submit" class="btn btn-success">Oui</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </td>
+                            </tr>
+
+                        <?php
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
             <br>
         </div>
     </div>
-
+    </div>
 </main>

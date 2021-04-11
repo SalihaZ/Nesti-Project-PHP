@@ -43,10 +43,10 @@
     <br>
 
     <!-- Table Container -->
-    <table class="table" data-toggle="table" data-sortable="true" data-pagination="true" data-pagination-next-text="Next" data-search="true" data-search-selector="#searchUser" data-locale="fr-FR" data-toolbar="#toolbar" data-toolbar-align="left">
+    <table class="table" data-toggle="table" data-sortable="true" data-pagination="true" data-pagination-next-text="Next" data-search="true" data-search-selector="#searchUser" data-locale="fr-FR"  >
         <thead>
             <tr>
-                <th scope="col">#</th>
+                <th scope="col">ID</th>
                 <th scope="col">Nom d'utilisateur</th>
                 <th scope="col">Nom</th>
                 <th scope="col">Rôle(s)</th>

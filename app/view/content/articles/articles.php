@@ -50,10 +50,10 @@
     <br>
 
     <!-- Table Container -->
-    <table class="table" data-toggle="table" data-sortable="true" data-pagination="true" data-pagination-next-text="Next" data-search="true" data-search-selector="#searchArticle" data-locale="fr-FR" data-toolbar="#toolbar" data-toolbar-align="left">
+    <table class="table" data-toggle="table" data-sortable="true" data-pagination="true" data-pagination-next-text="Next" data-search="true" data-search-selector="#searchArticle" data-locale="fr-FR"  >
         <thead>
             <tr>
-                <th scope="col">#</th>
+                <th scope="col">ID</th>
                 <th scope="col">Nom de l'article</th>
                 <th scope="col">Prix de vente</th>
                 <th scope="col">Type</th>
