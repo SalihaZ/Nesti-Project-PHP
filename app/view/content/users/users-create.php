@@ -24,7 +24,7 @@ if (!isset($city) || empty($city)) {
 
     <!-- Title Page -->
     <div class="row d-flex justify-content-center">
-        <div class="col-8">
+        <div class="col-10">
             <div class="row">
                 <h1>Création d'un utilisateur</h1>
             </div>

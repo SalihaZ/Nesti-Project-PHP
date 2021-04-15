@@ -46,7 +46,6 @@ h1, h2, h3 {
     box-sizing: border-box;
 }
 
-
 .fa-sign-out-alt {
     color:#c49000;
     font-size: 20px;
@@ -61,7 +60,6 @@ font-size: large;
     color: #c49000;
     font-size: large
 }
-
 
 #Connection {
     background-color: #1d596b;

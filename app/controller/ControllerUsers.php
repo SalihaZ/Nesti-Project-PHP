@@ -34,6 +34,9 @@ class ControllerUsers extends BaseController
                     $city = $this->createCity();
                     $user = $this->createUser($city);
                 }
+                
+                $this->_data['user'] = $user;
+                $this->_data['city'] = $city;
             }
 
             #USER/EDITION

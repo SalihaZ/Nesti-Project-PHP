@@ -67,7 +67,7 @@ class User
         if (empty($username_user)) {
             $this->usernameError = "Veuillez saisir un nom d'utilisateur";
             $this->valid_user  = false;
-        } else if (!preg_match("/^[a-zA-Z0-9._-]{3,20}$/", $username_user)) {
+        } else if (!preg_match("/^[a-zA-ZÀ-ÿ ,.'-]{3,20}+$/i", $username_user)) {
             $this->usernameError = "Le nom d'utilisateur ne respecte pas les conditions";
             $this->valid_user = false;
         }
@@ -121,7 +121,7 @@ class User
         if (empty($lastname_user)) {
             $this->lastnameError = 'Veuillez saisir votre nom';
             $this->valid_user = false;
-        } else if (!preg_match("/^[a-z ,.'-]{3,20}+$/i", $lastname_user)) { // A MODIFIER
+        } else if (!preg_match("/^[a-zA-ZÀ-ÿ ,.'-]{3,20}+$/i", $lastname_user)) {
             $this->lastnameError = "Votre saisie nom n'est pas correcte";
             $this->valid_user = false;
         }
@@ -148,7 +148,7 @@ class User
         if (empty($firstname_user)) {
             $this->firstnameError = 'Veuillez saisir votre prénom';
             $this->valid_user = false;
-        } else if (!preg_match("/^[a-z ,.'-]{3,20}+$/i", $firstname_user)) { // A MODIFIER
+        } else if (!preg_match("/^[a-zA-ZÀ-ÿ ,.'-]{3,20}+$/i",  $firstname_user)) {
             $this->firstnameError = "Votre saisie prénom n'est pas correcte";
             $this->valid_user = false;
         }
