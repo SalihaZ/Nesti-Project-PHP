@@ -4,7 +4,7 @@ class LogsUser
 {
     //Attributes
     private $id_log_user;
-    private $date_creation_log_user;
+    private $date_connection_log_user;
     private $fk_id_user;
 
 
@@ -29,21 +29,21 @@ class LogsUser
     }
 
     /**
-     * Get the value of date_creation_log_user
+     * Get the value of date_connection_log_user
      */ 
-    public function getDate_creation_log_user()
+    public function getDate_connection_log_user()
     {
-        return $this->date_creation_log_user;
+        return $this->date_connection_log_user;
     }
 
     /**
-     * Set the value of date_creation_log_user
+     * Set the value of date_connection_log_user
      *
      * @return  self
      */ 
-    public function setDate_creation_log_user($date_creation_log_user)
+    public function setDate_connection_log_user($date_connection_log_user)
     {
-        $this->date_creation_log_user = $date_creation_log_user;
+        $this->date_connection_log_user = $date_connection_log_user;
 
         return $this;
     }

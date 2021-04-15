@@ -487,22 +487,29 @@ class User
 
     public function getNumberApprovedCommentsModerator()
     {
-        return CommentsDAO::getNumberApprovedCommentsModerator($this->getId_user());
+        return CommentDAO::getNumberApprovedCommentsModerator($this->getId_user());
     }
 
     public function getNumberDisapprovedCommentsModerator()
     {
-        return CommentsDAO::getNumberDisapprovedCommentsModerator($this->getId_user());
+        return CommentDAO::getNumberDisapprovedCommentsModerator($this->getId_user());
+    }
+
+    public function getConnectionsUser()
+    {
+        return LogsUserDAO::getConnectionsUser($this->getId_user());
+        
     }
 
     public function getLastConnectionUser()
     {
         return LogsUserDAO::getLastConnectionUser($this->getId_user());
+        
     }
 
     public function getNumberCommandsUser()
     {
-        return CommandsDAO::getNumberCommandsUser($this->getId_user());
+        return CommandDAO::getNumberCommandsUser($this->getId_user());
     }
 
     public function getDateLastImportAdmin()
@@ -522,11 +529,11 @@ class User
 
     public function getLastCommandPriceUser()
     {
-        return CommandsDAO::getLastCommandPriceUser($this->getId_user());
+        return CommandDAO::getLastCommandPriceUser($this->getId_user());
     }
 
     public function getAllCommandsPricesUser()
     {
-        return CommandsDAO::getAllCommandsPricesUser($this->getId_user());
+        return CommandDAO::getAllCommandsPricesUser($this->getId_user());
     }
 }

@@ -22,7 +22,7 @@
     <?php
     if (isset($_SESSION['password'])) {
     ?>
-        <div class="alert alert-success" role="alert">
+        <div class="alert alert-success" role="alert" onclick="removeAlert(this)">
             Le mot de passe a bien été modifié.
             <br>
             Voici le nouveau mot de passe de l'utilisateur :<b> <?= $_SESSION['password'] ?> </b>
@@ -299,93 +299,96 @@
     <br>
 
     <!-- Section Middle -->
-    <div class="row d-flex">
+    <div class="container wrapper-commands">
 
-        <!-- Titles -->
-        <div class="col-12">
-            <div class="row">
-                <h1>Ses Commandes</h1>
-                <h5>Consultation de ses commandes</h5>
-            </div>
+        <div class="row d-flex">
 
-            <br>
+            <!-- Titles Page -->
+            <div class="col-12">
 
-            <!-- Research Bar Commands -->
-            <div class="row">
-                <div class="col d-flex align-items-center no-padding">
-                    <input type="search" class="form-control-lg shadow mr-2" id="searchCommands" placeholder="Rechercher une commande">
-                    <i class="fas fa-search ms-2"></i>
+                <div class="row">
+                    <h1>Commandes</h1>
+                    <h5>Consultation de ses commandes</h5>
                 </div>
 
-            </div>
+                <br>
 
-            <br>
+                <!-- Research Bar Commands -->
+                <div class="row">
+                    <div class="col d-flex align-items-center no-padding">
+                        <input type="search" class="form-control-lg shadow mr-2" id="searchCommands" placeholder="Rechercher une commande">
+                        <i class="fas fa-search ms-2"></i>
+                    </div>
 
-            <!-- Table Container Commands -->
-            <div class="row justify-content-between">
-                <div class="col-7">
-                    <table class="table" data-toggle="table" data-sortable="true" data-pagination="true" data-pagination-next-text="Next" data-search="true" data-search-selector="#searchCommands" data-locale="fr-FR">
-                        <thead>
-                            <tr>
-                                <th scope="col">ID</th>
-                                <th scope="col">Utilisateur</th>
-                                <th scope="col">Montant</th>
-                                <th scope="col">Nombre d'articles</th>
-                                <th scope="col">Date de création</th>
-                                <th scope="col">État</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            foreach ($arrayCommandsUser as $element) {
-                            ?>
+                </div>
+
+                <br>
+
+                <!-- Table Container Commands -->
+                <div class="row justify-content-between">
+                    <div class="col-7">
+                        <table class="table" id="commandsUserTable" data-toggle="table" data-sortable="true" data-pagination="true" data-pagination-next-text="Next" data-search="true" data-search-selector="#searchCommands" data-locale="fr-FR">
+                            <thead>
                                 <tr>
-                                    <th scope="row">
-                                        <?= $element->getId_command() ?>
-                                    </th>
-                                    <td>
-                                    <?= $element->getNameUserCommands() ?>
-                                    </td>
-                                    <td>
-                                       
-                                    </td>
-                                    <td>
-                                   
-                                    </td>
-                                    <td>
-                                        <?= $element->getDate_creation_command() ?>
-                                    </td>
-                                    <td>
-                                        <?= $element->getState_command() ?>
-                                    </td>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Utilisateur</th>
+                                    <th scope="col">Montant</th>
+                                    <th scope="col">Date de création</th>
+                                    <th scope="col">État</th>
                                 </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                foreach ($arrayCommandsUser as $element) {
+                                ?>
+                                    <tr id="<?= $element->getId_command() ?>">
+                                        <th scope="row">
+                                            <?= $element->getId_command() ?>
+                                        </th>
+                                        <td>
+                                            <?= $element->getNameUserCommands() ?>
+                                        </td>
+                                        <td>
+                                            <?= $element->getTotalPriceCommand() ?> €
+                                        </td>
+                                        <td>
+                                            <?= $element->getDate_creation_command() ?>
+                                        </td>
+                                        <td>
+                                            <?= $element->getDisplayState_command() ?>
+                                        </td>
+                                    </tr>
 
-                            <?php
-                            }
-                            ?>
+                                <?php
+                                }
+                                ?>
 
-                        </tbody>
-                    </table>
-                </div>
+                            </tbody>
+                        </table>
+                    </div>
 
-                <!-- Details -->
-                <div class="col-4">
-                    <div class="row d-flex justify-content-between mb-1">
-                        <div class="col-8">
-                            <h2>Détails</h2>
+                    <!-- Details -->
+                    <div class="col-4">
+                        <div class="row d-flex justify-content-between mb-1">
+                            <div class="col-8">
+                                <h2>Détails</h2>
+                            </div>
+                            <div class="col-2 d-flex align-items-center">
+                                <div class="px-2 bg-warning" id="idCommandUserSelected"></div>
+                            </div>
                         </div>
-                        <div class="col-2 d-flex align-items-center">
-                            <div class="px-2 bg-warning">ID n° 3</div>
+                        <div class="row">
+                            <div class="d-flex flex-column form-control shadow" id="detailsCommandsUser">
+                                Veuillez selectionner une ligne dans le tableau afin d'accéder aux détails d'une commande
+                            </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="form-control shadow" id="detailsCommands">Veuillez cliquer sur une commande afin d'accèder aux détails des articles la composant</div>
-                    </div>
-                </div>
 
+                </div>
             </div>
         </div>
     </div>
+
 
     <br><br>
 
@@ -411,7 +414,7 @@
 
             <!-- Table Comments Container -->
             <div class="row">
-                <table class="table" data-toggle="table" data-sortable="true" data-pagination="true" data-pagination-next-text="Next" data-search="true" data-search-selector="#searchComments" data-locale="fr-FR"  >
+                <table class="table" data-toggle="table" data-sortable="true" data-pagination="true" data-pagination-next-text="Next" data-search="true" data-search-selector="#searchComments" data-locale="fr-FR">
                     <thead>
                         <tr>
                             <th scope="col">ID</th>
@@ -523,5 +526,8 @@
             <br>
         </div>
     </div>
-    </div>
 </main>
+
+<script>
+    const ROOT = '<?= BASE_URL ?>';
+</script>

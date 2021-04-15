@@ -5,7 +5,12 @@ body {
     height: 100%;
 }
 
-h1 {
+a:hover, a:hover>*, button, button>* {
+    color: #00424b !important;
+    transition: none !important;
+}
+
+h1, h2, h3 {
     color: #005662;
     font-weight: bold !important;
 }
@@ -19,7 +24,7 @@ h1 {
 /* FOR THE CONNECTION PAGE */
 
 #wrapper_connection {
-    height: 100vh;
+    height: 100%;
     background-image: url(../images/background.jpg);
     background-repeat: no-repeat;
     background-size: cover;
@@ -41,11 +46,22 @@ h1 {
     box-sizing: border-box;
 }
 
-.fa-user,
+
 .fa-sign-out-alt {
-    color: black;
+    color:#c49000;
     font-size: 20px;
 }
+
+.fa-user, #userNames {
+color: #005662;
+font-size: large;
+}
+
+#disconnection {
+    color: #c49000;
+    font-size: large
+}
+
 
 #Connection {
     background-color: #1d596b;
@@ -68,6 +84,15 @@ h1 {
 
 /* FOR THE NAVBAR */
 
+#mainNavbar{
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+.nav-link{
+    transition: none !important;
+}
+
 #mainNavbar>* {
     background-color: #005662;
 }
@@ -75,10 +100,7 @@ h1 {
 .btnNavbar {
     color: white;
     background-color: #00838f;
-}
-
-.btnNavbarUser {
-    color: #00838f;
+    font-size: large;
 }
 
 .active {
@@ -88,11 +110,14 @@ h1 {
 .fa-utensils,
 .fa-users,
 .fa-chart-bar,
-.fa-clipboard-list {
+.fa-clipboard-list, .fa-eye  {
     color: white;
     font-size: 20px;
 }
 
+.shadow {
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
 
 /* Bordered form */
 
@@ -121,12 +146,12 @@ h1 {
 }
 
 .fa-plus-circle,
-.fa-search,
-.fa-eye {
+.fa-search
+{
     color: #00838f;
 }
 
-#button-commands {
+#btn-commands {
     background-color: #c49000;
     color: white;
 }
@@ -135,6 +160,20 @@ thead {
     background-color: #00838f;
     color: white;
 }
+
+.btn {
+    transition: none !important;
+}
+
+.btn:hover {
+    color: #00424b !important;
+}
+
+.btn-add{
+    background-color: white !important;
+    color: #00838f !important;
+}
+
 
 .btn-validation {
     background-color: #b0d41c !important;

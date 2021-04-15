@@ -65,7 +65,6 @@ class RecipeDAO extends BaseDAO
 
     public static function getNameLastRecipeChief($id_chief)
     {
-
         $pdo = Database::getPdo();
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $sql = "SELECT fk_id_chief, date_creation_recipe, name_recipe FROM recipes WHERE fk_id_chief = $id_chief ORDER BY date_creation_recipe DESC LIMIT 1 ";
@@ -83,4 +82,54 @@ class RecipeDAO extends BaseDAO
 
         return $name['name_recipe'];
     }
+
+    public static function getNameChiefRecipe($id_recipe){
+        $pdo = Database::getPdo();
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $sql = " SELECT users.username_user FROM users
+        INNER JOIN chiefs ON chiefs.fk_id_user = users.id_user
+        INNER JOIN recipes ON recipes.fk_id_chief = chiefs.fk_id_user
+        WHERE recipes.id_recipe = $id_recipe";
+        $result = $pdo->prepare($sql);
+        $result->setFetchMode(PDO::FETCH_ASSOC);
+        $result->execute();
+
+       
+        if ($result->rowcount() == 1) {
+
+            $name_chief = $result->fetch();
+    
+        } else {
+            $name_chief['username_user'] = "Pas de chef";
+        } 
+
+        Database::disconnect();
+
+        return $name_chief['username_user'];
+    }
+
+    public static function getGradesRecipe($id_recipe)
+    {
+        $pdo = Database::getPdo();
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $sql = "SELECT ROUND(AVG(grade_out_of_5), 0) FROM `give_grades` WHERE fk_id_recipe = $id_recipe";
+        $result = $pdo->prepare($sql);
+        $result->setFetchMode(PDO::FETCH_ASSOC);
+        $result->execute();
+
+
+        if ($result->rowcount() >= 1) {
+
+            $grades_recipe = $result->fetchAll();
+
+        } else {
+            $grades_recipe = "0";
+        }
+
+        Database::disconnect();
+
+        return $grades_recipe;
+    }
+
+    
 }

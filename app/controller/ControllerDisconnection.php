@@ -1,5 +1,4 @@
 <?php 
 
 $UserSession->disconnectUser();
-header('Location:' . BASE_URL . 'connection');
-
+header('Location:' . BASE_URL . 'connection/disconnected');

@@ -1,9 +1,21 @@
 <body>
+
+    <!-- Alertes -->
+    <?php
+    if (isset($_GET['action']) && ($_GET['action'] == 'disconnected')) {
+    ?><div>
+            <div class="alert alert-success mx-5 mt-2" role="alert" onclick="removeAlert(this)">
+                Vous avez été déconnecté.
+            </div>
+        </div>
+    <?php } ?>
+
+
     <div id="wrapper_connection">
-        <div class="row" id="container_connection">
-            
-         <form action="" method="POST" class="pb-4">
-               
+        <div class="row application" id="container_connection">
+
+            <form action="" method="POST" class="pb-4">
+
                 <!-- Title -->
                 <div class="row">
                     <h1>Connexion</h1>
@@ -14,7 +26,7 @@
                     <div class="col-11 no-padding">
                         <label class="no-margin ml-5"><b>Nom d'utilisateur</b></label>
                         <div class="d-flex align-items-center mb-2">
-                            <i class="fas fa-user-alt mr-3"></i>
+                            <i class="fas fa-user-alt me-2"></i>
                             <input class="rounded" type="text" id="Connection-Username" placeholder="Entrer le nom d'utilisateur" name="logUsername" required>
                         </div>
                     </div>
@@ -25,7 +37,7 @@
                     <div class="col-11 no-padding">
                         <label class="no-margin ml-5"><b>Mot de passe</b></label>
                         <div class="d-flex align-items-center">
-                            <i class="fas fa-lock mr-3"></i>
+                            <i class="fas fa-lock me-2"></i>
                             <input class="rounded" type="password" id="Connection-Password" placeholder="Entrer le mot de passe" name="logPassword" required>
                         </div>
                     </div>
@@ -41,6 +53,9 @@
             </form>
         </div>
     </div>
+    <script>
+        console.log($disconnection)
+    </script>
 </body>
 
 </html>

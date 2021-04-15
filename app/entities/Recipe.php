@@ -197,13 +197,15 @@ class Recipe {
         return $this;
     }
 
-    // public function setParametersFromArray($data) {
-    //     $this->valid = true;
+    public function getNameChiefRecipe()
+    {
+        return RecipeDAO::getNameChiefRecipe($this->getId_recipe());
+    }
 
-    //     $this->setName_recipe($data["name_recipes"]);
-    //     $this->setDifficulty_recipe($data["difficulty_recipes"]);
-    //     $this->setNumber_person_recipe($data["number_person_recipes"]);
-    //     $this->setState_recipe($data["state_recipes"]);
-    //     $this->setTime_recipe($data["time_recipes"]);
-    // }
+    public function getGradesRecipe()
+    {
+        return RecipeDAO::getGradesRecipe($this->getId_recipe());
+    }
+
+  
 }

@@ -2,9 +2,6 @@
 session_start();
 include ('app/Autoloader.php');
 
-// Head
-include(PATH_COMMON . 'head.php');
-
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -17,10 +14,10 @@ $option =  filter_input(INPUT_GET, "option", FILTER_SANITIZE_STRING);
 $UserSession = new Session();
 
 if ($UserSession->isUserConnected()) {
-    echo ("STATUS : Connected ;");
+    // echo ("STATUS : Connected ;");
 
 } else {
-    echo ("STATUS : Not Connected ;");
+    // echo ("STATUS : Not Connected ;");
     $loc = "connection";
 }
 

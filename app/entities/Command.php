@@ -49,6 +49,23 @@ class Command {
         return $this;
     }
 
+    
+    // Display state for tables
+    public function getDisplayState_command()
+    {
+
+        if ($this->state_command == 'a') {
+            $state = 'Payée';
+        }
+        if ($this->state_command == 'b') {
+            $state = 'En attente';
+        }
+        if ($this->state_command == 'w') {
+            $state = 'Annulée';
+        }
+        return $state;
+    }
+
     /**
      * Get the value of date_creation_command
      */ 
@@ -89,10 +106,15 @@ class Command {
         return $this;
     }
 
-    
     public function getNameUserCommands()
     {
         return UserDAO::getNameUserCommands($this->getFk_id_user());
     }
+
+    public function getTotalPriceCommand()
+    {
+        return CommandDAO::getTotalPriceCommand($this->getId_command());
+    }
+   
 }
 

@@ -1,6 +1,6 @@
 <?php
 
-class CommentsDAO extends BaseDAO
+class CommentDAO extends BaseDAO
 {
     protected static $tableName = "comments";
 

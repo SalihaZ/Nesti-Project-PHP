@@ -17,8 +17,6 @@ class ControllerUsers extends BaseController
 
                 if (isset($_GET['id'])) {
 
-                    echo "LOL";
-
                     $id_user = $_GET['id'];
 
                     UserDAO::deleteUser($id_user);
@@ -36,14 +34,29 @@ class ControllerUsers extends BaseController
                     $city = $this->createCity();
                     $user = $this->createUser($city);
                 }
-
-                $this->_data['city'] = $city;
-                $this->_data['user'] = $user;
             }
 
             #USER/EDITION
             if ($_GET['action'] == 'edition') {
+
                 if (!isset($_GET['option'])) {
+
+                    if (isset($_POST["id_command"]) && !empty($_POST["id_command"])) {
+
+                        $data = [];
+                        $id_command = $_POST['id_command'];
+                        $commandLines = CommandDAO::getCommandsLines($id_command);
+
+                        $index = 0;
+
+                        foreach ($commandLines as $line) {
+                            $article = ArticleDAO::findOneBy('id_article', $line->getFk_id_article());
+                            $data['article-command'][$index] = $line->getCommand_quantity() . ' x ' . $article->getQuantity_unite_article() . ' ' . $article->getUnitArticle() . ' de ' . $article->getNameArticle();
+                            $index++;
+                        }
+                        echo json_encode($data);
+                        die;
+                    }
 
                     $id_user = $_GET['id'];
 
@@ -55,11 +68,11 @@ class ControllerUsers extends BaseController
                     $user->setRoles_user($roles_user);
 
                     // Table Commands
-                    $arrayCommandsUser = CommandsDAO::readCommandsFromOneUser($id_user);
+                    $arrayCommandsUser = CommandDAO::readCommandsFromOneUser($id_user);
                     $this->_data['arrayCommandsUser'] = $arrayCommandsUser;
 
                     // Table Comments
-                    $arrayCommentsUser = CommentsDAO::readCommentsFromOneUser($id_user);
+                    $arrayCommentsUser = CommentDAO::readCommentsFromOneUser($id_user);
                     $this->_data['arrayCommentsUser'] = $arrayCommentsUser;
 
                     if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
@@ -67,6 +80,9 @@ class ControllerUsers extends BaseController
                         $city = $this->createCity();
                         $this->editUser($user, $city);
                     }
+
+                    $this->_data['user'] = $user;
+                    $this->_data['city'] = $city;
                 }
 
                 if (isset($_GET['option'])) {
@@ -76,7 +92,7 @@ class ControllerUsers extends BaseController
 
                             $id_user = $_POST['id_user'];
                             $id_comment = $_POST['id_comment'];
-                            CommentsDAO::approveComment($id_comment);
+                            CommentDAO::approveComment($id_comment);
 
                             $_SESSION['commentapproved'] = '';
                             header('Location:' . BASE_URL . "users/edition/" . $id_user);
@@ -92,7 +108,7 @@ class ControllerUsers extends BaseController
 
                             $id_user = $_POST['id_user'];
                             $id_comment = $_POST['id_comment'];
-                            CommentsDAO::disapproveComment($id_comment);
+                            CommentDAO::disapproveComment($id_comment);
 
                             $_SESSION['commentdisapproved'] = '';
                             header('Location:' . BASE_URL . "users/edition/" . $id_user);
@@ -120,9 +136,6 @@ class ControllerUsers extends BaseController
                         }
                     }
                 }
-
-                $this->_data['user'] = $user;
-                $this->_data['city'] = $city;
             }
         }
     }

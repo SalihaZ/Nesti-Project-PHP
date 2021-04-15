@@ -1,7 +1,17 @@
 <!-- Main -->
 <main class="container wrapper-recipe-create">
 
-    <br>
+      <!-- Nav Location -->
+      <div class="row mt-2">
+            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="<?php echo BASE_URL ?>recipes" class="bc">Recettes</a></li>
+                    <li class="breadcrumb-item org" aria-current="page">Création</li>
+                </ol>
+            </nav>
+        </div>
+   
+  
     <!-- Title Page -->
     <div class="row">
         <div class="col">
@@ -9,10 +19,6 @@
             <br>
         </div>
     </div>
-
-    <!-- Nav Location -->
-    <nav>
-    </nav>
 
     <!-- Section Top -->
     <div class="row d-flex">

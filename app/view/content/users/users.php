@@ -6,7 +6,7 @@
     <?php
     if (isset($_SESSION['deleteUser'])) {
     ?>
-        <div class="alert alert-success" role="alert">
+        <div class="alert alert-success" role="alert" onclick="removeAlert(this)">
             L'utilisateur a bien été bloqué.
         </div>
     <?php }
@@ -33,7 +33,7 @@
         <div class="col-4 d-flex justify-content-end no-padding">
 
             <!-- Button Add -->
-            <a href="users/create" class="btn btn-lg btn-outline-secondary shadow">
+            <a href="users/create" class="btn btn-lg btn-outline-secondary btn-add shadow">
                 <i class="fas fa-plus-circle"></i>
                 Ajouter
             </a>

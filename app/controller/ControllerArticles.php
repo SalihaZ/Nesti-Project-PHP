@@ -26,7 +26,7 @@ class ControllerArticles extends BaseController
                 }
             }
 
-        
+
             #ARTICLE / EDITION
             if ($_GET['action'] == 'edition') {
                 if (!isset($_GET['option'])) {
@@ -35,21 +35,39 @@ class ControllerArticles extends BaseController
 
                     // Read data (user/city/roles)
                     $article = ArticleDAO::findOneBy("id_article", $id_article);
-                    var_dump($article);
+                    $this->_data['article'] = $article;
                 }
             }
 
-             #ARTICLE / COMMANDS
-             if ($_GET['action'] == 'commands') {
-                if (!isset($_GET['option'])) {
+            #ARTICLE / COMMANDS
+            if ($_GET['action'] == 'commands') {
 
-                    // Read data (user/city/roles)
-                    $arrayCommands = CommandsDAO::readAllCommands();
-                    $this->_data['arrayCommands'] = $arrayCommands;
+                if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
+
+                    $data = [];
+                    $id_command = $_POST['id_command'];
+                    $commandLines = CommandDAO::getCommandsLines($id_command);
+
+                    $index = 0;
+
+                    foreach ($commandLines as $line) {
+                        $article = ArticleDAO::findOneBy('id_article', $line->getFk_id_article());
+                        $data['article-command'][$index] = $line->getCommand_quantity() . ' x ' .$article->getQuantity_unite_article() . ' ' . $article->getUnitArticle() . ' de ' . $article->getNameArticle();
+                        $index++;
+                    }
+                    echo json_encode($data);
+                    die;
+              
+                } else {
+
+                    if (!isset($_GET['option'])) {
+
+                        // Read data (user/city/roles)
+                        $arrayCommands = CommandDAO::readAllCommands();
+                        $this->_data['arrayCommands'] = $arrayCommands;
+                    }
                 }
             }
-
-            $this->_data['article'] = $article;
         }
     }
 }

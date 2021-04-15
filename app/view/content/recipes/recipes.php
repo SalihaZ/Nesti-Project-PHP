@@ -1,6 +1,16 @@
 <!-- Main -->
 <main class="container wrapper-recipes">
-    <br>
+<br>
+       <!-- Alertes -->
+    <!-- For the delete user -->
+    <?php
+    if (isset($_SESSION['deleteRecipe'])) {
+    ?>
+        <div class="alert alert-success" role="alert" onclick="removeAlert(this)">
+            La recette a bien été bloqué.
+        </div>
+    <?php }
+    unset($_SESSION['deleteRecipe']); ?>
 
     <!-- Title Page -->
     <div class="row">
@@ -10,22 +20,20 @@
         </div>
     </div>
 
-    <!-- Article Top Page -->
+    <!-- User Top Page -->
     <div class="row d-flex justify-content-between">
 
         <!-- Research Bar -->
-        <div class="col-8 d-flex no-padding">
-            <input type="search" class="form-control-lg shadow" placeholder="Rechercher une recette" />
-            <button type="button" class="btn" id="button-search-bar">
-                <i class="fas fa-search"></i>
-            </button>
+        <div class="col-8 d-flex align-items-center no-padding">
+            <input type="search" class="form-control-lg shadow mr-2" id="searchRecipe" placeholder="Rechercher une recette">
+            <i class="fas fa-search ms-2"></i>
         </div>
 
         <!-- Buttons Container -->
         <div class="col-4 d-flex justify-content-end no-padding">
 
-            <!-- Button ADD -->
-            <a href="recipes/create" class="btn btn-lg btn-outline-secondary shadow">
+            <!-- Button Add -->
+            <a href="recipes/create" class="btn btn-lg btn-outline-secondary btn-add shadow">
                 <i class="fas fa-plus-circle"></i>
                 Ajouter
             </a>
@@ -35,10 +43,10 @@
     <br>
 
     <!-- Table Container -->
-    <table class="table" data-toggle="table" data-sortable="true" data-pagination="true" data-pagination-pre-text="Previous" data-pagination-next-text="Next" data-search="true" data-search-align="left" data-search-selector="#customSearchArticle" data-locale="eu-EU"  >
+    <table class="table" data-toggle="table" data-sortable="true" data-pagination="true" data-pagination-next-text="Next" data-search="true" data-search-selector="#searchRecipe" data-locale="fr-FR"  >
         <thead>
             <tr>
-                <th scope="col">#</th>
+            <th scope="col">ID</th>
                 <th scope="col">Nom</th>
                 <th scope="col">Difficulté (sur 5)</th>
                 <th scope="col">Pour</th>
@@ -51,27 +59,83 @@
 
             <?php
             foreach ($arrayRecipes as $element) {
-            ?>
-                <tr>
-                    <th scope="row">
-                        <?= $element->getId_recipe() ?>
-                    </th>
+                ?>
+                    <tr>
+                        <th scope="row">
+                            <?= $element->getId_recipe() ?>
+                        </th>
+                        <td>
+                            <?= $element->getName_recipe() ?>
+                        </td>
+                        <td>
+                            <?= $element->getDifficulty_recipe() ?>
+                        </td>
+                        <td>
+                            <?= $element->getNumber_person_recipe() ?>
+                        </td>
+                        <td>
+                            <?= $element->getTime_recipe() ?>
+                        </td>
+                        <td>
+                            <?= $element->getNameChiefRecipe() ?>
+                        </td>
                     <td>
-                        <?= $element->getName_recipe() ?>
+                        <!-- Form POST Modify -->
+                        <form method="POST" action="<?= BASE_URL . "recipes/edition/" .  $element->getId_recipe() ?>" class="form-table mb-2 rounded bg-warning">
+
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn bt-tbl" data-bs-toggle="modal" data-bs-target="<?= '#modifyRecipe' .  $element->getId_recipe() ?>">
+                                Modifier
+                            </button>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="<?= 'modifyRecipe' .  $element->getId_recipe() ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="staticBackdropLabel">Modifier recette</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Vous êtes sur le point d'accéder à la modification des informations de la recette nommée <b> <?= $element->getName_recipe() ?></b>. Êtes-vous sûr de vouloir réaliser cette action ?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Non</button>
+                                            <button type="submit" class="btn btn-success">Oui</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                        <!-- Form POST Delete -->
+                        <form method="POST" action="<?= BASE_URL . "recipes/delete/" . $element->getId_recipe() ?>" class="form-table rounded bg-danger">
+
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn bt-tbl" data-bs-toggle="modal" data-bs-target="<?= '#deleteRecipe' .  $element->getId_recipe()  ?>">
+                                Supprimer
+                            </button>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="<?= 'deleteRecipe' .  $element->getId_recipe()  ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="staticBackdropLabel">Supprimer recette</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Vous êtes sur le point de supprimer la recette nommée <b><?= $element->getName_recipe() ?></b>. Êtes-vous sûr de vouloir réaliser cette action ?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Non</button>
+                                            <button type="submit" class="btn btn-success">Oui</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                     </td>
-                    <td>
-                        <?= $element->getDifficulty_recipe() ?>
-                    </td>
-                    <td>
-                        <?= $element->getNumber_person_recipe() ?>
-                    </td>
-                    <td>
-                        <?= $element->getTime_recipe() ?>
-                    </td>
-                    <td>
-                        <?= $element->getFk_id_chief() ?>
-                    </td>
-                    <td> <a href="recipes/edition">Modifier <br> <a href="">Supprimer</a></td>
                 </tr>
 
             <?php

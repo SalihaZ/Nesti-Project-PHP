@@ -7,7 +7,7 @@
     <?php
     if (isset($_SESSION['deleteArticle'])) {
     ?>
-        <div class="alert alert-success" role="alert">
+        <div class="alert alert-success" role="alert" onclick="removeAlert(this)">
             L'article a bien été bloqué.
         </div>
     <?php }
@@ -34,13 +34,13 @@
         <div class="col-4 d-flex justify-content-between no-padding">
 
             <!-- Button Commands -->
-            <a href="articles/commands" class="btn btn-lg btn-outline-secondary shadow" id="button-commands">
+            <a href="articles/commands" class="btn btn-lg btn-outline-secondary shadow" id="btn-commands">
                 <i class="far fa-eye"></i>
                 Commandes
             </a>
 
             <!-- Button Import -->
-            <a href="article/imports" class="btn btn-lg btn-outline-secondary shadow">
+            <a href="article/imports" class="btn btn-lg btn-outline-secondary btn-add shadow">
                 <i class="fas fa-plus-circle"></i>
                 Importer
             </a>
