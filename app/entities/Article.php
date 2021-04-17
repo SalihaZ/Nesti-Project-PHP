@@ -228,7 +228,7 @@ class Article
         return ArticleDAO::getPriceArticle($this->getId_article());
     }
 
-    public function getNameArticle()
+    public function getNameProduct()
     {
         return ArticleDAO::getNameArticle($this->getId_article());
     }
@@ -257,4 +257,25 @@ class Article
     {
         return ImportDAO::getDateImportArticle($this->getId_article());
     }
+
+    public function getTotalSalesArticle()
+    {
+        return ArticleDAO::getTotalSalesArticle($this->getId_article());
+    }
+
+    public function getTotalBoughtArticle()
+    {
+        return ArticleDAO::getTotalBoughtArticle($this->getId_article());
+    }
+
+    public function getQuantitySoldArticle() {
+        return ArticleDAO::getQuantitySoldArticle($this->getId_article());
+    }
+
+    public function getBenefitsArticle(){
+        $benefits = $this->getTotalSalesArticle() - $this->getTotalBoughtArticle();
+        return $benefits;
+    }
+
+   
 }

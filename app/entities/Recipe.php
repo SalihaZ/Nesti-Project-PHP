@@ -202,10 +202,9 @@ class Recipe {
         return RecipeDAO::getNameChiefRecipe($this->getId_recipe());
     }
 
-    public function getGradesRecipe()
+    public function getGradeRecipe()
     {
-        return RecipeDAO::getGradesRecipe($this->getId_recipe());
+        return RecipeDAO::getGradeRecipe($this->getId_recipe());
     }
-
   
 }

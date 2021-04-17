@@ -2,7 +2,7 @@
 
 class ArticleDAO extends BaseDAO
 {
-    
+
     protected static $tableName = "articles";
 
     // Fetch all data of the articles in DB
@@ -27,7 +27,7 @@ class ArticleDAO extends BaseDAO
         $pdo = Database::getPdo();
 
         $sql = "SELECT price_articles.price_article FROM `price_articles`
-        INNER JOIN articles ON articles.fk_id_product = price_articles.fk_id_article
+        INNER JOIN articles ON articles.id_article = price_articles.fk_id_article
         WHERE price_articles.fk_id_article = $id_article";
         $result = $pdo->query($sql);
         $result->setFetchMode(PDO::FETCH_ASSOC);
@@ -47,9 +47,9 @@ class ArticleDAO extends BaseDAO
     {
         $pdo = Database::getPdo();
 
-        $sql = "SELECT products.name_product FROM `products`
-        INNER JOIN articles ON products.id_product = articles.fk_id_product
-        WHERE articles.fk_id_product = $id_article";
+        $sql = "SELECT products.name_product FROM `articles`
+        INNER JOIN products ON products.id_product = articles.fk_id_product
+        WHERE articles.id_article = $id_article";
         $result = $pdo->query($sql);
         $result->setFetchMode(PDO::FETCH_ASSOC);
 
@@ -84,7 +84,7 @@ class ArticleDAO extends BaseDAO
         return $type;
     }
 
-    
+
     public static function getUnitArticle($id_article)
     {
         $pdo = Database::getPdo();
@@ -125,49 +125,106 @@ class ArticleDAO extends BaseDAO
         return $ref['ref_package'];
     }
 
-     // Block one article 
-     public static function deleteArticle($id_article)
-     {
-         $pdo = Database::getPdo();
-         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-         $sql = "UPDATE articles SET state_article = ? WHERE id_article = ?";
-         $q = $pdo->prepare($sql);
-         $q->execute(
-             [
-                 "b",
-                 $id_article
-             ]
-         );
-         Database::disconnect();
-     }
+    // Block one article 
+    public static function deleteArticle($id_article)
+    {
+        $pdo = Database::getPdo();
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $sql = "UPDATE articles SET state_article = ? WHERE id_article = ?";
+        $q = $pdo->prepare($sql);
+        $q->execute(
+            [
+                "b",
+                $id_article
+            ]
+        );
+        Database::disconnect();
+    }
 
-     public static function getStockArticle($id_article)
-     {
-         $pdo = Database::getPdo();
- 
-         $sql = "SELECT packages.quantity_bought_package -  SUM(command_lines.command_quantity) AS stock FROM packages
+    public static function getStockArticle($id_article)
+    {
+        $pdo = Database::getPdo();
+
+        $sql = "SELECT packages.quantity_bought_package -  SUM(command_lines.command_quantity) AS stock FROM packages
          INNER JOIN articles ON articles.id_article = packages.fk_id_article
          INNER JOIN command_lines ON command_lines.fk_id_article = articles.id_article
          WHERE articles.id_article = $id_article";
-         $result = $pdo->query($sql);
-         $result->setFetchMode(PDO::FETCH_ASSOC);
- 
-         if ($result->rowcount() == 1) {
-             $stock = $result->fetch();
-         } else {
-             $stock['stock'] = "0";
+        $result = $pdo->query($sql);
+        $result->setFetchMode(PDO::FETCH_ASSOC);
 
-         }
- 
-         Database::disconnect();
- 
-         return $stock['stock'];
-     }
+        if ($result->rowcount() == 1) {
+            $stock = $result->fetch();
+        } else {
+            $stock['stock'] = "0";
+        }
 
+        Database::disconnect();
 
+        return $stock['stock'];
+    }
 
- 
+    public static function getTotalSalesArticle($id_article)
+    {
+        $pdo = Database::getPdo();
 
+        $sql = "SELECT SUM(price_articles.price_article*command_lines.command_quantity) AS 'TotalSales' FROM `articles`
+        INNER JOIN price_articles ON price_articles.fk_id_article = articles.id_article
+        INNER JOIN command_lines ON command_lines.fk_id_article = articles.id_article
+        WHERE articles.id_article = $id_article";
+        $result = $pdo->query($sql);
+        $result->setFetchMode(PDO::FETCH_ASSOC);
 
-    
+        if ($result->rowcount() == 1) {
+            $total_sales = $result->fetch();
+        } else {
+            $total_sales = "0";
+        }
+
+        Database::disconnect();
+
+        return $total_sales['TotalSales'];
+    }
+
+    public static function getTotalBoughtArticle($id_article)
+    {
+        $pdo = Database::getPdo();
+
+        $sql = "SELECT (packages.quantity_bought_package * packages.price_unite_package) AS 'TotalBought' FROM packages
+        WHERE packages.fk_id_article = $id_article";
+        $result = $pdo->query($sql);
+        $result->setFetchMode(PDO::FETCH_ASSOC);
+
+        if ($result->rowcount() == 1) {
+            $total_bought = $result->fetch();
+        } else {
+            $total_bought = "0";
+        }
+
+        Database::disconnect();
+
+        return $total_bought['TotalBought'];
+    }
+
+    public static function getQuantitySoldArticle($id_article)
+    {
+        $pdo = Database::getPdo();
+
+        $sql = "SELECT SUM(command_lines.command_quantity) AS quantity_sold FROM packages
+        INNER JOIN articles ON articles.id_article = packages.fk_id_article
+        INNER JOIN command_lines ON command_lines.fk_id_article = articles.id_article
+        WHERE articles.id_article = $id_article";
+        $result = $pdo->query($sql);
+        $result->setFetchMode(PDO::FETCH_ASSOC);
+
+        if ($result->rowcount() == 1) {
+            $quantity_sold = $result->fetch();
+        } else {
+            $quantity_sold['quantity_sold'] = "0";
+        }
+
+        Database::disconnect();
+
+        return $quantity_sold['quantity_sold'];
+    }
+
 }

@@ -108,7 +108,7 @@ class RecipeDAO extends BaseDAO
         return $name_chief['username_user'];
     }
 
-    public static function getGradesRecipe($id_recipe)
+    public static function getGradeRecipe($id_recipe)
     {
         $pdo = Database::getPdo();
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -120,16 +120,40 @@ class RecipeDAO extends BaseDAO
 
         if ($result->rowcount() >= 1) {
 
-            $grades_recipe = $result->fetchAll();
+            $grade_recipe = $result->fetchAll();
 
         } else {
-            $grades_recipe = "0";
+            $grade_recipe = "0";
         }
 
         Database::disconnect();
 
-        return $grades_recipe;
+        return $grade_recipe;
     }
 
-    
+
+    public static function getGradeChief($id_chief)
+    {
+        $pdo = Database::getPdo();
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $sql = "SELECT ROUND(AVG(grade_out_of_5), 0) FROM `give_grades` 
+        INNER JOIN recipes ON fk_id_recipe = id_recipe
+        WHERE fk_id_chief = $id_chief ";
+        $result = $pdo->prepare($sql);
+        $result->setFetchMode(PDO::FETCH_ASSOC);
+        $result->execute();
+
+
+        if ($result->rowcount() >= 1) {
+
+            $grade_chief = $result->fetchAll();
+
+        } else {
+            $grade_chief = "0";
+        }
+
+        Database::disconnect();
+
+        return $grade_chief;
+    }  
 }

@@ -7,7 +7,6 @@ class LogsUserDAO extends BaseDAO
      // Fetch all data of the articles in DB
      public static function readAllLogsUsers()
      {
- 
          $pdo = Database::getPdo();
          $sql = "SELECT * FROM `logs_users` ";
          $result = $pdo->query($sql);

@@ -36,7 +36,7 @@ if (!isset($article) || empty($article)) {
                 <div class="row d-flex mb-3">
                     <div class="col-12">
                         <label for="inputArticleFactoryName">Nom d'usine de l'article</label>
-                        <input type="text" class="form-control" id="inputArticleFactoryName" name="articleFactoryName" value="<?= $article->getQuantity_unite_article() ?> <?= $article->getUnitArticle() ?> de <?= $article->getNameArticle() ?>">
+                        <input type="text" class="form-control" id="inputArticleFactoryName" name="articleFactoryName" value="<?= $article->getQuantity_unite_article() ?> <?= $article->getUnitArticle() ?> de <?= $article->getNameProduct() ?>">
                     </div>
                 </div>
 
@@ -44,7 +44,7 @@ if (!isset($article) || empty($article)) {
                 <div class="row d-flex mb-3">
                     <div class="col-12">
                         <label for="inputArticleCustomerName">Nom de l'article pour l'utilisateur</label>
-                        <input type="text" class="form-control" id="inputArticleCustomerName" name="articleCustomerName" value="<?= $article->getCustomer_name_article() != null ? $article->getCustomer_name_article() : $article->getQuantity_unite_article() . " " . $article->getUnitArticle() . " de " . $article->getNameArticle() ?>">
+                        <input type="text" class="form-control" id="inputArticleCustomerName" name="articleCustomerName" value="<?= $article->getCustomer_name_article() != null ? $article->getCustomer_name_article() : $article->getQuantity_unite_article() . " " . $article->getUnitArticle() . " de " . $article->getNameProduct() ?>">
                     </div>
                 </div>
 

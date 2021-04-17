@@ -52,7 +52,7 @@ class ControllerArticles extends BaseController
 
                     foreach ($commandLines as $line) {
                         $article = ArticleDAO::findOneBy('id_article', $line->getFk_id_article());
-                        $data['article-command'][$index] = $line->getCommand_quantity() . ' x ' .$article->getQuantity_unite_article() . ' ' . $article->getUnitArticle() . ' de ' . $article->getNameArticle();
+                        $data['article-command'][$index] = $line->getCommand_quantity() . ' x ' .$article->getQuantity_unite_article() . ' ' . $article->getUnitArticle() . ' de ' . $article->getNameProduct();
                         $index++;
                     }
                     echo json_encode($data);

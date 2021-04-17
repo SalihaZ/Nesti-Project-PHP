@@ -536,4 +536,9 @@ class User
     {
         return CommandDAO::getAllCommandsPricesUser($this->getId_user());
     }
+
+    public function getGradeChief()
+    {
+        return RecipeDAO::getGradeChief($this->getId_user());
+    }
 }

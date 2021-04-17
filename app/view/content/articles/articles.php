@@ -73,7 +73,7 @@
                         <?= $element->getId_article() ?>
                     </th>
                     <td>
-                        <?= $element->getQuantity_unite_article() ?> <?= $element->getUnitArticle() ?> de <?= $element->getNameArticle() ?>
+                        <?= $element->getQuantity_unite_article() ?> <?= $element->getUnitArticle() ?> de <?= $element->getNameProduct() ?>
                     </td>
                     <td>
                         <?= $element->getPriceArticle() ?> €
@@ -109,7 +109,7 @@
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            Vous êtes sur le point d'accéder à la modification des informations de l'article <b> <?= $element->getQuantity_unite_article() ?> <?= $element->getUnitArticle() ?> de <?= $element->getNameArticle() ?></b>. Êtes-vous sûr de vouloir réaliser cette action ?
+                                            Vous êtes sur le point d'accéder à la modification des informations de l'article <b> <?= $element->getQuantity_unite_article() ?> <?= $element->getUnitArticle() ?> de <?= $element->getNameProduct() ?></b>. Êtes-vous sûr de vouloir réaliser cette action ?
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Non</button>
@@ -137,7 +137,7 @@
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            Vous êtes sur le point de supprimer l'article <b><?= $element->getQuantity_unite_article() ?> <?= $element->getUnitArticle() ?> de <?= $element->getNameArticle() ?></b>. Êtes-vous sûr de vouloir réaliser cette action ?
+                                            Vous êtes sur le point de supprimer l'article <b><?= $element->getQuantity_unite_article() ?> <?= $element->getUnitArticle() ?> de <?= $element->getNameProduct() ?></b>. Êtes-vous sûr de vouloir réaliser cette action ?
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Non</button>

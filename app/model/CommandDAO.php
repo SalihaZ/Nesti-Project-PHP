@@ -169,6 +169,23 @@ class CommandDAO extends BaseDAO
         return $arrayCommandLines;
     }
 
+    public static function getCommandsByDay($date){
+
+        $pdo = Database::getPdo();
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $sql = "SELECT * FROM commands WHERE date_creation_command LIKE '$date%' AND state_command ='a'";
+        $result = $pdo->query($sql);
+
+        if ($result) {
+            $commandByDay = $result->fetchAll(PDO::FETCH_CLASS, 'Command');
+        } else {
+            $commandByDay = new Command;
+        }
+        Database::disconnect();
+        return $commandByDay;
+    }
+   
+
 
     // SELECT CONCAT(command_lines.command_quantity, ' x ', articles.quantity_unite_article,' ', measure_units.name_measure_unit,' de ', products.name_product) FROM `command_lines`
     //     INNER JOIN commands ON commands.id_command = command_lines.fk_id_command

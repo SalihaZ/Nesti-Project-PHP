@@ -5,14 +5,24 @@ body {
     height: 100%;
 }
 
-a:hover, a:hover>*, button, button>* {
+a 
+{ 
+ text-decoration:none !important; 
+} 
+
+a:hover, a:hover>*, button:hover, button:hover>* {
     color: #00424b !important;
     transition: none !important;
+    filter: brightness(80%) !important;
 }
 
 h1, h2, h3 {
     color: #005662;
     font-weight: bold !important;
+}
+
+h3 {
+    font-size: 1.1rem !important;
 }
 
 .org {
