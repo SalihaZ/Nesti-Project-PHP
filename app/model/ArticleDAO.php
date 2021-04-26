@@ -22,6 +22,23 @@ class ArticleDAO extends BaseDAO
         return $arrayArticles;
     }
 
+      
+        public static function updateArticle($article)
+        {
+            $pdo = Database::getPdo();
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $sql = "UPDATE articles SET customer_name_article = ?, state_article = ? WHERE id_article = ?";
+            $q = $pdo->prepare($sql);
+            $q->execute(
+                [
+                    $article->getCustomer_name_article(),
+                    $article->getState_article(), 
+                    $article->getId_article(), 
+                ]
+            );
+            Database::disconnect();
+        }
+
     public static function getPriceArticle($id_article)
     {
         $pdo = Database::getPdo();

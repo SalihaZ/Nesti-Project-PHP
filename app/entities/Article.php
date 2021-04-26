@@ -13,7 +13,10 @@ class Article
     private $fk_id_product;
     private $fk_id_image;
     private $fk_id_measure_unit;
-    private $valid;
+    private $valid_article = true;
+
+    // Errors
+    private $customerNameError = '';
 
 
     /**
@@ -204,21 +207,42 @@ class Article
         return $this;
     }
 
+    
+    /**
+     * Get the value of customerNameError
+     */ 
+    public function getCustomerNameError()
+    {
+        return $this->customerNameError;
+    }
+
+    /**
+     * Set the value of customerNameError
+     *
+     * @return  self
+     */ 
+    public function setCustomerNameError($customerNameError)
+    {
+        $this->customerNameError = $customerNameError;
+
+        return $this;
+    }
+
     /**
      * Get the value of valid
      */
-    public function getValid()
+    public function getValid_article()
     {
-        return $this->valid;
+        return $this->valid_article;
     }
 
     /**
      * Set the value of valid
      * @return  self
      */
-    public function setValid($valid)
+    public function setValid_article($valid_article)
     {
-        $this->valid = $valid;
+        $this->valid_article = $valid_article;
 
         return $this;
     }
@@ -255,7 +279,11 @@ class Article
 
     public function getDateImportArticle()
     {
-        return ImportDAO::getDateImportArticle($this->getId_article());
+        $date =  ImportDAO::getDateImportArticle($this->getId_article());
+        if ($date != "Pas de première importation") {
+            $date = strftime("Le %d/%m/%G à %Hh%M", strtotime($date));
+        }
+        return $date;
     }
 
     public function getTotalSalesArticle()
@@ -268,14 +296,14 @@ class Article
         return ArticleDAO::getTotalBoughtArticle($this->getId_article());
     }
 
-    public function getQuantitySoldArticle() {
+    public function getQuantitySoldArticle()
+    {
         return ArticleDAO::getQuantitySoldArticle($this->getId_article());
     }
 
-    public function getBenefitsArticle(){
+    public function getBenefitsArticle()
+    {
         $benefits = $this->getTotalSalesArticle() - $this->getTotalBoughtArticle();
         return $benefits;
     }
-
-   
 }

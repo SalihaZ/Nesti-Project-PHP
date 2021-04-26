@@ -33,8 +33,17 @@ class ControllerArticles extends BaseController
 
                     $id_article = $_GET['id'];
 
-                    // Read data (user/city/roles)
                     $article = ArticleDAO::findOneBy("id_article", $id_article);
+
+                    if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
+
+                        $article->setCustomer_name_article(($_POST["articleCustomerName"]));
+                        $article->setState_article(($_POST["stateArticle"]));
+                       
+                        ArticleDAO::updateArticle($article);
+                        $_SESSION['articleUpdated'] = '';
+                    }
+
                     $this->_data['article'] = $article;
                 }
             }
