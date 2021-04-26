@@ -17,6 +17,17 @@ if (!isset($article) || empty($article)) {
         </nav>
     </div>
 
+    <!-- Alertes -->
+    <!-- For edition article -->
+    <?php
+    if (isset($_SESSION['articleUpdated'])) {
+    ?>
+        <div class="alert alert-success" role="alert" onclick="removeAlert(this)">
+            L'article a bien été mis à jour.
+        </div>
+    <?php }
+    unset($_SESSION['articleUpdated']); ?>
+
     <!-- Title Page -->
     <div class="row">
         <div class="col">
@@ -35,15 +46,15 @@ if (!isset($article) || empty($article)) {
                 <!-- Input Factory Name Article -->
                 <div class="row d-flex mb-3">
                     <div class="col-12">
-                        <label for="inputArticleFactoryName">Nom d'usine de l'article</label>
-                        <input type="text" class="form-control" id="inputArticleFactoryName" name="articleFactoryName" value="<?= $article->getQuantity_unite_article() ?> <?= $article->getUnitArticle() ?> de <?= $article->getNameProduct() ?>">
+                        <label for="inputArticleFactoryName">Nom d'usine</label>
+                        <input type="text" class="form-control" id="inputArticleFactoryName" name="articleFactoryName" value="<?= $article->getQuantity_unite_article() ?> <?= $article->getUnitArticle() ?> de <?= $article->getNameProduct() ?>" disabled>
                     </div>
                 </div>
 
                 <!--  Input Customer Name Article -->
                 <div class="row d-flex mb-3">
                     <div class="col-12">
-                        <label for="inputArticleCustomerName">Nom de l'article pour l'utilisateur</label>
+                        <label for="inputArticleCustomerName">Nom clients</label>
                         <input type="text" class="form-control" id="inputArticleCustomerName" name="articleCustomerName" value="<?= $article->getCustomer_name_article() != null ? $article->getCustomer_name_article() : $article->getQuantity_unite_article() . " " . $article->getUnitArticle() . " de " . $article->getNameProduct() ?>">
                     </div>
                 </div>
@@ -79,6 +90,26 @@ if (!isset($article) || empty($article)) {
                         <input type="text" class="form-control" id="inputArticleStock" name="articleStock" value="<?= $article->getStockArticle() ?>" disabled>
                     </div>
 
+                </div>
+
+                <!-- Input State User -->
+                <div class="row d-flex justify-content-between">
+                    <div class="col-6">
+                        <label for="inputArticleState">État</label>
+                    </div>
+                    <div class="col-4 d-flex justify-content-end">
+                        <select name="stateArticle" id="state-select">
+                            <option value="a" <?php if ($article->getState_article() == 'a') {
+                                                    echo 'selected';
+                                                }; ?>>Actif</option>
+                            <option value="b" <?php if ($article->getState_article() == 'b') {
+                                                    echo 'selected';
+                                                }; ?>>Bloqué</option>
+                            <option value="w" <?php if ($article->getState_article() == 'w') {
+                                                    echo 'selected';
+                                                }; ?>>En attente</option>
+                        </select>
+                    </div>
                 </div>
 
                 <br>

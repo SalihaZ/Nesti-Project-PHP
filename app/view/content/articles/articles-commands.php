@@ -62,7 +62,7 @@
                                         <?= $element->getTotalPriceCommand() ?> €
                                     </td>
                                     <td>
-                                        <?= $element->getDate_creation_command() ?>
+                                        <?= $element->getDisplayDate_creation_command() ?>
                                     </td>
                                     <td>
                                         <?= $element->getDisplayState_command() ?>

@@ -1,6 +1,7 @@
-<?php 
+<?php
 
-class Command { 
+class Command
+{
 
     //Attributes
     private $id_command;
@@ -11,7 +12,7 @@ class Command {
 
     /**
      * Get the value of id_command
-     */ 
+     */
     public function getId_command()
     {
         return $this->id_command;
@@ -21,7 +22,7 @@ class Command {
      * Set the value of id_command
      *
      * @return  self
-     */ 
+     */
     public function setId_command($id_command)
     {
         $this->id_command = $id_command;
@@ -31,7 +32,7 @@ class Command {
 
     /**
      * Get the value of state_command
-     */ 
+     */
     public function getState_command()
     {
         return $this->state_command;
@@ -41,7 +42,7 @@ class Command {
      * Set the value of state_command
      *
      * @return  self
-     */ 
+     */
     public function setState_command($state_command)
     {
         $this->state_command = $state_command;
@@ -49,7 +50,7 @@ class Command {
         return $this;
     }
 
-    
+
     // Display state for tables
     public function getDisplayState_command()
     {
@@ -68,17 +69,23 @@ class Command {
 
     /**
      * Get the value of date_creation_command
-     */ 
+     */
     public function getDate_creation_command()
     {
         return $this->date_creation_command;
+    }
+
+    public function getDisplayDate_creation_command()
+    {
+        $date = $this->date_creation_command;
+        return strftime("Le %d/%m/%G à %Hh%M", strtotime($date));
     }
 
     /**
      * Set the value of date_creation_command
      *
      * @return  self
-     */ 
+     */
     public function setDate_creation_command($date_creation_command)
     {
         $this->date_creation_command = $date_creation_command;
@@ -88,7 +95,7 @@ class Command {
 
     /**
      * Get the value of fk_id_user
-     */ 
+     */
     public function getFk_id_user()
     {
         return $this->fk_id_user;
@@ -98,7 +105,7 @@ class Command {
      * Set the value of fk_id_user
      *
      * @return  self
-     */ 
+     */
     public function setFk_id_user($fk_id_user)
     {
         $this->fk_id_user = $fk_id_user;
@@ -115,6 +122,4 @@ class Command {
     {
         return CommandDAO::getTotalPriceCommand($this->getId_command());
     }
-   
 }
-

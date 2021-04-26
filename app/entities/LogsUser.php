@@ -68,7 +68,8 @@ class LogsUser
         return $this;
     }
 
-    public function getLastConnectionUser(){
-        return LogsUserDAO::getLastConnectionUser($this->getFk_id_user());
-    }
+    // public function getLastConnectionUser(){
+        
+    //     return LogsUserDAO::getLastConnectionUser($this->getFk_id_user());
+    // }
 }

@@ -227,6 +227,11 @@ class User
         return $this->date_creation_user;
     }
 
+    public function getDisplayDate_creation_user(){
+        $date =  $this->date_creation_user;
+        return strftime("Le %d/%m/%G à %Hh%M", strtotime($date));    
+    }
+
     /**
      * Set the value of date_creation_user
      * @return  self
@@ -501,10 +506,12 @@ class User
         
     }
 
-    public function getLastConnectionUser()
-    {
-        return LogsUserDAO::getLastConnectionUser($this->getId_user());
-        
+    public function getLastConnectionUser(){
+        $date =  LogsUserDAO::getLastConnectionUser($this->getId_user());
+        if ($date != "Pas de première connection"){
+            $date = strftime("Le %d/%m/%G à %Hh%M", strtotime($date));
+        } 
+       return $date;
     }
 
     public function getNumberCommandsUser()

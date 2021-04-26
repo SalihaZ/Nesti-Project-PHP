@@ -212,7 +212,7 @@
             </div>
             <div class="list">
                 <div class="row">
-                    <p> Date de création : <?= $user->getDate_creation_user() ?> <br>
+                    <p> Date de création : <?= $user->getDisplayDate_creation_user() ?> <br>
                         Dernière connexion : <?= $user->getLastConnectionUser() ?></p>
                 </div>
                 <div class="row">
@@ -352,7 +352,7 @@
                                             <?= $element->getTotalPriceCommand() ?> €
                                         </td>
                                         <td>
-                                            <?= $element->getDate_creation_command() ?>
+                                            <?= $element->getDisplayDate_creation_command() ?>
                                         </td>
                                         <td>
                                             <?= $element->getDisplayState_command() ?>
@@ -444,7 +444,7 @@
                                     <?= $element->getContent_comment() ?>
                                 </td>
                                 <td>
-                                    <?= $element->getDate_creation_comment() ?>
+                                    <?= $element->getDisplayDate_creation_comment() ?>
                                 </td>
                                 <td>
                                     <?= $element->getDisplayState_comment() ?>
