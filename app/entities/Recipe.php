@@ -12,11 +12,13 @@ class Recipe
     private $time_recipe;
     private $fk_id_image;
     private $fk_id_chief;
-    private $valid = true;
+    private $valid_recipe = true;
 
-    // public function getChief() {
-    //     return ChiefDAO::findById($fk_id_chief);
-    // }
+    // Errors
+    private $nameError = '';
+    private $difficultyError = '';
+    private $numberPersonError = '';
+    private $timeError = '';
 
     /**
      * Get the value of id_recipe
@@ -71,6 +73,11 @@ class Recipe
      */
     public function setName_recipe($name_recipe)
     {
+        if (empty($name_recipe)) {
+            $this->nameError = 'Veuillez saisir un nom de recette';
+            $this->valid_recipe = false;
+        }
+
         $this->name_recipe = $name_recipe;
 
         return $this;
@@ -90,6 +97,14 @@ class Recipe
      */
     public function setDifficulty_recipe($difficulty_recipe)
     {
+        if (empty($difficulty_recipe)) {
+            $this->difficultyError = 'Veuillez saisir une note de difficulté sur 5';
+            $this->valid_recipe = false;
+        } else if (!preg_match("/^[1-5]$/", $difficulty_recipe)) {
+            $this->difficultyError = "Veuillez saisir une note de difficulté comprise entre 0 et 5";
+            $this->valid_recipe = false;
+        }
+
         $this->difficulty_recipe = $difficulty_recipe;
 
         return $this;
@@ -109,6 +124,14 @@ class Recipe
      */
     public function setNumber_person_recipe($number_person_recipe)
     {
+        if (empty($number_person_recipe)) {
+            $this->numberPersonError = 'Veuillez saisir un nombre de personnes';
+            $this->valid_recipe = false;
+        } else if (!preg_match("/^[0-9]{0,2}$/", $number_person_recipe)) {
+            $this->numberPersonError = "Veuillez saisir un nombre de personnes valide";
+            $this->valid_recipe = false;
+        }
+
         $this->number_person_recipe = $number_person_recipe;
 
         return $this;
@@ -149,9 +172,9 @@ class Recipe
         if ($vals[0] == 0)
             $result = $vals[1] . ' minutes';
         else
-            $result = $vals[0] . 'heures, ' . $vals[1] . ' minutes' ;
-        
-           return $result;
+            $result = $vals[0] . 'heures, ' . $vals[1] . ' minutes';
+
+        return $result;
     }
 
     /**
@@ -160,17 +183,17 @@ class Recipe
      */
     public function setTime_recipe($time_recipe)
     {
+        if (empty($time_recipe)) {
+            $this->timeError = 'Veuillez saisir un temps de préparation';
+            $this->valid_recipe = false;
+        } else if (!preg_match("/^[0-9]{0,2}$/", $time_recipe)) {
+            $this->timeError = "Veuillez saisir un temps de préparation valide";
+            $this->valid_recipe = false;
+        }
+
         $this->time_recipe = $time_recipe;
 
         return $this;
-    }
-
-    /**
-     * Get the value of valid
-     */
-    public function isValid()
-    {
-        return $this->valid;
     }
 
     /**
@@ -211,12 +234,117 @@ class Recipe
         return $this;
     }
 
+    /**
+     * Get the value of nameError
+     */
+    public function getNameError()
+    {
+        return $this->nameError;
+    }
+
+    /**
+     * Set the value of nameError
+     *
+     * @return  self
+     */
+    public function setNameError($nameError)
+    {
+        $this->nameError = $nameError;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of difficultyError
+     */
+    public function getDifficultyError()
+    {
+        return $this->difficultyError;
+    }
+
+    /**
+     * Set the value of difficultyError
+     *
+     * @return  self
+     */
+    public function setDifficultyError($difficultyError)
+    {
+        $this->difficultyError = $difficultyError;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of numberPersonError
+     */
+    public function getNumberPersonError()
+    {
+        return $this->numberPersonError;
+    }
+
+    /**
+     * Set the value of numberPersonError
+     *
+     * @return  self
+     */
+    public function setNumberPersonError($numberPersonError)
+    {
+        $this->numberPersonError = $numberPersonError;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of timeError
+     */
+    public function getTimeError()
+    {
+        return $this->timeError;
+    }
+
+    /**
+     * Set the value of timeError
+     *
+     * @return  self
+     */
+    public function setTimeError($timeError)
+    {
+        $this->timeError = $timeError;
+
+        return $this;
+    }
+
+     /**
+     * Get the value of valid_recipe
+     */
+    public function getValid_recipe()
+    {
+        return $this->valid_recipe;
+    }
+
+    /**
+     * Set the value of valid_recipe
+     *
+     * @return  self
+     */
+    public function setValid_recipe($valid_recipe)
+    {
+        $this->valid_recipe = $valid_recipe;
+
+        return $this;
+    }
+
     public function getNameChiefRecipe()
     {
         return RecipeDAO::getNameChiefRecipe($this->getId_recipe());
     }
 
     public function getGradeRecipe()
+    {
+        return RecipeDAO::getGradeRecipe($this->getId_recipe());
+    }
+
+    public function canUserCreateRecipe()
     {
         return RecipeDAO::getGradeRecipe($this->getId_recipe());
     }

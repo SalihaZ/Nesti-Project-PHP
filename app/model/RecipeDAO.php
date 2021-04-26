@@ -22,11 +22,11 @@ class RecipeDAO extends BaseDAO
     }
 
     // Creates a new recipe 
-    public static function create($recipe)
+    public static function createRecipe($recipe, $id_user)
     {
         $pdo = Database::getPdo();
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $sql = "INSERT INTO recipes (name_recipe, difficulty_recipe, number_person_recipe, state_recipe, time_recipe) values(?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO recipes (name_recipe, difficulty_recipe, number_person_recipe, state_recipe, time_recipe, fk_id_chief) values(?, ?, ?, ?, ?, ?)";
         $q = $pdo->prepare($sql);
         $q->execute(
             [
@@ -34,11 +34,13 @@ class RecipeDAO extends BaseDAO
                 $recipe->getDifficulty_recipe(),
                 $recipe->getNumber_person_recipe(),
                 $recipe->getState_recipe(),
-                $recipe->getTime_recipe()
+                $recipe->getTime_recipe(),
+                $id_user,
             ]
         );
-
+        $last_id = $pdo->lastInsertId();
         Database::disconnect();
+        return $last_id;
     }
 
     // Finds the number of recipes the chef has published 
