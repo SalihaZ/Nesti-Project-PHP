@@ -6,7 +6,7 @@ class ControllerUsers extends BaseController
     public function initialize()
     {
 
-        #USER
+        #USERS
         if (!isset($_GET['action'])) {
             $arrayUsers = UserDAO::readAllUsers();
             $this->_data['arrayUsers'] = $arrayUsers;
@@ -40,7 +40,7 @@ class ControllerUsers extends BaseController
             }
 
             #USER/EDITION
-            if ($_GET['action'] == 'edition') {
+            if ($_GET['action'] == 'edit') {
 
                 if (!isset($_GET['option'])) {
 
@@ -98,7 +98,7 @@ class ControllerUsers extends BaseController
                             CommentDAO::approveComment($id_comment);
 
                             $_SESSION['commentapproved'] = '';
-                            header('Location:' . BASE_URL . "users/edition/" . $id_user);
+                            header('Location:' . BASE_URL . "users/edit/" . $id_user);
                             exit();
                         }
                     }
@@ -114,7 +114,7 @@ class ControllerUsers extends BaseController
                             CommentDAO::disapproveComment($id_comment);
 
                             $_SESSION['commentdisapproved'] = '';
-                            header('Location:' . BASE_URL . "users/edition/" . $id_user);
+                            header('Location:' . BASE_URL . "users/edit/" . $id_user);
                             exit();
                         }
                     }
@@ -134,7 +134,7 @@ class ControllerUsers extends BaseController
 
                             $_SESSION['password'] = $password;
 
-                            header('Location:' . BASE_URL . "users/edition/" . $id_user);
+                            header('Location:' . BASE_URL . "users/edit/" . $id_user);
                             exit();
                         }
                     }

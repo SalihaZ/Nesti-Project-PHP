@@ -18,7 +18,7 @@ switch ($loc) {
                 include(PATH_RECIPES . "recipes-create.php");
                 break;
             case "edit":
-                include(PATH_RECIPES . "recipes-edition.php");
+                include(PATH_RECIPES . "recipes-edit.php");
                 break;
             default:
                 include(PATH_RECIPES  . "recipes.php");
@@ -32,8 +32,8 @@ switch ($loc) {
             case "commands":
                 include(PATH_ARTICLES . "articles-commands.php");
                 break;
-            case "edition":
-                include(PATH_ARTICLES . "articles-edition.php");
+            case "edit":
+                include(PATH_ARTICLES . "articles-edit.php");
                 break;
             case "imports":
                 include(PATH_ARTICLES . "articles-imports.php");
@@ -50,8 +50,8 @@ switch ($loc) {
             case "create":
                 include(PATH_USER . "users-create.php");
                 break;
-            case "edition":
-                include(PATH_USER . "users-edition.php");
+            case "edit":
+                include(PATH_USER . "users-edit.php");
                 break;
             default:
                 include(PATH_USER . "users.php");

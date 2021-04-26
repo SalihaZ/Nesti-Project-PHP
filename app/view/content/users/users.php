@@ -82,7 +82,7 @@
                     </td>
                     <td>
                         <!-- Form POST Modify -->
-                        <form method="POST" action="<?= BASE_URL . "users/edition/" .  $element->getId_user() ?>" class="form-table mb-2 rounded bg-warning">
+                        <form method="POST" action="<?= BASE_URL . "users/edit/" .  $element->getId_user() ?>" class="form-table mb-2 rounded bg-warning">
 
                             <!-- Button trigger modal -->
                             <button type="button" class="btn bt-tbl" data-bs-toggle="modal" data-bs-target="<?= '#modifyUser' .  $element->getId_user() ?>">

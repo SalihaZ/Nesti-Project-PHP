@@ -93,7 +93,7 @@
                     <td>
 
                         <!-- Form POST Modify -->
-                        <form method="POST" action="<?= BASE_URL . "articles/edition/" .  $element->getId_article() ?>" class="form-table mb-2 rounded bg-warning">
+                        <form method="POST" action="<?= BASE_URL . "articles/edit/" .  $element->getId_article() ?>" class="form-table mb-2 rounded bg-warning">
 
                             <!-- Button trigger modal -->
                             <button type="button" class="btn bt-tbl" data-bs-toggle="modal" data-bs-target="<?= '#modifyArticle' .  $element->getId_article() ?>">

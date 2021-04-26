@@ -48,7 +48,7 @@
                 <div class="row d-flex justify-content-center form-control shadow">
                     <?php
                     foreach ($top10ConnectedUsers as $user) {
-                        echo "<div class='d-flex flex-row justify-content-between'> <div>" . $user->getLastname_user() . ' ' . $user->getFirstname_user() . " </div> <a href='" . BASE_URL . "users/edition/" . $user->getId_user() . "'>Voir</a></div>";
+                        echo "<div class='d-flex flex-row justify-content-between'> <div>" . $user->getLastname_user() . ' ' . $user->getFirstname_user() . " </div> <a href='" . BASE_URL . "users/edit/" . $user->getId_user() . "'>Voir</a></div>";
                     } ?>
                 </div>
             </div>
@@ -73,7 +73,7 @@
                         <div class="col">
                             <?php
                             foreach ($top10Chiefs as $chief) {
-                                echo "<div class='d-flex flex-row justify-content-between'> <div>" . $chief->getLastname_user() . ' ' . $chief->getFirstname_user() . " </div> <a href='" . BASE_URL . "users/edition/" . $chief->getId_user() . "'>Voir</a></div>";
+                                echo "<div class='d-flex flex-row justify-content-between'> <div>" . $chief->getLastname_user() . ' ' . $chief->getFirstname_user() . " </div> <a href='" . BASE_URL . "users/edit/" . $chief->getId_user() . "'>Voir</a></div>";
                             } ?>
 
                         </div>
@@ -87,7 +87,7 @@
                         <div class="col">
                             <?php
                             foreach ($top10Recipes as $recipe) {
-                                echo "<div class='d-flex flex-row justify-content-between'> <div>" . $recipe->getName_recipe() . " </div> <a href='" . BASE_URL . "recipes/edition/" . $recipe->getName_recipe() . "'>Voir</a></div>";
+                                echo "<div class='d-flex flex-row justify-content-between'> <div>" . $recipe->getName_recipe() . " </div> <a href='" . BASE_URL . "recipes/edit/" . $recipe->getName_recipe() . "'>Voir</a></div>";
                             } ?>
 
                         </div>

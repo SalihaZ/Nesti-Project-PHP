@@ -26,9 +26,8 @@ class ControllerArticles extends BaseController
                 }
             }
 
-
             #ARTICLE / EDITION
-            if ($_GET['action'] == 'edition') {
+            if ($_GET['action'] == 'edit') {
                 if (!isset($_GET['option'])) {
 
                     $id_article = $_GET['id'];

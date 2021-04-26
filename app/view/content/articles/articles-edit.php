@@ -18,7 +18,7 @@ if (!isset($article) || empty($article)) {
     </div>
 
     <!-- Alertes -->
-    <!-- For edition article -->
+    <!-- For edit article -->
     <?php
     if (isset($_SESSION['articleUpdated'])) {
     ?>

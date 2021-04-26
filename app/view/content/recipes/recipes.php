@@ -81,7 +81,7 @@
                         </td>
                     <td>
                         <!-- Form POST Modify -->
-                        <form method="POST" action="<?= BASE_URL . "recipes/edition/" .  $element->getId_recipe() ?>" class="form-table mb-2 rounded bg-warning">
+                        <form method="POST" action="<?= BASE_URL . "recipes/edit/" .  $element->getId_recipe() ?>" class="form-table mb-2 rounded bg-warning">
 
                             <!-- Button trigger modal -->
                             <button type="button" class="btn bt-tbl" data-bs-toggle="modal" data-bs-target="<?= '#modifyRecipe' .  $element->getId_recipe() ?>">

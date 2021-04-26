@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function () {
             body: formData
         };
 
-        let response = await fetch(ROOT + 'users/edition', myInit);
+        let response = await fetch(ROOT + 'users/edit', myInit);
 
         try {
             if (response.ok) {

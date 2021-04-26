@@ -10,6 +10,6 @@
 <script type="text/javascript" src="<?php echo PATH_JS ?>recipes-create.js"></script>
 <script type="text/javascript" src="<?php echo PATH_JS ?>users-create.js"></script>
 <script type="text/javascript" src="<?php echo PATH_JS ?>articles-commands.js"></script>
-<script type="text/javascript" src="<?php echo PATH_JS ?>users-edition.js"></script>
+<script type="text/javascript" src="<?php echo PATH_JS ?>users-edit.js"></script>
 <script type="text/javascript" src="<?php echo PATH_JS ?>statistics.js"></script>
 <script type="text/javascript" src="<?php echo PATH_JS ?>alertes.js"></script>
