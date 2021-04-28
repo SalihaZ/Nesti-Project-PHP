@@ -1,15 +1,15 @@
 <!-- Main -->
 <main class="container wrapper-recipe-create">
 
-      <!-- Nav Location -->
-      <div class="row mt-2">
-            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="<?php echo BASE_URL ?>recipes" class="bc">Recettes</a></li>
-                    <li class="breadcrumb-item org" aria-current="page">Création</li>
-                </ol>
-            </nav>
-        </div>
+    <!-- Nav Location -->
+    <div class="row mt-2">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="<?php echo BASE_URL ?>recipes" class="bc">Recettes</a></li>
+                <li class="breadcrumb-item org" aria-current="page">Création</li>
+            </ol>
+        </nav>
+    </div>
 
     <!-- Alertes -->
     <!-- For the creation of a recipe -->
@@ -22,7 +22,7 @@
         </div>
     <?php }
     unset($_SESSION['recipeCreated']); ?>
-  
+
     <!-- Title Page -->
     <div class="row">
         <div class="col">
@@ -42,11 +42,11 @@
                 <div class="row d-flex mb-2">
                     <div class="col-12">
                         <label for="inputRecipeName">Nom de la recette</label>
-                        <input type="text" class="form-control" id="inputRecipeName" placeholder="Exemple : Gâteau au chocolat" name="name_recipe" value ="<?= $recipe->getName_recipe() ?>">
+                        <input type="text" class="form-control" id="inputRecipeName" placeholder="Exemple : Gâteau au chocolat" name="name_recipe" value="<?= $recipe->getName_recipe() ?>">
                     </div>
                 </div>
 
-                 <!-- Error Name Recipe -->
+                <!-- Error Name Recipe -->
                 <div>
                     <?php if (!empty($recipe->getNameError())) : ?>
                         <span class="badge bg-danger mb-2"><?= $recipe->getNameError() ?></span>
@@ -59,12 +59,12 @@
                         <label for="inputRecipeDifficulty">Difficulté (note sur 5)</label>
                     </div>
                     <div class="col-2">
-                        <input type="text" class="form-control" id="inputRecipeDifficulty" placeholder="" name="difficulty_recipe" value ="<?= $recipe->getDifficulty_recipe() ?>">
+                        <input type="text" class="form-control" id="inputRecipeDifficulty" placeholder="" name="difficulty_recipe" value="<?= $recipe->getDifficulty_recipe() ?>">
                     </div>
                 </div>
 
-                 <!-- Error Difficulty Recipe -->
-                 <div>
+                <!-- Error Difficulty Recipe -->
+                <div>
                     <?php if (!empty($recipe->getDifficultyError())) : ?>
                         <span class="badge bg-danger mb-2"><?= $recipe->getDifficultyError() ?></span>
                     <?php endif; ?>
@@ -76,7 +76,7 @@
                         <label for="inputRecipeNbPerson">Nombre de personnes</label>
                     </div>
                     <div class="col-2">
-                        <input type="text" class="form-control" id="inputRecipeNbPerson" placeholder="" name="number_person_recipe" value ="<?= $recipe->getNumber_person_recipe() ?>">
+                        <input type="text" class="form-control" id="inputRecipeNbPerson" placeholder="" name="number_person_recipe" value="<?= $recipe->getNumber_person_recipe() ?>">
                     </div>
 
                 </div>
@@ -94,19 +94,19 @@
                         <label for="inputRecipeType">Temps de préparation (en minutes)</label>
                     </div>
                     <div class="col-2">
-                        <input type="text" class="form-control" id="inputRecipeType" placeholder="" name="time_recipe" value ="<?= $recipe->getDisplayTimeM_recipe() ?>">
+                        <input type="text" class="form-control" id="inputRecipeType" placeholder="" name="time_recipe" value="<?= $recipe->getDisplayTimeM_recipe() ?>">
                     </div>
                 </div>
 
-                 <!-- Error Time Preparation Recipe -->
-                 <div>
+                <!-- Error Time Preparation Recipe -->
+                <div>
                     <?php if (!empty($recipe->getTimeError())) : ?>
                         <span class="badge bg-danger mb-2"><?= $recipe->getTimeError() ?></span>
                     <?php endif; ?>
                 </div>
 
-                  <!-- Input State Recipe -->
-                  <div class="row d-flex justify-content-between">
+                <!-- Input State Recipe -->
+                <div class="row d-flex justify-content-between">
                     <div class="col-6">
                         <label for="inputRecipeState">État</label>
                     </div>
@@ -135,7 +135,7 @@
 
                     <!-- Button Reset -->
                     <button class="btn btn-lg btn-reset" type="reset" onclick="resetUser()">Annuler</button>
-                
+
                 </div>
             </form>
         </div>
@@ -146,7 +146,7 @@
             <div class="application">
                 <div class="image-upload">
                     <div class="image-preview">
-                        <div class="bg-warning" id="imagePreview" >
+                        <div class="bg-warning" id="imagePreview">
                         </div>
                     </div>
                     <div class="image-edit">
@@ -161,7 +161,7 @@
     <br>
 
     <!-- Section Preparation -->
-    <div class="row d-flex mb-4">
+    <div class="row d-flex justify-content-between mb-4">
 
         <div class="col-7">
 
@@ -179,64 +179,76 @@
                 <div id="stepsPreparation">
                     <!-- Row One Step Preparation -->
                     <div class="row mb-4 d-flex">
-                        <div class="d-flex flex-column pr-3">
+                        <div class="col-1">
+                            <div class="d-flex flex-column pr-3">
 
-                            <!-- Arrow DOWN -->
-                            <a class="mb-2">
-                                <i class="fas fa-caret-square-down"></i>
-                            </a>
+                                <!-- Arrow DOWN -->
+                                <a class="mb-2">
+                                    <i class="fas fa-caret-square-down"></i>
+                                </a>
 
-                            <!-- Trash -->
-                            <a class="mb-2">
-                                <i class="fas fa-trash"></i>
-                            </a>
+                                <!-- Trash -->
+                                <a class="mb-2">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </div>
                         </div>
 
                         <!-- Text AREA -->
-                        <textarea cols="65" rows="5" class="bg-white border border-info rounded"></textarea>
+                        <div class="col-8">
+                            <textarea cols="65" rows="6" class="bg-white border border-info rounded"></textarea>
+                        </div>
                     </div>
 
                     <!-- Row One Step Preparation -->
                     <div class="row mb-4 d-flex">
-                        <div class="d-flex flex-column pr-3">
+                        <div class="col-1">
+                            <div class="d-flex flex-column pr-3">
 
-                            <!-- Arrow UP -->
-                            <a class="mb-2">
-                                <i class="fas fa-caret-square-up"></i>
-                            </a>
+                                <!-- Arrow UP -->
+                                <a class="mb-2">
+                                    <i class="fas fa-caret-square-up"></i>
+                                </a>
 
-                            <!-- Arrow DOWN -->
-                            <a class="mb-2">
-                                <i class="fas fa-caret-square-down"></i>
-                            </a>
+                                <!-- Arrow DOWN -->
+                                <a class="mb-2">
+                                    <i class="fas fa-caret-square-down"></i>
+                                </a>
 
-                            <!-- Trash -->
-                            <a class="mb-2">
-                                <i class="fas fa-trash"></i>
-                            </a>
+                                <!-- Trash -->
+                                <a class="mb-2">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </div>
                         </div>
 
                         <!-- Text AREA -->
-                        <textarea cols="65" rows="5" class="bg-white border border-info rounded"></textarea>
+                        <div class="col-8">
+                            <textarea cols="65" rows="6" class="bg-white border border-info rounded"></textarea>
+                        </div>
                     </div>
 
                     <!-- Row One Step Preparation -->
                     <div class="row mb-4 d-flex">
-                        <div class="d-flex flex-column pr-3">
+                        <div class="col-1">
+                            <div class="d-flex flex-column pr-3">
 
-                            <!-- Arrow UP -->
-                            <a class="mb-2">
-                                <i class="fas fa-caret-square-up"></i>
-                            </a>
+                                <!-- Arrow UP -->
+                                <a class="mb-2">
+                                    <i class="fas fa-caret-square-up"></i>
+                                </a>
 
-                            <!-- Trash -->
-                            <a class="mb-2">
-                                <i class="fas fa-trash"></i>
-                            </a>
+                                <!-- Trash -->
+                                <a class="mb-2">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </div>
                         </div>
 
                         <!-- Text AREA -->
-                        <textarea cols="65" rows="5" class="bg-white border border-info rounded"></textarea>
+                        <div class="col-8">
+                            <textarea cols="65" rows="5" class="bg-white border border-info rounded"></textarea>
+                        </div>
                     </div>
                 </div>
                 <!-- Button Plus -->
@@ -279,14 +291,14 @@
                             </div>
 
                             <div class="row d-flex justify-content-between">
-                                <div class="col-4 no-padding">
+                                <div class="col-3">
                                     <input type="text" class="form-control" id="inputIngredientQuantity" placeholder="Quantité">
                                 </div>
-                                <div class="col-4 no-padding">
+                                <div class="col-5">
                                     <input type="text" class="form-control" id="inputIngredientUnit" placeholder="Unité">
                                 </div>
-                                <div class="col-2 no-padding">
-                                    <input class="btn" onclick="addIngredient()" type="submit" id="button-validation" value="OK">
+                                <div class="col-3 d-flex justify-content-end">
+                                    <input class="btn btn-validation" onclick="addIngredient()" type="submit" value="Ajouter">
                                 </div>
                             </div>
                         </div>
