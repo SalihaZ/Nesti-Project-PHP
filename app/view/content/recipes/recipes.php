@@ -74,7 +74,7 @@
                             <?= $element->getNumber_person_recipe() ?>
                         </td>
                         <td>
-                            <?= $element->getDisplayTime_recipe() ?>
+                            <?= $element->getDisplayTimeHMS_recipe() ?>
                         </td>
                         <td>
                             <?= $element->getNameChiefRecipe() ?>

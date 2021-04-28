@@ -164,7 +164,7 @@ class Recipe
         return $this->time_recipe;
     }
 
-    public function getDisplayTime_recipe()
+    public function getDisplayTimeHMS_recipe()
     {
         $duration = $this->getTime_recipe();
         $vals = explode(':', $duration);
@@ -172,9 +172,16 @@ class Recipe
         if ($vals[0] == 0)
             $result = $vals[1] . ' minutes';
         else
-            $result = $vals[0] . 'heures, ' . $vals[1] . ' minutes';
+            $result = substr($vals[0], 1)  . ' heure ' . $vals[1] . ' minutes';
 
         return $result;
+    }
+
+    public function getDisplayTimeM_recipe()
+    {
+        $duration = $this->getTime_recipe();
+        $time = explode(':', $duration);
+        return ($time[0]*60) + ($time[1]) + ($time[2]/60);
     }
 
     /**
@@ -186,12 +193,17 @@ class Recipe
         if (empty($time_recipe)) {
             $this->timeError = 'Veuillez saisir un temps de préparation';
             $this->valid_recipe = false;
-        } else if (!preg_match("/^[0-9]{0,2}$/", $time_recipe)) {
+        } else if (!preg_match("/^[0-9]{0,3}$/", $time_recipe)) {
             $this->timeError = "Veuillez saisir un temps de préparation valide";
             $this->valid_recipe = false;
+        } else {
+            $convertedTimeHour = intdiv($time_recipe , 60);
+            $convertedTimeMinutes = fmod($time_recipe , 60);
+            $convertedTime = $convertedTimeHour . ":" . $convertedTimeMinutes . ":00";
+            $this->time_recipe = $convertedTime;
         }
 
-        $this->time_recipe = $time_recipe;
+       
 
         return $this;
     }
@@ -314,7 +326,7 @@ class Recipe
         return $this;
     }
 
-     /**
+    /**
      * Get the value of valid_recipe
      */
     public function getValid_recipe()

@@ -94,7 +94,7 @@
                         <label for="inputRecipeType">Temps de préparation (en minutes)</label>
                     </div>
                     <div class="col-2">
-                        <input type="text" class="form-control" id="inputRecipeType" placeholder="" name="time_recipe" value ="<?= $recipe->getTime_recipe() ?>">
+                        <input type="text" class="form-control" id="inputRecipeType" placeholder="" name="time_recipe" value ="<?= $recipe->getDisplayTimeM_recipe() ?>">
                     </div>
                 </div>
 
