@@ -281,7 +281,7 @@ class Article
     {
         $date =  ImportDAO::getDateImportArticle($this->getId_article());
         if ($date != "Pas de première importation") {
-            $date = strftime("Le %d/%m/%G à %Hh%M", strtotime($date));
+            $date = strftime("%d/%m/%G à %Hh%M", strtotime($date));
         }
         return $date;
     }

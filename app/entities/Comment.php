@@ -82,7 +82,7 @@ class Comment {
 
     public function getDisplayDate_creation_comment(){
         $date =  $this->date_creation_comment;
-        return strftime("Le %d/%m/%G à %Hh%M", strtotime($date));    
+        return strftime("%d/%m/%G à %Hh%M", strtotime($date));    
     }
 
     /**

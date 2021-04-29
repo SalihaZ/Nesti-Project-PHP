@@ -78,7 +78,7 @@ class Command
     public function getDisplayDate_creation_command()
     {
         $date = $this->date_creation_command;
-        return strftime("Le %d/%m/%G à %Hh%M", strtotime($date));
+        return strftime("%d/%m/%G à %Hh%M", strtotime($date));
     }
 
     /**
