@@ -1,6 +1,6 @@
 <?php 
 
-class Command_Lines { 
+class CommandLines { 
 
     //Attributes
     private $command_quantity;

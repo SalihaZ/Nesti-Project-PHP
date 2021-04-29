@@ -162,7 +162,7 @@ class CommandDAO extends BaseDAO
         $result = $pdo->query($sql);
 
         if ($result) {
-            $arrayCommandLines = $result->fetchAll(PDO::FETCH_CLASS, 'Command_Lines');
+            $arrayCommandLines = $result->fetchAll(PDO::FETCH_CLASS, 'CommandLines');
         } else {
             $arrayCommandLines = [];
         }
