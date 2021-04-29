@@ -131,7 +131,7 @@
                 <div class="row d-flex justify-content-around">
 
                     <!-- Button Validation -->
-                    <input class="btn btn-lg btn-validation" type="submit" value="Valider">
+                    <button class="btn btn-lg btn-validation" type="submit">Valider</button>
 
                     <!-- Button Reset -->
                     <button class="btn btn-lg btn-reset" type="reset" onclick="resetUser()">Annuler</button>
@@ -271,6 +271,13 @@
             <div class="row shadow rounded">
                 <div class="col-12 mt-3">
                     <ul id="listIngredients">
+                    <?php foreach ($ingredients_recipe as $element) { ?>
+                        <li class = "justify-content-between mb-1">
+                            <?= $element->getQuantity_ingredient() . " " . $element->getNameMeasureUnit() . " de " . $element->getNameProduct() ?>
+                        <button class="buttonDeleteIngredient rounded" data-id-recipe="<?= $element->getFk_id_recipe() ?>" data-quantity="<?= $element->getQuantity_ingredient() ?>" data-id-product="<?= $element->getFk_id_product() ?>" data-id-measure-unit="<?= $element->getFk_id_measure_unit()?> ">
+                        <i class = "fas fa-times"></i>
+                        </button>
+                        <?php }?>
                         <!-- Add <li> here -->
                     </ul>
                 </div>
@@ -298,7 +305,7 @@
                                     <input type="text" class="form-control" id="inputIngredientUnit" placeholder="Unité">
                                 </div>
                                 <div class="col-3 d-flex justify-content-end">
-                                    <input class="btn btn-validation" onclick="addIngredient()" type="submit" value="Ajouter">
+                                    <button id ="buttonAddIngredient" class="btn btn-validation">Ajouter</button>
                                 </div>
                             </div>
                         </div>
@@ -307,3 +314,8 @@
             </div>
         </div>
 </main>
+
+<script>
+    const ROOT = '<?= BASE_URL ?>';
+    const idRecipe = '<?= $_GET['id'] ?>';
+</script>
