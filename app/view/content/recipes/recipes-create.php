@@ -125,7 +125,7 @@
                 <div class="row d-flex justify-content-around">
 
                     <!-- Button Validation -->
-                    <input class="btn btn-lg btn-validation" type="submit" value="Valider">
+                    <button class="btn btn-lg btn-validation" type="submit">Valider</button>
 
                     <!-- Button Reset -->
                     <button class="btn btn-lg btn-reset" type="reset" onclick="resetUser()">Annuler</button>
