@@ -7,7 +7,7 @@
 <script type="text/javascript" src="<?php echo PATH_JS ?>tui-chart.js"></script>
 <script type="text/javascript" src="<?php echo PATH_JS ?>bootstrap-table-fr-FR.js"></script>
 
-<script type="text/javascript" src="<?php echo PATH_JS ?>recipes-create.js"></script>
+<script type="text/javascript" src="<?php echo PATH_JS ?>recipes-edit.js"></script>
 <script type="text/javascript" src="<?php echo PATH_JS ?>users-create.js"></script>
 <script type="text/javascript" src="<?php echo PATH_JS ?>articles-commands.js"></script>
 <script type="text/javascript" src="<?php echo PATH_JS ?>users-edit.js"></script>
