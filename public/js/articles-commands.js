@@ -30,11 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    /**
-     * Ajax Request to get the articles from the orderLines according to the order
-     * @param int orderId
-     * @returns mixed
-     */
+   // AJAX REQUEST
     async function getCommandDetails(commandID) {
 
         var myHeaders = new Headers();
