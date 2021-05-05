@@ -10,7 +10,10 @@ abstract class BaseController{
     }
 
     public function getData(){
-            return $this->_data; 
+
+        if (isset($this->_data) && !empty($this->_data)) {
+            return $this->_data;
+        }
     }
 
     protected abstract function initialize();

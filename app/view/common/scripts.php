@@ -13,3 +13,4 @@
 <script type="text/javascript" src="<?php echo PATH_JS ?>users-edit.js"></script>
 <script type="text/javascript" src="<?php echo PATH_JS ?>statistics.js"></script>
 <script type="text/javascript" src="<?php echo PATH_JS ?>alertes.js"></script>
+<script type="text/javascript" src="<?php echo PATH_JS ?>articles-edit.js"></script>

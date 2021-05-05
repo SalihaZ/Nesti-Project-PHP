@@ -12,7 +12,7 @@
         <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="<?php echo BASE_URL ?>users" class="bc">Utilisateur</a></li>
-                <li class="breadcrumb-item org" aria-current="page">Edition</li>
+                <li class="breadcrumb-item org" aria-current="page">Édition</li>
             </ol>
         </nav>
     </div>

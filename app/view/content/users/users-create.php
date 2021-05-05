@@ -1,7 +1,8 @@
-<!-- Create new user object -->
+<!-- Create new user and city objects -->
 <?php if (!isset($user) || empty($user)) {
     $user = new User();
 }
+
 if (!isset($city) || empty($city)) {
     $city = new City();
 }
@@ -49,7 +50,7 @@ if (!isset($city) || empty($city)) {
                             <!-- Error LastName User -->
                             <div>
                                 <?php if (!empty($user->getLastnameError())) : ?>
-                                    <span class="badge bg-danger mb-2"><?= $user->getLastnameError() ?></span>
+                                    <span class="badge bg-danger mb-3"><?= $user->getLastnameError() ?></span>
                                 <?php endif; ?>
                             </div>
 
@@ -62,7 +63,7 @@ if (!isset($city) || empty($city)) {
                             <!-- Error FirstName User -->
                             <div>
                                 <?php if (!empty($user->getFirstnameError())) : ?>
-                                    <span class="badge bg-danger mb-2"><?= $user->getFirstnameError() ?></span>
+                                    <span class="badge bg-danger mb-3"><?= $user->getFirstnameError() ?></span>
                                 <?php endif; ?>
                             </div>
 
@@ -75,7 +76,7 @@ if (!isset($city) || empty($city)) {
                             <!-- Error Email User -->
                             <div>
                                 <?php if (!empty($user->getEmailError())) : ?>
-                                    <span class="badge bg-danger mb-2"><?= $user->getEmailError() ?></span>
+                                    <span class="badge bg-danger mb-3"><?= $user->getEmailError() ?></span>
                                     <?php echo "</br>" ?>
                                 <?php endif; ?>
                             </div>
@@ -89,7 +90,7 @@ if (!isset($city) || empty($city)) {
                             <!-- Error UserName User -->
                             <div>
                                 <?php if (!empty($user->getUsernameError())) : ?>
-                                    <span class="badge bg-danger mb-2"><?= $user->getUsernameError() ?></span>
+                                    <span class="badge bg-danger mb-3"><?= $user->getUsernameError() ?></span>
                                 <?php endif; ?>
                             </div>
 
@@ -103,7 +104,7 @@ if (!isset($city) || empty($city)) {
                             <!-- Error Password User -->
                             <div>
                                 <?php if (!empty($user->getPasswordError())) : ?>
-                                    <span class="badge bg-danger mb-2"><?= $user->getPasswordError() ?></span>
+                                    <span class="badge bg-danger mb-3"><?= $user->getPasswordError() ?></span>
                                 <?php endif; ?>
                             </div>
 

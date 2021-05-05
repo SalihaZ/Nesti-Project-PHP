@@ -1,6 +1,6 @@
 <?php
 session_start();
-include ('app/Autoloader.php');
+include('app/Autoloader.php');
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -10,6 +10,10 @@ $loc =  filter_input(INPUT_GET, "loc", FILTER_SANITIZE_STRING);
 $action =  filter_input(INPUT_GET, "action", FILTER_SANITIZE_STRING);
 $id =  filter_input(INPUT_GET, "id", FILTER_SANITIZE_STRING);
 $option =  filter_input(INPUT_GET, "option", FILTER_SANITIZE_STRING);
+
+if (!isset($loc) && ($loc != 'connection')){
+    $loc = 'recipes';
+}
 
 $UserSession = new Session();
 
@@ -24,7 +28,7 @@ if ($UserSession->isUserConnected()) {
 $controller = null;
 
 switch ($loc) {
-   
+
         // Connection part
     case "connection":
         $controller = new ControllerConnection();
@@ -47,8 +51,8 @@ switch ($loc) {
 
         // Users part
     case "users":
-       $controller = new ControllerUsers();
-    break;
+        $controller = new ControllerUsers();
+        break;
 
         // Statistics part
     case "statistics":
@@ -60,6 +64,9 @@ switch ($loc) {
         break;
 }
 
-extract($controller->getData());
+if ($controller !=null){
+    extract($controller->getData());
+}
+
 
 include(PATH_COMMON . "template.php");

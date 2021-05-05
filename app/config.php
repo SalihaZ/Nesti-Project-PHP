@@ -5,6 +5,7 @@ define('DEBUG', true);
 // PATH
 define('BASE_URL', 'http://localhost/www/Nesti-Project-PHP/');
 define('PATH_CTRL', 'app/controller/');
+define("BASE_DIR", __DIR__.'/..');
 
 // PATH-VIEW
 define('PATH_VIEW', 'app/view/');
@@ -29,6 +30,8 @@ define('PWD', '');
 
 // PATH_IMAGE
 define('PATH_IMG', BASE_URL.'public/images/');
+define('PATH_IMG_RECIPES', BASE_URL.'public/images/recipes/');
+define('PATH_IMG_ARTICLES', BASE_URL.'public/images/articles/');
 
 //PATH_JS
 define('PATH_JS', BASE_URL.'public/js/');
