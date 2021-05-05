@@ -6,7 +6,7 @@
         <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="<?php echo BASE_URL ?>recipes" class="bc">Recettes</a></li>
-                <li class="breadcrumb-item org" aria-current="page">Création</li>
+                <li class="breadcrumb-item org" aria-current="page">Édition</li>
             </ol>
         </nav>
     </div>
@@ -23,6 +23,14 @@
     <?php }
     unset($_SESSION['recipeCreated']); ?>
 
+    <?php if (isset($_SESSION['recipeUpdated'])) {
+    ?>
+        <div class="alert alert-success" role="alert" onclick="removeAlert(this)">
+            Votre recette a bien été mis à jour.
+        </div>
+    <?php }
+    unset($_SESSION['recipeUpdated']); ?>
+
     <!-- Title Page -->
     <div class="row">
         <div class="col">
@@ -36,7 +44,7 @@
 
         <!-- Article Input Informations Recipe-->
         <div class="col-4">
-            <form method="POST" action="create" class="application">
+            <form method="POST" action="" class="application">
 
                 <!-- Input Name Recipe -->
                 <div class="row d-flex mb-2">
@@ -141,18 +149,26 @@
         </div>
 
 
+        <!-- Picture Recipe -->
         <div class="col-6">
-
-            <div class="application">
-                <div class="image-upload">
-                    <div class="image-preview">
-                        <div class="bg-warning" id="imagePreview">
+            <div class="application d-flex justify-content-between">
+                <form id="formPictureRecipe" method="post" action="" enctype="multipart/form-data">
+                    <div id="display-img-recipe" class='preview d-flex justify-content-center mb-3' style="background-image: url('http://localhost/www/Nesti-Project-PHP/public/images/recipes/<?= $name_picture['image_name'] ?> ')">
+                        <!-- IMAGE DISPLAY HERE -->
+                    </div>
+                    <div class='d-flex justify-content-center'>
+                        <div class='d-flex align-items-center me-2'>
+                            <input type="file" id="InputFileEditRecipe" name="file" />
+                        </div>
+                        <div class='d-flex justify-content-center me-2'>
+                            <button class="btn btn-lg btn-validation" id="button-upload-picture-recipe">Ajouter</button>
                         </div>
                     </div>
-                    <div class="image-edit">
-                        <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
-                        <label for="imageUpload"></label>
-                    </div>
+                </form>
+                <div class='d-flex align-items-center'>
+                    <button class="btn btn-lg btn-delete" id="button-delete-picture-recipe">
+                        <i class="fas fa-trash"> </i>
+                    </button>
                 </div>
             </div>
         </div>
@@ -175,85 +191,14 @@
             <br>
 
             <!-- Bloc Preparation -->
-            <div class="application">
+            <div class="application mb-4">
                 <div id="stepsPreparation">
-                    <!-- Row One Step Preparation -->
-                    <div class="row mb-4 d-flex">
-                        <div class="col-1">
-                            <div class="d-flex flex-column pr-3">
-
-                                <!-- Arrow DOWN -->
-                                <a class="mb-2">
-                                    <i class="fas fa-caret-square-down"></i>
-                                </a>
-
-                                <!-- Trash -->
-                                <a class="mb-2">
-                                    <i class="fas fa-trash"></i>
-                                </a>
-                            </div>
-                        </div>
-
-                        <!-- Text AREA -->
-                        <div class="col-8">
-                            <textarea cols="65" rows="6" class="bg-white border border-info rounded"></textarea>
-                        </div>
-                    </div>
-
-                    <!-- Row One Step Preparation -->
-                    <div class="row mb-4 d-flex">
-                        <div class="col-1">
-                            <div class="d-flex flex-column pr-3">
-
-                                <!-- Arrow UP -->
-                                <a class="mb-2">
-                                    <i class="fas fa-caret-square-up"></i>
-                                </a>
-
-                                <!-- Arrow DOWN -->
-                                <a class="mb-2">
-                                    <i class="fas fa-caret-square-down"></i>
-                                </a>
-
-                                <!-- Trash -->
-                                <a class="mb-2">
-                                    <i class="fas fa-trash"></i>
-                                </a>
-                            </div>
-                        </div>
-
-                        <!-- Text AREA -->
-                        <div class="col-8">
-                            <textarea cols="65" rows="6" class="bg-white border border-info rounded"></textarea>
-                        </div>
-                    </div>
-
-                    <!-- Row One Step Preparation -->
-                    <div class="row mb-4 d-flex">
-                        <div class="col-1">
-                            <div class="d-flex flex-column pr-3">
-
-                                <!-- Arrow UP -->
-                                <a class="mb-2">
-                                    <i class="fas fa-caret-square-up"></i>
-                                </a>
-
-                                <!-- Trash -->
-                                <a class="mb-2">
-                                    <i class="fas fa-trash"></i>
-                                </a>
-                            </div>
-                        </div>
-
-                        <!-- Text AREA -->
-                        <div class="col-8">
-                            <textarea cols="65" rows="5" class="bg-white border border-info rounded"></textarea>
-                        </div>
-                    </div>
+                    <!-- PARAGRAPHS LOAD HERE -->
                 </div>
+
                 <!-- Button Plus -->
-                <div class="row justify-content-end">
-                    <button class="btn" id="plusPreparation" onclick="addStepPreparation()" type="submit"><i class="fas fa-plus"></i></button>
+                <div id="row-add-preparation" class="row justify-content-end">
+                    <button class="btn" id="buttonAddStepPreparation" type="submit"><i class="fas fa-plus"></i></button>
                 </div>
             </div>
         </div>
@@ -271,14 +216,14 @@
             <div class="row shadow rounded">
                 <div class="col-12 mt-3">
                     <ul id="listIngredients">
-                    <?php foreach ($ingredients_recipe as $element) { ?>
-                        <li class = "justify-content-between mb-1">
-                            <?= $element->getQuantity_ingredient() . " " . $element->getNameMeasureUnit() . " de " . $element->getNameProduct() ?>
-                        <button class="buttonDeleteIngredient rounded" data-id-recipe="<?= $element->getFk_id_recipe() ?>" data-quantity="<?= $element->getQuantity_ingredient() ?>" data-id-product="<?= $element->getFk_id_product() ?>" data-id-measure-unit="<?= $element->getFk_id_measure_unit()?> ">
-                        <i class = "fas fa-times"></i>
-                        </button>
-                        <?php }?>
-                        <!-- Add <li> here -->
+                        <?php foreach ($ingredients_recipe as $element) { ?>
+                            <li class="justify-content-between mb-1">
+                                <?= $element->getQuantity_ingredient() . " " . $element->getNameMeasureUnit() . " de " . $element->getNameProduct() ?>
+                                <button class="buttonDeleteIngredient rounded" data-id-recipe="<?= $element->getFk_id_recipe() ?>" data-quantity="<?= $element->getQuantity_ingredient() ?>" data-id-product="<?= $element->getFk_id_product() ?>" data-id-measure-unit="<?= $element->getFk_id_measure_unit() ?> ">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            <?php } ?>
+                            <!-- Add <li> here -->
                     </ul>
                 </div>
             </div>
@@ -305,7 +250,7 @@
                                     <input type="text" class="form-control" id="inputIngredientUnit" placeholder="Unité">
                                 </div>
                                 <div class="col-3 d-flex justify-content-end">
-                                    <button id ="buttonAddIngredient" class="btn btn-validation">Ajouter</button>
+                                    <button id="buttonAddIngredient" class="btn btn-validation">Ajouter</button>
                                 </div>
                             </div>
                         </div>
@@ -313,6 +258,7 @@
                 </div>
             </div>
         </div>
+
 </main>
 
 <script>

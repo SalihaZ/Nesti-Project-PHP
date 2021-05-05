@@ -4,7 +4,42 @@ class IngredientRecipeDAO extends BaseDAO
 {
     protected static $tableName = "ingredient_recipes";
 
+  // Find All Ingredients for one recipe
+  public static function findAllIngredientsForOneRecipe($id_recipe)
+  {
+      $pdo = Database::getPdo();
+      $sql = "SELECT * FROM `ingredient_recipes` WHERE fk_id_recipe = $id_recipe";
+      $result = $pdo->query($sql);
 
+      if ($result) {
+          $arrayIngredientsRecipe = $result->fetchAll(PDO::FETCH_CLASS, 'IngredientRecipes');
+      } else {
+          $arrayIngredientsRecipe = [];
+      }
+
+      Database::disconnect();
+
+      return $arrayIngredientsRecipe;
+  }
+
+  public static function findIDMeasureUnitWith($name_measure_unit)
+  {
+      $pdo = Database::getPdo();
+      $sql = "SELECT id_measure_unit FROM measure_units WHERE name_measure_unit = '$name_measure_unit'";
+      $result = $pdo->query($sql);
+      $result->setFetchMode(PDO::FETCH_ASSOC);
+
+      if ($result->rowcount() == 1) {
+         $id_measure_unit = $result->fetch();
+      } else {
+         $id_measure_unit['id_measure_unit'] = null;
+      }
+
+      Database::disconnect();
+
+      return $id_measure_unit['id_measure_unit'];
+  }
+  
     // Creates a new ingredient for a recipe
     public static function addIngredientRecipe($id_recipe, $id_ingredient, $quantity_ingredient, $id_measure_unit_ingredient)
     {
@@ -44,39 +79,5 @@ class IngredientRecipeDAO extends BaseDAO
          Database::disconnect();
      }
 
-    // Find All Ingredients for one recipe
-    public static function findAllIngredientsForOneRecipe($id_recipe)
-    {
-        $pdo = Database::getPdo();
-        $sql = "SELECT * FROM `ingredient_recipes` WHERE fk_id_recipe = $id_recipe";
-        $result = $pdo->query($sql);
-
-        if ($result) {
-            $arrayIngredientsRecipe = $result->fetchAll(PDO::FETCH_CLASS, 'IngredientRecipes');
-        } else {
-            $arrayIngredientsRecipe = [];
-        }
-
-        Database::disconnect();
-
-        return $arrayIngredientsRecipe;
-    }
-
-    public static function findIDMeasureUnitWith($name_measure_unit)
-    {
-        $pdo = Database::getPdo();
-        $sql = "SELECT id_measure_unit FROM measure_units WHERE name_measure_unit = '$name_measure_unit'";
-        $result = $pdo->query($sql);
-        $result->setFetchMode(PDO::FETCH_ASSOC);
-
-        if ($result->rowcount() == 1) {
-           $id_measure_unit = $result->fetch();
-        } else {
-           $id_measure_unit['id_measure_unit'] = null;
-        }
-
-        Database::disconnect();
-
-        return $id_measure_unit['id_measure_unit'];
-    }
+  
 }

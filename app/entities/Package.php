@@ -9,8 +9,6 @@ class Package
     private $quantity_bought_package;
     private $date_reception;
 
-
-
     /**
      * Get the value of ref_package
      */ 

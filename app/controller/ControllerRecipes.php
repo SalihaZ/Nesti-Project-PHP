@@ -48,19 +48,109 @@ class ControllerRecipes extends BaseController
 
                     $recipe = RecipeDAO::findOneBy("id_recipe", $id_recipe);
                     $ingredients_recipe = IngredientRecipeDAO::findAllIngredientsForOneRecipe($id_recipe);
-
+                    $steps_recipe = ParagraphDAO::findAllStepsForOneRecipe($id_recipe);
+                    $id_picture = $recipe->getFk_id_image();
+                    if ($id_picture != 0) {
+                        $name_picture = PictureDAO::getPictureName($recipe->getFk_id_image());
+                        $this->_data['name_picture'] = $name_picture;
+                    }
 
                     if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
 
-                        // $article->setCustomer_name_article(($_POST["articleCustomerName"]));
-                        // $article->setState_article(($_POST["stateArticle"]));
+                        $recipe->setName_recipe($_POST["name_recipe"]);
+                        $recipe->setDifficulty_recipe($_POST["difficulty_recipe"]);
+                        $recipe->setNumber_person_recipe($_POST["number_person_recipe"]);
+                        $recipe->setState_recipe($_POST["stateRecipe"]);
+                        $recipe->setTime_recipe($_POST["time_recipe"]);
 
-                        // ArticleDAO::updateArticle($article);
-                        // $_SESSION['articleUpdated'] = '';
+                        // Pushes into DB
+                        if (($recipe->getValid_recipe()) == true) {
+                            RecipeDAO::updateRecipe($recipe);
+
+                            $_SESSION['recipeUpdated'] = '';
+                        }
                     }
 
                     $this->_data['recipe'] = $recipe;
                     $this->_data['ingredients_recipe'] = $ingredients_recipe;
+                    $this->_data['steps_recipe'] = $steps_recipe;
+                }
+
+                #RECIPE / ADD IMAGE
+                if (isset($_GET['id'])) {
+
+                    if ((isset($_GET['option'])) && (($_GET['option']) == "editpicture")) {
+
+                        if (isset($_FILES['file']['name'])) {
+
+                            $id_recipe = $_GET['id'];
+                            $filename = $_FILES['file']['name'];
+                            $position = strrpos($filename, ".");
+                            $data['download'] = is_uploaded_file($_FILES['file']['tmp_name']);
+                            $location = BASE_DIR . "/public/images/recipes/" . strtolower($filename);
+                            $imageFileType = strtolower(pathinfo($location, PATHINFO_EXTENSION));
+                            $valid_extensions = array("jpg", "jpeg", "png");
+
+                            $response = [];
+                            /* Check file extension */
+                            if (in_array(strtolower($imageFileType), $valid_extensions)) {
+                                /* Upload file */
+                                if (move_uploaded_file($_FILES['file']['tmp_name'], $location)) {
+
+                                    $image = new Image;
+                                    $image->setName_image(substr(strtolower($filename), 0, $position));
+                                    $image->setExtension_image($imageFileType);
+                                    $id_image = PictureDAO::addPicture($image);
+                                    PictureDAO::linkPictureToRecipe($id_recipe, $id_image);
+
+                                    $response['name'] = $image->getName_image() . "." . $image->getExtension_image();
+                                    $response["path"] = PATH_IMG_RECIPES . $response['name'];
+                                }
+                            }
+                            echo json_encode($response);
+                            die();
+                        }
+                    }
+                }
+
+                #RECIPE / DELETE IMAGE
+                if (isset($_GET['id'])) {
+
+                    if ((isset($_GET['option'])) && (($_GET['option']) == "deletepicture")) {
+                        if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
+
+                            $id_recipe = $_POST["id_recipe"];
+                            RecipeDAO::deletePictureRecipe($id_recipe);
+
+                            $response = 'succeed';
+
+                            echo json_encode($response);
+                            die();
+                        }
+                    }
+                }
+
+                // LOAD PARAGRAPHS
+                if (isset($_GET['id'])) {
+                    if ((isset($_GET['option'])) && (($_GET['option']) == "loadparagraphs")) {
+
+                        if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
+
+                            $fk_id_recipe = $_POST["id_recipe"];
+
+                            $steps_recipe = ParagraphDAO::findAllStepsForOneRecipe($fk_id_recipe);
+
+                            $steps = [];
+                            foreach ($steps_recipe as $key => $step) {
+                                $steps[$key]['id_paragraph'] = $step->getId_paragraph();
+                                $steps[$key]['content_paragraph'] = $step->getContent_paragraph();
+                                $steps[$key]['order_paragraph'] = $step->getOrder_paragraph();
+                                $steps[$key]['fk_id_recipes'] = $step->getFk_id_recipes();
+                            }
+                            echo json_encode($steps);
+                            die();
+                        }
+                    }
                 }
 
                 //ADD INGREDIENT
@@ -86,12 +176,12 @@ class ControllerRecipes extends BaseController
                             if ($id_measure_unit_ingredient == null) {
                                 $id_measure_unit_ingredient = MeasureUnitDAO::createMeasureUnit($name_unit_ingredient);
                             }
-                            
+
                             $data["id_ingredient"] = $id_ingredient;
                             $data["id_measure_unit_ingredient"] = $id_measure_unit_ingredient;
                             $data['quantity_ingredient'] = $quantity_ingredient;
-                            $data['id_recipe']= $id_recipe;
-                          
+                            $data['id_recipe'] = $id_recipe;
+
                             echo json_encode($data);
 
                             IngredientRecipeDAO::addIngredientRecipe($id_recipe, $id_ingredient, $quantity_ingredient, $id_measure_unit_ingredient);
@@ -99,10 +189,11 @@ class ControllerRecipes extends BaseController
                         }
                     }
 
-                     // DELETE INGREDIENT
+
+                    // DELETE INGREDIENT
                     if ((isset($_GET['option'])) && (($_GET['option']) == "deleteingredient")) {
 
-                        if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) { 
+                        if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
 
                             $id_recipe = $_POST["id_recipe"];
                             $id_ingredient = $_POST["id_ingredient"];
@@ -115,10 +206,144 @@ class ControllerRecipes extends BaseController
 
                             IngredientRecipeDAO::deleteIngredientRecipe($id_recipe, $id_ingredient, $quantity_ingredient, $id_measure_unit_ingredient);
                             die();
-
                         }
+                    }
 
-                    }                    
+                    //ADD PARAGRAPH
+                    if (isset($_GET['id'])) {
+                        if ((isset($_GET['option'])) && (($_GET['option']) == "addparagraph")) {
+
+                            if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
+
+                                $fk_id_recipe = $_POST["id_recipe"];
+
+                                $order_paragraph = ParagraphDAO::getOrderParagraphRecipe($fk_id_recipe);
+                                $id_paragraph = ParagraphDAO::addParagraphRecipe($fk_id_recipe, $order_paragraph);
+                                $steps_recipe = ParagraphDAO::findAllStepsForOneRecipe($fk_id_recipe);
+
+                                $steps = [];
+                                foreach ($steps_recipe as $key => $step) {
+                                    $steps[$key]['id_paragraph'] = $step->getId_paragraph();
+                                    $steps[$key]['content_paragraph'] = $step->getContent_paragraph();
+                                    $steps[$key]['order_paragraph'] = $step->getOrder_paragraph();
+                                    $steps[$key]['fk_id_recipes'] = $step->getFk_id_recipes();
+                                }
+                                echo json_encode($steps);
+                                die();
+                            }
+                        }
+                    }
+
+                    //ADD CONTENT PARAGRAPH
+                    if (isset($_GET['id'])) {
+                        if ((isset($_GET['option'])) && (($_GET['option']) == "addcontentparagraph")) {
+
+                            if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
+
+                                $fk_id_recipe = $_POST["id_recipe"];
+                                $id_paragraph = $_POST["id_paragraph"];
+                                $content_paragraph = $_POST["content_paragraph"];
+                                $order_paragraph = $_POST["order_paragraph"];
+
+                                ParagraphDAO::addContentParagraphRecipe($fk_id_recipe, $content_paragraph, $id_paragraph, $order_paragraph);
+
+                                $data['addcontent'] = "succeed";
+
+                                echo json_encode($data);
+                                die();
+                            }
+                        }
+                    }
+
+                    // DELETE PARAGRAPH
+                    if (isset($_GET['id'])) {
+                        if ((isset($_GET['option'])) && (($_GET['option']) == "deleteparagraph")) {
+
+                            if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
+
+                                $fk_id_recipe = $_POST["id_recipe"];
+                                $id_paragraph = $_POST["id_paragraph"];
+                                $order_paragraph = $_POST["order_paragraph"];
+
+                                $array_id_paragraphs = ParagraphDAO::findAllOrderGreaterThan($order_paragraph, $fk_id_recipe);
+
+                                ParagraphDAO::deleteParagraphRecipe($fk_id_recipe, $id_paragraph, $order_paragraph);
+                                foreach ($array_id_paragraphs as $id_paragraph) {
+                                    ParagraphDAO::orderDownParagraphRecipe($id_paragraph['id_paragraph']);
+                                }
+
+                                $steps_recipe = ParagraphDAO::findAllStepsForOneRecipe($fk_id_recipe);
+
+                                $steps = [];
+                                foreach ($steps_recipe as $key => $step) {
+                                    $steps[$key]['id_paragraph'] = $step->getId_paragraph();
+                                    $steps[$key]['content_paragraph'] = $step->getContent_paragraph();
+                                    $steps[$key]['order_paragraph'] = $step->getOrder_paragraph();
+                                    $steps[$key]['fk_id_recipes'] = $step->getFk_id_recipes();
+                                }
+                                echo json_encode($steps);
+                                die();
+                            }
+                        }
+                    }
+
+                    //MOVE UP PARAGRAPHS
+                    if (isset($_GET['id'])) {
+                        if ((isset($_GET['option'])) && (($_GET['option']) == "moveupparagraphs")) {
+
+                            if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
+
+                                $fk_id_recipe = $_POST["id_recipe"];
+                                $id_paragraph = $_POST["id_paragraph"];
+                                $order_paragraph = $_POST["order_paragraph"];
+
+                                $id_paragraph_before = ParagraphDAO::findParagraphBefore($order_paragraph, $fk_id_recipe);
+                                ParagraphDAO::orderUpParagraphRecipe($id_paragraph_before);
+                                ParagraphDAO::orderDownParagraphRecipe($id_paragraph);
+
+                                $steps_recipe = ParagraphDAO::findAllStepsForOneRecipe($fk_id_recipe);
+
+                                $steps = [];
+                                foreach ($steps_recipe as $key => $step) {
+                                    $steps[$key]['id_paragraph'] = $step->getId_paragraph();
+                                    $steps[$key]['content_paragraph'] = $step->getContent_paragraph();
+                                    $steps[$key]['order_paragraph'] = $step->getOrder_paragraph();
+                                    $steps[$key]['fk_id_recipes'] = $step->getFk_id_recipes();
+                                }
+                                echo json_encode($steps);
+                                die();
+                            }
+                        }
+                    }
+
+                    //MOVE DOWN PARAGRAPHS
+                    if (isset($_GET['id'])) {
+                        if ((isset($_GET['option'])) && (($_GET['option']) == "movedownparagraphs")) {
+
+                            if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
+
+                                $fk_id_recipe = $_POST["id_recipe"];
+                                $id_paragraph = $_POST["id_paragraph"];
+                                $order_paragraph = $_POST["order_paragraph"];
+
+                                $id_paragraph_after = ParagraphDAO::findParagraphAfter($order_paragraph, $fk_id_recipe);
+                                ParagraphDAO::orderDownParagraphRecipe($id_paragraph_after);
+                                ParagraphDAO::orderUpParagraphRecipe($id_paragraph);
+
+                                $steps_recipe = ParagraphDAO::findAllStepsForOneRecipe($fk_id_recipe);
+
+                                $steps = [];
+                                foreach ($steps_recipe as $key => $step) {
+                                    $steps[$key]['id_paragraph'] = $step->getId_paragraph();
+                                    $steps[$key]['content_paragraph'] = $step->getContent_paragraph();
+                                    $steps[$key]['order_paragraph'] = $step->getOrder_paragraph();
+                                    $steps[$key]['fk_id_recipes'] = $step->getFk_id_recipes();
+                                }
+                                echo json_encode($steps);
+                                die();
+                            }
+                        }
+                    }
                 }
             }
         }
