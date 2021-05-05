@@ -244,4 +244,18 @@ class ArticleDAO extends BaseDAO
         return $quantity_sold['quantity_sold'];
     }
 
+    public static function deletePictureArticle($id_article)
+    {
+        $pdo = Database::getPdo();
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $sql = "UPDATE articles SET fk_id_image = NULL WHERE id_article = ?";
+        $q = $pdo->prepare($sql);
+        $q->execute(
+            [
+                $id_article
+            ]
+        );
+        Database::disconnect();
+    }
+
 }

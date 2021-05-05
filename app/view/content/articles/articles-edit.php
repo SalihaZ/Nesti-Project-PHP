@@ -125,26 +125,35 @@ if (!isset($article) || empty($article)) {
                 </div>
             </form>
         </div>
-        <!-- Input Picture Article -->
-        <div class="col-5">
-            <div class="row mb-3">
-                <div class="col-12">
-                    <div class="custom-file">
-                        <form id="" class="application" action="" enctype="multipart/form-data" method="POST">
-                            <div class="d-flex flex-column">
-                                <input type="file" class="custom-file-input" id="InputFileEditArticle" name="image">
 
-                                <!-- Button Validation Picture -->
-                                <div class="row d-flex justify-content-center">
-                                    <button type="button" class="btn btn-lg btn-validation">OK</button>
-                                </div>
-
-                            </div>
+        <!-- Picture Article -->
+        <div class="col-6">
+            <div class="application d-flex justify-content-between">
+                <form id="formPictureArticle" method="post" action="" enctype="multipart/form-data">
+                    <div id="display-img-article" class='preview d-flex justify-content-center mb-3' style="background-image: url('http://localhost/www/Nesti-Project-PHP/public/images/articles/<?= $name_picture['image_name'] ?> ')">
+                        <!-- IMAGE DISPLAY HERE -->
                     </div>
-                </div>
+                    <div class='d-flex justify-content-center'>
+                        <div class='d-flex align-items-center me-2'>
+                            <input type="file" id="InputFileEditArticle" name="file" />
+                        </div>
+                        <div class='d-flex justify-content-center me-2'>
+                            <button class="btn btn-lg btn-validation" id="button-upload-picture-article">Ajouter</button>
+                        </div>
+                    </div>
                 </form>
+                <div class='d-flex align-items-center'>
+                    <button class="btn btn-lg btn-delete" id="button-delete-picture-article">
+                        <i class="fas fa-trash"> </i>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
     <br>
 </main>
+
+<script>
+    const ROOT = '<?= BASE_URL ?>';
+    const idArticle = '<?= $_GET['id'] ?>';
+</script>

@@ -33,6 +33,11 @@ class ControllerArticles extends BaseController
                     $id_article = $_GET['id'];
 
                     $article = ArticleDAO::findOneBy("id_article", $id_article);
+                    $id_picture = $article->getFk_id_image();
+                    if ($id_picture != 0) {
+                        $name_picture = PictureDAO::getPictureName($article->getFk_id_image());
+                        $this->_data['name_picture'] = $name_picture;
+                    }
 
                     if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
 
@@ -45,6 +50,64 @@ class ControllerArticles extends BaseController
 
                     $this->_data['article'] = $article;
                 }
+
+                #ARTICLE / ADD IMAGE
+                if (isset($_GET['id'])) {
+                    if ((isset($_GET['option'])) && (($_GET['option']) == "editpicture")) {
+                        if (isset($_FILES['file']['name'])) {
+
+                            $id_article= $_GET['id'];
+                            $filename = $_FILES['file']['name'];
+                            $position = strrpos($filename, ".");
+                            $data['download'] = is_uploaded_file($_FILES['file']['tmp_name']);
+                            $location = BASE_DIR . "/public/images/articles/" . strtolower($filename);
+                            $imageFileType = strtolower(pathinfo($location, PATHINFO_EXTENSION));
+                            $valid_extensions = array("jpg", "jpeg", "png");
+
+                            $response = [];
+                            /* Check file extension */
+                            if (in_array(strtolower($imageFileType), $valid_extensions)) {
+                                /* Upload file */
+                                if (move_uploaded_file($_FILES['file']['tmp_name'], $location)) {
+
+                                    $image = new Image;
+                                    $image->setName_image(substr(strtolower($filename), 0, $position));
+                                    $image->setExtension_image($imageFileType);
+                                    $id_image = PictureDAO::addPicture($image);
+                                    PictureDAO::linkPictureToArticle($id_article, $id_image);
+
+                                    $response['name'] = $image->getName_image() . "." . $image->getExtension_image();
+                                    $response["path"] = PATH_IMG_ARTICLES . $response['name'];
+                                }
+                            }
+                            echo json_encode($response);
+                            die();
+                        }
+                    }
+                }
+
+                #ARTICLE/ DELETE IMAGE
+                if (isset($_GET['id'])) {
+                    if ((isset($_GET['option'])) && (($_GET['option']) == "deletepicture")) {
+                        if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
+
+                            $id_article = $_POST["id_article"];
+                            ArticleDAO::deletePictureArticle($id_article);
+
+                            $response = 'succeed';
+
+                            echo json_encode($response);
+                            die();
+                        }
+                    }
+                }
+
+
+
+
+
+
+
             }
 
             #ARTICLE / COMMANDS
