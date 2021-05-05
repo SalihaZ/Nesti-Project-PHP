@@ -160,7 +160,7 @@ class ControllerRecipes extends BaseController
                         if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
 
                             $id_recipe = $_POST["id_recipe"];
-                            $name_ingredient = $_POST["name_ingredient"];
+                            $name_ingredient = filter_input(INPUT_POST,"name_ingredient", FILTER_SANITIZE_STRING);
                             $quantity_ingredient = $_POST["quantity_ingredient"];
                             $name_unit_ingredient = $_POST["unit_ingredient"];
 
