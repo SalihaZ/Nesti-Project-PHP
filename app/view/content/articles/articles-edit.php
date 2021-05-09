@@ -47,7 +47,7 @@
         <div class="row d-flex justify-content-around mr-2">
 
             <!-- Article Input Informations -->
-            <div class="col-4">
+            <div class="col-lg-4 col-sm-12 mb-sm-3">
                 <form method="POST" action="" class="application">
 
                     <!-- Input Factory Name Article -->
@@ -134,7 +134,7 @@
             </div>
 
             <!-- Picture Article -->
-            <div class="col-6">
+            <div class="col-lg-6 col-sm-12">
 
                 <div id="alertes-article-image">
                     <!-- ALERTES IMAGE DISPLAY HERE -->
@@ -142,7 +142,7 @@
 
                 <div class="application d-flex justify-content-center">
                     <form id="formPictureArticle" method="post" action="" enctype="multipart/form-data">
-                        <div id="display-img-article" class='preview d-flex justify-content-center mb-3' style="background-image: url('http://localhost/www/Nesti-Project-PHP/public/images/articles/<?= $name_picture['image_name'] ?> ')">
+                        <div id="display-img-article" class='preview d-flex justify-content-center mb-3' style="background-image: url('<?= BASE_URL ?>/public/images/articles/<?= $name_picture['image_name'] ?> ')">
                             <!-- IMAGE DISPLAY HERE -->
                         </div>
                         <div class='d-flex justify-content-center'>

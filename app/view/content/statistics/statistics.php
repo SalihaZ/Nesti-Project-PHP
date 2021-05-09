@@ -18,7 +18,7 @@
 
         <!-- Statistics Top Section -->
         <div class="row d-flex justify-content-between">
-            <div class="col-6">
+            <div class="col-lg-6 col-sm-12 mb-sm-3">
 
                 <div class="row">
                     <h2>Commandes</h2>
@@ -30,7 +30,7 @@
                 <div class="row d-flex justify-content-between mb-1">
                     <h3>Top 10 commandes</h3>
                 </div>
-                <div class="col-5">
+                <div class="col-lg-6 col-sm-8">
                     <div class="row d-flex justify-content-center form-control shadow">
                         <?php
                         foreach ($top10commands as $command) {
@@ -40,7 +40,7 @@
                 </div>
 
             </div>
-            <div class="col-5">
+            <div class="col-lg-6 col-sm-6">
 
                 <div class="row">
                     <h2>Consultation du site</h2>
@@ -52,7 +52,7 @@
                 <div class="row d-flex justify-content-between mb-1">
                     <h3>Top 10 utilisateurs</h3>
                 </div>
-                <div class="col-8">
+                <div class="col-lg-6 col-sm-8">
                     <div class="row d-flex justify-content-center form-control shadow">
                         <?php
                         foreach ($top10ConnectedUsers as $user) {
@@ -67,13 +67,13 @@
 
         <!-- Statistics Middle Section -->
         <div class="row d-flex justify-content-between">
-            <div class="col-5">
+            <div class="col-lg-5 col-sm-12">
 
                 <div class="row">
                     <h2>Recettes</h2>
                 </div>
                 <div class="row d-flex justify-content-between">
-                    <div class="col-5">
+                    <div class="col-lg-5 col-sm-8 mb-sm-3">
                         <div class="row d-flex justify-content-between mb-1">
                             <h3>Top 10 Chefs</h3>
                         </div>
@@ -87,7 +87,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-lg-5 col-sm-8 mb-sm-3">
                         <div class="row d-flex justify-content-between mb-1">
                             <h3>Top 10 Recettes</h3>
                         </div>
@@ -103,7 +103,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-6">
+            <div class="col-lg-6 col-sm-12">
 
                 <div class="row">
                     <h2>Articles</h2>

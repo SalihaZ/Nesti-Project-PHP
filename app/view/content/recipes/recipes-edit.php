@@ -50,7 +50,7 @@
         <div class="row d-flex  justify-content-between">
 
             <!-- Article Input Informations Recipe-->
-            <div class="col-4">
+            <div class="col-lg-4 col-sm-12 mb-sm-3">
                 <form method="POST" action="" class="application">
 
                     <!-- Input Name Recipe -->
@@ -157,7 +157,7 @@
 
 
             <!-- Picture Recipe -->
-            <div class="col-6">
+            <div class="col-lg-6 col-sm-12">
 
                 <div id="alertes-recipe-image">
                     <!-- ALERTES IMAGE DISPLAY HERE -->
@@ -165,7 +165,7 @@
 
                 <div class="application d-flex justify-content-center">
                     <form id="formPictureRecipe" method="post" action="" enctype="multipart/form-data">
-                        <div id="display-img-recipe" class='preview d-flex justify-content-center mb-3' style="background-image: url('http://localhost/www/Nesti-Project-PHP/public/images/recipes/<?= $name_picture['image_name'] ?> ')">
+                        <div id="display-img-recipe" class='preview d-flex justify-content-center mb-3' style="background-image: url('<?= BASE_URL ?>public/images/recipes/<?= $name_picture['image_name'] ?> ')">
                             <!-- IMAGE DISPLAY HERE -->
                         </div>
                         <div class='d-flex justify-content-center'>
@@ -208,7 +208,7 @@
         <!-- Section Preparation -->
         <div class="row d-flex justify-content-between mb-4">
 
-            <div class="col-7">
+            <div class="col-lg-7 col-sm-12">
 
                 <!-- Title -->
                 <div class="row">
@@ -237,7 +237,7 @@
             </div>
 
 
-            <div class="col-4">
+            <div class="col-lg-4 col-sm-12">
 
                 <!-- Title -->
                 <div class="row">
@@ -295,6 +295,8 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <br>
 
     </main>
 

@@ -80,7 +80,7 @@
         <div class="row d-flex justify-content-around mr-2">
 
             <!-- Inputs User Informations -->
-            <div class="col-5">
+            <div class="col-lg-5 col-sm-12 mb-sm-3">
                 <form method="POST" action="" class="application rounded">
 
                     <!-- Input LastName User -->
@@ -224,7 +224,7 @@
             </div>
 
             <!-- Article Input Informations Users-->
-            <div class="col-5">
+            <div class="col-lg-5 col-sm-12">
 
                 <div class="row">
                     <h2>Informations</h2>
@@ -345,7 +345,7 @@
 
                     <!-- Table Container Commands -->
                     <div class="row justify-content-between">
-                        <div class="col-7">
+                        <div class="col-lg-7 col-sm-12">
                             <table class="table" id="commandsUserTable" data-toggle="table" data-sortable="true" data-pagination="true" data-pagination-next-text="Next" data-search="true" data-search-selector="#searchCommands" data-locale="fr-FR">
                                 <thead>
                                     <tr>
@@ -387,7 +387,7 @@
                         </div>
 
                         <!-- Details -->
-                        <div class="col-4">
+                        <div class="col-lg-4 col-sm-12">
                             <div class="row d-flex justify-content-between mb-1">
                                 <div class="col-8">
                                     <h2>Détails</h2>
@@ -413,7 +413,7 @@
 
         <!-- Section Comments -->
         <div class="row d-flex">
-            <div class="col-12">
+            <div class="col-lg-12">
                 <div class="row">
                     <h1>Ses Commentaires</h1>
                     <h5>Modération des ses commentaires</h5>
