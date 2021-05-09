@@ -5,30 +5,45 @@ class ControllerConnection extends BaseController
     public function initialize()
     {
         $UserSession = new Session();
-        
+
         $username = filter_input(INPUT_POST, "logUsername", FILTER_SANITIZE_STRING);
         $password = filter_input(INPUT_POST, "logPassword", FILTER_SANITIZE_STRING);
 
-        if (isset($username)) {
+        if (isset($username) && (!empty($username))) {
 
-            // $activeUser = ConnectionDAO::checkUsername($username);
-            $activeUser = UserDAO::findOneBy('username_user', $username);
-            //  ConnectionDAO::checkPassword($password);
+            $user = UserDAO::findOneBy('username_user', $username);
 
-            if ($activeUser) {
+            if ($user) {
+                if (isset($password) && (!empty($password))) {
+                    $passwordDB = $user->getPassword_user();
+                    $validation = password_verify($password, $passwordDB);
 
-                $UserSession->connectUser($activeUser->getId_user());    
-                
-                // Add log user 
-                ConnectionDAO::addLogUser($_SESSION["id_user"]);
+                    if ($validation) {
 
-                $_SESSION["lastname_user"] = $activeUser->getLastname_user();
-                $_SESSION["firstname_user"] = $activeUser->getFirstname_user();
+                        $UserSession->connectUser($user->getId_user());
 
-                header('Location:' . BASE_URL . "recipes");
-                die();
+                        // Add log user 
+                        ConnectionDAO::addLogUser($_SESSION["id_user"]);
+
+                        $roles = RoleDAO::readUserRoles($user);
+
+                        if ($roles[0] == 'Utilisateur') {
+                            $this->_data['error_roles'] = "Vous n'avez pas accès à ce contenu";
+                        } else {
+                            $user->SetRoles_user($roles);
+                            $_SESSION["lastname_user"] = $user->getLastname_user();
+                            $_SESSION["firstname_user"] = $user->getFirstname_user();
+                            $_SESSION["roles_user"] = $user->getRoles_user();
+
+                            header('Location:' . BASE_URL . "recipes");
+                            die();
+                        }
+                    } else {
+                        $this->_data['error_password'] = "Le mot de passe est incorrect";
+                    }
+                }
             } else {
-                header('Location:' . BASE_URL . "connection");
+                $this->_data['error_username'] = "Le nom d'utilisateur est incorrect";
             }
         }
     }

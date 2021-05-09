@@ -2,24 +2,26 @@
 
     <!-- Alertes -->
     <?php
-    if (isset($_GET['action']) && ($_GET['action'] == 'disconnected')) {
+
+    if (isset($_SESSION['userDisconnected'])) {
     ?><div>
             <div class="alert alert-success mx-5 mt-2" role="alert" onclick="removeAlert(this)">
                 Vous avez été déconnecté.
             </div>
         </div>
-    <?php } ?>
+    <?php }
+    unset($_SESSION['userDisconnected']); ?>
 
     <div id="wrapper_connection">
 
-       <!-- Logo -->
+        <!-- Logo -->
         <div id="logo_nesti">
             <img src="public/images/logo/Nesti-logo-big.png">
         </div>
 
         <div class="row application" id="container_connection">
 
-            <form action="" method="POST" class="pb-4">
+            <form action="" method="POST" class="">
 
                 <!-- Title -->
                 <div class="row">
@@ -37,6 +39,13 @@
                     </div>
                 </div>
 
+                <!-- Error Username -->
+                <div>
+                    <?php if (!empty($error_username)) : ?>
+                        <span class="alerte-error-connection badge bg-danger mb-3"><?= $error_username ?></span>
+                    <?php endif; ?>
+                </div>
+
                 <!-- Password -->
                 <div class="row justify-content-center">
                     <div class="col-11 no-padding">
@@ -48,11 +57,25 @@
                     </div>
                 </div>
 
+                <!-- Error Password -->
+                <div>
+                    <?php if (!empty($error_password)) : ?>
+                        <span class="alerte-error-connection badge bg-danger mb-3"><?= $error_password ?></span>
+                    <?php endif; ?>
+                </div>
+
                 <!-- Button Connection -->
                 <div class="row justify-content-center">
                     <div class="col-4 no-padding">
                         <input class="no-margin rounded" type="submit" id='Connection' value='Valider'>
                     </div>
+                </div>
+
+                <!-- Error Roles -->
+                <div>
+                    <?php if (!empty($error_roles)) : ?>
+                        <span class="alerte-error-roles badge bg-danger mt-3"><?= $error_roles ?></span>
+                    <?php endif; ?>
                 </div>
 
             </form>
