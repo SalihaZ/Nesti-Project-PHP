@@ -27,10 +27,7 @@ class RoleDAO extends BaseDAO
        public static function deleteRoles($roles_user, $id_user)
        {
    
-           foreach ($roles_user as $value) {
-               var_dump($value);
-               var_dump($id_user);
-   
+           foreach ($roles_user as $value) { 
                $pdo = Database::getPdo();
                $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                $sql = "DELETE FROM $value WHERE fk_id_user = ?";

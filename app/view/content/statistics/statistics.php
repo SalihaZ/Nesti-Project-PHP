@@ -1,159 +1,169 @@
-<main class="container wrapper-articles">
-    <br>
-    <!-- Title Page -->
-    <div class="row">
-        <div class="col-12">
-            <h1>Statistiques</h1>
-            <br>
-        </div>
+<!-- Restriction -->
+<?php if (array_search("admins", $_SESSION["roles_user"]) === false) { ?>
+    <div class="container mt-4">
+        <h1 class="title_access_forbidden">Accès interdit</h1>
+        <p class="text_access_forbidden">Vous n'avez pas les droits pour accèder à cette page.</p>
     </div>
+<?php } else { ?>
 
-    <!-- Statistics Top Section -->
-    <div class="row d-flex justify-content-between">
-        <div class="col-6">
-
-            <div class="row">
-                <h2>Commandes</h2>
+    <main class="container wrapper-articles">
+        <br>
+        <!-- Title Page -->
+        <div class="row">
+            <div class="col-12">
+                <h1>Statistiques</h1>
+                <br>
             </div>
+        </div>
 
-            <div id="toastCommands"> </div>
-            
-            <!-- TOP 10 USERS -->
-            <div class="row d-flex justify-content-between mb-1">
-                <h3>Top 10 commandes</h3>
-            </div>
-            <div class="col-5">
-                <div class="row d-flex justify-content-center form-control shadow">
+        <!-- Statistics Top Section -->
+        <div class="row d-flex justify-content-between">
+            <div class="col-6">
+
+                <div class="row">
+                    <h2>Commandes</h2>
+                </div>
+
+                <div id="toastCommands"> </div>
+
+                <!-- TOP 10 USERS -->
+                <div class="row d-flex justify-content-between mb-1">
+                    <h3>Top 10 commandes</h3>
+                </div>
+                <div class="col-5">
+                    <div class="row d-flex justify-content-center form-control shadow">
                         <?php
                         foreach ($top10commands as $command) {
                             echo "<div class='d-flex flex-row justify-content-between'> <div> Commande n°" . $command->getId_command() . " </div><a href='" . BASE_URL . "articles/commands'>Voir</a> </div>";
                         } ?>
-                </div>
-            </div>
-
-        </div>
-        <div class="col-5">
-
-            <div class="row">
-                <h2>Consultation du site</h2>
-            </div>
-
-            <div id="toastConnection"> </div>
-
-            <!-- TOP 10 USERS -->
-            <div class="row d-flex justify-content-between mb-1">
-                <h3>Top 10 utilisateurs</h3>
-            </div>
-            <div class="col-8">
-                <div class="row d-flex justify-content-center form-control shadow">
-                    <?php
-                    foreach ($top10ConnectedUsers as $user) {
-                        echo "<div class='d-flex flex-row justify-content-between'> <div>" . $user->getLastname_user() . ' ' . $user->getFirstname_user() . " </div> <a href='" . BASE_URL . "users/edit/" . $user->getId_user() . "'>Voir</a></div>";
-                    } ?>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <br>
-
-    <!-- Statistics Middle Section -->
-    <div class="row d-flex justify-content-between">
-        <div class="col-5">
-
-            <div class="row">
-                <h2>Recettes</h2>
-            </div>
-            <div class="row d-flex justify-content-between">
-                <div class="col-5">
-                    <div class="row d-flex justify-content-between mb-1">
-                        <h3>Top 10 Chefs</h3>
                     </div>
-                    <div class="row d-flex justify-content-center form-control shadow">
-                        <div class="col">
-                            <?php
-                            foreach ($top10Chiefs as $chief) {
-                                echo "<div class='d-flex flex-row justify-content-between'> <div>" . $chief->getLastname_user() . ' ' . $chief->getFirstname_user() . " </div> <a href='" . BASE_URL . "users/edit/" . $chief->getId_user() . "'>Voir</a></div>";
-                            } ?>
+                </div>
 
+            </div>
+            <div class="col-5">
+
+                <div class="row">
+                    <h2>Consultation du site</h2>
+                </div>
+
+                <div id="toastConnection"> </div>
+
+                <!-- TOP 10 USERS -->
+                <div class="row d-flex justify-content-between mb-1">
+                    <h3>Top 10 utilisateurs</h3>
+                </div>
+                <div class="col-8">
+                    <div class="row d-flex justify-content-center form-control shadow">
+                        <?php
+                        foreach ($top10ConnectedUsers as $user) {
+                            echo "<div class='d-flex flex-row justify-content-between'> <div>" . $user->getLastname_user() . ' ' . $user->getFirstname_user() . " </div> <a href='" . BASE_URL . "users/edit/" . $user->getId_user() . "'>Voir</a></div>";
+                        } ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br>
+
+        <!-- Statistics Middle Section -->
+        <div class="row d-flex justify-content-between">
+            <div class="col-5">
+
+                <div class="row">
+                    <h2>Recettes</h2>
+                </div>
+                <div class="row d-flex justify-content-between">
+                    <div class="col-5">
+                        <div class="row d-flex justify-content-between mb-1">
+                            <h3>Top 10 Chefs</h3>
+                        </div>
+                        <div class="row d-flex justify-content-center form-control shadow">
+                            <div class="col">
+                                <?php
+                                foreach ($top10Chiefs as $chief) {
+                                    echo "<div class='d-flex flex-row justify-content-between'> <div>" . $chief->getLastname_user() . ' ' . $chief->getFirstname_user() . " </div> <a href='" . BASE_URL . "users/edit/" . $chief->getId_user() . "'>Voir</a></div>";
+                                } ?>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="row d-flex justify-content-between mb-1">
+                            <h3>Top 10 Recettes</h3>
+                        </div>
+                        <div class="row d-flex justify-content-center form-control shadow">
+                            <div class="col">
+                                <?php
+                                foreach ($top10Recipes as $recipe) {
+                                    echo "<div class='d-flex flex-row justify-content-between'> <div>" . $recipe->getName_recipe() . " </div> <a href='" . BASE_URL . "recipes/edit/" . $recipe->getId_recipe() . "'>Voir</a></div>";
+                                } ?>
+
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-6">
-                    <div class="row d-flex justify-content-between mb-1">
-                        <h3>Top 10 Recettes</h3>
-                    </div>
-                    <div class="row d-flex justify-content-center form-control shadow">
-                        <div class="col">
-                            <?php
-                            foreach ($top10Recipes as $recipe) {
-                                echo "<div class='d-flex flex-row justify-content-between'> <div>" . $recipe->getName_recipe() . " </div> <a href='" . BASE_URL . "recipes/edit/" . $recipe->getName_recipe() . "'>Voir</a></div>";
-                            } ?>
+            </div>
+            <div class="col-6">
 
-                        </div>
-                    </div>
+                <div class="row">
+                    <h2>Articles</h2>
                 </div>
-            </div>
-        </div>
-        <div class="col-6">
+                <div class="row">
+                    Nombre d'articles en vente : <?php echo count($articlesName) ?>
+                    <div id="toastArticles"> </div>
+                </div>
 
-            <div class="row">
-                <h2>Articles</h2>
-            </div>
-            <div class="row">
-                Nombre d'articles en vente : <?php echo count($articlesName) ?>
-                <div id="toastArticles"> </div>
-            </div>
-
-            <h3>En rupture de stock</h3>
-            <!-- Table Container -->
-            <table class="table" data-toggle="table" data-sortable="true" data-locale="fr-FR">
-                <thead>
-                    <tr>
-                        <th scope="col">Nom</th>
-                        <th scope="col">Quantité vendu</th>
-                        <th scope="col">Bénéfice</th>
-                        <th scope="col">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-
-                    <?php
-                    foreach ($articlesOutOfStock as $article) {
-                    ?>
+                <h3>En rupture de stock</h3>
+                <!-- Table Container -->
+                <table class="table" data-toggle="table" data-sortable="true" data-locale="fr-FR">
+                    <thead>
                         <tr>
-                            <td>
-                                <?= $article->getNameProduct() ?>
-                            </td>
-                            <td>
-                                <?= $article->getQuantitySoldArticle() ?>
-                            </td>
-                            <td>
-                                <?= $article->getBenefitsArticle() ?> €
-                            </td>
-                            <td>
-                                Voir
-                            </td>
+                            <th scope="col">Nom</th>
+                            <th scope="col">Quantité vendu</th>
+                            <th scope="col">Bénéfice</th>
+                            <th scope="col">Action</th>
                         </tr>
+                    </thead>
+                    <tbody>
 
-                    <?php
-                    }
-                    ?>
+                        <?php
+                        foreach ($articlesOutOfStock as $article) {
+                        ?>
+                            <tr>
+                                <td>
+                                    <?= $article->getNameProduct() ?>
+                                </td>
+                                <td>
+                                    <?= $article->getQuantitySoldArticle() ?>
+                                </td>
+                                <td>
+                                    <?= $article->getBenefitsArticle() ?> €
+                                </td>
+                                <td>
+                                    Voir
+                                </td>
+                            </tr>
 
-                </tbody>
-            </table>
+                        <?php
+                        }
+                        ?>
+
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
-    <br>
-</main>
+        <br>
+    </main>
 
-<script>
-    var totalSoldPerDay = <?php echo json_encode($totalSoldPerDay) ?>;
-    var totalPurchasedPerDay = <?php echo json_encode($totalPurchasedPerDay) ?>;
-    var arrayDates = <?php echo json_encode($arrayDates) ?>;
-    var totalSoldPerDay = <?php echo json_encode($totalSoldPerDay) ?>;
-    var connectionPerHour = <?php echo json_encode($connectionPerHour) ?>;
-    var articlesName = <?php echo json_encode($articlesName) ?>;
-    var articlesSold = <?php echo json_encode($articlesSold) ?>;
-    var articlesBought = <?php echo json_encode($articlesBought) ?>;
-</script>
+    <script>
+        var totalSoldPerDay = <?php echo json_encode($totalSoldPerDay) ?>;
+        var totalPurchasedPerDay = <?php echo json_encode($totalPurchasedPerDay) ?>;
+        var arrayDates = <?php echo json_encode($arrayDates) ?>;
+        var totalSoldPerDay = <?php echo json_encode($totalSoldPerDay) ?>;
+        var connectionPerHour = <?php echo json_encode($connectionPerHour) ?>;
+        var articlesName = <?php echo json_encode($articlesName) ?>;
+        var articlesSold = <?php echo json_encode($articlesSold) ?>;
+        var articlesBought = <?php echo json_encode($articlesBought) ?>;
+    </script>
+
+<?php } ?>
