@@ -80,7 +80,7 @@
         <div class="row d-flex justify-content-around mr-2">
 
             <!-- Inputs User Informations -->
-            <div class="col-lg-5 col-sm-12 mb-sm-3">
+            <div class="col-lg-5 col-sm-12 mb-sm-4">
                 <form method="POST" action="" class="application rounded">
 
                     <!-- Input LastName User -->

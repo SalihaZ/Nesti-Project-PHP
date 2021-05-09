@@ -50,7 +50,7 @@
         <div class="row d-flex  justify-content-between">
 
             <!-- Article Input Informations Recipe-->
-            <div class="col-lg-4 col-sm-12 mb-sm-3">
+            <div class="col-lg-4 col-sm-12 mb-sm-4">
                 <form method="POST" action="" class="application">
 
                     <!-- Input Name Recipe -->

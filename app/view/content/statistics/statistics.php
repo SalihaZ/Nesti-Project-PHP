@@ -18,7 +18,7 @@
 
         <!-- Statistics Top Section -->
         <div class="row d-flex justify-content-between">
-            <div class="col-lg-6 col-sm-12 mb-sm-3">
+            <div class="col-lg-6 col-sm-12 mb-sm-4">
 
                 <div class="row">
                     <h2>Commandes</h2>
@@ -73,7 +73,7 @@
                     <h2>Recettes</h2>
                 </div>
                 <div class="row d-flex justify-content-between">
-                    <div class="col-lg-5 col-sm-8 mb-sm-3">
+                    <div class="col-lg-5 col-sm-8 mb-sm-4">
                         <div class="row d-flex justify-content-between mb-1">
                             <h3>Top 10 Chefs</h3>
                         </div>
@@ -87,7 +87,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-5 col-sm-8 mb-sm-3">
+                    <div class="col-lg-5 col-sm-8 mb-sm-4">
                         <div class="row d-flex justify-content-between mb-1">
                             <h3>Top 10 Recettes</h3>
                         </div>

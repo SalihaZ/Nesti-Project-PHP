@@ -47,7 +47,7 @@
         <div class="row d-flex justify-content-around mr-2">
 
             <!-- Article Input Informations -->
-            <div class="col-lg-4 col-sm-12 mb-sm-3">
+            <div class="col-lg-4 col-sm-12 mb-sm-4">
                 <form method="POST" action="" class="application">
 
                     <!-- Input Factory Name Article -->
