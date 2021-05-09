@@ -1,13 +1,3 @@
-<!-- Create new user and city objects -->
-<?php if (!isset($user) || empty($user)) {
-    $user = new User();
-}
-
-if (!isset($city) || empty($city)) {
-    $city = new City();
-}
-?>
-
 <!-- Main -->
 <main class="container ">
 
