@@ -47,6 +47,16 @@ document.addEventListener("DOMContentLoaded", function () {
                     buttonsDeleteIngredient.forEach(button => button.addEventListener('click', function () {
                         deleteIngredient(button);
                     }));
+
+                    // Add alerte
+                    var alertes = document.querySelector("#alertes-recipe-ingredients");
+                    alertes.innerHTML = "";
+                    var div = document.createElement("div");
+                    div.className = "alert alert-success";
+                    var remove = 'removeAlert(this)';
+                    div.setAttribute('onclick', remove);
+                    div.innerHTML = "L'ingrédient a bien été ajouté à la recette.";
+                    alertes.appendChild(div);
                 }
             });
 
@@ -103,6 +113,16 @@ function deleteIngredient(button) {
         .then((response) => {
             if (response) {
                 button.parentNode.remove();
+
+                // Add alerte
+                var alertes = document.querySelector("#alertes-recipe-ingredients");
+                alertes.innerHTML = "";
+                var div = document.createElement("div");
+                div.className = "alert alert-danger";
+                var remove = 'removeAlert(this)';
+                div.setAttribute('onclick', remove);
+                div.innerHTML = "L'ingrédient a bien été supprimé de la recette.";
+                alertes.appendChild(div);
             }
         });
 
@@ -157,6 +177,17 @@ document.addEventListener("DOMContentLoaded", function () {
                     if (response) {
                         const divPicture = document.querySelector("#display-img-recipe");
                         divPicture.style.backgroundImage = "url(" + response["path"] + ")";
+
+                        // Add alerte
+                        var alertes = document.querySelector("#alertes-recipe-image");
+                        console.log(alertes);
+                        alertes.innerHTML = "";
+                        var div = document.createElement("div");
+                        div.className = "alert alert-success";
+                        var remove = 'removeAlert(this)';
+                        div.setAttribute('onclick', remove);
+                        div.innerHTML = "L'image a bien été ajoutée à la recette.";
+                        alertes.appendChild(div);
                     }
                 });
         }
@@ -196,6 +227,17 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (response) {
                     const divPicture = document.querySelector("#display-img-recipe");
                     divPicture.style.backgroundImage = "";
+
+                     // Add alerte
+                     var alertes = document.querySelector("#alertes-recipe-image");
+                     console.log(alertes);
+                     alertes.innerHTML = "";
+                     var div = document.createElement("div");
+                     div.className = "alert alert-danger";
+                     var remove = 'removeAlert(this)';
+                     div.setAttribute('onclick', remove);
+                     div.innerHTML = "L'image a bien été supprimée de la recette.";
+                     alertes.appendChild(div);
                 };
             });
     });
@@ -298,6 +340,15 @@ document.addEventListener("DOMContentLoaded", function () {
                     var length = response.length;
                     response.forEach(element => {
                         renewTable(element, length)
+
+                        var alertes = document.querySelector("#alertes-recipe-preparations");
+                        alertes.innerHTML = "";
+                        var div = document.createElement("div");
+                        div.className = "alert alert-success";
+                        var remove = 'removeAlert(this)';
+                        div.setAttribute('onclick', remove);
+                        div.innerHTML = "Une étape de préparation a bien été ajoutée à la recette";
+                        alertes.appendChild(div);
                     });
                 }
             });
@@ -469,6 +520,15 @@ document.addEventListener("DOMContentLoaded", function () {
                     response.forEach(element => {
                         renewTable(element, length);
                     });
+
+                    var alertes = document.querySelector("#alertes-recipe-preparations");
+                    alertes.innerHTML = "";
+                    var div = document.createElement("div");
+                    div.className = "alert alert-danger";
+                    var remove = 'removeAlert(this)';
+                    div.setAttribute('onclick', remove);
+                    div.innerHTML = "L'étape de préparation a bien été supprimée.";
+                    alertes.appendChild(div);
                 }
             });
     }
@@ -531,6 +591,15 @@ document.addEventListener("DOMContentLoaded", function () {
                     response.forEach(element => {
                         renewTable(element, length);
                     });
+
+                    var alertes = document.querySelector("#alertes-recipe-preparations");
+                    alertes.innerHTML = "";
+                    var div = document.createElement("div");
+                    div.className = "alert alert-success";
+                    var remove = 'removeAlert(this)';
+                    div.setAttribute('onclick', remove);
+                    div.innerHTML = "L'étape de préparation a bien été déplacée vers le haut.";
+                    alertes.appendChild(div);
                 }
             });
     }
@@ -593,6 +662,15 @@ document.addEventListener("DOMContentLoaded", function () {
                     response.forEach(element => {
                         renewTable(element, length);
                     });
+
+                    var alertes = document.querySelector("#alertes-recipe-preparations");
+                    alertes.innerHTML = "";
+                    var div = document.createElement("div");
+                    div.className = "alert alert-success";
+                    var remove = 'removeAlert(this)';
+                    div.setAttribute('onclick', remove);
+                    div.innerHTML = "L'étape de préparation a bien été déplacée vers le bas.";
+                    alertes.appendChild(div);
                 }
             });
     }
