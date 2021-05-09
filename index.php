@@ -64,7 +64,7 @@ switch ($loc) {
         break;
 }
 
-if ($controller !=null){
+if ($controller != null){
     extract($controller->getData());
 }
 

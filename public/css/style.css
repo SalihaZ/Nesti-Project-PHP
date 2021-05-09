@@ -78,6 +78,15 @@ h3 {
     box-sizing: border-box;
 }
 
+.alerte-error-connection{
+    margin-left: 16%;
+}
+
+.alerte-error-roles
+{
+    margin-left: 20%;
+}
+
 .fa-sign-out-alt {
     color:#c49000;
     font-size: 20px;

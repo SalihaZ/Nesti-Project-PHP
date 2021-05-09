@@ -167,6 +167,10 @@ class ControllerUsers extends BaseController
             $user->setId_user($last_id);
             // Links ROLES to USER
             RoleDAO::createRoles($user);
+            
+            $_SESSION['userCreated'] = '';
+            header('Location:' . BASE_URL . "users");
+            exit();
         }
         return $user;
     }
@@ -221,13 +225,15 @@ class ControllerUsers extends BaseController
 
         // Push into DB
         if (($user->getValid_user()) == true) {
-            var_dump($user);
+       
             UserDAO::updateUser($user);
             RoleDAO::deleteRoles($roles_user, $id_user);
             RoleDAO::createRoles($user);
         }
 
-        return $user;
+        $_SESSION['userUpdated'] = '';
+        header('Location:' . BASE_URL . "users/edit/" . $id_user);
+        exit();
     }
 
     // GET COMMANDS

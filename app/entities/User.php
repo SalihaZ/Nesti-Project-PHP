@@ -338,7 +338,6 @@ class User
      */
     public function getRoles_user()
     {
-
         return $this->roles_user;
     }
 
