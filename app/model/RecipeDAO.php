@@ -63,6 +63,22 @@ class RecipeDAO extends BaseDAO
         Database::disconnect();
     }
 
+        // 
+        public static function deleteRecipe($id_recipe)
+        {
+            $pdo = Database::getPdo();
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $sql = "UPDATE recipes SET state_recipe = ? WHERE id_recipe = ?";
+            $q = $pdo->prepare($sql);
+            $q->execute(
+                [
+                    "b",
+                    $id_recipe
+                ]
+            );
+            Database::disconnect();
+        }
+
     // Finds the number of recipes the chef has published 
     public static function getNumberRecipesChief($id_chief)
     {

@@ -11,6 +11,21 @@ class ControllerRecipes extends BaseController
             $this->_data['arrayRecipes'] = $arrayRecipes;
         } else {
 
+            #ARTICLE / DELETE
+            if ($_GET['action'] == 'delete') {
+
+                if (isset($_GET['id'])) {
+
+                    $id_recipe = $_GET['id'];
+
+                    RecipeDAO::deleteRecipe($id_recipe);
+
+                    $_SESSION['deleteRecipe'] = '';
+                    header('Location:' . BASE_URL . "recipes");
+                    exit();
+                }
+            }
+
             #RECIPE/CREATE
             if ($_GET['action'] == 'create') {
 
@@ -160,7 +175,7 @@ class ControllerRecipes extends BaseController
                         if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
 
                             $id_recipe = $_POST["id_recipe"];
-                            $name_ingredient = filter_input(INPUT_POST,"name_ingredient", FILTER_SANITIZE_STRING);
+                            $name_ingredient = filter_input(INPUT_POST, "name_ingredient", FILTER_SANITIZE_STRING);
                             $quantity_ingredient = $_POST["quantity_ingredient"];
                             $name_unit_ingredient = $_POST["unit_ingredient"];
 

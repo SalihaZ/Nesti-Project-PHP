@@ -145,6 +145,22 @@ class Recipe
         return $this->state_recipe;
     }
 
+    // Display state for tables
+    public function getDisplayState_recipe()
+    {
+
+        if ($this->state_recipe == 'a') {
+            $state = 'Actif';
+        }
+        if ($this->state_recipe == 'b') {
+            $state = 'Bloqué';
+        }
+        if ($this->state_recipe == 'w') {
+            $state = 'En attente';
+        }
+        return $state;
+    }
+
     /**
      * Set the value of state_recipe
      * @return  self
@@ -181,7 +197,7 @@ class Recipe
     {
         $duration = $this->getTime_recipe();
         $time = explode(':', $duration);
-        return ($time[0]*60) + ($time[1]) + ($time[2]/60);
+        return ($time[0] * 60) + ($time[1]) + ($time[2] / 60);
     }
 
     /**
@@ -197,13 +213,13 @@ class Recipe
             $this->timeError = "Veuillez saisir un temps de préparation valide";
             $this->valid_recipe = false;
         } else {
-            $convertedTimeHour = intdiv($time_recipe , 60);
-            $convertedTimeMinutes = fmod($time_recipe , 60);
+            $convertedTimeHour = intdiv($time_recipe, 60);
+            $convertedTimeMinutes = fmod($time_recipe, 60);
             $convertedTime = $convertedTimeHour . ":" . $convertedTimeMinutes . ":00";
             $this->time_recipe = $convertedTime;
         }
 
-       
+
 
         return $this;
     }
