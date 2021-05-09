@@ -13,7 +13,17 @@ document.addEventListener("DOMContentLoaded", function () {
                     if (response) {
                         const divPicture = document.querySelector("#display-img-article");
                         divPicture.style.backgroundImage = "url(" + response["path"] + ")";
-                        console.log(response["path"]);
+
+                        // Add alerte
+                        var alertes = document.querySelector("#alertes-article-image");
+                        console.log(alertes);
+                        alertes.innerHTML = "";
+                        var div = document.createElement("div");
+                        div.className = "alert alert-success";
+                        var remove = 'removeAlert(this)';
+                        div.setAttribute('onclick', remove);
+                        div.innerHTML = "L'image a bien été ajoutée à l'article.";
+                        alertes.appendChild(div);
                     }
                 });
         }
@@ -52,6 +62,17 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (response) {
                     const divPicture = document.querySelector("#display-img-article");
                     divPicture.style.backgroundImage = "";
+
+                     // Add alerte
+                     var alertes = document.querySelector("#alertes-article-image");
+                     console.log(alertes);
+                     alertes.innerHTML = "";
+                     var div = document.createElement("div");
+                     div.className = "alert alert-danger";
+                     var remove = 'removeAlert(this)';
+                     div.setAttribute('onclick', remove);
+                     div.innerHTML = "L'image a bien été supprimée de l'article.";
+                     alertes.appendChild(div);
                 };
             });
     });
