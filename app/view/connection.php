@@ -10,8 +10,13 @@
         </div>
     <?php } ?>
 
-
     <div id="wrapper_connection">
+
+       <!-- Logo -->
+        <div id="logo_nesti">
+            <img src="public/images/logo/Nesti-logo-big.png">
+        </div>
+
         <div class="row application" id="container_connection">
 
             <form action="" method="POST" class="pb-4">

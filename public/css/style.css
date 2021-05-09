@@ -40,8 +40,16 @@ h3 {
 
 /* FOR THE CONNECTION PAGE */
 
+#logo_nesti>*{
+    height: 30%;
+    width: auto;
+    position: absolute;
+    top: 10%;
+    left: 5%;
+    z-index: -1;
+}
+
 #wrapper_connection {
-    
     height: 100%;
     background-position: center;
     background-image: url(../images/background.jpg);
@@ -52,7 +60,6 @@ h3 {
     left: 50%;
     transform: translate(-50%, -50%);
     width: 100%;
-   
 }
 
 #container_connection {
