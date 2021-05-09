@@ -151,21 +151,21 @@
 
                         <input type="checkbox" id="admin" name="roles_user[]" value="admins" <?php foreach ($user->getRoles_user() as $role) {
                                                                                                     if ($role == 'admins') {
-                                                                                                        echo 'checked disabled';
+                                                                                                        echo 'checked';
                                                                                                     };
                                                                                                 }; ?>>
                         <label for="admin"> Administrateur </label><br>
 
                         <input type="checkbox" id="mod" name="roles_user[]" value="moderators" <?php foreach ($user->getRoles_user() as $role) {
                                                                                                     if ($role == 'moderators') {
-                                                                                                        echo 'checked disabled';
+                                                                                                        echo 'checked';
                                                                                                     };
                                                                                                 }; ?>>
                         <label for="mod"> Modérateur </label><br>
 
                         <input type="checkbox" id="chief" name="roles_user[]" value="chiefs" <?php foreach ($user->getRoles_user() as $role) {
                                                                                                     if ($role == 'chiefs') {
-                                                                                                        echo 'checked disabled';
+                                                                                                        echo 'checked';
                                                                                                     };
                                                                                                 }; ?>>
                         <label for="chief"> Chef </label><br>

@@ -14,27 +14,19 @@ class ControllerUsers extends BaseController
 
             #USER/DELETE
             if ($_GET['action'] == 'delete') {
-
-                if (isset($_GET['id'])) {
-
-                    $id_user = $_GET['id'];
-
-                    UserDAO::deleteUser($id_user);
-
-                    $_SESSION['deleteUser'] = '';
-                    header('Location:' . BASE_URL . "users");
-                    exit();
-                }
+                $this->deleteUser();
             }
 
             #USER/CREATE
             if ($_GET['action'] == 'create') {
+                $user = new User();
+                $city = new City();
 
                 if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
                     $city = $this->createCity();
                     $user = $this->createUser($city);
                 }
-                
+
                 $this->_data['user'] = $user;
                 $this->_data['city'] = $city;
             }
@@ -45,20 +37,7 @@ class ControllerUsers extends BaseController
                 if (!isset($_GET['option'])) {
 
                     if (isset($_POST["id_command"]) && !empty($_POST["id_command"])) {
-
-                        $data = [];
-                        $id_command = $_POST['id_command'];
-                        $commandLines = CommandDAO::getCommandsLines($id_command);
-
-                        $index = 0;
-
-                        foreach ($commandLines as $line) {
-                            $article = ArticleDAO::findOneBy('id_article', $line->getFk_id_article());
-                            $data['article-command'][$index] = $line->getCommand_quantity() . ' x ' . $article->getQuantity_unite_article() . ' ' . $article->getUnitArticle() . ' de ' . $article->getNameProduct();
-                            $index++;
-                        }
-                        echo json_encode($data);
-                        die;
+                        $this->getCommands();
                     }
 
                     $id_user = $_GET['id'];
@@ -81,13 +60,14 @@ class ControllerUsers extends BaseController
                     if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
 
                         $city = $this->createCity();
-                        $this->editUser($user, $city);
+                        $this->editUser($user, $city, $roles_user);
                     }
 
                     $this->_data['user'] = $user;
                     $this->_data['city'] = $city;
                 }
 
+                // COMMENT APPROVED
                 if (isset($_GET['option'])) {
                     if ($_GET['option'] == 'commentapproved') {
 
@@ -104,6 +84,7 @@ class ControllerUsers extends BaseController
                     }
                 }
 
+                //COMMENT DISAPPROVED
                 if (isset($_GET['option'])) {
                     if ($_GET['option'] == 'commentdisapproved') {
 
@@ -120,6 +101,7 @@ class ControllerUsers extends BaseController
                     }
                 }
 
+                // RESET PASSWORD
                 if (isset($_GET['option'])) {
                     if ($_GET['option'] == 'resetpassword') {
 
@@ -140,6 +122,18 @@ class ControllerUsers extends BaseController
                     }
                 }
             }
+        }
+    }
+
+    private function deleteUser()
+    {
+        if (isset($_GET['id'])) {
+
+            $id_user = $_GET['id'];
+            UserDAO::deleteUser($id_user);
+            $_SESSION['deleteUser'] = '';
+            header('Location:' . BASE_URL . "users");
+            exit();
         }
     }
 
@@ -177,7 +171,7 @@ class ControllerUsers extends BaseController
         return $user;
     }
 
-    // Creates or gets an object CITY from/
+    // Creates or gets an object CITY
     private function createCity()
     {
         // Checks/Creates a new CITY
@@ -196,17 +190,21 @@ class ControllerUsers extends BaseController
         return $city;
     }
 
-
     // Edit data for one user
-    private function editUser($user, $city)
+    private function editUser($user, $city, $roles_user)
     {
+        // Creates ROLES to user
 
-        // // Creates ROLES to user
-        // if (!empty($_POST['roles_user'])) {
-        //     foreach ($_POST['roles_user'] as $value) {
-        //         $roles = $_POST['roles_user'];
-        //     }
-        // }
+        $roles = [];
+        if (!empty($_POST['roles_user'])) {
+            foreach ($_POST['roles_user'] as $value) {
+                $roles = $_POST['roles_user'];
+            }
+        }
+
+        if ($roles_user[0] == 'Utilisateur') {
+            $roles_user = [];
+        }
 
         // Checks/Creates data USER
         $user->setState_user($_POST["state_user"]);
@@ -217,16 +215,36 @@ class ControllerUsers extends BaseController
         $user->setAddress2_user($_POST["address2_user"]);
         $user->setFk_id_city($city->getId_city());
         $user->setPostcode_user($_POST["postcode_user"]);
-        // if (!empty($roles)) {
-        //     $user->setRoles_user($roles);
-        // }
+        $user->setRoles_user($roles);
+
+        $id_user = $_GET['id'];
 
         // Push into DB
         if (($user->getValid_user()) == true) {
+            var_dump($user);
             UserDAO::updateUser($user);
-            // RoleDAO::createRoles($user);
+            RoleDAO::deleteRoles($roles_user, $id_user);
+            RoleDAO::createRoles($user);
         }
 
         return $user;
+    }
+
+    // GET COMMANDS
+    private function getCommands()
+    {
+        $data = [];
+        $id_command = $_POST['id_command'];
+        $commandLines = CommandDAO::getCommandsLines($id_command);
+
+        $index = 0;
+
+        foreach ($commandLines as $line) {
+            $article = ArticleDAO::findOneBy('id_article', $line->getFk_id_article());
+            $data['article-command'][$index] = $line->getCommand_quantity() . ' x ' . $article->getQuantity_unite_article() . ' ' . $article->getUnitArticle() . ' de ' . $article->getNameProduct();
+            $index++;
+        }
+        echo json_encode($data);
+        die;
     }
 }

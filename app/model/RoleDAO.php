@@ -23,6 +23,28 @@ class RoleDAO extends BaseDAO
         }
     }
 
+       // Creates role(s) for a new user (association foreing key(s))
+       public static function deleteRoles($roles_user, $id_user)
+       {
+   
+           foreach ($roles_user as $value) {
+               var_dump($value);
+               var_dump($id_user);
+   
+               $pdo = Database::getPdo();
+               $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+               $sql = "DELETE FROM $value WHERE fk_id_user = ?";
+               $q = $pdo->prepare($sql);
+               $q->execute(
+                   [
+                       $id_user,
+                   ]
+               );
+   
+               Database::disconnect();
+           }
+       }
+
     // Fetchs role(s) for users
     public static function readUserRoles($user) {
 
