@@ -115,7 +115,7 @@ const optionsArticle = {
         visible: true,
     },
     xAxis: {
-        title: "Nom article",
+        title: "Noms articles",
     },
     yAxis: {
         title: "Euros",

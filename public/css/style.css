@@ -303,7 +303,6 @@ thead {
 
 /* PAGE USER */
 
-
 /* REGISTER */
 
 #pwd-strength {
@@ -376,4 +375,16 @@ thead {
     background-position: center;
     background-size: contain;
     border-radius: 8px;
+}
+
+/* FOR THE TABLE */
+.page-item.active .page-link {
+    z-index: 3;
+    color: #fff;
+    background-color: #005662 !important;
+    border-color: #005662 !important;
+}
+
+.dropdown-item.active, .dropdown-item:active {
+    background-color: #5c636a !important;
 }
