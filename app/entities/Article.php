@@ -274,7 +274,10 @@ class Article
 
     public function getStockArticle()
     {
-        return ArticleDAO::getStockArticle($this->getId_article());
+       $bought = ArticleDAO::getQuantityBoughtArticle($this->getId_article());
+       $sold = ArticleDAO::getQuantitySoldArticle($this->getId_article());
+       $stock =  $bought - $sold;
+        return $stock;
     }
 
     public function getDateImportArticle()

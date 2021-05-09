@@ -158,26 +158,25 @@ class ArticleDAO extends BaseDAO
         Database::disconnect();
     }
 
-    public static function getStockArticle($id_article)
+    public static function getQuantityBoughtArticle($id_article)
     {
         $pdo = Database::getPdo();
 
-        $sql = "SELECT packages.quantity_bought_package -  SUM(command_lines.command_quantity) AS stock FROM packages
+        $sql = "SELECT packages.quantity_bought_package AS bought FROM packages
          INNER JOIN articles ON articles.id_article = packages.fk_id_article
-         INNER JOIN command_lines ON command_lines.fk_id_article = articles.id_article
          WHERE articles.id_article = $id_article";
         $result = $pdo->query($sql);
         $result->setFetchMode(PDO::FETCH_ASSOC);
 
         if ($result->rowcount() == 1) {
-            $stock = $result->fetch();
+            $bought = $result->fetch();
         } else {
-            $stock['stock'] = "0";
+            $bought['bought'] = "0";
         }
 
         Database::disconnect();
 
-        return $stock['stock'];
+        return $bought['bought'];
     }
 
     public static function getTotalSalesArticle($id_article)
