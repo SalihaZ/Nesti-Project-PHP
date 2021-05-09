@@ -33,16 +33,16 @@
         <div class="row d-flex justify-content-between">
 
             <!-- Research Bar -->
-            <div class="col-8 d-flex align-items-center no-padding">
+            <div class="col-6 d-flex align-items-center no-padding">
                 <input type="search" class="form-control-lg shadow mr-2" id="searchArticle" placeholder="Rechercher un article">
                 <i class="fas fa-search ms-2"></i>
             </div>
 
             <!-- Buttons Container -->
-            <div class="col-4 d-flex justify-content-between no-padding">
+            <div class="col-6 d-flex justify-content-end no-padding">
 
                 <!-- Button Commands -->
-                <a href="articles/commands" class="btn btn-lg btn-outline-secondary shadow" id="btn-commands">
+                <a href="articles/commands" class="btn btn-lg btn-outline-secondary shadow me-3" id="btn-commands">
                     <i class="far fa-eye"></i>
                     Commandes
                 </a>
