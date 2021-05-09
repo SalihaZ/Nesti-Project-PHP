@@ -3,12 +3,11 @@
     <br>
 
     <!-- Alertes -->
-    <!-- For deleting article -->
     <?php
     if (isset($_SESSION['deleteArticle'])) {
     ?>
         <div class="alert alert-success" role="alert" onclick="removeAlert(this)">
-            L'article a bien été bloqué.
+            L'article a bien été bloquée.
         </div>
     <?php }
     unset($_SESSION['deleteArticle']); ?>

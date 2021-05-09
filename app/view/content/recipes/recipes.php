@@ -1,13 +1,13 @@
 <!-- Main -->
 <main class="container wrapper-recipes">
-<br>
-       <!-- Alertes -->
-    <!-- For the delete user -->
+    <br>
+
+    <!-- Alertes -->
     <?php
     if (isset($_SESSION['deleteRecipe'])) {
     ?>
         <div class="alert alert-success" role="alert" onclick="removeAlert(this)">
-            La recette a bien été bloqué.
+            La recette a bien été bloquée.
         </div>
     <?php }
     unset($_SESSION['deleteRecipe']); ?>
@@ -43,15 +43,16 @@
     <br>
 
     <!-- Table Container -->
-    <table class="table" data-toggle="table" data-sortable="true" data-pagination="true" data-pagination-next-text="Next" data-search="true" data-search-selector="#searchRecipe" data-locale="fr-FR"  >
+    <table class="table" data-toggle="table" data-sortable="true" data-pagination="true" data-pagination-next-text="Next" data-search="true" data-search-selector="#searchRecipe" data-locale="fr-FR">
         <thead>
             <tr>
-            <th scope="col">ID</th>
+                <th scope="col">ID</th>
                 <th scope="col">Nom</th>
                 <th scope="col">Difficulté (sur 5)</th>
                 <th scope="col">Pour</th>
                 <th scope="col">Temps</th>
                 <th scope="col">Chef</th>
+                <th scope="col">État</th>
                 <th scope="col">Actions</th>
             </tr>
         </thead>
@@ -59,26 +60,29 @@
 
             <?php
             foreach ($arrayRecipes as $element) {
-                ?>
-                    <tr>
-                        <th scope="row">
-                            <?= $element->getId_recipe() ?>
-                        </th>
-                        <td>
-                            <?= $element->getName_recipe() ?>
-                        </td>
-                        <td>
-                            <?= $element->getDifficulty_recipe() ?>
-                        </td>
-                        <td>
-                            <?= $element->getNumber_person_recipe() ?>
-                        </td>
-                        <td>
-                            <?= $element->getDisplayTimeHMS_recipe() ?>
-                        </td>
-                        <td>
-                            <?= $element->getNameChiefRecipe() ?>
-                        </td>
+            ?>
+                <tr>
+                    <th scope="row">
+                        <?= $element->getId_recipe() ?>
+                    </th>
+                    <td>
+                        <?= $element->getName_recipe() ?>
+                    </td>
+                    <td>
+                        <?= $element->getDifficulty_recipe() ?>
+                    </td>
+                    <td>
+                        <?= $element->getNumber_person_recipe() ?>
+                    </td>
+                    <td>
+                        <?= $element->getDisplayTimeHMS_recipe() ?>
+                    </td>
+                    <td>
+                        <?= $element->getNameChiefRecipe() ?>
+                    </td>
+                    <td>
+                        <?= $element->getDisplayState_recipe() ?>
+                    </td>
                     <td>
                         <!-- Form POST Modify -->
                         <form method="POST" action="<?= BASE_URL . "recipes/edit/" .  $element->getId_recipe() ?>" class="form-table mb-2 rounded bg-warning">
