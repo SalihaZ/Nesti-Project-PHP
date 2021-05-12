@@ -68,7 +68,7 @@ class User
             $this->usernameError = "Veuillez saisir un nom d'utilisateur";
             $this->valid_user  = false;
         } else if (!preg_match("/^[a-zA-ZÀ-ÿ ,.'-]{3,20}+$/i", $username_user)) {
-            $this->usernameError = "Le nom d'utilisateur ne respecte pas les conditions";
+            $this->usernameError = "Votre saisie nom d'utilisateur ne respecte pas les conditions";
             $this->valid_user = false;
         }
 
@@ -122,7 +122,7 @@ class User
             $this->lastnameError = 'Veuillez saisir votre nom';
             $this->valid_user = false;
         } else if (!preg_match("/^[a-zA-ZÀ-ÿ ,.'-]{3,20}+$/i", $lastname_user)) {
-            $this->lastnameError = "Votre saisie nom n'est pas correcte";
+            $this->lastnameError = "Votre saisie nom ne respecte pas les conditions";
             $this->valid_user = false;
         }
 
@@ -149,7 +149,7 @@ class User
             $this->firstnameError = 'Veuillez saisir votre prénom';
             $this->valid_user = false;
         } else if (!preg_match("/^[a-zA-ZÀ-ÿ ,.'-]{3,20}+$/i",  $firstname_user)) {
-            $this->firstnameError = "Votre saisie prénom n'est pas correcte";
+            $this->firstnameError = "Votre saisie prénom ne respecte pas les conditions";
             $this->valid_user = false;
         }
 
@@ -176,7 +176,7 @@ class User
             $this->emailError = 'Veuillez saisir votre adresse e-mail';
             $this->valid_user = false;
         } else if (!filter_var($email_user, FILTER_VALIDATE_EMAIL)) {
-            $this->emailError = "L'adresse email n'est pas correcte";
+            $this->emailError = "Votre saisie adresse email ne respecte pas les conditions";
             $this->valid_user = false;
         }
         $this->email_user = $email_user;
@@ -304,7 +304,7 @@ class User
             $this->postcodeError = 'Veuillez saisir un code postal';
             $this->valid_user = false;
         } else if (!preg_match("/^[0-9]{5}$/", $postcode_user)) {
-            $this->postcodeError = "Veuillez saisir un code postal valide";
+            $this->postcodeError = "Votre saisie code postal ne respecte pas les conditions";
             $this->valid_user = false;
         }
 

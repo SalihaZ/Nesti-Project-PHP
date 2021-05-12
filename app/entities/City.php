@@ -48,8 +48,8 @@ class City {
         if (empty($name_city)) {
             $this->nameCityError = "Veuillez saisir votre ville";
             $this->valid_city  = false;
-        } else if (!preg_match("/^[a-zA-Z0-9._-]{3,16}$/", $name_city)) {
-            $this->nameCityError = "Votre saisie ville n'est pas correcte";
+        } else if (!preg_match("/^[a-zA-Z0-9._-]{3,25}$/", $name_city)) {
+            $this->nameCityError = "Votre saisie ville ne respecte pas les conditions";
             $this->valid_city = false;
         }
 
