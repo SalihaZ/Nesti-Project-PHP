@@ -7,7 +7,7 @@
 <?php } else { ?>
 
     <!-- Main -->
-    <main class="container wrapper-commands">
+    <main class="container-lg wrapper-commands">
         <div class="row d-flex">
             <!-- Nav Location -->
             <div class="row mt-2">

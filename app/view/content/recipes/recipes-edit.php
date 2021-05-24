@@ -7,7 +7,7 @@
 <?php } else { ?>
 
     <!-- Main -->
-    <main class="container wrapper-recipe-create">
+    <main class="container-lg wrapper-recipe-create">
 
         <!-- Nav Location -->
         <div class="row mt-2">
@@ -41,7 +41,7 @@
         <!-- Title Page -->
         <div class="row">
             <div class="col">
-                <h1>Création d'un Recette</h1>
+                <h1>Édition d'une Recette</h1>
                 <br>
             </div>
         </div>

@@ -13,6 +13,10 @@ a
  text-decoration:none !important; 
 } 
 
+.page-link {
+    color: #005662 !important;
+}
+
 a:hover, a:hover>*, button:hover, button:hover>* {
     color: #00424b !important;
     transition: none !important;

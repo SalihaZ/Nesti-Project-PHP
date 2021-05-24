@@ -7,7 +7,7 @@
 <?php } else { ?>
 
     <!-- Main -->
-    <main class="container wrapper-recipes">
+    <main class="container-lg wrapper-recipes">
         <br>
 
         <!-- Alertes -->

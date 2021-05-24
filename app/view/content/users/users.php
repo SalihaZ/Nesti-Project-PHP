@@ -7,7 +7,7 @@
 <?php } else { ?>
 
     <!-- Main -->
-    <main class="container wrapper-users">
+    <main class="container-lg wrapper-users">
         <br>
         <!-- Alertes -->
         <!-- For the create user -->

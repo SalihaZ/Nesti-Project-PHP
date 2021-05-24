@@ -8,7 +8,7 @@
 
 
     <!-- Main -->
-    <main class="container wrapper-articles">
+    <main class="container-lg wrapper-articles">
         <br>
 
         <!-- Alertes -->
