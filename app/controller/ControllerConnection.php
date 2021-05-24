@@ -34,6 +34,7 @@ class ControllerConnection extends BaseController
                             $_SESSION["lastname_user"] = $user->getLastname_user();
                             $_SESSION["firstname_user"] = $user->getFirstname_user();
                             $_SESSION["roles_user"] = $user->getRoles_user();
+                            $_SESSION["id_user"] = $user->getId_user();
 
                             header('Location:' . BASE_URL . "recipes");
                             die();
