@@ -60,8 +60,8 @@ const dataConnectionLogPerHour = {
 const optionsConnectionLog = {
     chart: {
         title: '',
-        width: 550,
-        height: 400
+        width: 650,
+        height: 500
     },
     legend: {
         visible: true
@@ -108,8 +108,8 @@ const dataArticle = {
 const optionsArticle = {
     chart: {
         title: "",
-        width: 700,
-        height: 300
+        width: 900,
+        height: 400
     },
     legend: {
         visible: true,

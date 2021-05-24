@@ -318,7 +318,7 @@
         <br>
 
         <!-- Section Middle -->
-        <div class="container wrapper-commands">
+        <div class="container-lg wrapper-commands">
 
             <div class="row d-flex">
 
