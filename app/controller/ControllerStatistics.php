@@ -87,7 +87,7 @@ class ControllerStatistics extends BaseController
             if ($article->getStockArticle() <= 0) {
                 $articlesOutOfStock[] = $article;
             }
-            $articlesName[$article->getNameProduct()] = $article;
+            $articlesName[ $article->getQuantity_unite_article() . ' ' . $article->getUnitArticle() . ' de ' . $article->getNameProduct()] = $article;
         }
 
         $articlesSold = [];

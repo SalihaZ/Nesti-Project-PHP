@@ -6,7 +6,7 @@
     </div>
 <?php } else { ?>
 
-    <main class="container wrapper-articles">
+    <main class="container-lg wrapper-articles">
         <br>
         <!-- Title Page -->
         <div class="row">
@@ -34,7 +34,7 @@
                     <div class="row d-flex justify-content-center form-control shadow">
                         <?php
                         foreach ($top10commands as $command) {
-                            echo "<div class='d-flex flex-row justify-content-between'> <div> Commande n°" . $command->getId_command() . " </div><a href='" . BASE_URL . "articles/commands'>Voir</a> </div>";
+                            echo "<div class='top10 d-flex flex-row justify-content-between'> <div> Commande n°" . $command->getId_command() . " </div><a href='" . BASE_URL . "articles/commands'>Voir</a> </div>";
                         } ?>
                     </div>
                 </div>
@@ -56,7 +56,7 @@
                     <div class="row d-flex justify-content-center form-control shadow">
                         <?php
                         foreach ($top10ConnectedUsers as $user) {
-                            echo "<div class='d-flex flex-row justify-content-between'> <div>" . $user->getLastname_user() . ' ' . $user->getFirstname_user() . " </div> <a href='" . BASE_URL . "users/edit/" . $user->getId_user() . "'>Voir</a></div>";
+                            echo "<div class='top10 d-flex flex-row justify-content-between'> <div>" . $user->getLastname_user() . ' ' . $user->getFirstname_user() . " </div> <a href='" . BASE_URL . "users/edit/" . $user->getId_user() . "'>Voir</a></div>";
                         } ?>
                     </div>
                 </div>
@@ -81,7 +81,7 @@
                             <div class="col">
                                 <?php
                                 foreach ($top10Chiefs as $chief) {
-                                    echo "<div class='d-flex flex-row justify-content-between'> <div>" . $chief->getLastname_user() . ' ' . $chief->getFirstname_user() . " </div> <a href='" . BASE_URL . "users/edit/" . $chief->getId_user() . "'>Voir</a></div>";
+                                    echo "<div class='top10 d-flex flex-row justify-content-between'> <div>" . $chief->getLastname_user() . ' ' . $chief->getFirstname_user() . " </div> <a href='" . BASE_URL . "users/edit/" . $chief->getId_user() . "'>Voir</a></div>";
                                 } ?>
 
                             </div>
@@ -95,7 +95,7 @@
                             <div class="col">
                                 <?php
                                 foreach ($top10Recipes as $recipe) {
-                                    echo "<div class='d-flex flex-row justify-content-between'> <div>" . $recipe->getName_recipe() . " </div> <a href='" . BASE_URL . "recipes/edit/" . $recipe->getId_recipe() . "'>Voir</a></div>";
+                                    echo "<div class='top10 d-flex flex-row justify-content-between'> <div>" . $recipe->getName_recipe() . " </div> <a href='" . BASE_URL . "recipes/edit/" . $recipe->getId_recipe() . "'>Voir</a></div>";
                                 } ?>
 
                             </div>
@@ -131,7 +131,7 @@
                         ?>
                             <tr>
                                 <td>
-                                    <?= $article->getNameProduct() ?>
+                                    <?= $article->getQuantity_unite_article() . ' ' . $article->getUnitArticle() . ' de ' . $article->getNameProduct() ?>
                                 </td>
                                 <td>
                                     <?= $article->getQuantitySoldArticle() ?>
@@ -140,7 +140,7 @@
                                     <?= $article->getBenefitsArticle() ?> €
                                 </td>
                                 <td>
-                                    Voir
+                                <a href='<?= BASE_URL . "articles" ?>'>Voir</a></div>
                                 </td>
                             </tr>
 
