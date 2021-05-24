@@ -175,17 +175,17 @@
                             <div class='d-flex justify-content-center me-2'>
                                 <button class="btn btn-lg btn-validation" id="button-upload-picture-recipe">Ajouter</button>
                             </div>
-                            <button class="btn btn-delete" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                            <button class="btn btn-delete" data-bs-toggle="modal" data-bs-target="#staticBackdropImage">
                                 <i class="fas fa-trash"> </i>
                             </button>
                         </div>
 
-                        <!-- Modal -->
-                        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <!-- Modal Delete Picture -->
+                        <div class="modal fade" id="staticBackdropImage" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabelImage" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="staticBackdropLabel">Supprimer l'image</h5>
+                                        <h5 class="modal-title" id="staticBackdropLabelImage">Supprimer l'image</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
@@ -233,6 +233,25 @@
                     <div id="row-add-preparation" class="row justify-content-end">
                         <button class="btn" id="buttonAddStepPreparation" type="submit"><i class="fas fa-plus"></i></button>
                     </div>
+
+                    <!-- Modal Delete Preparation -->
+                    <div class="modal fade" id="deletePreparation" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="labelDeletePreparation" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="labelDeletePreparation">Supprimer une étape de préparation</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Vous êtes sur le point de supprimer une étape de préparation à cette recette. Êtes-vous sûr de vouloir réaliser cette action ?
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-danger" data-bs-dismiss="modal">Non</button>
+                                    <button id="button-delete-preparation-recipe" class="btn btn-success" data-bs-dismiss="modal">Oui</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -256,12 +275,31 @@
                             <?php foreach ($ingredients_recipe as $element) { ?>
                                 <li class="justify-content-between mb-1">
                                     <?= $element->getQuantity_ingredient() . " " . $element->getNameMeasureUnit() . " de " . $element->getNameProduct() ?>
-                                    <button class="buttonDeleteIngredient rounded" data-id-recipe="<?= $element->getFk_id_recipe() ?>" data-quantity="<?= $element->getQuantity_ingredient() ?>" data-id-product="<?= $element->getFk_id_product() ?>" data-id-measure-unit="<?= $element->getFk_id_measure_unit() ?> ">
-                                        <i class="fas fa-times"></i>
+                                    <button class="buttonDeleteIngredient rounded" data-id-recipe="<?= $element->getFk_id_recipe() ?>" data-quantity="<?= $element->getQuantity_ingredient() ?>" data-id-product="<?= $element->getFk_id_product() ?>" data-id-measure-unit="<?= $element->getFk_id_measure_unit() ?>" data-bs-toggle="modal" data-bs-target="#deleteIngredient">
+                                    <i class="fas fa-times"></i>
                                     </button>
                                 <?php } ?>
                                 <!-- Add <li> here -->
                         </ul>
+                    </div>
+
+                    <!-- Modal Delete Ingredient-->
+                    <div class="modal fade" id="deleteIngredient" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="labelDeleteIngredient" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="labelDeleteIngredient">Supprimer un ingrédient</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Vous êtes sur le point de bloquer cet ingrédient. Êtes-vous sûr de vouloir réaliser cette action ?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Non</button>
+                                    <button id="button-delete-ingredient-recipe" class="btn btn-success" data-bs-dismiss="modal">Oui</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 

@@ -31,6 +31,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     buttonDelete.setAttribute('data-id-recipe', id_recipe);
                     buttonDelete.setAttribute('data-id-product', id_ingredient);
                     buttonDelete.setAttribute('data-id-measure-unit', id_measure_unit_ingredient);
+                    buttonDelete.setAttribute('data-bs-toggle', 'modal');
+                    buttonDelete.setAttribute('data-bs-target', '#deleteIngredient');
                     newIngredient.className = "justify-content-between mb-1";
 
                     // AppendChild Element
@@ -44,9 +46,14 @@ document.addEventListener("DOMContentLoaded", function () {
                     document.getElementById("inputIngredientUnit").value = '';
 
                     buttonsDeleteIngredient = document.querySelectorAll(".buttonDeleteIngredient");
+                    
                     buttonsDeleteIngredient.forEach(button => button.addEventListener('click', function () {
-                        deleteIngredient(button);
+                        var modalDeleteIngredient = document.querySelector("#button-delete-ingredient-recipe");
+                        modalDeleteIngredient.onclick = function () {
+                            deleteIngredient(button);
+                        };
                     }));
+
 
                     // Add alerte
                     var alertes = document.querySelector("#alertes-recipe-ingredients");
@@ -98,7 +105,10 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     buttonsDeleteIngredient.forEach(button => button.addEventListener('click', function () {
-        deleteIngredient(button);
+        var modalDeleteIngredient = document.querySelector("#button-delete-ingredient-recipe");
+        modalDeleteIngredient.onclick = function () {
+            deleteIngredient(button);
+        };
     }));
 });
 
@@ -112,6 +122,7 @@ function deleteIngredient(button) {
     deleteIngredientDB(idRecipe, idIngredient, ingredientQuantity, idMeasureUnit)
         .then((response) => {
             if (response) {
+
                 button.parentNode.remove();
 
                 // Add alerte
@@ -228,16 +239,16 @@ document.addEventListener("DOMContentLoaded", function () {
                     const divPicture = document.querySelector("#display-img-recipe");
                     divPicture.style.backgroundImage = "";
 
-                     // Add alerte
-                     var alertes = document.querySelector("#alertes-recipe-image");
-                     console.log(alertes);
-                     alertes.innerHTML = "";
-                     var div = document.createElement("div");
-                     div.className = "alert alert-danger";
-                     var remove = 'removeAlert(this)';
-                     div.setAttribute('onclick', remove);
-                     div.innerHTML = "L'image a bien été supprimée de la recette.";
-                     alertes.appendChild(div);
+                    // Add alerte
+                    var alertes = document.querySelector("#alertes-recipe-image");
+                    console.log(alertes);
+                    alertes.innerHTML = "";
+                    var div = document.createElement("div");
+                    div.className = "alert alert-danger";
+                    var remove = 'removeAlert(this)';
+                    div.setAttribute('onclick', remove);
+                    div.innerHTML = "L'image a bien été supprimée de la recette.";
+                    alertes.appendChild(div);
                 };
             });
     });
@@ -436,6 +447,8 @@ document.addEventListener("DOMContentLoaded", function () {
         textArea.className = "paragraph-content bg-white border border-info rounded w-100";
         textArea.rows = "6";
         iconTrash.className = "fas fa-trash";
+        iconTrash.setAttribute('data-bs-toggle', 'modal');
+        iconTrash.setAttribute('data-bs-target', '#deletePreparation');
 
         newRow.setAttribute('data-id-recipe', element.fk_id_recipes);
         newRow.setAttribute('data-id-paragraph', element.id_paragraph);
@@ -497,8 +510,14 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function addEventListenerDeleteParagraph(button) {
+
         button.addEventListener('click', function () {
-            deleteParagraphLine(button);
+
+            var modalDeletePreparation = document.querySelector("#button-delete-preparation-recipe");
+
+            modalDeletePreparation.onclick = function () {
+                deleteParagraphLine(button);
+            };
         })
     }
 
