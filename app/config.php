@@ -3,7 +3,7 @@
 define('DEBUG', true);
 
 // PATH
-define('BASE_URL', 'http://localhost/www/Nesti-Project-PHP/');
+define('BASE_URL', 'https://teillier.needemand.com/realisations/Projet_Nesti/Nesti-Project-PHP/');
 define('PATH_CTRL', 'app/controller/');
 define("BASE_DIR", __DIR__.'/..');
 
@@ -24,9 +24,9 @@ define('PATH_ENTITIES', 'app/entities/');
 define('PATH_MODEL', 'app/model/');
 
 // CONNECTION
-define('DSN', 'mysql:dbname=nesti_php; host=localhost');
-define('USERNAME', 'root');
-define('PWD', '');
+define('DSN', 'mysql:dbname=c35teillier; host=localhost');
+define('USERNAME', 'c35teillier');
+define('PWD', '654zfdvTR');
 
 // PATH_IMAGE
 define('PATH_IMG', BASE_URL.'public/images/');
