@@ -6,11 +6,31 @@
 
 <script type="text/javascript" src="<?php echo PATH_JS ?>tui-chart.js"></script>
 <script type="text/javascript" src="<?php echo PATH_JS ?>bootstrap-table-fr-FR.js"></script>
-
-<script type="text/javascript" src="<?php echo PATH_JS ?>recipes-edit.js"></script>
-<script type="text/javascript" src="<?php echo PATH_JS ?>users-create.js"></script>
-<script type="text/javascript" src="<?php echo PATH_JS ?>articles-commands.js"></script>
-<script type="text/javascript" src="<?php echo PATH_JS ?>users-edit.js"></script>
-<script type="text/javascript" src="<?php echo PATH_JS ?>statistics.js"></script>
 <script type="text/javascript" src="<?php echo PATH_JS ?>alertes.js"></script>
-<script type="text/javascript" src="<?php echo PATH_JS ?>articles-edit.js"></script>
+
+
+<?php if ($loc == "statistics") { ?>
+    <script type="text/javascript" src="<?php echo PATH_JS ?>statistics.js"></script>
+<?php } ?>
+
+<?php if ($loc == "recipes" && $action == 'edit') { ?>
+    <script type="text/javascript" src="<?php echo PATH_JS ?>recipes-edit.js"></script>
+<?php } ?>
+
+<?php if ($loc == "users") {
+    if ($action == 'create') { ?>
+        <script type="text/javascript" src="<?php echo PATH_JS ?>users-create.js"></script>
+    <?php }
+    if ($action == 'edit') { ?>
+        <script type="text/javascript" src="<?php echo PATH_JS ?>users-edit.js"></script>
+<?php }
+} ?>
+
+<?php if ($loc == "articles") {
+    if ($action == 'commands') { ?>
+        <script type="text/javascript" src="<?php echo PATH_JS ?>articles-commands.js"></script>
+    <?php }
+    if ($action == 'edit') { ?>
+        <script type="text/javascript" src="<?php echo PATH_JS ?>articles-edit.js"></script>
+<?php }
+} ?>
