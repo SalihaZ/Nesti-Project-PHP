@@ -1,11 +1,3 @@
-<!-- Restriction -->
-<?php if (array_search("admins", $_SESSION["roles_user"]) === false) { ?>
-    <div class="container mt-4">
-        <h1 class="title_access_forbidden">Accès interdit</h1>
-        <p class="text_access_forbidden">Vous n'avez pas les droits pour accèder à cette page.</p>
-    </div>
-<?php } else { ?>
-
     <!-- Main -->
     <main class="container-lg wrapper-commands">
         <div class="row d-flex">
@@ -110,4 +102,3 @@
     <script>
         const ROOT = '<?= BASE_URL ?>';
     </script>
-<?php } ?>

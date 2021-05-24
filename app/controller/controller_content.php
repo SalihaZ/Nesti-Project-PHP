@@ -64,6 +64,11 @@ switch ($loc) {
         include(PATH_STATISTICS . "statistics.php");
         break;
 
+         // Access Forbidden part
+    case "forbidden":
+        include(PATH_VIEW . "forbidden.php");
+        break;
+
     default:
         include(PATH_ERRORS . "error404.php");
         break;

@@ -5,119 +5,129 @@ class ControllerUsers extends BaseController
 
     public function initialize()
     {
-
-        #USERS
-        if (!isset($_GET['action'])) {
-            $arrayUsers = UserDAO::readAllUsers();
-            $this->_data['arrayUsers'] = $arrayUsers;
+        // RESTRICTION
+        if (array_search("moderators", $_SESSION["roles_user"]) === false && array_search("admins", $_SESSION["roles_user"]) === false) {
+            header('Location:' . BASE_URL . "forbidden");
+            exit();
         } else {
 
-            #USER/DELETE
-            if ($_GET['action'] == 'delete') {
-                $this->deleteUser();
-            }
+            #USERS
+            if (!isset($_GET['action'])) {
+                $arrayUsers = UserDAO::readAllUsers();
+                $this->_data['arrayUsers'] = $arrayUsers;
+            } else {
 
-            #USER/CREATE
-            if ($_GET['action'] == 'create') {
-                $user = new User();
-                $city = new City();
-
-                if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
-                    $city = $this->createCity();
-                    $user = $this->createUser($city);
+                #USER/DELETE
+                if ($_GET['action'] == 'delete') {
+                    $this->deleteUser();
                 }
 
-                $this->_data['user'] = $user;
-                $this->_data['city'] = $city;
-            }
-
-            #USER/EDITION
-            if ($_GET['action'] == 'edit') {
-
-                if (!isset($_GET['option'])) {
-
-                    if (isset($_POST["id_command"]) && !empty($_POST["id_command"])) {
-                        $this->getCommands();
-                    }
-
-                    $id_user = $_GET['id'];
-
-                    // Read data (user/city/roles)
-                    $user = UserDAO::findOneUser($id_user);
-                    $id_city = $user->getFk_id_city();
-                    $city = CityDAO::findOneBy("id_city", $id_city);
-                    $roles_user = RoleDAO::readUserRoles($user);
-                    $user->setRoles_user($roles_user);
-
-                    // Table Commands
-                    $arrayCommandsUser = CommandDAO::readCommandsFromOneUser($id_user);
-                    $this->_data['arrayCommandsUser'] = $arrayCommandsUser;
-
-                    // Table Comments
-                    $arrayCommentsUser = CommentDAO::readCommentsFromOneUser($id_user);
-                    $this->_data['arrayCommentsUser'] = $arrayCommentsUser;
+                #USER/CREATE
+                if ($_GET['action'] == 'create') {
+                    $user = new User();
+                    $city = new City();
 
                     if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
-
                         $city = $this->createCity();
-                        $this->editUser($user, $city, $roles_user);
+                        $user = $this->createUser($city);
                     }
 
                     $this->_data['user'] = $user;
                     $this->_data['city'] = $city;
                 }
 
-                // COMMENT APPROVED
-                if (isset($_GET['option'])) {
-                    if ($_GET['option'] == 'commentapproved') {
+                #USER/EDITION
+                if ($_GET['action'] == 'edit') {
 
-                        if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
+                    if (!isset($_GET['option'])) {
 
-                            $id_user = $_POST['id_user'];
-                            $id_comment = $_POST['id_comment'];
-                            CommentDAO::approveComment($id_comment);
+                            if (isset($_POST["id_command"]) && !empty($_POST["id_command"])) {
+                                $this->getCommands();
+                            }
+    
+                            $id_user = $_GET['id'];
+    
+                            // Read data (user/city/roles)
+                            $user = UserDAO::findOneUser($id_user);
+                            $id_city = $user->getFk_id_city();
+                            $city = CityDAO::findOneBy("id_city", $id_city);
+                            $roles_user = RoleDAO::readUserRoles($user);
+                            $user->setRoles_user($roles_user);
 
-                            $_SESSION['commentapproved'] = '';
-                            header('Location:' . BASE_URL . "users/edit/" . $id_user);
-                            exit();
+                            if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
+
+                                $city = $this->createCity();
+                                $this->editUser($user, $city, $roles_user);
+                            
+                            }
+    
+                            // Table Commands
+                            $arrayCommandsUser = CommandDAO::readCommandsFromOneUser($id_user);
+                            $this->_data['arrayCommandsUser'] = $arrayCommandsUser;
+    
+                            // Table Comments
+                            $arrayCommentsUser = CommentDAO::readCommentsFromOneUser($id_user);
+                            $this->_data['arrayCommentsUser'] = $arrayCommentsUser;
+                           
+                            $this->_data['user'] = $user;
+                            $this->_data['city'] = $city;
+
+                        
+
+                    }
+
+                    // COMMENT APPROVED
+                    if (isset($_GET['option'])) {
+                        if ($_GET['option'] == 'commentapproved') {
+
+                            if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
+
+                                $id_user = $_POST['id_user'];
+                                $id_comment = $_POST['id_comment'];
+                                CommentDAO::approveComment($id_comment);
+
+                                $_SESSION['commentapproved'] = '';
+                                header('Location:' . BASE_URL . "users/edit/" . $id_user);
+                                exit();
+                            }
                         }
                     }
-                }
 
-                //COMMENT DISAPPROVED
-                if (isset($_GET['option'])) {
-                    if ($_GET['option'] == 'commentdisapproved') {
+                    //COMMENT DISAPPROVED
+                    if (isset($_GET['option'])) {
+                        if ($_GET['option'] == 'commentdisapproved') {
 
-                        if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
+                            if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
 
-                            $id_user = $_POST['id_user'];
-                            $id_comment = $_POST['id_comment'];
-                            CommentDAO::disapproveComment($id_comment);
+                                $id_user = $_POST['id_user'];
+                                $id_comment = $_POST['id_comment'];
+                                CommentDAO::disapproveComment($id_comment);
 
-                            $_SESSION['commentdisapproved'] = '';
-                            header('Location:' . BASE_URL . "users/edit/" . $id_user);
-                            exit();
+                                $_SESSION['commentdisapproved'] = '';
+                                header('Location:' . BASE_URL . "users/edit/" . $id_user);
+                                exit();
+                            }
                         }
                     }
-                }
 
-                // RESET PASSWORD
-                if (isset($_GET['option'])) {
-                    if ($_GET['option'] == 'resetpassword') {
+                    // RESET PASSWORD
+                    if (isset($_GET['option'])) {
+                        if ($_GET['option'] == 'resetpassword') {
 
-                        if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
+                            if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
 
-                            $id_user = $_POST['id_user'];
+                                $id_user = $_POST['id_user'];
 
-                            $data = '1234567890ABCDEFGHIJabcefghij!$#=+/&@_-';
-                            $password = substr(str_shuffle($data), 0, 16);
+                                $data = '1234567890ABCDEFGHIJabcefghij!$#=+/&@_-';
+                                $password = substr(str_shuffle($data), 0, 16);
 
-                            UserDAO::resetPasswordUser($password, $id_user);
+                                UserDAO::resetPasswordUser($password, $id_user);
 
-                            $_SESSION['password'] = $password;
+                                $_SESSION['password'] = $password;
 
-                            header('Location:' . BASE_URL . "users/edit/" . $id_user);
-                            exit();
+                                header('Location:' . BASE_URL . "users/edit/" . $id_user);
+                                exit();
+                            }
                         }
                     }
                 }
@@ -167,7 +177,7 @@ class ControllerUsers extends BaseController
             $user->setId_user($last_id);
             // Links ROLES to USER
             RoleDAO::createRoles($user);
-            
+
             $_SESSION['userCreated'] = '';
             header('Location:' . BASE_URL . "users");
             exit();
@@ -197,8 +207,12 @@ class ControllerUsers extends BaseController
     // Edit data for one user
     private function editUser($user, $city, $roles_user)
     {
-        // Creates ROLES to user
 
+        if ($roles_user[0] == 'Utilisateur') {
+            $roles_user = [];
+        }
+
+        // Creates ROLES to user
         $roles = [];
         if (!empty($_POST['roles_user'])) {
             foreach ($_POST['roles_user'] as $value) {
@@ -206,9 +220,9 @@ class ControllerUsers extends BaseController
             }
         }
 
-        if ($roles_user[0] == 'Utilisateur') {
-            $roles_user = [];
-        }
+    $newRoles = array_diff($roles, $roles_user);
+    $oldAndNewRoles = array_merge($roles, $roles_user);
+
 
         // Checks/Creates data USER
         $user->setState_user($_POST["state_user"]);
@@ -219,21 +233,27 @@ class ControllerUsers extends BaseController
         $user->setAddress2_user($_POST["address2_user"]);
         $user->setFk_id_city($city->getId_city());
         $user->setPostcode_user($_POST["postcode_user"]);
-        $user->setRoles_user($roles);
+        $user->setRoles_user($oldAndNewRoles);
 
         $id_user = $_GET['id'];
 
         // Push into DB
         if (($user->getValid_user()) == true) {
-       
+
             UserDAO::updateUser($user);
-            RoleDAO::deleteRoles($roles_user, $id_user);
-            RoleDAO::createRoles($user);
-        }
+            // RoleDAO::deleteRoles($roles_user, $id_user);
+            RoleDAO::updateRoles($id_user, $newRoles);
+    
+            if ( $id_user == $_SESSION["id_user"] ) {
+                $_SESSION["roles_user"] = $user->getRoles_user(); 
+            }
 
         $_SESSION['userUpdated'] = '';
         header('Location:' . BASE_URL . "users/edit/" . $id_user);
         exit();
+        }
+        
+        return $user;
     }
 
     // GET COMMANDS

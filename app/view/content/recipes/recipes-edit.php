@@ -1,11 +1,3 @@
-<!-- Restriction -->
-<?php if (array_search("chiefs", $_SESSION["roles_user"]) === false && array_search("admins", $_SESSION["roles_user"]) === false) { ?>
-    <div class="container mt-4">
-        <h1 class="title_access_forbidden">Accès interdit</h1>
-        <p class="text_access_forbidden">Vous n'avez pas les droits pour accèder à cette page.</p>
-    </div>
-<?php } else { ?>
-
     <!-- Main -->
     <main class="container-lg wrapper-recipe-create">
 
@@ -276,7 +268,7 @@
                                 <li class="justify-content-between mb-1">
                                     <?= $element->getQuantity_ingredient() . " " . $element->getNameMeasureUnit() . " de " . $element->getNameProduct() ?>
                                     <button class="buttonDeleteIngredient rounded" data-id-recipe="<?= $element->getFk_id_recipe() ?>" data-quantity="<?= $element->getQuantity_ingredient() ?>" data-id-product="<?= $element->getFk_id_product() ?>" data-id-measure-unit="<?= $element->getFk_id_measure_unit() ?>" data-bs-toggle="modal" data-bs-target="#deleteIngredient">
-                                    <i class="fas fa-times"></i>
+                                        <i class="fas fa-times"></i>
                                     </button>
                                 <?php } ?>
                                 <!-- Add <li> here -->
@@ -292,7 +284,7 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    Vous êtes sur le point de bloquer cet ingrédient. Êtes-vous sûr de vouloir réaliser cette action ?
+                                    Vous êtes sur le point de supprimer cet ingrédient. Êtes-vous sûr de vouloir réaliser cette action ?
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Non</button>
@@ -342,5 +334,3 @@
         const ROOT = '<?= BASE_URL ?>';
         const idRecipe = '<?= $_GET['id'] ?>';
     </script>
-
-<?php } ?>
