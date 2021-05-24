@@ -59,9 +59,9 @@ switch ($loc) {
         $controller = new ControllerStatistics();
         break;
 
-    default:
-        include(PATH_ERRORS . "error404.php");
-        break;
+    // default:
+    //     include(PATH_ERRORS . "error404.php");
+    //     break;
 }
 
 if ($controller != null){

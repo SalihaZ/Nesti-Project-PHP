@@ -45,6 +45,11 @@ h3 {
     --bs-table-hover-bg:#c49000 !important;
 }
 
+#error-duck {
+    width: 1000px;
+    height: auto;
+}
+
 
 /* FOR THE CONNECTION PAGE */
 
@@ -92,7 +97,7 @@ h3 {
 
 .alerte-error-roles
 {
-    margin-left: 20%;
+    margin-left: 25%;
 }
 
 .fa-sign-out-alt {
