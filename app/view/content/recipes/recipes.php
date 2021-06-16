@@ -43,7 +43,7 @@
         <br>
 
         <!-- Table Container -->
-        <table class="table" data-toggle="table" data-sortable="true" data-pagination="true" data-pagination-next-text="Next" data-search="true" data-search-selector="#searchRecipe" data-locale="fr-FR">
+        <table class="table" data-toggle="table" data-sortable="true" data-pagination="true" data-pagination-next-text="›" data-search="true" data-search-selector="#searchRecipe" data-locale="fr-FR">
             <thead>
                 <tr>
                     <th scope="col">ID</th>
@@ -84,33 +84,11 @@
                             <?= $element->getDisplayState_recipe() ?>
                         </td>
                         <td>
-                            <!-- Form POST Modify -->
-                            <form method="POST" action="<?= BASE_URL . "recipes/edit/" .  $element->getId_recipe() ?>" class="form-table mb-2 rounded bg-warning">
 
-                                <!-- Button trigger modal -->
-                                <button type="button" class="btn bt-tbl" data-bs-toggle="modal" data-bs-target="<?= '#modifyRecipe' .  $element->getId_recipe() ?>">
+                           <!-- Button modify -->
+                           <a class="btn bt-tbl mb-2 rounded bg-warning" href = "<?= BASE_URL . "recipes/edit/" .  $element->getId_recipe() ?>">
                                     Modifier
-                                </button>
-
-                                <!-- Modal -->
-                                <div class="modal fade" id="<?= 'modifyRecipe' .  $element->getId_recipe() ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="staticBackdropLabel">Modifier recette</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                Vous êtes sur le point d'accéder à la modification des informations de la recette nommée <b> <?= $element->getName_recipe() ?></b>. Êtes-vous sûr de vouloir réaliser cette action ?
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Non</button>
-                                                <button type="submit" class="btn btn-success">Oui</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
+                                </a>
 
                             <!-- Form POST Delete -->
                             <form method="POST" action="<?= BASE_URL . "recipes/delete/" . $element->getId_recipe() ?>" class="form-table rounded bg-danger">
@@ -121,11 +99,11 @@
                                 </button>
 
                                 <!-- Modal -->
-                                <div class="modal fade" id="<?= 'deleteRecipe' .  $element->getId_recipe()  ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal fade" id="<?= 'deleteRecipe' .  $element->getId_recipe()  ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="<?='staticBackdropLabel'.  $element->getId_recipe() ?>" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="staticBackdropLabel">Supprimer recette</h5>
+                                                <h5 class="modal-title" id="<?='staticBackdropLabel'.  $element->getId_recipe() ?>">Supprimer recette</h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">

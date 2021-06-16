@@ -27,7 +27,7 @@
 
                     <!-- Article Input Informations Recipe-->
 
-                    <form method="POST" action="" class="application rounded">
+                    <form method="POST" class="application rounded">
                         <div class="row d-flex justify-content-between">
                             <div class="col-5">
 
@@ -172,7 +172,7 @@
 
                                     <!-- Input Role User -->
                                     <div class="col-6">
-                                        <label for="inputUserRole">Rôle(s)</label> <br>
+                                        <div>Rôle(s)</div> <br>
 
                                         <input type="checkbox" id="admin" name="roles_user[]" value="admins" <?php foreach ($user->getRoles_user() as $role) {
                                                                                                                     if ($role == 'admins') {
@@ -200,7 +200,7 @@
                                     <!-- Input State User -->
                                     <div class="col-6">
                                         <label for="inputUserState">État</label> <br>
-                                        <select name="state_user" id="state-select">
+                                        <select name="state_user" id="inputUserState">
                                             <option value="a">Actif</option>
                                             <option value="b">Bloqué</option>
                                             <option value="w">En attente</option>

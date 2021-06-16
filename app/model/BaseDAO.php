@@ -4,6 +4,7 @@ class BaseDAO
 {
     protected static $tableName;
 
+    /* Find one fieldname thanks to its value */
     public static function findOneBy($fieldName, $value)
     {
         $pdo = Database::getPdo();
@@ -13,9 +14,9 @@ class BaseDAO
         $q->execute([$value]);
 
         $result = $q->fetchObject(static::getEntityClass());
-     
-        $entity = $result??[]; // C'est du génie !
-        
+
+        $entity = $result ?? []; // C'est du génie !
+
         return $entity;
     }
 
@@ -23,5 +24,4 @@ class BaseDAO
     {
         return substr(get_called_class(), 0, -3);
     }
-
 }

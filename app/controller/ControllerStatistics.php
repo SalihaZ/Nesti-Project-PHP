@@ -41,7 +41,6 @@ class ControllerStatistics extends BaseController
             }
 
             // COMMANDS
-
             $commands = CommandDAO::readAllCommands();
             usort($commands, function ($command1, $command2) { // sort the array DESC according to the price of the order
                 return $command2->getTotalPriceCommand() <=> $command1->getTotalPriceCommand();

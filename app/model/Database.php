@@ -1,18 +1,22 @@
 <?php
 
-class Database {
+class Database
+{
 
     private static $pdo = null;
 
-    public static function connect() {
+    /* Connection of the PDO */
+    public static function connect()
+    {
 
         try {
-            self::$pdo = new PDO(DSN, USERNAME, PWD, [PDO::ATTR_PERSISTENT=>true]);
+            self::$pdo = new PDO(DSN, USERNAME, PWD, [PDO::ATTR_PERSISTENT => true]);
         } catch (PDOException $e) {
             die($e->getMessage());
         }
     }
 
+    /* Disconnection of the PDO */
     public static function disconnect()
     {
         self::$pdo = null;
@@ -20,13 +24,12 @@ class Database {
 
     /**
      * Get the value of pdo
-     */ 
+     */
     public static function getPdo()
     {
-        if(self::$pdo == null) {
+        if (self::$pdo == null) {
             self::connect();
         }
         return self::$pdo;
     }
-
 }

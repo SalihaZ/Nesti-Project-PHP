@@ -72,7 +72,7 @@
 
         <!-- Inputs User Informations -->
         <div class="col-lg-5 col-sm-12 mb-sm-4">
-            <form method="POST" action="" class="application rounded">
+            <form method="POST" class="application rounded">
 
                 <!-- Input LastName User -->
                 <div class="row mb-2">
@@ -157,23 +157,23 @@
                     <!-- Input Role User -->
                     <div class="col-6">
 
-                        <label for="inputUserRole">Rôle(s) *</label> <br>
+                        <div>Rôle(s) *</div> <br>
 
-                        <input type="checkbox" id="admin" name="roles_user[]" value="admins" <?php foreach ($user->getRoles_user() as $role) {
+                        <input type="checkbox" id="admin" name="inputUserRole" value="admins" <?php foreach ($user->getRoles_user() as $role) {
                                                                                                     if ($role == 'admins') {
                                                                                                         echo 'checked disabled';
                                                                                                     };
                                                                                                 }; ?>>
                         <label for="admin"> Administrateur </label><br>
 
-                        <input type="checkbox" id="mod" name="roles_user[]" value="moderators" <?php foreach ($user->getRoles_user() as $role) {
+                        <input type="checkbox" id="mod" name="inputUserRole" value="moderators" <?php foreach ($user->getRoles_user() as $role) {
                                                                                                     if ($role == 'moderators') {
                                                                                                         echo 'checked disabled';
                                                                                                     };
                                                                                                 }; ?>>
                         <label for="mod"> Modérateur </label><br>
 
-                        <input type="checkbox" id="chief" name="roles_user[]" value="chiefs" <?php foreach ($user->getRoles_user() as $role) {
+                        <input type="checkbox" id="chief" name="inputUserRole" value="chiefs" <?php foreach ($user->getRoles_user() as $role) {
                                                                                                     if ($role == 'chiefs') {
                                                                                                         echo 'checked disabled';
                                                                                                     };
@@ -185,7 +185,7 @@
                     <!-- Input State User -->
                     <div class="col-6">
                         <label for="inputUserState">État *</label> <br>
-                        <select name="state_user" id="state-select">
+                        <select name="state_user" id="inputUserState">
                             <option value="a" <?php if ($user->getState_user() == 'a') {
                                                     echo 'selected';
                                                 }; ?>>Actif</option>
@@ -226,7 +226,9 @@
                         Dernière connexion : <?= $user->getLastConnectionUser() ?></p>
                 </div>
                 <div class="row">
+               
                     <h5> Utilisateur </h5>
+                    <p>
                     Nombre de commandes : <?= $user->getNumberCommandsUser() ?><br>
                     Montant total des commandes : <?= $user->getAllCommandsPricesUser() ?> €<br>
                     Dernière commande : <?= $user->getLastCommandPriceUser() ?> €</p>
@@ -236,8 +238,8 @@
                 <?php foreach ($roles_user as $role) {
                     if ($role == 'admins') { ?>
                         <div class="row">
-                            <p>
                             <h5> Administrateur </h5>
+                            <p>
                             Nombre d'importation faites : <?= $user->getNumberImportsAdmin() ?> <br>
                             Date de la dernière importation : <?= $user->getDateLastImportAdmin() ?> </p>
                         </div>
@@ -245,8 +247,8 @@
                     }
                     if ($role == 'moderators') { ?>
                         <div class="row">
-                            <p>
                             <h5> Modérateur </h5>
+                            <p>
                             Nombre de commentaire validé : <?= $user->getNumberApprovedCommentsModerator() ?> <br>
                             Nombre de commentaire bloqué : <?= $user->getNumberDisapprovedCommentsModerator() ?> </p>
                         </div>
@@ -254,8 +256,8 @@
                     }
                     if ($role == 'chiefs') { ?>
                         <div class="row">
-                            <p>
                             <h5> Chef </h5>
+                            <p>
                             Nombre de recette : <?= $user->getNumberRecipesChief() ?> <br>
                             Dernière recette : <?= $user->getNameLastRecipeChief() ?> </p>
                         </div>

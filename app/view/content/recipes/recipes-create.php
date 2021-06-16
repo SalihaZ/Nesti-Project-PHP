@@ -29,8 +29,8 @@
     <div class="row d-flex  justify-content-between">
 
         <!-- Article Input Informations Recipe-->
-        <div class="col-4">
-            <form method="POST" action="" class="application">
+        <div class="col-lg-4 col-sm-12 mb-sm-4">
+            <form method="POST" class="application">
 
                 <!-- Input Name Recipe -->
                 <div class="row d-flex mb-2">
@@ -105,7 +105,7 @@
                         <label for="inputRecipeState">État</label>
                     </div>
                     <div class="col-4 d-flex justify-content-end">
-                        <select name="stateRecipe" id="state-select">
+                        <select name="stateRecipe" id="inputRecipeState">
                             <option value="a" <?php if ($recipe->getState_recipe() == 'a') {
                                                     echo 'selected';
                                                 }; ?>>Actif</option>

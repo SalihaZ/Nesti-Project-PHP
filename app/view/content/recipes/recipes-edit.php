@@ -39,11 +39,11 @@
         </div>
 
         <!-- Section Top -->
-        <div class="row d-flex  justify-content-between">
+        <div class="row d-flex justify-content-between">
 
             <!-- Article Input Informations Recipe-->
             <div class="col-lg-4 col-sm-12 mb-sm-4">
-                <form method="POST" action="" class="application">
+                <form method="POST" class="application">
 
                     <!-- Input Name Recipe -->
                     <div class="row d-flex mb-2">
@@ -118,7 +118,7 @@
                             <label for="inputRecipeState">État</label>
                         </div>
                         <div class="col-4 d-flex justify-content-end">
-                            <select name="stateRecipe" id="state-select">
+                            <select name="stateRecipe" id="inputRecipeState">
                                 <option value="a" <?php if ($recipe->getState_recipe() == 'a') {
                                                         echo 'selected';
                                                     }; ?>>Actif</option>
@@ -156,7 +156,7 @@
                 </div>
 
                 <div class="application d-flex justify-content-center">
-                    <form id="formPictureRecipe" method="post" action="" enctype="multipart/form-data">
+                    <form id="formPictureRecipe" method="post" enctype="multipart/form-data">
                         <div id="display-img-recipe" class='preview d-flex justify-content-center mb-3' style="background-image: url('<?= BASE_URL ?>public/images/recipes/<?= $name_picture['image_name'] ?> ')">
                             <!-- IMAGE DISPLAY HERE -->
                         </div>

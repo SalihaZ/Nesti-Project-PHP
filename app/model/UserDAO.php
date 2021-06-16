@@ -4,7 +4,7 @@ class UserDAO extends BaseDAO
 {
     protected static $tableName = "users";
 
-    // Fetchs all data of the users in DB
+    /* Fetchs all data of the users in DB */
     public static function readAllUsers()
     {
         $pdo = Database::getPdo();
@@ -25,7 +25,7 @@ class UserDAO extends BaseDAO
         return $arrayUsers;
     }
 
-    // Fetch data of one user in DB
+    /* Fetch data of one user in DB */
     public static function findOneUser($id)
     {
         $pdo = Database::getPdo();
@@ -45,7 +45,7 @@ class UserDAO extends BaseDAO
         return $user;
     }
 
-    // Create one user 
+    /* Create one user */
     public static function createUser($user)
     {
         $pdo = Database::getPdo();
@@ -71,23 +71,23 @@ class UserDAO extends BaseDAO
         return $last_id;
     }
 
-      // Block one user 
-      public static function deleteUser($id)
-      {
-          $pdo = Database::getPdo();
-          $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-          $sql = "UPDATE users SET state_user = ? WHERE id_user = ?";
-          $q = $pdo->prepare($sql);
-          $q->execute(
-              [
-                  "b",
-                  $id
-              ]
-          );
-          Database::disconnect();
-      }
+    /* Block one user */
+    public static function deleteUser($id)
+    {
+        $pdo = Database::getPdo();
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $sql = "UPDATE users SET state_user = ? WHERE id_user = ?";
+        $q = $pdo->prepare($sql);
+        $q->execute(
+            [
+                "b",
+                $id
+            ]
+        );
+        Database::disconnect();
+    }
 
-    // Update one user 
+    /* Update one user */
     public static function updateUser($user)
     {
         $pdo = Database::getPdo();
@@ -109,41 +109,41 @@ class UserDAO extends BaseDAO
         Database::disconnect();
     }
 
-     // Reset password of one user 
-     public static function resetPasswordUser($password, $id_user)
-     {
-         $pdo = Database::getPdo();
-         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-         $sql = "UPDATE users SET password_user = ? WHERE id_user = ?";
-         $q = $pdo->prepare($sql);
-         $q->execute(
-             [
-                 password_hash($password, PASSWORD_BCRYPT),
-                 $id_user
-             ]
-         );
-         Database::disconnect();
-     }
+    /* Reset password of one user */
+    public static function resetPasswordUser($password, $id_user)
+    {
+        $pdo = Database::getPdo();
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $sql = "UPDATE users SET password_user = ? WHERE id_user = ?";
+        $q = $pdo->prepare($sql);
+        $q->execute(
+            [
+                password_hash($password, PASSWORD_BCRYPT),
+                $id_user
+            ]
+        );
+        Database::disconnect();
+    }
 
-     public static function getNameUserCommands($id_user){
+    /* Get the username of the person who made the command(s) */
+    public static function getNameUserCommands($id_user)
+    {
         $pdo = Database::getPdo();
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $sql = "SELECT CONCAT(users.lastname_user, ' ', users.firstname_user) AS name FROM `users` WHERE users.id_user = $id_user";
         $result = $pdo->prepare($sql);
         $result->setFetchMode(PDO::FETCH_ASSOC);
         $result->execute();
-       
+
         if ($result->rowcount() == 1) {
 
             $name = $result->fetch();
-    
         } else {
             $name['name'] = "";
-        } 
+        }
 
         Database::disconnect();
 
         return $name['name'];
     }
-
 }

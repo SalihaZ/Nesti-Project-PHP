@@ -8,8 +8,8 @@ switch ($loc) {
         break;
 
     case "disconnection":
-            include(PATH_VIEW . "connection.php");
-            break;
+        include(PATH_VIEW . "connection.php");
+        break;
 
         // Recipes part
     case "recipes":
@@ -64,7 +64,7 @@ switch ($loc) {
         include(PATH_STATISTICS . "statistics.php");
         break;
 
-         // Access Forbidden part
+        // Access Forbidden part
     case "forbidden":
         include(PATH_VIEW . "forbidden.php");
         break;

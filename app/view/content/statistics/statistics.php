@@ -133,17 +133,17 @@
                              </td>
                              <td>
                                  <a href='<?= BASE_URL . "articles" ?>'>Voir</a>
-         </div>
-         </td>
-         </tr>
 
-     <?php
+                             </td>
+                         </tr>
+
+                     <?php
                         }
-        ?>
+                        ?>
 
-     </tbody>
-     </table>
-     </div>
+                 </tbody>
+             </table>
+         </div>
      </div>
      <br>
  </main>

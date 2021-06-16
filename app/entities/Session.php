@@ -2,7 +2,7 @@
 
 class Session
 {
-    // Does the user is connected ?
+    /* Does the user is connected ? */
     public function isUserConnected()
     {
         $isConnected = false;
@@ -12,13 +12,13 @@ class Session
         return $isConnected;
     }
 
-    // Connection User Session
+    /* Connection User Session */
     public function connectUser($id)
     {
         $_SESSION['id_user'] = $id;
     }
 
-    // Disconnection User Sesion
+    /* Disconnection User Sesion */
     public function disconnectUser()
     {
         session_unset();

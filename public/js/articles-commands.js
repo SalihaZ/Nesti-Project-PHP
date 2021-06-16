@@ -12,13 +12,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 const detailsCommand = document.querySelector("#detailsCommands");
                 detailsCommand.innerHTML = "";
                 
-                response['article-command'].forEach(element => {
+                response['article-command'].forEach((element, index) => {
                     const row = document.createElement("row");
                     row.className= "d-flex justify-content-between";
                     row.innerHTML = element;
                     const link = document.createElement("a");
                     link.innerHTML = "Voir";
-                    link.href = "#";
+                    link.href = "https://teillier.needemand.com/realisations/Projet_Nesti/Nesti-Project-CodeIgniter/public/article/" + response['id-article-command'][index];
                     
                     row.appendChild(link);
                     detailsCommand.appendChild(row);

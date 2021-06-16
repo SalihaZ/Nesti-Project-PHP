@@ -4,7 +4,7 @@ class IngredientDAO extends BaseDAO
 {
     protected static $tableName = "ingredients";
 
-    // Creates a new ingredient 
+    /* Creates a new ingredient */
     public static function createIngredient($id_ingredient)
     {
         $pdo = Database::getPdo();

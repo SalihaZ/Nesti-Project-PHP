@@ -2,7 +2,7 @@
 
 class User
 {
-    //Attributes
+    /* Attributes */
     private $id_user;
     private $username_user;
     private $password_user;
@@ -18,7 +18,7 @@ class User
     private $roles_user = [];
     private $valid_user = true;
 
-    // Errors
+    /* Errors */
     private $usernameError = '';
     private $passwordError = '';
     private $lastnameError = '';
@@ -68,7 +68,7 @@ class User
             $this->usernameError = "Veuillez saisir un nom d'utilisateur";
             $this->valid_user  = false;
         } else if (!preg_match("/^[a-zA-ZÀ-ÿ ,.'-]{3,20}+$/i", $username_user)) {
-            $this->usernameError = "Votre saisie nom d'utilisateur ne respecte pas les conditions";
+            $this->usernameError = "Votre saisie nom d'utilisateur ne respecte pas les conditions (entre 3 et 20 caractères)";
             $this->valid_user = false;
         }
 
@@ -94,7 +94,7 @@ class User
         if (empty($password_user)) {
             $this->passwordError = 'Veuillez saisir un mot de passe';
             $this->valid_user = false;
-        } else if (!preg_match("/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%!?^&+=])(?=\\S+$).{12,}$/", $password_user)) {
+        } else if (!preg_match("/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[$&+,:;=?@#|'<>.-^*()%!])(?=\\S+$).{12,}$/", $password_user)) {
             $this->passwordError = "Le mot de passe n'est pas assez fort ou ne respecte pas les conditions";
             $this->valid_user = false;
         }
@@ -121,8 +121,8 @@ class User
         if (empty($lastname_user)) {
             $this->lastnameError = 'Veuillez saisir votre nom';
             $this->valid_user = false;
-        } else if (!preg_match("/^[a-zA-ZÀ-ÿ ,.'-]{3,20}+$/i", $lastname_user)) {
-            $this->lastnameError = "Votre saisie nom ne respecte pas les conditions";
+        } else if (!preg_match("/^[a-zA-ZÀ-ÿ ,.'-]{2,25}+$/i", $lastname_user)) {
+            $this->lastnameError = "Votre saisie nom ne respecte pas les conditions (entre 2 et 25 caractères)";
             $this->valid_user = false;
         }
 
@@ -148,8 +148,8 @@ class User
         if (empty($firstname_user)) {
             $this->firstnameError = 'Veuillez saisir votre prénom';
             $this->valid_user = false;
-        } else if (!preg_match("/^[a-zA-ZÀ-ÿ ,.'-]{3,20}+$/i",  $firstname_user)) {
-            $this->firstnameError = "Votre saisie prénom ne respecte pas les conditions";
+        } else if (!preg_match("/^[a-zA-ZÀ-ÿ ,.'-]{2,25}+$/i",  $firstname_user)) {
+            $this->firstnameError = "Votre saisie prénom ne respecte pas les conditions (entre 2 et 25 caractères)";
             $this->valid_user = false;
         }
 
@@ -227,9 +227,10 @@ class User
         return $this->date_creation_user;
     }
 
-    public function getDisplayDate_creation_user(){
+    public function getDisplayDate_creation_user()
+    {
         $date =  $this->date_creation_user;
-        return strftime("%d/%m/%G à %Hh%M", strtotime($date));    
+        return strftime("%d/%m/%G à %Hh%M", strtotime($date));
     }
 
     /**
@@ -291,7 +292,14 @@ class User
      */
     public function getPostcode_user()
     {
-        return $this->postcode_user;
+        $postcode2 = $this->postcode_user;
+
+        if ($postcode2 != '' && strlen($postcode2) < 5) {
+            $postcode2 = "0" . $postcode2;
+        }
+
+
+        return $postcode2;
     }
 
     /**
@@ -502,15 +510,15 @@ class User
     public function getConnectionsUser()
     {
         return LogsUserDAO::getConnectionsUser($this->getId_user());
-        
     }
 
-    public function getLastConnectionUser(){
+    public function getLastConnectionUser()
+    {
         $date =  LogsUserDAO::getLastConnectionUser($this->getId_user());
-        if ($date != "Pas de première connection"){
+        if ($date != "Pas de première connection") {
             $date = strftime("%d/%m/%G à %Hh%M", strtotime($date));
-        } 
-       return $date;
+        }
+        return $date;
     }
 
     public function getNumberCommandsUser()

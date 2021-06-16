@@ -13,11 +13,13 @@ class ControllerConnection extends BaseController
 
             $user = UserDAO::findOneBy('username_user', $username);
 
+            // If the user exists
             if ($user) {
                 if (isset($password) && (!empty($password))) {
                     $passwordDB = $user->getPassword_user();
                     $validation = password_verify($password, $passwordDB);
 
+                    // If the password login are validated
                     if ($validation) {
 
                         $UserSession->connectUser($user->getId_user());
@@ -39,10 +41,14 @@ class ControllerConnection extends BaseController
                             header('Location:' . BASE_URL . "recipes");
                             die();
                         }
+
+                         // If the password login are not validated
                     } else {
                         $this->_data['error_password'] = "Le mot de passe est incorrect";
                     }
                 }
+                
+                // If the user doesn't exist
             } else {
                 $this->_data['error_username'] = "Le nom d'utilisateur est incorrect";
             }

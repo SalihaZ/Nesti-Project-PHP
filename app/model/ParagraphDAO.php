@@ -4,7 +4,7 @@ class ParagraphDAO extends BaseDAO
 {
     protected static $tableName = "paragraphs";
 
-
+    /* Find all the preparation steps for one recipe thanks to the recipe id */
     public static function findAllStepsForOneRecipe($id_recipe)
     {
         $pdo = Database::getPdo();
@@ -22,7 +22,7 @@ class ParagraphDAO extends BaseDAO
         return $arrayParagraphRecipe;
     }
 
-
+    /* Get the preparation steps in order thanks to the recipe id */
     public static function getOrderParagraphRecipe($id_recipe)
     {
         $pdo = Database::getPdo();
@@ -41,7 +41,7 @@ class ParagraphDAO extends BaseDAO
         return $order_recipes['order'];
     }
 
-
+    /* Add one preparation step to one recipe */
     public static function addParagraphRecipe($order_paragraph, $fk_id_recipe)
     {
         $pdo = Database::getPdo();
@@ -60,6 +60,7 @@ class ParagraphDAO extends BaseDAO
         return $last_id;
     }
 
+    /* */
     public static function addContentParagraphRecipe($fk_id_recipe, $content_paragraph, $id_paragraph, $order_paragraph)
     {
         $pdo = Database::getPdo();
@@ -75,10 +76,11 @@ class ParagraphDAO extends BaseDAO
                 $id_paragraph
             ]
         );
-  
+
         Database::disconnect();
     }
 
+    /* Delete one preparation step to one recipe*/
     public static function deleteParagraphRecipe($fk_id_recipe, $id_paragraph, $order_paragraph)
     {
         $pdo = Database::getPdo();
@@ -96,6 +98,7 @@ class ParagraphDAO extends BaseDAO
         Database::disconnect();
     }
 
+    /* Find all order that are greater than */
     public static function findAllOrderGreaterThan($order_paragraph, $fk_id_recipe)
     {
         $pdo = Database::getPdo();
@@ -114,7 +117,7 @@ class ParagraphDAO extends BaseDAO
         return $arrayIdParagraphs["id_paragraph"];
     }
 
-
+    /* Find one preparation step before another on */
     public static function findParagraphBefore($order_paragraph, $fk_id_recipe)
     {
         $pdo = Database::getPdo();
@@ -132,6 +135,7 @@ class ParagraphDAO extends BaseDAO
         return $id_paragraph['id_paragraph'];
     }
 
+    /* Find one preparation step after another one */
     public static function findParagraphAfter($order_paragraph, $fk_id_recipe)
     {
         $pdo = Database::getPdo();
@@ -148,6 +152,7 @@ class ParagraphDAO extends BaseDAO
         return $id_paragraph['id_paragraph'];
     }
 
+    /* Change order to one preparation step : -1 */
     public static function orderDownParagraphRecipe($id_paragraph)
     {
 
@@ -163,6 +168,7 @@ class ParagraphDAO extends BaseDAO
         Database::disconnect();
     }
 
+    /* Change order to one preparation step : +1 */
     public static function orderUpParagraphRecipe($id_paragraph)
     {
         $pdo = Database::getPdo();
@@ -172,10 +178,9 @@ class ParagraphDAO extends BaseDAO
         $q->execute(
             [
                 $id_paragraph
-               
+
             ]
         );
         Database::disconnect();
     }
-
 }

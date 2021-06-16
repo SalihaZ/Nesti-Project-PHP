@@ -53,7 +53,7 @@
         <br>
 
         <!-- Table Container -->
-        <table class="table" data-toggle="table" data-sortable="true" data-pagination="true" data-pagination-next-text="Next" data-search="true" data-search-selector="#searchUser" data-locale="fr-FR">
+        <table class="table" data-toggle="table" data-sortable="true" data-pagination="true" data-pagination-next-text="›" data-search="true" data-search-selector="#searchUser" data-locale="fr-FR">
             <thead>
                 <tr>
                     <th scope="col">ID</th>
@@ -91,33 +91,11 @@
                             <?= $element->getDisplayState_user() ?>
                         </td>
                         <td>
-                            <!-- Form POST Modify -->
-                            <form method="POST" action="<?= BASE_URL . "users/edit/" .  $element->getId_user() ?>" class="form-table mb-2 rounded bg-warning">
 
-                                <!-- Button trigger modal -->
-                                <button type="button" class="btn bt-tbl" data-bs-toggle="modal" data-bs-target="<?= '#modifyUser' .  $element->getId_user() ?>">
+                                <!-- Button modify -->
+                                <a class="btn bt-tbl mb-2 rounded bg-warning" href = "<?= BASE_URL . "users/edit/" .  $element->getId_user() ?>">
                                     Modifier
-                                </button>
-
-                                <!-- Modal -->
-                                <div class="modal fade" id="<?= 'modifyUser' .  $element->getId_user() ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="staticBackdropLabel">Modifier profil utilisateur</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                Vous êtes sur le point d'accéder à la modification des informations du profil utilisateur de <b><?= $element->getLastname_user() ?> <?= $element->getFirstname_user() ?></b>. Êtes-vous sûr de vouloir réaliser cette action ?
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Non</button>
-                                                <button type="submit" class="btn btn-success">Oui</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
+                                </a>
 
                             <!-- Form POST Delete -->
                             <form method="POST" action="<?= BASE_URL . "users/delete/" . $element->getId_user() ?>" class="form-table rounded bg-danger">
@@ -128,11 +106,11 @@
                                 </button>
 
                                 <!-- Modal -->
-                                <div class="modal fade" id="<?= 'deleteUser' .  $element->getId_user() ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal fade" id="<?= 'deleteUser' .  $element->getId_user() ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="<?='staticBackdropLabel'.  $element->getId_user() ?>" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="staticBackdropLabel">Supprimer profil utilisateur</h5>
+                                                <h5 class="modal-title" id="<?='staticBackdropLabel'.  $element->getId_user() ?>">Supprimer profil utilisateur</h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">

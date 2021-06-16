@@ -3,7 +3,7 @@
 class Command
 {
 
-    //Attributes
+    /* Attributes */
     private $id_command;
     private $state_command;
     private $date_creation_command;
@@ -51,7 +51,7 @@ class Command
     }
 
 
-    // Display state for tables
+    /* Display state for tables */
     public function getDisplayState_command()
     {
 

@@ -5,7 +5,7 @@ class ArticleDAO extends BaseDAO
 
     protected static $tableName = "articles";
 
-    // Fetch all data of the articles in DB
+    /* Fetch all data of the articles in DB */
     public static function readAllArticles()
     {
 
@@ -22,23 +22,24 @@ class ArticleDAO extends BaseDAO
         return $arrayArticles;
     }
 
-      
-        public static function updateArticle($article)
-        {
-            $pdo = Database::getPdo();
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $sql = "UPDATE articles SET customer_name_article = ?, state_article = ? WHERE id_article = ?";
-            $q = $pdo->prepare($sql);
-            $q->execute(
-                [
-                    $article->getCustomer_name_article(),
-                    $article->getState_article(), 
-                    $article->getId_article(), 
-                ]
-            );
-            Database::disconnect();
-        }
+    /* Update one article thanks to its id */
+    public static function updateArticle($article)
+    {
+        $pdo = Database::getPdo();
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $sql = "UPDATE articles SET customer_name_article = ?, state_article = ? WHERE id_article = ?";
+        $q = $pdo->prepare($sql);
+        $q->execute(
+            [
+                $article->getCustomer_name_article(),
+                $article->getState_article(),
+                $article->getId_article(),
+            ]
+        );
+        Database::disconnect();
+    }
 
+    /* Get the price of one article thanks to its id */
     public static function getPriceArticle($id_article)
     {
         $pdo = Database::getPdo();
@@ -60,6 +61,7 @@ class ArticleDAO extends BaseDAO
         return $price_article['price_article'];
     }
 
+    /* Get the name of one article thanks to its id */
     public static function getNameArticle($id_article)
     {
         $pdo = Database::getPdo();
@@ -81,6 +83,7 @@ class ArticleDAO extends BaseDAO
         return $name_article['name_product'];
     }
 
+    /* Get the type of one article thanks to its id */
     public static function getTypeArticle($id_article)
     {
         $pdo = Database::getPdo();
@@ -101,7 +104,7 @@ class ArticleDAO extends BaseDAO
         return $type;
     }
 
-
+    /* Get the unit of one article thanks to its id */
     public static function getUnitArticle($id_article)
     {
         $pdo = Database::getPdo();
@@ -123,6 +126,7 @@ class ArticleDAO extends BaseDAO
         return $unit['name_measure_unit'];
     }
 
+    /* Get the reference number for one article thanls to its id */
     public static function getRefArticle($id_article)
     {
         $pdo = Database::getPdo();
@@ -142,7 +146,7 @@ class ArticleDAO extends BaseDAO
         return $ref['ref_package'];
     }
 
-    // Block one article 
+    /* Block / Delete one article */
     public static function deleteArticle($id_article)
     {
         $pdo = Database::getPdo();
@@ -158,6 +162,7 @@ class ArticleDAO extends BaseDAO
         Database::disconnect();
     }
 
+    /* Get the quantity bought for one article thanks to its id */
     public static function getQuantityBoughtArticle($id_article)
     {
         $pdo = Database::getPdo();
@@ -179,6 +184,7 @@ class ArticleDAO extends BaseDAO
         return $bought['bought'];
     }
 
+    /* Get the total sales for one article thanks to its id */
     public static function getTotalSalesArticle($id_article)
     {
         $pdo = Database::getPdo();
@@ -201,6 +207,7 @@ class ArticleDAO extends BaseDAO
         return $total_sales['TotalSales'];
     }
 
+    /* Get the total that Nesti bought for one article thanks to its id */
     public static function getTotalBoughtArticle($id_article)
     {
         $pdo = Database::getPdo();
@@ -221,6 +228,7 @@ class ArticleDAO extends BaseDAO
         return $total_bought['TotalBought'];
     }
 
+    /* Get the quantity sold for one article thanks to its id */
     public static function getQuantitySoldArticle($id_article)
     {
         $pdo = Database::getPdo();
@@ -243,6 +251,7 @@ class ArticleDAO extends BaseDAO
         return $quantity_sold['quantity_sold'];
     }
 
+    /* Delet the picture for one article thanks to the id article*/
     public static function deletePictureArticle($id_article)
     {
         $pdo = Database::getPdo();
@@ -256,5 +265,4 @@ class ArticleDAO extends BaseDAO
         );
         Database::disconnect();
     }
-
 }

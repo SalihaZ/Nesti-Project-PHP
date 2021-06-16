@@ -1,8 +1,9 @@
-<?php 
+<?php
 
-class Comment { 
+class Comment
+{
 
-    //Attributes
+    /* Attributes */
     private $id_comment;
     private $title_comment;
     private $content_comment;
@@ -14,7 +15,7 @@ class Comment {
 
     /**
      * Get the value of id_comment
-     */ 
+     */
     public function getId_comment()
     {
         return $this->id_comment;
@@ -24,7 +25,7 @@ class Comment {
      * Set the value of id_comment
      *
      * @return  self
-     */ 
+     */
     public function setId_comment($id_comment)
     {
         $this->id_comment = $id_comment;
@@ -34,7 +35,7 @@ class Comment {
 
     /**
      * Get the value of title_comment
-     */ 
+     */
     public function getTitle_comment()
     {
         return $this->title_comment;
@@ -44,7 +45,7 @@ class Comment {
      * Set the value of title_comment
      *
      * @return  self
-     */ 
+     */
     public function setTitle_comment($title_comment)
     {
         $this->title_comment = $title_comment;
@@ -54,7 +55,7 @@ class Comment {
 
     /**
      * Get the value of content_comment
-     */ 
+     */
     public function getContent_comment()
     {
         return $this->content_comment;
@@ -64,7 +65,7 @@ class Comment {
      * Set the value of content_comment
      *
      * @return  self
-     */ 
+     */
     public function setContent_comment($content_comment)
     {
         $this->content_comment = $content_comment;
@@ -74,22 +75,23 @@ class Comment {
 
     /**
      * Get the value of date_creation_comment
-     */ 
+     */
     public function getDate_creation_comment()
     {
         return $this->date_creation_comment;
     }
 
-    public function getDisplayDate_creation_comment(){
+    public function getDisplayDate_creation_comment()
+    {
         $date =  $this->date_creation_comment;
-        return strftime("%d/%m/%G à %Hh%M", strtotime($date));    
+        return strftime("%d/%m/%G à %Hh%M", strtotime($date));
     }
 
     /**
      * Set the value of date_creation_comment
      *
      * @return  self
-     */ 
+     */
     public function setDate_creation_comment($date_creation_comment)
     {
         $this->date_creation_comment = $date_creation_comment;
@@ -99,13 +101,13 @@ class Comment {
 
     /**
      * Get the value of state_comment
-     */ 
+     */
     public function getState_comment()
     {
         return $this->state_comment;
     }
 
-    // Display state for tables
+    /* Display state for tables */
     public function getDisplayState_comment()
     {
 
@@ -125,7 +127,7 @@ class Comment {
      * Set the value of state_comment
      *
      * @return  self
-     */ 
+     */
     public function setState_comment($state_comment)
     {
         $this->state_comment = $state_comment;
@@ -135,21 +137,21 @@ class Comment {
 
     /**
      * Get the value of fk_id_recipe
-     */ 
+     */
     public function getFk_id_recipe()
     {
         return $this->fk_id_recipe;
     }
 
-    public function getNameById_recipe() {
-
+    public function getNameById_recipe()
+    {
     }
 
     /**
      * Set the value of fk_id_recipe
      *
      * @return  self
-     */ 
+     */
     public function setFk_id_recipe($fk_id_recipe)
     {
         $this->fk_id_recipe = $fk_id_recipe;
@@ -159,7 +161,7 @@ class Comment {
 
     /**
      * Get the value of fk_id_user
-     */ 
+     */
     public function getFk_id_user()
     {
         return $this->fk_id_user;
@@ -169,7 +171,7 @@ class Comment {
      * Set the value of fk_id_user
      *
      * @return  self
-     */ 
+     */
     public function setFk_id_user($fk_id_user)
     {
         $this->fk_id_user = $fk_id_user;
@@ -179,7 +181,7 @@ class Comment {
 
     /**
      * Get the value of fk_id_moderator
-     */ 
+     */
     public function getFk_id_moderator()
     {
         return $this->fk_id_moderator;
@@ -189,7 +191,7 @@ class Comment {
      * Set the value of fk_id_moderator
      *
      * @return  self
-     */ 
+     */
     public function setFk_id_moderator($fk_id_moderator)
     {
         $this->fk_id_moderator = $fk_id_moderator;
@@ -201,5 +203,4 @@ class Comment {
     {
         return RecipeDAO::findOneBy('id_recipe', $this->getFk_id_recipe());
     }
-
 }

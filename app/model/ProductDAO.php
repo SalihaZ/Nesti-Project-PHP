@@ -4,7 +4,7 @@ class ProductDAO extends BaseDAO
 {
     protected static $tableName = "products";
 
-    //
+    /* Find the ID of the ingredient thanks to its name */
     public static function findIDIngredientWith($name_ingredient)
     {
         $pdo = Database::getPdo();
@@ -23,7 +23,7 @@ class ProductDAO extends BaseDAO
         return $id_ingredient['id_product'];
     }
 
-    // Creates a new product 
+    /* Creates a new product */
     public static function createProduct($name_ingredient)
     {
         $pdo = Database::getPdo();
@@ -40,7 +40,7 @@ class ProductDAO extends BaseDAO
         return $last_id;
     }
 
-
+    /* Get the name of one product thanks to its id */
     public static function getNameProduct($id_product)
     {
         $pdo = Database::getPdo();
@@ -49,13 +49,13 @@ class ProductDAO extends BaseDAO
         $result->setFetchMode(PDO::FETCH_ASSOC);
 
         if ($result->rowcount() == 1) {
-           $name_product = $result->fetch();
+            $name_product = $result->fetch();
         } else {
-           $name_product['name_product'] = "";
+            $name_product['name_product'] = "";
         }
 
         Database::disconnect();
 
         return $name_product['name_product'];
-    } 
+    }
 }

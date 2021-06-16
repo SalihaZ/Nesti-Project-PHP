@@ -11,13 +11,14 @@ class ControllerRecipes extends BaseController
             header('Location:' . BASE_URL . "forbidden");
             exit();
         } else {
-            #RECIPES
+
+            // RECIPES
             if (!isset($_GET['action'])) {
                 $arrayRecipes = RecipeDAO::readAllRecipes();
                 $this->_data['arrayRecipes'] = $arrayRecipes;
             } else {
 
-                #ARTICLE / DELETE
+                // ARTICLE / DELETE
                 if ($_GET['action'] == 'delete') {
 
                     if (isset($_GET['id'])) {
@@ -32,7 +33,7 @@ class ControllerRecipes extends BaseController
                     }
                 }
 
-                #RECIPE/CREATE
+                // RECIPE/CREATE
                 if ($_GET['action'] == 'create') {
 
                     // RESTRICTION
@@ -66,7 +67,7 @@ class ControllerRecipes extends BaseController
                     }
                 }
 
-                #RECIPE / EDITION
+                // RECIPE / EDITION
                 if ($_GET['action'] == 'edit') {
                     if (isset($_GET['id'])) {
 
@@ -111,7 +112,7 @@ class ControllerRecipes extends BaseController
                                 $this->_data['steps_recipe'] = $steps_recipe;
                             }
 
-                            #RECIPE / ADD IMAGE
+                            // RECIPE / ADD IMAGE
                             if ((isset($_GET['option'])) && (($_GET['option']) == "editpicture")) {
 
                                 if (isset($_FILES['file']['name'])) {
@@ -145,7 +146,7 @@ class ControllerRecipes extends BaseController
                                 }
                             }
 
-                            #RECIPE / DELETE IMAGE
+                            // RECIPE / DELETE IMAGE
                             if ((isset($_GET['option'])) && (($_GET['option']) == "deletepicture")) {
                                 if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
 
@@ -180,7 +181,7 @@ class ControllerRecipes extends BaseController
                                 }
                             }
 
-                            //ADD INGREDIENT
+                            // ADD INGREDIENT
                             if ((isset($_GET['option'])) && (($_GET['option']) == "addingredient")) {
 
                                 if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
@@ -234,7 +235,7 @@ class ControllerRecipes extends BaseController
                                 }
                             }
 
-                            //ADD PARAGRAPH
+                            // ADD PARAGRAPH
                             if ((isset($_GET['option'])) && (($_GET['option']) == "addparagraph")) {
 
                                 if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
@@ -257,7 +258,7 @@ class ControllerRecipes extends BaseController
                                 }
                             }
 
-                            //ADD CONTENT PARAGRAPH
+                            // ADD CONTENT PARAGRAPH
                             if ((isset($_GET['option'])) && (($_GET['option']) == "addcontentparagraph")) {
 
                                 if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
@@ -306,7 +307,7 @@ class ControllerRecipes extends BaseController
                                 }
                             }
 
-                            //MOVE UP PARAGRAPHS
+                            // MOVE UP PARAGRAPHS
                             if ((isset($_GET['option'])) && (($_GET['option']) == "moveupparagraphs")) {
 
                                 if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
@@ -333,7 +334,7 @@ class ControllerRecipes extends BaseController
                                 }
                             }
 
-                            //MOVE DOWN PARAGRAPHS
+                            // MOVE DOWN PARAGRAPHS
                             if ((isset($_GET['option'])) && (($_GET['option']) == "movedownparagraphs")) {
 
                                 if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {

@@ -3,7 +3,7 @@
 class Article
 {
 
-    //Attributes
+    /* Attributes */
     private $id_article;
     private $customer_name_article;
     private $quantity_unite_article;
@@ -15,7 +15,7 @@ class Article
     private $fk_id_measure_unit;
     private $valid_article = true;
 
-    // Errors
+    /* Errors */
     private $customerNameError = '';
 
 
@@ -207,10 +207,10 @@ class Article
         return $this;
     }
 
-    
+
     /**
      * Get the value of customerNameError
-     */ 
+     */
     public function getCustomerNameError()
     {
         return $this->customerNameError;
@@ -220,7 +220,7 @@ class Article
      * Set the value of customerNameError
      *
      * @return  self
-     */ 
+     */
     public function setCustomerNameError($customerNameError)
     {
         $this->customerNameError = $customerNameError;
@@ -274,9 +274,9 @@ class Article
 
     public function getStockArticle()
     {
-       $bought = ArticleDAO::getQuantityBoughtArticle($this->getId_article());
-       $sold = ArticleDAO::getQuantitySoldArticle($this->getId_article());
-       $stock =  $bought - $sold;
+        $bought = ArticleDAO::getQuantityBoughtArticle($this->getId_article());
+        $sold = ArticleDAO::getQuantitySoldArticle($this->getId_article());
+        $stock =  $bought - $sold;
         return $stock;
     }
 

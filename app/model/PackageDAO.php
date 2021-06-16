@@ -4,7 +4,7 @@ class PackageDAO extends BaseDAO
 {
     protected static $tableName = "packages";
 
-    
+    /* Get the packages by day */
     public static function getPackagesByDay($date)
     {
 
@@ -21,7 +21,5 @@ class PackageDAO extends BaseDAO
 
         Database::disconnect();
         return $packagesByDay;
-       
     }
-
 }

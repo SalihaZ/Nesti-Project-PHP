@@ -4,7 +4,7 @@ class RecipeDAO extends BaseDAO
 {
     protected static $tableName = "recipes";
 
-    // Fetch all data DB Recipe to fill a table
+    /* Fetch all data DB Recipe to fill a table */
     public static function readAllRecipes()
     {
         $pdo = Database::getPdo();
@@ -21,7 +21,7 @@ class RecipeDAO extends BaseDAO
         return $arrayRecipes;
     }
 
-    // Creates a new recipe 
+    /* Creates a new recipe */
     public static function createRecipe($recipe, $id_user)
     {
         $pdo = Database::getPdo();
@@ -43,6 +43,7 @@ class RecipeDAO extends BaseDAO
         return $last_id;
     }
 
+    /* Update one recipe thanks to its id */
     public static function updateRecipe($recipe)
     {
         $pdo = Database::getPdo();
@@ -57,29 +58,29 @@ class RecipeDAO extends BaseDAO
                 $recipe->getTime_recipe(),
                 $recipe->getState_recipe(),
                 $recipe->getId_recipe()
-              
+
             ]
         );
         Database::disconnect();
     }
 
-        // 
-        public static function deleteRecipe($id_recipe)
-        {
-            $pdo = Database::getPdo();
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $sql = "UPDATE recipes SET state_recipe = ? WHERE id_recipe = ?";
-            $q = $pdo->prepare($sql);
-            $q->execute(
-                [
-                    "b",
-                    $id_recipe
-                ]
-            );
-            Database::disconnect();
-        }
+    /* Delete one recipe thanks to its id*/
+    public static function deleteRecipe($id_recipe)
+    {
+        $pdo = Database::getPdo();
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $sql = "UPDATE recipes SET state_recipe = ? WHERE id_recipe = ?";
+        $q = $pdo->prepare($sql);
+        $q->execute(
+            [
+                "b",
+                $id_recipe
+            ]
+        );
+        Database::disconnect();
+    }
 
-    // Finds the number of recipes the chef has published 
+    /* Finds the number of recipes the chef has published */
     public static function getNumberRecipesChief($id_chief)
     {
 
@@ -101,6 +102,7 @@ class RecipeDAO extends BaseDAO
         return $number[0];
     }
 
+    /* Get the last name of the chief who has create the recipe thanks to its id */
     public static function getNameLastRecipeChief($id_chief)
     {
         $pdo = Database::getPdo();
@@ -121,7 +123,9 @@ class RecipeDAO extends BaseDAO
         return $name['name_recipe'];
     }
 
-    public static function getNameChiefRecipe($id_recipe){
+    /* Get the name of the chief who has made the recipe thank to its id */
+    public static function getNameChiefRecipe($id_recipe)
+    {
         $pdo = Database::getPdo();
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $sql = "SELECT users.username_user FROM users
@@ -132,20 +136,19 @@ class RecipeDAO extends BaseDAO
         $result->setFetchMode(PDO::FETCH_ASSOC);
         $result->execute();
 
-       
         if ($result->rowcount() == 1) {
 
             $name_chief = $result->fetch();
-    
         } else {
             $name_chief['username_user'] = "Pas de chef";
-        } 
+        }
 
         Database::disconnect();
 
         return $name_chief['username_user'];
     }
 
+    /* Get the grade of one recipe thanks to its id */
     public static function getGradeRecipe($id_recipe)
     {
         $pdo = Database::getPdo();
@@ -159,7 +162,6 @@ class RecipeDAO extends BaseDAO
         if ($result->rowcount() >= 1) {
 
             $grade_recipe = $result->fetchAll();
-
         } else {
             $grade_recipe = "0";
         }
@@ -169,6 +171,7 @@ class RecipeDAO extends BaseDAO
         return $grade_recipe;
     }
 
+    /* Delete the picture of one recipe thanks to its id */
     public static function deletePictureRecipe($id_recipe)
     {
         $pdo = Database::getPdo();
@@ -183,7 +186,7 @@ class RecipeDAO extends BaseDAO
         Database::disconnect();
     }
 
-
+    /* Get the grade of one chief thanks to its is */
     public static function getGradeChief($id_chief)
     {
         $pdo = Database::getPdo();
@@ -199,7 +202,6 @@ class RecipeDAO extends BaseDAO
         if ($result->rowcount() >= 1) {
 
             $grade_chief = $result->fetchAll();
-
         } else {
             $grade_chief = "0";
         }
@@ -207,6 +209,5 @@ class RecipeDAO extends BaseDAO
         Database::disconnect();
 
         return $grade_chief;
-    }  
-
+    }
 }

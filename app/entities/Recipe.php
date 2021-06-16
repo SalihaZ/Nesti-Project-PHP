@@ -2,7 +2,7 @@
 
 class Recipe
 {
-
+    /* Attributs */
     private $id_recipe;
     private $date_creation_recipe;
     private $name_recipe;
@@ -14,7 +14,7 @@ class Recipe
     private $fk_id_chief;
     private $valid_recipe = true;
 
-    // Errors
+    /* Errors */
     private $nameError = '';
     private $difficultyError = '';
     private $numberPersonError = '';

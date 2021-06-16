@@ -4,7 +4,7 @@ class CommandDAO extends BaseDAO
 {
     protected static $tableName = "commands";
 
-    // Fetch all data of the commands
+    /* Fetch all data of the commands */
     public static function readAllCommands()
     {
 
@@ -21,7 +21,7 @@ class CommandDAO extends BaseDAO
         return $arrayCommands;
     }
 
-    // Fetchs all comments of one user
+    // Fetchs all commands of one user thanks to its is */
     public static function readCommandsFromOneUser($id_user)
     {
         $pdo = Database::getPdo();
@@ -37,7 +37,7 @@ class CommandDAO extends BaseDAO
         return $arrayCommands;
     }
 
-    // Finds the number of comments approved by the moderator 
+    /* Finds the number of commands for one user thanks to its id */
     public static function getNumberCommandsUser($id_user)
     {
         $pdo = Database::getPdo();
@@ -59,6 +59,7 @@ class CommandDAO extends BaseDAO
         return $number['COUNT(fk_id_user)'];
     }
 
+    /* Get last command price of one user */
     public static function getLastCommandPriceUser($id_user)
     {
         $pdo = Database::getPdo();
@@ -72,17 +73,15 @@ class CommandDAO extends BaseDAO
         $result->execute();
 
         if ($result->rowcount() == 1) {
-
             $number = $result->fetch();
         } else {
             $number['price_article'] = "0";
         }
-
         Database::disconnect();
-
         return $number['price_article'];
     }
 
+    /* Get all the prices of all the commands that a user has done thanks to its id */
     public static function getAllCommandsPricesUser($id_user)
     {
         $pdo = Database::getPdo();
@@ -107,6 +106,7 @@ class CommandDAO extends BaseDAO
         return $number['priceAllCommands'];
     }
 
+    /* Get the total price of one command thanks to its id */
     public static function getTotalPriceCommand($id_command)
     {
         $pdo = Database::getPdo();
@@ -131,6 +131,7 @@ class CommandDAO extends BaseDAO
         return $price_command['price_command'];
     }
 
+    /* Get all the article of one command thanks to its id */
     public static function getArticlesCommands($id_command)
     {
         $pdo = Database::getPdo();
@@ -153,6 +154,7 @@ class CommandDAO extends BaseDAO
         return $articles_command;
     }
 
+    /* Get all the command lines of one command thanks to its id */
     public static function getCommandsLines($id_command)
     {
         $pdo = Database::getPdo();
@@ -169,7 +171,9 @@ class CommandDAO extends BaseDAO
         return $arrayCommandLines;
     }
 
-    public static function getCommandsByDay($date){
+    /* Get all the commands by day */
+    public static function getCommandsByDay($date)
+    {
 
         $pdo = Database::getPdo();
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -184,17 +188,4 @@ class CommandDAO extends BaseDAO
         Database::disconnect();
         return $commandByDay;
     }
-   
-
-
-    // SELECT CONCAT(command_lines.command_quantity, ' x ', articles.quantity_unite_article,' ', measure_units.name_measure_unit,' de ', products.name_product) FROM `command_lines`
-    //     INNER JOIN commands ON commands.id_command = command_lines.fk_id_command
-    //     INNER JOIN articles ON articles.id_article = command_lines.fk_id_article
-    //     INNER JOIN products ON products.id_product = articles.id_article
-    //     INNER JOIN measure_units ON measure_units.id_measure_unit = articles.fk_id_measure_unit
-    //     WHERE commands.id_command = 
-
-
-
-
 }

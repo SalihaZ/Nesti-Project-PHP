@@ -2,6 +2,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const commandsTable = document.querySelector("#commandsUserTable");  // Get the table
 
+    /**
+     * On click on one of the table rows, the user gets the details of the command in another div
+     */
     commandsTable.addEventListener('click', function () {
         const idCommand = event.target.parentNode.getAttribute('id');  // Get ID command
 
@@ -13,6 +16,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 detailsCommandsUser.innerHTML = "";
                 
                 response['article-command'].forEach(element => {
+
+                    // Création of the row which contain the information
                     const row = document.createElement("row");
                     row.className= "d-flex justify-content-between";
                     row.innerHTML = element;
@@ -21,8 +26,9 @@ document.addEventListener("DOMContentLoaded", function () {
                     link.href = "#";
                     
                     row.appendChild(link);
+                    // Add the article line(s) to the divList
                     detailsCommandsUser.appendChild(row);
-                    // add the articles lines to the divList
+                   
                 })
 
                 document.querySelector("#idCommandUserSelected").innerHTML = "ID n°" + idCommand;

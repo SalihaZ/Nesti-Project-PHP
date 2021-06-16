@@ -6,19 +6,19 @@ class ControllerArticles extends BaseController
     public function initialize()
     {
 
-        // RESTRICTION 
+        // RESTRICTION user if he is not an admin
         if (array_search("admins", $_SESSION["roles_user"]) === false) {
             header('Location:' . BASE_URL . "forbidden");
             exit();
         } else {
 
-            #ARTICLE
+            // ARTICLE
             if (!isset($_GET['action'])) {
                 $arrayArticles = ArticleDAO::readAllArticles();
                 $this->_data['arrayArticles'] = $arrayArticles;
             } else {
 
-                #ARTICLE / DELETE
+                // ARTICLE / DELETE
                 if ($_GET['action'] == 'delete') {
 
                     if (isset($_GET['id'])) {
@@ -33,7 +33,7 @@ class ControllerArticles extends BaseController
                     }
                 }
 
-                #ARTICLE / EDITION
+                // ARTICLE / EDITION
                 if ($_GET['action'] == 'edit') {
                     if (!isset($_GET['option'])) {
 
@@ -58,7 +58,7 @@ class ControllerArticles extends BaseController
                         $this->_data['article'] = $article;
                     }
 
-                    #ARTICLE / ADD IMAGE
+                    // ARTICLE / ADD IMAGE
                     if (isset($_GET['id'])) {
                         if ((isset($_GET['option'])) && (($_GET['option']) == "editpicture")) {
                             if (isset($_FILES['file']['name'])) {
@@ -93,7 +93,7 @@ class ControllerArticles extends BaseController
                         }
                     }
 
-                    #ARTICLE/ DELETE IMAGE
+                    // ARTICLE/ DELETE IMAGE
                     if (isset($_GET['id'])) {
                         if ((isset($_GET['option'])) && (($_GET['option']) == "deletepicture")) {
                             if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
@@ -110,7 +110,7 @@ class ControllerArticles extends BaseController
                     }
                 }
 
-                #ARTICLE / COMMANDS
+                // ARTICLE / COMMANDS
                 if ($_GET['action'] == 'commands') {
 
                     if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
@@ -124,6 +124,7 @@ class ControllerArticles extends BaseController
                         foreach ($commandLines as $line) {
                             $article = ArticleDAO::findOneBy('id_article', $line->getFk_id_article());
                             $data['article-command'][$index] = $line->getCommand_quantity() . ' x ' . $article->getQuantity_unite_article() . ' ' . $article->getUnitArticle() . ' de ' . $article->getNameProduct();
+                            $data['id-article-command'][$index] = $line->getFk_id_article();
                             $index++;
                         }
                         echo json_encode($data);

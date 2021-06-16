@@ -4,6 +4,7 @@ class CityDAO extends BaseDAO
 {
     protected static $tableName = "cities";
 
+    /* Create a new city */
     public static function createCity($city)
     {
         $pdo = Database::getPdo();

@@ -4,6 +4,7 @@ class PictureDAO extends BaseDAO
 {
     protected static $tableName = "images";
 
+    /* Add one picture */
     public static function addPicture($image)
     {
         $pdo = Database::getPdo();
@@ -21,7 +22,7 @@ class PictureDAO extends BaseDAO
         return $last_id;
     }
 
-
+    /* Link a picture to one recipe */
     public static function linkPictureToRecipe($id_recipe, $id_image)
     {
         $pdo = Database::getPdo();
@@ -30,13 +31,14 @@ class PictureDAO extends BaseDAO
         $q = $pdo->prepare($sql);
         $q->execute(
             [
-                $id_image, 
-                $id_recipe 
+                $id_image,
+                $id_recipe
             ]
         );
         Database::disconnect();
     }
 
+    /* Link a picture to one article */
     public static function linkPictureToArticle($id_article, $id_image)
     {
         $pdo = Database::getPdo();
@@ -45,13 +47,14 @@ class PictureDAO extends BaseDAO
         $q = $pdo->prepare($sql);
         $q->execute(
             [
-                $id_image, 
+                $id_image,
                 $id_article
             ]
         );
         Database::disconnect();
     }
 
+    /* Get the name of one picture thanks to its id */
     public static function getPictureName($id_image)
     {
         $pdo = Database::getPdo();
@@ -65,7 +68,6 @@ class PictureDAO extends BaseDAO
         if ($result->rowcount() >= 1) {
 
             $image_name = $result->fetch();
-
         } else {
             $image_name = "0";
         }

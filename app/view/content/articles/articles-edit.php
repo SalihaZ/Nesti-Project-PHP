@@ -40,7 +40,7 @@
 
           <!-- Article Input Informations -->
           <div class="col-lg-4 col-sm-12 mb-sm-4">
-              <form method="POST" action="" class="application">
+              <form method="POST" class="application">
 
                   <!-- Input Factory Name Article -->
                   <div class="row d-flex mb-3">
@@ -97,7 +97,7 @@
                           <label for="inputArticleState">État</label>
                       </div>
                       <div class="col-4 d-flex justify-content-end">
-                          <select name="stateArticle" id="state-select">
+                          <select name="stateArticle" id="inputArticleState">
                               <option value="a" <?php if ($article->getState_article() == 'a') {
                                                     echo 'selected';
                                                 }; ?>>Actif</option>
@@ -133,7 +133,7 @@
               </div>
 
               <div class="application d-flex justify-content-center">
-                  <form id="formPictureArticle" method="post" action="" enctype="multipart/form-data">
+                  <form id="formPictureArticle" method="post" enctype="multipart/form-data">
                       <div id="display-img-article" class='preview d-flex justify-content-center mb-3' style="background-image: url('<?= BASE_URL ?>/public/images/articles/<?= $name_picture['image_name'] ?> ')">
                           <!-- IMAGE DISPLAY HERE -->
                       </div>

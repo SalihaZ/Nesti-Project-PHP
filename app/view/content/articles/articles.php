@@ -49,7 +49,7 @@
         <br>
 
         <!-- Table Container -->
-        <table class="table" data-toggle="table" data-sortable="true" data-pagination="true" data-pagination-next-text="Next" data-search="true" data-search-selector="#searchArticle" data-locale="fr-FR">
+        <table class="table" data-toggle="table" data-sortable="true" data-pagination="true" data-pagination-next-text="›" data-search="true" data-search-selector="#searchArticle" data-locale="fr-FR">
             <thead>
                 <tr>
                     <th scope="col">ID</th>
@@ -91,33 +91,11 @@
                         </td>
                         <td>
 
-                            <!-- Form POST Modify -->
-                            <form method="POST" action="<?= BASE_URL . "articles/edit/" .  $element->getId_article() ?>" class="form-table mb-2 rounded bg-warning">
-
-                                <!-- Button trigger modal -->
-                                <button type="button" class="btn bt-tbl" data-bs-toggle="modal" data-bs-target="<?= '#modifyArticle' .  $element->getId_article() ?>">
+                        <!-- Button modify -->
+                        <a class="btn bt-tbl mb-2 rounded bg-warning" href = "<?= BASE_URL . "articles/edit/" .  $element->getId_article() ?>">
                                     Modifier
-                                </button>
+                                </a>
 
-                                <!-- Modal -->
-                                <div class="modal fade" id="<?= 'modifyArticle' .  $element->getId_article() ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="staticBackdropLabel">Modifier article</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                Vous êtes sur le point d'accéder à la modification des informations de l'article <b> <?= $element->getQuantity_unite_article() ?> <?= $element->getUnitArticle() ?> de <?= $element->getNameProduct() ?></b>. Êtes-vous sûr de vouloir réaliser cette action ?
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Non</button>
-                                                <button type="submit" class="btn btn-success">Oui</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
 
                             <!-- Form POST Delete -->
                             <form method="POST" action="<?= BASE_URL . "articles/delete/" . $element->getId_article() ?>" class="form-table rounded bg-danger">
@@ -128,11 +106,11 @@
                                 </button>
 
                                 <!-- Modal -->
-                                <div class="modal fade" id="<?= 'deleteArticle' .  $element->getId_article() ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal fade" id="<?= 'deleteArticle' .  $element->getId_article() ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="<?='staticBackdropLabel'.  $element->getId_article() ?>" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="staticBackdropLabel">Supprimer article</h5>
+                                                <h5 class="modal-title" id="<?='staticBackdropLabel'.  $element->getId_article() ?>">Supprimer article</h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">

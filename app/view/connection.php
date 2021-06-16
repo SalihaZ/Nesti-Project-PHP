@@ -16,12 +16,12 @@
 
         <!-- Logo -->
         <div id="logo_nesti">
-            <img src="public/images/logo/Nesti-logo-big.png">
+            <img src="public/images/logo/Nesti-logo-big.png" alt="Logo Nesti">
         </div>
 
         <div class="row application" id="container_connection">
 
-            <form action="" method="POST" class="">
+            <form method="POST">
 
                 <!-- Title -->
                 <div class="row">
